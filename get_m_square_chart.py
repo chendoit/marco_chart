@@ -117,8 +117,7 @@ def fetch_data_from_urls(urls):
                     logger.error(f"Invalid URL format: {url}")
                     continue
 
-                # Pass the extracted chart ID to the response handler
-                page.on('response', lambda response: save_response_data(response, chart_id))
+                page.on('response', lambda response, cid=chart_id: save_response_data(response, cid))
                 logger.info(f"Fetching data for URL: {url}")
                 page.goto(url)
                 page.wait_for_timeout(5000)  # Wait for data to load

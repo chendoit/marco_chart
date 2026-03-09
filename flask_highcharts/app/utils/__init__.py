@@ -11,6 +11,8 @@ from .highcharts_utils import (
     process_yoy,
     is_ma_expression,
     process_ma,
+    resolve_series_title,
+    ChartModule,
 )
 
 __all__ = [
@@ -26,5 +28,7 @@ __all__ = [
     'process_yoy',
     'is_ma_expression',
     'process_ma',
+    'resolve_series_title',
+    'ChartModule',
 ]
 

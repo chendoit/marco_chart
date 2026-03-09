@@ -3,6 +3,7 @@ Highcharts Utility Functions
 共用的圖表處理函數，供所有 route 模組使用
 """
 import os
+import re
 import pickle
 import pandas as pd
 
@@ -21,37 +22,64 @@ colors = [
 ]
 
 
+_series_cache = {}
+
+
 def load_series_data(chart_id, category=None):
     """Load series data from the pickle file(s) that contain the chart_id in their filename.
     If multiple files are found, further filter by the category if provided.
+    Results are cached in memory to avoid redundant disk I/O.
     """
+    cache_key = (chart_id, category)
+    if cache_key in _series_cache:
+        return _series_cache[cache_key]
+
     data_dir = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data")
-    matching_files = [f for f in os.listdir(data_dir) if f"{chart_id}.pkl" in f and f.endswith(".pkl")]
-    matching_files.sort(key=len)  # 字串長度排序（字數少的排前面）
+    escaped_id = re.escape(str(chart_id))
+    pattern = re.compile(rf'(?:^|_){escaped_id}\.pkl$')
+    matching_files = [f for f in os.listdir(data_dir) if pattern.search(f)]
+    matching_files.sort(key=len)
 
     if not matching_files:
         raise FileNotFoundError(f"No files containing 'series_{chart_id}' found in {data_dir}")
 
-    # If category is provided, filter files further by category
     if category:
         matching_files = [f for f in matching_files if category in f]
         if not matching_files:
             raise FileNotFoundError(
                 f"No files containing 'series_{chart_id}' and category '{category}' found in {data_dir}")
 
-    # Load data from the first matching file
     file_path = os.path.join(data_dir, matching_files[0])
     with open(file_path, 'rb') as f:
-        return pickle.load(f)
+        data = pickle.load(f)
+
+    _series_cache[cache_key] = data
+    return data
+
+
+def _parse_op_string(op_string, operators):
+    """從運算式字串（如 "385/386"）解析出 id1, operator, id2。"""
+    op = None
+    for operator in operators:
+        if operator in op_string:
+            op = operator
+            break
+    if op is None:
+        raise ValueError(f"不支援的運算: {op_string}")
+    parts = op_string.split(op)
+    try:
+        return int(parts[0]), op, int(parts[1])
+    except (ValueError, IndexError):
+        raise ValueError(f"無法將操作字符串的部分轉換為整數: {op_string}")
 
 
 def process_expression(expr):
     """處理運算式，返回處理後的數據
-    
+
     支援兩種格式：
     1. 三元組格式（新）: (left_id, operator, right_id) 例如 (385, '/', 386)
     2. 字串格式（舊，向後相容）: ("385/386",) 或 "385/386"
-    
+
     支援的運算符：+, -, *, /
     """
     operators = {
@@ -61,74 +89,35 @@ def process_expression(expr):
         '/': lambda x, y: x / y
     }
     operator_symbols = {'-': '-', '+': '+', '*': '×', '/': '÷'}
-    
-    # 判斷格式
+
     if isinstance(expr, tuple) and len(expr) == 3:
-        # 新格式：三元組 (left_id, operator, right_id)
         id1, op, id2 = expr
         if op not in operators:
             raise ValueError(f"不支援的運算符: {op}")
     elif isinstance(expr, tuple) and len(expr) == 1 and isinstance(expr[0], str):
-        # 舊格式：單元素 tuple 包字串 ("385/386",)
-        op_string = expr[0]
-        op = None
-        for operator in operators.keys():
-            if operator in op_string:
-                op = operator
-                break
-        if op is None:
-            raise ValueError(f"不支援的運算: {op_string}")
-        parts = op_string.split(op)
-        try:
-            id1 = int(parts[0])
-            id2 = int(parts[1])
-        except ValueError:
-            raise ValueError(f"無法將操作字符串的部分轉換為整數: {op_string}")
+        id1, op, id2 = _parse_op_string(expr[0], operators)
     elif isinstance(expr, str):
-        # 舊格式：純字串 "385/386"
-        op_string = expr
-        op = None
-        for operator in operators.keys():
-            if operator in op_string:
-                op = operator
-                break
-        if op is None:
-            raise ValueError(f"不支援的運算: {op_string}")
-        parts = op_string.split(op)
-        try:
-            id1 = int(parts[0])
-            id2 = int(parts[1])
-        except ValueError:
-            raise ValueError(f"無法將操作字符串的部分轉換為整數: {op_string}")
+        id1, op, id2 = _parse_op_string(expr, operators)
     else:
         raise ValueError(f"不支援的運算式格式: {expr}")
 
-    # 載入兩個序列的數據
     data1 = load_series_data(id1)
     data2 = load_series_data(id2)
 
-    # 轉換為 DataFrame
     df1 = pd.DataFrame(data1['data'], columns=['Date', 'Value'])
     df2 = pd.DataFrame(data2['data'], columns=['Date', 'Value'])
-
-    # 轉換日期格式
     df1['Date'] = pd.to_datetime(df1['Date'])
     df2['Date'] = pd.to_datetime(df2['Date'])
-
-    # 設定索引
     df1.set_index('Date', inplace=True)
     df2.set_index('Date', inplace=True)
 
-    # 對齊日期並進行運算
     df = df1.join(df2, lsuffix='_1', rsuffix='_2', how='inner')
     df['Value'] = operators[op](df['Value_1'], df['Value_2'])
 
-    # 構建結果
-    result = {
+    return {
         'data': df.reset_index()[['Date', 'Value']].values.tolist(),
         'title': f"{data1['title']} {operator_symbols[op]} {data2['title']}"
     }
-    return result
 
 
 def add_plot_line(chart_ids, chart_id_list, chart_id_entry, chart_ids_index, target_chart_id, plot_values, y_axis):
@@ -209,7 +198,6 @@ def is_ma_expression(chart_id):
     
     支援格式: "6785.MA20" 表示 20 期移動平均線
     """
-    import re
     if isinstance(chart_id, str) and re.search(r'\.MA\d+', chart_id.upper()):
         return True
     return False
@@ -224,9 +212,6 @@ def process_ma(expr):
     Returns:
     dict: 包含 'data' 和 'title' 的字典
     """
-    import re
-    
-    # 解析 series_id 和期數
     match = re.match(r'(\d+)\.MA(\d+)', expr.upper())
     if not match:
         raise ValueError(f"無效的 MA 格式: {expr}")
@@ -477,5 +462,107 @@ def build_y_axis(title, index, reversed_flag=False, plot_lines=None):
         y_axis["plotLines"] = plot_lines
         
     return y_axis
+
+
+# ============================================================
+# ChartModule — 宣告式圖表群組模組
+# ============================================================
+
+def resolve_series_title(chart_id_entry, fallback_title=''):
+    """根據單一 series entry 取得顯示標題。"""
+    if is_yoy_expression(chart_id_entry):
+        return process_yoy(chart_id_entry)['title']
+    if is_ma_expression(chart_id_entry):
+        return process_ma(chart_id_entry)['title']
+    if is_expression(chart_id_entry):
+        return process_expression(chart_id_entry)['title']
+    if isinstance(chart_id_entry, list):
+        return fallback_title
+    data = load_series_data(chart_id_entry)
+    return data.get('title', fallback_title)
+
+
+class ChartModule:
+    """宣告式圖表群組配置。
+
+    將 route 模組的重複邏輯統一於此，各模組只需傳入資料常數：
+      chart_ids, summary_list, chart_titles, axis_config,
+      reverse_ids, plot_lines_config, range_selector_override, filename
+    """
+
+    def __init__(self, *, chart_ids, summary_list, chart_titles=None,
+                 axis_config=None, reverse_ids=None, plot_lines_config=None,
+                 range_selector_override=None, filename=''):
+        self.CHART_IDS = chart_ids
+        self.SUMMARY_LIST = summary_list
+        self._chart_titles = chart_titles or []
+        self._axis_config = axis_config or []
+        self._reverse_ids = reverse_ids or []
+        self._plot_lines_config = plot_lines_config or []
+        self._range_selector_override = range_selector_override
+        self._filename = filename
+
+    # -- 標題查詢 --
+    def get_chart_title(self, chart_id_list):
+        for i, ids in enumerate(self.CHART_IDS):
+            if chart_id_list == ids:
+                if i < len(self._chart_titles) and self._chart_titles[i] is not None:
+                    return self._chart_titles[i]
+                return '圖表'
+        return '圖表'
+
+    # -- Y 軸分配 --
+    def get_y_axis_config(self, chart_id_list):
+        default = list(range(len(chart_id_list)))
+        for i, ids in enumerate(self.CHART_IDS):
+            if chart_id_list == ids:
+                if i < len(self._axis_config) and self._axis_config[i] is not None:
+                    return self._axis_config[i]
+                return default
+        return default
+
+    # -- 反向 Y 軸 --
+    def should_reverse_axis(self, chart_id_entry):
+        if not self._reverse_ids:
+            return False
+        if isinstance(chart_id_entry, (str, int)):
+            return chart_id_entry in self._reverse_ids
+        if isinstance(chart_id_entry, tuple) and len(chart_id_entry) == 3:
+            return (chart_id_entry[0] in self._reverse_ids
+                    or chart_id_entry[2] in self._reverse_ids)
+        if isinstance(chart_id_entry, list):
+            return any(cid in self._reverse_ids for cid in chart_id_entry)
+        return False
+
+    # -- Plot lines --
+    def _apply_plot_lines(self, chart_id_list, chart_id_entry, y_axis):
+        for group_idx, target_id, values in self._plot_lines_config:
+            add_plot_line(self.CHART_IDS, chart_id_list, chart_id_entry,
+                          group_idx, target_id, values, y_axis)
+
+    # -- 生成圖表資料 --
+    def generate_chart_data(self, chart_id_entry, months=600):
+        return generate_chart_data(chart_id_entry, self.get_y_axis_config, months)
+
+    # -- 生成 Highcharts 配置 --
+    def get_chart_config(self, chart_id_list):
+        y_axes = []
+        for i, entry in enumerate(chart_id_list):
+            title = resolve_series_title(entry, self._filename)
+            y_axis = build_y_axis(
+                title=title, index=i,
+                reversed_flag=self.should_reverse_axis(entry),
+            )
+            self._apply_plot_lines(chart_id_list, entry, y_axis)
+            y_axes.append(y_axis)
+
+        config = get_base_chart_config(y_axes, self.get_chart_title(chart_id_list))
+        if self._range_selector_override:
+            rs = config["rangeSelector"]
+            if "extra_buttons" in self._range_selector_override:
+                rs["buttons"].extend(self._range_selector_override["extra_buttons"])
+            if "selected" in self._range_selector_override:
+                rs["selected"] = self._range_selector_override["selected"]
+        return config
 
 

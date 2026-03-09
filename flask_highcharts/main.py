@@ -5,24 +5,39 @@ from loguru import logger
 
 app = Flask(__name__)
 
-# 設定 Loguru 日誌
 logger.add("app.log", rotation="10 MB", level="INFO")
 
-# 定義 group 模塊的路徑
 GROUPS_DIR = os.path.join("app", "routes")
 
-# 動態加載所有 group 模塊
+# 快取已載入的模組，避免每次 API 請求都重新 exec_module
+_loaded_modules = {}
 chart_id_list = {}
-for filename in os.listdir(GROUPS_DIR):
-    if filename.endswith(".py"):
-        group_name = filename[:-3]  # 去掉 .py
-        module_path = os.path.join(GROUPS_DIR, filename)
-        spec = importlib.util.spec_from_file_location(group_name, module_path)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        chart_id_list[group_name] = module.CHART_IDS
 
+
+def _load_module(group_name):
+    """載入單一 group 模組並快取。"""
+    module_path = os.path.join(GROUPS_DIR, f"{group_name}.py")
+    spec = importlib.util.spec_from_file_location(group_name, module_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    _loaded_modules[group_name] = module
+    chart_id_list[group_name] = module.CHART_IDS
+    return module
+
+
+def _load_all_modules():
+    """載入所有 group 模組。"""
+    _loaded_modules.clear()
+    chart_id_list.clear()
+    for filename in os.listdir(GROUPS_DIR):
+        if filename.endswith(".py"):
+            group_name = filename[:-3]
+            _load_module(group_name)
+
+
+_load_all_modules()
 logger.info("Loaded groups: {}", list(chart_id_list.keys()))
+
 
 @app.route('/favicon.ico')
 def favicon():
@@ -30,10 +45,12 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+
 @app.route("/")
 def index():
     logger.info("Accessed index page")
     return render_template("index.html", chart_id_list=chart_id_list.keys())
+
 
 @app.route("/api/chart/<group_name>")
 def get_chart_data(group_name):
@@ -42,11 +59,7 @@ def get_chart_data(group_name):
         return jsonify({"error": f"Group {group_name} not found"}), 404
 
     try:
-        module_path = os.path.join(GROUPS_DIR, f"{group_name}.py")
-        spec = importlib.util.spec_from_file_location(group_name, module_path)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-
+        module = _loaded_modules[group_name]
         chart_ids = module.CHART_IDS
         summary_list = module.SUMMARY_LIST
         charts = []
@@ -82,6 +95,7 @@ def get_chart_data(group_name):
         logger.exception("Unexpected error in get_chart_data for '{}': {}", group_name, e)
         return jsonify({"error": str(e)}), 500
 
+
 @app.route("/charts/<group_name>")
 def show_charts(group_name):
     if group_name not in chart_id_list:
@@ -94,23 +108,11 @@ def show_charts(group_name):
 
 @app.route("/api/update_groups", methods=["GET"])
 def update_groups():
-    """動態更新 group 模塊"""
-    global chart_id_list
-    chart_id_list.clear()
-
+    """重新載入所有 group 模組（熱更新）。"""
     try:
-        for filename in os.listdir(GROUPS_DIR):
-            if filename.endswith(".py"):
-                group_name = filename[:-3]
-                module_path = os.path.join(GROUPS_DIR, filename)
-                spec = importlib.util.spec_from_file_location(group_name, module_path)
-                module = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(module)
-                chart_id_list[group_name] = module.CHART_IDS
-
+        _load_all_modules()
         logger.info("Updated chart_id_list: {}", list(chart_id_list.keys()))
         return jsonify({"success": True, "chart_id_list": list(chart_id_list.keys())})
-
     except Exception as e:
         logger.error("Error updating groups: {}", e)
         return jsonify({"success": False, "error": str(e)}), 500

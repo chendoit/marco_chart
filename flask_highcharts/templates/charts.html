@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ group_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/highstock.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navigator.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 50%; /* 修改這裡：改為 80% 來達到 1:0.8 的比例 check Jasper in following html */
+            margin-bottom: 2rem;
+        }
+        .chart-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+        .summary-wrapper {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        .summary-container {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .highcharts-container {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .chart-wrapper:focus {
+            outline: 2px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">{{ group_name }}</h1>
+
+        <!-- Navigation buttons -->
+        <div class="flex justify-center space-x-4 mb-8">
+            <button id="prev-group" class="bg-gray-600 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition-transform transform hover:-translate-y-1 shadow-lg">
+                上一個 Group
+            </button>
+            <button id="home" class="bg-gray-600 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition-transform transform hover:-translate-y-1 shadow-lg">
+                回到主頁
+            </button>
+            <button id="next-group" class="bg-gray-600 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition-transform transform hover:-translate-y-1 shadow-lg">
+                下一個 Group
+            </button>
+        </div>
+
+        <div id="charts-grid" class="max-w-8xl mx-auto space-y-8"> <!-- 修改這裡：從 max-w-3xl 改為 max-w-6xl Jasper -->
+            <!-- 圖表將在這裡動態生成 -->
+        </div>
+    </div>
+
+    <script>
+        function estimateSummaryHeight(summary) {
+            if (!summary) return 0;
+
+            // 估算每行能容納的字符數（考慮中英文混合）
+            const charsPerLine = 50;
+
+            // 計算預估行數（考慮換行符）
+            const lines = summary.split('<br>').reduce((acc, line) => {
+                return acc + Math.ceil(line.length / charsPerLine);
+            }, 0);
+
+            // 每行高度（px）+ padding
+            return (lines * 24) + 32;
+        }
+
+        function createChartContainer(index, summary) {
+            const chartsGrid = document.getElementById("charts-grid");
+            if (!chartsGrid) return null;
+
+            // 創建外層容器
+            const outerContainer = document.createElement("div");
+            outerContainer.className = "bg-white rounded-lg shadow-lg p-4";
+
+            // 創建 summary 容器
+            if (summary) {
+                const summaryWrapper = document.createElement("div");
+                summaryWrapper.className = "summary-wrapper";
+                const summaryContainer = document.createElement("div");
+                summaryContainer.id = `summary-container-${index}`;
+                summaryContainer.className = "summary-container";
+                summaryContainer.innerHTML = summary;
+                summaryWrapper.appendChild(summaryContainer);
+                outerContainer.appendChild(summaryWrapper);
+            }
+
+            // 創建圖表容器
+            const chartWrapper = document.createElement("div");
+            chartWrapper.className = "chart-wrapper";
+            chartWrapper.tabIndex = 0; // 使容器可以聚焦
+            const chartContainer = document.createElement("div");
+            chartContainer.className = "chart-container p-4";
+            const chartDiv = document.createElement("div");
+            chartDiv.id = `chart-container-${index}`;
+
+            chartContainer.appendChild(chartDiv);
+            chartWrapper.appendChild(chartContainer);
+            outerContainer.appendChild(chartWrapper);
+
+            chartsGrid.appendChild(outerContainer);
+
+            chartContainers.push(chartWrapper);
+
+            return chartDiv.id;
+        }
+
+        const currentGroup = "{{ group_name }}";
+        const groupList = JSON.parse('{{ group_list | tojson | safe }}');
+        const currentIndex = groupList.indexOf(currentGroup);
+
+        let chartContainers = []; // 存儲所有 chart container 的引用
+        let currentChartIndex = 0; // 當前聚焦的 chart container 索引
+
+        function goToNextGroup() {
+            const nextIndex = (currentIndex + 1) % groupList.length;
+            window.location.href = `/charts/${groupList[nextIndex]}`;
+        }
+
+        function goToPrevGroup() {
+            const prevIndex = (currentIndex - 1 + groupList.length) % groupList.length;
+            window.location.href = `/charts/${groupList[prevIndex]}`;
+        }
+
+        document.getElementById("home").addEventListener("click", () => {
+            window.location.href = "/";
+        });
+
+        document.getElementById("prev-group").addEventListener("click", goToPrevGroup);
+        document.getElementById("next-group").addEventListener("click", goToNextGroup);
+
+        document.addEventListener("keydown", (event) => {
+            if (event.keyCode === 37) {
+                goToPrevGroup();
+            } else if (event.keyCode === 39) {
+                goToNextGroup();
+            }
+        });
+
+        // 切換到上一個 chart container
+        function goToPrevChart() {
+            if (currentChartIndex > 0) {
+                currentChartIndex--;
+                focusChartContainer(currentChartIndex);
+            }
+        }
+
+        // 切換到下一個 chart container
+        function goToNextChart() {
+            if (currentChartIndex < chartContainers.length - 1) {
+                currentChartIndex++;
+                focusChartContainer(currentChartIndex);
+            }
+        }
+
+        // 聚焦到指定的 chart container
+        function focusChartContainer(index) {
+            const targetChart = chartContainers[index];
+            if (targetChart) {
+<!--                targetChart.focus(); // 聚焦到該容器-->
+                targetChart.scrollIntoView({ behavior: "smooth", block: "center" }); // 滾動到該容器
+            }
+        }
+
+        // 監聽上下鍵來切換 chart container
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp") {
+                goToPrevChart();
+            } else if (event.key === "ArrowDown") {
+                goToNextChart();
+            }
+        });
+
+        function createChart(container, config) {
+            const chartContainer = document.querySelector(`#${container}`).parentElement;
+            if (!chartContainer) return null;
+
+            const containerWidth = chartContainer.offsetWidth - 32;
+            const newConfig = {
+                ...config,
+                chart: {
+                    ...config.chart,
+                    width: containerWidth,
+                    height: containerWidth * 0.5, // 修改這裡：高度設為寬度的 0.8 倍 Jasper
+                    spacingRight: 20,
+                    spacingBottom: 20,
+                },
+                navigator: {
+                    ...config.navigator,
+                    margin: 30
+                }
+            };
+
+            return Highcharts.stockChart(container, newConfig);
+        }
+
+        window.addEventListener('resize', () => {
+            const charts = Highcharts.charts.filter(c => c);
+            charts.forEach((chart, index) => {
+                const container = document.querySelector(`#chart-container-${index}`).parentElement;
+                const containerWidth = container.offsetWidth - 32;
+                chart.setSize(containerWidth, containerWidth * 0.5, false); // 修改這裡：高度設為寬度的 0.8 倍 Jasper
+            });
+        });
+
+        // 初始化頁面加載
+        fetch(`/api/chart/{{ group_name }}`)
+            .then(response => response.json())
+            .then(response => {
+                if (response.error) {
+                    const chartsGrid = document.getElementById("charts-grid");
+                    if (chartsGrid) {
+                        chartsGrid.innerHTML = `<p class="text-red-500">${response.error}</p>`;
+                    }
+                } else {
+                    const charts = response.charts;
+                    charts.forEach((chart, index) => {
+                        const containerId = createChartContainer(index, chart.summary);
+                        if (containerId) {
+                            createChart(containerId, chart.config);
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const chartsGrid = document.getElementById("charts-grid");
+                if (chartsGrid) {
+                    chartsGrid.innerHTML = `<p class="text-red-500">Error loading charts</p>`;
+                }
+            });
+
+        // 保留原有的事件處理代碼...
+    </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+# [時間戳規範] 所有寫入 pkl 的 datetime 時間部分統一為 08:00:00 (UTC+8)
+# 以與 MacroMicro series 的 fromtimestamp() 產出一致。新增抓取腳本時請遵循此規範。
 from pycot.reports import CommitmentsOfTraders #pip install pycot-reports, pydantic-settings
 import pandas as pd
 import datetime
@@ -110,7 +112,6 @@ class COTReportCache:
         return os.path.join(self.cache_dir, f'{safe_name}_cache.pkl')
 
     def _is_cache_fresh(self, cache_file):
-        return False
         if not os.path.exists(cache_file):
             return False
         file_time = datetime.fromtimestamp(os.path.getmtime(cache_file))
@@ -147,7 +148,7 @@ def convert_and_save_column(df, column_name, output_dir, prefix, exchange_code):
     """將單一欄位轉換並儲存成pickle"""
     os.makedirs(output_dir, exist_ok=True)
 
-    data = [[datetime.combine(date, datetime.min.time()), float(value)]
+    data = [[datetime.combine(date, datetime.min.time()).replace(hour=8), float(value)]
             for date, value in zip(df.index, df[column_name])]
 
     pickle_data = {

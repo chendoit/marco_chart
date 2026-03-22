@@ -1,3 +1,5 @@
+# [時間戳規範] 所有寫入 pkl 的 datetime 時間部分統一為 08:00:00 (UTC+8)
+# 以與 MacroMicro series 的 fromtimestamp() 產出一致。新增抓取腳本時請遵循此規範。
 import os
 import pickle
 import datetime
@@ -39,7 +41,7 @@ def fetch_and_save_fred_data(series_id):
         # 格式化數據
         formatted_data = []
         for index, row in data.iterrows():
-            date = index.to_pydatetime()
+            date = index.to_pydatetime().replace(hour=8)
             value = row['value']
             formatted_data.append([date, value])
 
@@ -105,7 +107,7 @@ def fetch_and_save_sofr_data(start_date, end_date):
         # 處理 rate 和 volume 數據
         for entry in data['refRates']:
             entry_type = entry["type"]
-            entry_date = datetime.datetime.strptime(entry["effectiveDate"], "%Y-%m-%d")
+            entry_date = datetime.datetime.strptime(entry["effectiveDate"], "%Y-%m-%d").replace(hour=8)
 
             if entry_type == "BGCR":
                 bgcr_data['percent1'].append([entry_date, entry.get("percentPercentile1", None)])

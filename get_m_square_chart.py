@@ -1,3 +1,5 @@
+# [時間戳規範] 所有寫入 pkl 的 datetime 時間部分統一為 08:00:00 (UTC+8)
+# 以與 MacroMicro series 的 fromtimestamp() 產出一致。新增抓取腳本時請遵循此規範。
 import re
 import pickle
 from playwright.sync_api import sync_playwright
@@ -48,7 +50,7 @@ def convert_chart_data(chart_data, chart_id, folder=folder):
         full_title = f"{chart_title}{series_title}"
 
         # 转换数据格式
-        series_parsed = [[datetime.strptime(date, '%Y-%m-%d'), float(value)] for date, value in series_data]
+        series_parsed = [[datetime.strptime(date, '%Y-%m-%d').replace(hour=8), float(value)] for date, value in series_data]
 
         series_dict = {
             'data': series_parsed,

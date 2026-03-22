@@ -2,14 +2,12 @@ from app.utils import ChartModule
 
 _module = ChartModule(
     filename='澳元',
-    chart_titles=[
-        "澳元CFTC持倉",
-    ],
-    chart_ids=[
-        [745, 'aud_cme_noncommercial_short', "aud_cme_noncommercial_long"],
-    ],
-    summary_list=[
-        "",
+    charts=[
+        {
+            "title": "澳元CFTC持倉",
+            "ids": [745, 'aud_cme_noncommercial_short', "aud_cme_noncommercial_long"],
+            "summary": "",
+        },
     ],
     reverse_ids=[
         "eur_cme_noncommercial_short",

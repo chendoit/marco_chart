@@ -562,22 +562,44 @@ def resolve_series_title(chart_id_entry, fallback_title=''):
 class ChartModule:
     """宣告式圖表群組配置。
 
-    將 route 模組的重複邏輯統一於此，各模組只需傳入資料常數：
-      chart_ids, summary_list, chart_titles, axis_config,
-      reverse_ids, plot_lines_config, range_selector_override, filename
+    支援兩種初始化方式：
+
+    1. 新格式 — charts (list of dict)，每張圖的設定集中在一起：
+       ChartModule(filename='...', charts=[
+           {"title": "...", "ids": [...], "axis": [...], "summary": "...",
+            "plot_lines": [(target_id, value), ...]},
+           ...
+       ], reverse_ids=[...], range_selector_override={...})
+
+    2. 舊格式 — 平行陣列（向後相容）：
+       ChartModule(filename='...', chart_ids=[...], chart_titles=[...],
+                   axis_config=[...], summary_list=[...], ...)
     """
 
-    def __init__(self, *, chart_ids, summary_list, chart_titles=None,
-                 axis_config=None, reverse_ids=None, plot_lines_config=None,
-                 range_selector_override=None, filename=''):
-        self.CHART_IDS = chart_ids
-        self.SUMMARY_LIST = summary_list
-        self._chart_titles = chart_titles or []
-        self._axis_config = axis_config or []
+    def __init__(self, *, charts=None, chart_ids=None, summary_list=None,
+                 chart_titles=None, axis_config=None, reverse_ids=None,
+                 plot_lines_config=None, range_selector_override=None,
+                 filename=''):
         self._reverse_ids = reverse_ids or []
-        self._plot_lines_config = plot_lines_config or []
         self._range_selector_override = range_selector_override
         self._filename = filename
+
+        if charts is not None:
+            self.CHART_IDS = [c["ids"] for c in charts]
+            self.SUMMARY_LIST = [c.get("summary") for c in charts]
+            self._chart_titles = [c.get("title") for c in charts]
+            self._axis_config = [c.get("axis") for c in charts]
+            pl = []
+            for i, c in enumerate(charts):
+                for target_id, values in c.get("plot_lines", []):
+                    pl.append((i, target_id, values))
+            self._plot_lines_config = pl
+        else:
+            self.CHART_IDS = chart_ids
+            self.SUMMARY_LIST = summary_list
+            self._chart_titles = chart_titles or []
+            self._axis_config = axis_config or []
+            self._plot_lines_config = plot_lines_config or []
 
     # -- 標題查詢 --
     def get_chart_title(self, chart_id_list):

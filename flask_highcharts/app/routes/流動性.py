@@ -2,10 +2,14 @@ from app.utils import ChartModule
 
 _module = ChartModule(
     filename='流動性',
-    chart_titles=["流動性"],
-    chart_ids=[['STLFSI4', '4456']],
-    axis_config=[[0, 1]],
-    summary_list=["S&P500和SOFR99!!"],
+    charts=[
+        {
+            "title": "流動性",
+            "ids": ['STLFSI4', '4456'],
+            "axis": [0, 1],
+            "summary": "S&P500和SOFR99!!",
+        },
+    ],
 )
 
 CHART_IDS = _module.CHART_IDS

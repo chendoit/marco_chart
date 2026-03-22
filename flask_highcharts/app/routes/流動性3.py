@@ -2,9 +2,17 @@ from app.utils import ChartModule
 
 _module = ChartModule(
     filename='流動性3',
-    chart_titles=["流動性3", "流動性3"],
-    chart_ids=[[2], ['STLFSI4']],
-    summary_list=["S&P500和SOFR99!!"],
+    charts=[
+        {
+            "title": "流動性3",
+            "ids": [2],
+            "summary": "S&P500和SOFR99!!",
+        },
+        {
+            "title": "流動性3",
+            "ids": ['STLFSI4'],
+        },
+    ],
 )
 
 CHART_IDS = _module.CHART_IDS

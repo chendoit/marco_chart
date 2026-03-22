@@ -2,18 +2,21 @@ from app.utils import ChartModule
 
 _module = ChartModule(
     filename='台幣台股',
-    chart_titles=[
-        "半導體產值年增率 vs 台股PE",
-        "半導體產值年增率 vs 台幣匯率",
-    ],
-    chart_ids=[
-        [2756, 5683],
-        [2756, 621],
-        [2756, 5683, 621],
-    ],
-    summary_list=[
-        "台股PE 高點領先 半導體年增率 2-3Q (訂單在談 PE就開始漲)",
-        "半導體年增率 領先台股匯率 2-3Q (美元匯回台灣 台幣就高) 不過這點 目前好像沒有生效 ",
+    charts=[
+        {
+            "title": "半導體產值年增率 vs 台股PE",
+            "ids": [2756, 5683],
+            "summary": "台股PE 高點領先 半導體年增率 2-3Q (訂單在談 PE就開始漲)",
+        },
+        {
+            "title": "半導體產值年增率 vs 台幣匯率",
+            "ids": [2756, 621],
+            "summary": "半導體年增率 領先台股匯率 2-3Q (美元匯回台灣 台幣就高) 不過這點 目前好像沒有生效 ",
+        },
+        {
+            "title": None,
+            "ids": [2756, 5683, 621],
+        },
     ],
     reverse_ids=[621],
     range_selector_override={

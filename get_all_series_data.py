@@ -3,12 +3,14 @@ from loguru import logger
 from get_fed_series import fetch_and_save_fred_data
 from get_m_square_chart import fetch_m_square_charts
 from get_m_square_series import fetch_m_square_series
+from get_m_square_etf import fetch_m_square_etfs
 from get_ctfc_series import fetch_cftc_data
 
 tasks = [
     ("FRED data", lambda: fetch_and_save_fred_data('STLFSI4')),
     ("MacroMicro charts", fetch_m_square_charts),
     ("MacroMicro series", fetch_m_square_series),
+    ("MacroMicro ETFs", fetch_m_square_etfs),
     ("CFTC data", fetch_cftc_data),
 ]
 

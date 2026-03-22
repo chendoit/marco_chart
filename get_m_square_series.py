@@ -1,4 +1,6 @@
 # pip install playwright==1.43.0
+# [時間戳規範] 所有寫入 pkl 的 datetime 時間部分統一為 08:00:00 (UTC+8)
+# 以與 MacroMicro series 的 fromtimestamp() 產出一致。新增抓取腳本時請遵循此規範。
 import re
 import pickle
 from playwright.sync_api import sync_playwright
@@ -68,7 +70,7 @@ def extract_data_from_script(html):
                         else:
                             # Handle negative timestamps manually
                             epoch = datetime(1970, 1, 1)
-                            datetime_object = epoch + timedelta(seconds=timestamp)
+                            datetime_object = (epoch + timedelta(seconds=timestamp)).replace(hour=8)
 
                         results.append([datetime_object, item[1]])
                     except Exception as e:
@@ -217,6 +219,7 @@ url_list = [
 
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us", # 美日-10年期公債利差
     "https://www.macromicro.me/series/385/fx-usd-jpy", #美元/日圓
+    "https://www.macromicro.me/series/32377/jpy-vix", # 日圓波動率指數
 
 
     # fedwatch 升降息
@@ -231,6 +234,13 @@ url_list = [
     "https://www.macromicro.me/series/22904/vvix", # vvix
     "https://www.macromicro.me/series/4407/cboe-skew", # 黑天鵝
     "https://www.macromicro.me/series/1650/us-put-call-ratio-total", # put call ratio
+
+    # VIX 期限結構
+    "https://www.macromicro.me/series/28769/vix1d",  # VIX 1-Day
+    "https://www.macromicro.me/series/7173/vix9d",   # VIX 9-Day
+    "https://www.macromicro.me/series/7174/vix3m",   # VIX 3-Month
+    "https://www.macromicro.me/series/7175/vix6m",   # VIX 6-Month
+    "https://www.macromicro.me/series/7770/vix1y",   # VIX 1-Year
     #
     #
     # # 美國 公債殖利率
@@ -308,24 +318,8 @@ url_list = [
 
 
 local_url_list = [
-    # "https://www.macromicro.me/series/319/durable-goods", # 耐久財新訂單
-    # "https://www.macromicro.me/series/339/durable-goods-nondefense-capital-yoy", #耐久財新訂單-非國防資本財 (年增率)
-    # "https://www.macromicro.me/series/321/durable-goods-yoy", # 美國-耐久財新訂單 (年增率)
-
-    # 美國-芝加哥聯儲當週金融狀況指數
-    # "https://www.macromicro.me/series/5696/united-states-chicago-fed-national-financial-conditions-index",
-
-    # Nikkei 225
-    # "https://www.macromicro.me/series/1281/japan-nikkei225",
-
-    # 美元/加幣
-    # "https://www.macromicro.me/series/386/fx-usd-cad",
-
-    # 黃金 ETF 波動率指數
-
     "https://www.macromicro.me/series/7054/consumer-confidence", # 美國-經濟諮商局消費者信心指數
     "https://www.macromicro.me/series/72/michigan-consumer-confidence", # 美國-密大消費者信心指數
-
 ]
 
 folder = os.getenv("DATA_DIR")  # 默認數據目錄

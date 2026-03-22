@@ -5,6 +5,7 @@ Highcharts Utility Functions
 import os
 import re
 import pickle
+import numpy as np
 import pandas as pd
 
 # 顏色列表常數
@@ -23,6 +24,10 @@ colors = [
 
 
 _series_cache = {}
+
+
+def clear_series_cache():
+    _series_cache.clear()
 
 
 def load_series_data(chart_id, category=None):
@@ -101,8 +106,8 @@ def process_expression(expr):
     else:
         raise ValueError(f"不支援的運算式格式: {expr}")
 
-    data1 = load_series_data(id1)
-    data2 = load_series_data(id2)
+    data1 = _resolve_operand(id1)
+    data2 = _resolve_operand(id2)
 
     df1 = pd.DataFrame(data1['data'], columns=['Date', 'Value'])
     df2 = pd.DataFrame(data2['data'], columns=['Date', 'Value'])
@@ -118,6 +123,73 @@ def process_expression(expr):
         'data': df.reset_index()[['Date', 'Value']].values.tolist(),
         'title': f"{data1['title']} {operator_symbols[op]} {data2['title']}"
     }
+
+
+def is_aggregate_expression(chart_id):
+    """判斷是否為聚合運算式 {"SUM": [...]} 或 {"ZSUM": [...]}"""
+    return isinstance(chart_id, dict) and any(k in chart_id for k in ('SUM', 'ZSUM'))
+
+
+def process_aggregate(expr):
+    """處理聚合運算式 SUM / ZSUM
+
+    SUM:  載入多個 series 按日期 inner join 後逐日加總
+    ZSUM: 各 series 先做 Z-score 正規化再逐日加總
+
+    Parameters:
+    expr: {"SUM": [id1, id2, ...]} 或 {"ZSUM": [id1, id2, ...]}
+
+    Returns:
+    dict: {'data': [[date, value], ...], 'title': str}
+    """
+    if 'SUM' in expr:
+        mode, ids = 'SUM', expr['SUM']
+    else:
+        mode, ids = 'ZSUM', expr['ZSUM']
+
+    frames = []
+    titles = []
+    for sid in ids:
+        data = load_series_data(sid)
+        titles.append(data['title'])
+        df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
+        df['Date'] = pd.to_datetime(df['Date'])
+        df = df.set_index('Date').sort_index()
+        frames.append(df)
+
+    combined = frames[0].copy()
+    combined.columns = ['V0']
+    for i, df in enumerate(frames[1:], 1):
+        df = df.copy()
+        df.columns = [f'V{i}']
+        combined = combined.join(df, how='inner')
+
+    if mode == 'ZSUM':
+        for col in combined.columns:
+            mean = combined[col].mean()
+            std = combined[col].std()
+            if std > 0:
+                combined[col] = (combined[col] - mean) / std
+            else:
+                combined[col] = 0.0
+
+    combined['Total'] = combined.sum(axis=1)
+
+    prefix = 'Σz' if mode == 'ZSUM' else 'Σ'
+    title = f"{prefix}({', '.join(titles)})"
+
+    return {
+        'data': combined.reset_index()[['Date', 'Total']].rename(
+            columns={'Total': 'Value'}).values.tolist(),
+        'title': title,
+    }
+
+
+def _resolve_operand(operand):
+    """解析運算式的操作元，支援 int/str（一般 series）和 dict（聚合運算式）。"""
+    if is_aggregate_expression(operand):
+        return process_aggregate(operand)
+    return load_series_data(operand)
 
 
 def add_plot_line(chart_ids, chart_id_list, chart_id_entry, chart_ids_index, target_chart_id, plot_values, y_axis):
@@ -292,9 +364,8 @@ def process_yoy(expr):
 
 
 def is_expression(chart_id):
-    """判斷是否為運算式"""
+    """判斷是否為運算式（含聚合運算式間的二元運算）"""
     if isinstance(chart_id, tuple):
-        # 三元組格式 (left, op, right) 或舊格式 ("expr",)
         if len(chart_id) == 3:
             return True
         if len(chart_id) == 1 and isinstance(chart_id[0], str):
@@ -322,8 +393,11 @@ def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600):
             chart_id_entry['charts']]
 
     for i, chart_id in enumerate(chart_id_list):
+        # 處理聚合運算式 {"SUM": [...]} / {"ZSUM": [...]}
+        if is_aggregate_expression(chart_id):
+            data = process_aggregate(chart_id)
         # 處理 YOY 年增率
-        if is_yoy_expression(chart_id):
+        elif is_yoy_expression(chart_id):
             data = process_yoy(chart_id)
         # 處理 MA 移動平均線
         elif is_ma_expression(chart_id):
@@ -346,8 +420,9 @@ def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600):
             min_date = max_date - pd.DateOffset(months=months)
         df = df[df.index >= min_date]
 
-        date_range = pd.date_range(start=df.index.min(), end=df.index.max(), freq='B')
-        df_filled = df.reindex(date_range)
+        biz_dates = pd.date_range(start=df.index.min(), end=df.index.max(), freq='B')
+        all_dates = biz_dates.union(df.index)
+        df_filled = df.reindex(all_dates)
         df_filled['Value'] = df_filled['Value'].interpolate(method='linear')
 
         data_dict = df_filled[['Value']].to_dict(orient='index')
@@ -470,6 +545,8 @@ def build_y_axis(title, index, reversed_flag=False, plot_lines=None):
 
 def resolve_series_title(chart_id_entry, fallback_title=''):
     """根據單一 series entry 取得顯示標題。"""
+    if is_aggregate_expression(chart_id_entry):
+        return process_aggregate(chart_id_entry)['title']
     if is_yoy_expression(chart_id_entry):
         return process_yoy(chart_id_entry)['title']
     if is_ma_expression(chart_id_entry):

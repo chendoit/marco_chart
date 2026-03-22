@@ -1,5 +1,8 @@
 from app.utils import ChartModule
 
+_VIX_LONG_FLOW = ["etf_UVXY_fundflow", "etf_VIXY_fundflow"]
+_VIX_SHORT_FLOW = ["etf_SVXY_fundflow"]
+
 _module = ChartModule(
     filename='每日天啟',
     chart_titles=[
@@ -13,6 +16,12 @@ _module = ChartModule(
         "日經225 vs Vix",
         "SP500, MOVE and VIX",
         "日圓加幣, vs 油價",
+        "SPX vs VIX 期限結構 (raw)",
+        "SPX vs VIX 期限結構 (ratio)",
+        "VIX ETF 淨做多資金流 vs SPX vs VIX",
+        "VIX ETF 正規化淨做多資金流 vs SPX vs VIX",
+        "CBOE VIX Futures Index (LONGVOL vs SHORTVOL) vs SPX",
+        "SPX vs VIX vs NFCI vs SHORTVOL",
     ],
     chart_ids=[
         [2, 22904, 355, "jpy_cme_noncommercial_short"],
@@ -25,6 +34,12 @@ _module = ChartModule(
         [1281, 355],
         [2, 17581, 355],
         [486, (385, '/', 386)],
+        [2, 355, 28769, 7173, 7174, 7175, 7770],
+        [2, (355, '/', 7174), (28769, '/', 7175)],
+        [({"SUM": _VIX_LONG_FLOW}, '-', {"SUM": _VIX_SHORT_FLOW}), 2, 355],
+        [({"ZSUM": _VIX_LONG_FLOW}, '-', {"ZSUM": _VIX_SHORT_FLOW}), 2, 355],
+        [2, "cboe_LONGVOL", "cboe_SHORTVOL"],
+        [2, 355, 5696, "cboe_SHORTVOL"],
     ],
     axis_config=[
         None,
@@ -37,6 +52,12 @@ _module = ChartModule(
         None,
         None,
         None,
+        [0, 1, 1, 1, 1, 1, 1],
+        [0, 1, 1],
+        [0, 1, 2],
+        [0, 1, 2],
+        [0, 1, 2],
+        [0, 1, 2, 3],
     ],
     summary_list=[
         """ 日圓空頭由高點滑落, 且VVIX由底部上升到達100, 強力風險警示!! <br>
@@ -58,6 +79,27 @@ _module = ChartModule(
         '<img src="https://raw.githubusercontent.com/chendoit/PicBed/main/image-20250829224909178.png" alt="圖片描述" style="width:40%; height:auto;" >',
         None,
         None,
+        "SPX 搭配 VIX 各期限原始數值：VIX(30D), VIX1D, VIX9D, VIX3M, VIX6M, VIX1Y。"
+        "<br>可觀察各期限 VIX 的絕對水準與相對位置。",
+        "VIX/VIX3M：VIX 與 3 個月期 VIX 的比率，衡量短期 vs 中期波動預期。"
+        "<br>VIX1D/VIX6M：1 天期 vs 6 個月期比率，對短期恐慌更敏感。"
+        "<br><b>&gt;1</b>：期限結構倒掛 (backwardation)，短期恐慌高於中長期 → 市場恐慌。"
+        "<br><b>&lt;1</b>：期限結構正常 (contango)，市場穩定。"
+        "<br>數值越高代表恐慌越劇烈，歷史上突破 1.5 通常對應重大市場事件。",
+        "做多VIX ETF (UVXY+VIXY) 資金淨流量減去做空VIX ETF (SVXY) 資金淨流量。<br>"
+        "資料來源：ProShares 官方 CSV（每日 Δ Shares Outstanding × NAV）。<br>"
+        "<b>正值</b>：市場整體偏向買入恐慌避險，資金流入做多VIX產品。<br>"
+        "<b>負值</b>：市場整體偏向賣出波動率，資金流入做空VIX產品（看好市場）。<br>"
+        "搭配 SPX 與 VIX 觀察資金流向是否與市場走勢背離。",
+        "各ETF先做Z-score正規化後再加總，避免規模大的ETF主導信號。<br>"
+        "邏輯同上，但每個ETF的信號權重相當。<br>"
+        "可與原始加總對比，若兩者一致則信號更可靠。",
+        "CBOE LONGVOL：做多 VIX 期貨的指數（UVIX 追蹤 2x LONGVOL）。<br>"
+        "CBOE SHORTVOL：做空 VIX 期貨的指數（SVIX 追蹤 -1x SHORTVOL）。<br>"
+        "LONGVOL 持續下降反映 VIX 期貨的 contango 成本，SHORTVOL 則持續上升。<br>"
+        "觀察 LONGVOL 急升 + SHORTVOL 急跌 = VIX 期貨做多方大量湧入。",
+        "SPX 搭配 VIX、芝加哥聯儲 NFCI（反轉軸）、CBOE SHORTVOL 綜合觀察。<br>"
+        "NFCI 下彎代表金融環境收緊，搭配 VIX 上升與 SHORTVOL 下跌可確認風險升溫。",
     ],
     reverse_ids=[
         "eur_cme_noncommercial_short",
@@ -71,6 +113,7 @@ _module = ChartModule(
         (2, 18331, [25, 75]),
         (2, 22718, [50, 75]),
         (4, 7145, 95),
+        (11, (355, '/', 7174), 1),
     ],
 )
 

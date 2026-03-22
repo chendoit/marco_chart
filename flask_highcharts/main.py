@@ -1,17 +1,68 @@
-from flask import Flask, jsonify, render_template, send_from_directory
+from flask import Flask, jsonify, render_template, send_from_directory, request, make_response
 import os
+import hashlib
 import importlib.util
 from loguru import logger
+
+from app.utils import clear_series_cache
 
 app = Flask(__name__)
 
 logger.add("app.log", rotation="10 MB", level="INFO")
 
 GROUPS_DIR = os.path.join("app", "routes")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
 # 快取已載入的模組，避免每次 API 請求都重新 exec_module
 _loaded_modules = {}
 chart_id_list = {}
+
+# --- data version & API cache ---
+_data_version = ""
+_data_dir_mtime = 0.0
+_api_cache = {}
+
+
+def _compute_data_version():
+    """掃描 data/ 下所有 pkl 的最後修改時間，產生版本 hash。"""
+    max_mtime = 0.0
+    try:
+        for fname in os.listdir(DATA_DIR):
+            if fname.endswith(".pkl"):
+                fpath = os.path.join(DATA_DIR, fname)
+                mt = os.path.getmtime(fpath)
+                if mt > max_mtime:
+                    max_mtime = mt
+    except OSError:
+        pass
+    return hashlib.md5(str(max_mtime).encode()).hexdigest()[:12]
+
+
+def _refresh_data_version_if_needed():
+    """快速檢查 data/ 目錄 mtime，若有變化則重算 data_version 並清除所有快取。"""
+    global _data_version, _data_dir_mtime
+    try:
+        current_mtime = os.stat(DATA_DIR).st_mtime
+    except OSError:
+        return
+    if current_mtime != _data_dir_mtime:
+        new_version = _compute_data_version()
+        if new_version != _data_version:
+            logger.info("Data version changed: {} -> {}, clearing caches", _data_version, new_version)
+            _data_version = new_version
+            _api_cache.clear()
+            clear_series_cache()
+        _data_dir_mtime = current_mtime
+
+
+def _init_data_version():
+    global _data_version, _data_dir_mtime
+    try:
+        _data_dir_mtime = os.stat(DATA_DIR).st_mtime
+    except OSError:
+        _data_dir_mtime = 0.0
+    _data_version = _compute_data_version()
+    logger.info("Initial data_version: {}", _data_version)
 
 
 def _load_module(group_name):
@@ -35,8 +86,40 @@ def _load_all_modules():
             _load_module(group_name)
 
 
+_init_data_version()
 _load_all_modules()
 logger.info("Loaded groups: {}", list(chart_id_list.keys()))
+
+
+def _build_group_charts(group_name):
+    """計算一個 group 的所有 chart 資料（純運算，不含 HTTP 邏輯）。"""
+    module = _loaded_modules[group_name]
+    chart_ids = module.CHART_IDS
+    summary_list = module.SUMMARY_LIST
+    charts = []
+
+    for i, chart_group in enumerate(chart_ids):
+        if isinstance(chart_group, list):
+            data = module.generate_chart_data(chart_group)
+            config = module.get_chart_config(chart_group)
+        else:
+            data = module.generate_chart_data([chart_group])
+            config = module.get_chart_config([chart_group])
+
+        config["series"] = [
+            {
+                "name": series_info.get("name"),
+                "data": list(series_info.get("data", {}).items()),
+                "yAxis": series_info.get("yAxis", 0),
+                "color": series_info.get("color", "rgba(75, 192, 192, 1)")
+            }
+            for series_info in data["series"]
+        ]
+
+        summary = summary_list[i] if i < len(summary_list) else None
+        charts.append({"config": config, "summary": summary})
+
+    return charts
 
 
 @app.route('/favicon.ico')
@@ -58,41 +141,31 @@ def get_chart_data(group_name):
         logger.warning("Group '{}' not found", group_name)
         return jsonify({"error": f"Group {group_name} not found"}), 404
 
+    _refresh_data_version_if_needed()
+
+    client_etag = request.headers.get("If-None-Match", "").strip('" ')
+    if client_etag == _data_version:
+        return "", 304
+
+    if group_name in _api_cache:
+        logger.info("Cache hit for '{}'", group_name)
+        resp = make_response(_api_cache[group_name])
+        resp.headers["Content-Type"] = "application/json"
+        resp.headers["ETag"] = f'"{_data_version}"'
+        return resp
+
     try:
-        module = _loaded_modules[group_name]
-        chart_ids = module.CHART_IDS
-        summary_list = module.SUMMARY_LIST
-        charts = []
+        charts = _build_group_charts(group_name)
+        json_str = jsonify({"charts": charts}).get_data(as_text=True)
+        _api_cache[group_name] = json_str
 
-        for i, chart_group in enumerate(chart_ids):
-            try:
-                if isinstance(chart_group, list):
-                    data = module.generate_chart_data(chart_group)
-                    config = module.get_chart_config(chart_group)
-                else:
-                    data = module.generate_chart_data([chart_group])
-                    config = module.get_chart_config([chart_group])
-
-                config["series"] = [
-                    {
-                        "name": series_info.get("name"),
-                        "data": list(series_info.get("data", {}).items()),
-                        "yAxis": series_info.get("yAxis", 0),
-                        "color": series_info.get("color", "rgba(75, 192, 192, 1)")
-                    }
-                    for series_info in data["series"]
-                ]
-
-                summary = summary_list[i] if i < len(summary_list) else None
-                charts.append({"config": config, "summary": summary})
-            except Exception as e:
-                logger.error("Error generating chart data for '{}': {}", group_name, e)
-                return jsonify({"error": f"Failed to generate chart data for group {group_name}"}), 500
-
-        logger.info("Successfully retrieved chart data for '{}'.", group_name)
-        return jsonify({"charts": charts})
+        logger.info("Computed and cached chart data for '{}'", group_name)
+        resp = make_response(json_str)
+        resp.headers["Content-Type"] = "application/json"
+        resp.headers["ETag"] = f'"{_data_version}"'
+        return resp
     except Exception as e:
-        logger.exception("Unexpected error in get_chart_data for '{}': {}", group_name, e)
+        logger.exception("Error in get_chart_data for '{}': {}", group_name, e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -108,9 +181,12 @@ def show_charts(group_name):
 
 @app.route("/api/update_groups", methods=["GET"])
 def update_groups():
-    """重新載入所有 group 模組（熱更新）。"""
+    """重新載入所有 group 模組（熱更新），同時清除快取。"""
     try:
+        _api_cache.clear()
+        clear_series_cache()
         _load_all_modules()
+        _init_data_version()
         logger.info("Updated chart_id_list: {}", list(chart_id_list.keys()))
         return jsonify({"success": True, "chart_id_list": list(chart_id_list.keys())})
     except Exception as e:

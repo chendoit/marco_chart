@@ -1,6 +1,7 @@
 from .highcharts_utils import (
     colors,
     load_series_data,
+    clear_series_cache,
     process_expression,
     add_plot_line,
     generate_chart_data,
@@ -18,6 +19,7 @@ from .highcharts_utils import (
 __all__ = [
     'colors',
     'load_series_data',
+    'clear_series_cache',
     'process_expression',
     'add_plot_line',
     'generate_chart_data',

@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, send_from_directory, request, make_response
 import os
+import time
 import hashlib
 import importlib.util
 from loguru import logger
@@ -19,7 +20,8 @@ chart_id_list = {}
 
 # --- data version & API cache ---
 _data_version = ""
-_data_dir_mtime = 0.0
+_last_check_time = 0.0
+_CHECK_INTERVAL = 60  # 每 60 秒最多重掃一次 pkl mtime
 _api_cache = {}
 
 
@@ -39,28 +41,23 @@ def _compute_data_version():
 
 
 def _refresh_data_version_if_needed():
-    """快速檢查 data/ 目錄 mtime，若有變化則重算 data_version 並清除所有快取。"""
-    global _data_version, _data_dir_mtime
-    try:
-        current_mtime = os.stat(DATA_DIR).st_mtime
-    except OSError:
+    """定期掃描 pkl 檔案 mtime，若 data version 改變則清除所有快取。"""
+    global _data_version, _last_check_time
+    now = time.monotonic()
+    if now - _last_check_time < _CHECK_INTERVAL:
         return
-    if current_mtime != _data_dir_mtime:
-        new_version = _compute_data_version()
-        if new_version != _data_version:
-            logger.info("Data version changed: {} -> {}, clearing caches", _data_version, new_version)
-            _data_version = new_version
-            _api_cache.clear()
-            clear_series_cache()
-        _data_dir_mtime = current_mtime
+    _last_check_time = now
+    new_version = _compute_data_version()
+    if new_version != _data_version:
+        logger.info("Data version changed: {} -> {}, clearing caches", _data_version, new_version)
+        _data_version = new_version
+        _api_cache.clear()
+        clear_series_cache()
 
 
 def _init_data_version():
-    global _data_version, _data_dir_mtime
-    try:
-        _data_dir_mtime = os.stat(DATA_DIR).st_mtime
-    except OSError:
-        _data_dir_mtime = 0.0
+    global _data_version, _last_check_time
+    _last_check_time = time.monotonic()
     _data_version = _compute_data_version()
     logger.info("Initial data_version: {}", _data_version)
 
@@ -111,7 +108,8 @@ def _build_group_charts(group_name):
                 "name": series_info.get("name"),
                 "data": list(series_info.get("data", {}).items()),
                 "yAxis": series_info.get("yAxis", 0),
-                "color": series_info.get("color", "rgba(75, 192, 192, 1)")
+                "color": series_info.get("color", "rgba(75, 192, 192, 1)"),
+                "visible": series_info.get("visible", True),
             }
             for series_info in data["series"]
         ]
@@ -199,4 +197,4 @@ if __name__ == "__main__":
     port = 6002 if is_dev else 5002
 
     logger.info(f"Starting Flask app chart dev: {is_dev} port {port} ")
-    app.run(debug=False, port=port)
+    app.run(debug=False, host="0.0.0.0", port=port)

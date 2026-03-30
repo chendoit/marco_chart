@@ -363,6 +363,152 @@ def process_yoy(expr):
     return result
 
 
+def is_dd_expression(chart_id):
+    """判斷是否為 DD (Drawdown from rolling high) 格式
+
+    支援格式: "cboe_SHORTVOL.DD60" (距 60 日高點的回撤百分比)
+    series_id 可為數字或含底線的字串 (如 cboe_SHORTVOL)。
+    """
+    return isinstance(chart_id, str) and re.search(r'\.DD\d+$', chart_id.upper())
+
+
+def process_dd(expr):
+    """計算距 N 日滾動高點的回撤百分比 (drawdown %)
+
+    公式: (value / rolling_max_N - 1) * 100
+
+    Parameters:
+    expr: "series_id.DDn"，例如 "cboe_SHORTVOL.DD60"
+
+    Returns:
+    dict: {'data': [[date, value], ...], 'title': str}
+    """
+    match = re.match(r'(.+)\.DD(\d+)', expr, re.IGNORECASE)
+    if not match:
+        raise ValueError(f"無效的 DD 格式: {expr}")
+
+    raw_id = match.group(1)
+    window = int(match.group(2))
+
+    series_id = int(raw_id) if raw_id.isdigit() else raw_id
+    data = load_series_data(series_id)
+
+    df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.sort_values('Date').set_index('Date')
+
+    rolling_high = df['Value'].rolling(window=window, min_periods=1).max()
+    df['DD'] = (df['Value'] / rolling_high - 1) * 100
+    df = df.dropna(subset=['DD'])
+
+    return {
+        'data': [[idx, row['DD']] for idx, row in df.iterrows()],
+        'title': f"{data['title']} DD{window}",
+    }
+
+
+def is_diff_expression(chart_id):
+    """判斷是否為 DIFF (差分) 格式
+
+    支援格式: "4407.DIFF" (預設 1 期) 或 "4407.DIFF5" (指定 5 期)
+    """
+    return isinstance(chart_id, str) and re.search(r'\.DIFF\d*$', chart_id.upper())
+
+
+def process_diff(expr):
+    """處理 DIFF (差分) 計算
+
+    Parameters:
+    expr: "series_id.DIFF" (預設 1 期) 或 "series_id.DIFFn" (n 期差分)
+
+    Returns:
+    dict: 包含 'data' 和 'title' 的字典
+    """
+    match = re.match(r'(\d+)\.DIFF(\d*)', expr.upper())
+    if not match:
+        raise ValueError(f"無效的 DIFF 格式: {expr}")
+
+    series_id = int(match.group(1))
+    periods = int(match.group(2)) if match.group(2) else 1
+
+    data = load_series_data(series_id)
+
+    df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.sort_values('Date').set_index('Date')
+
+    df['Value_DIFF'] = df['Value'].diff(periods=periods)
+    df = df.dropna(subset=['Value_DIFF'])
+
+    suffix = f"Δ{periods}日" if periods > 1 else "Δ日"
+    return {
+        'data': [[idx, row['Value_DIFF']] for idx, row in df.iterrows()],
+        'title': f"{data['title']} {suffix}"
+    }
+
+
+def is_rev_expression(chart_id):
+    """判斷是否為 REV (極值翻轉信號) 格式
+
+    支援格式: "5696.REV10" 或 "cboe_SHORTVOL.REV20"
+    series_id 可為數字或含底線的字串。
+    """
+    return isinstance(chart_id, str) and re.search(r'\.REV\d+$', chart_id.upper())
+
+
+def process_rev(expr):
+    """偵測 MA 平滑後的斜率翻轉信號
+
+    步驟: 原始數據 → MA(n) → diff → sign → sign 變化 → debounce → +1/-1/0
+    +1 = 波谷翻上（斜率由負轉正）
+    -1 = 波峰翻下（斜率由正轉負）
+
+    信號發出後，window//2 期內的反向信號會被抑制，避免震盪產生假信號。
+
+    Parameters:
+    expr: "series_id.REVn"，例如 "5696.REV10"
+
+    Returns:
+    dict: {'data': [[date, value], ...], 'title': str}
+    """
+    match = re.match(r'(.+)\.REV(\d+)', expr, re.IGNORECASE)
+    if not match:
+        raise ValueError(f"無效的 REV 格式: {expr}")
+
+    raw_id = match.group(1)
+    window = int(match.group(2))
+
+    series_id = int(raw_id) if raw_id.isdigit() else raw_id
+    data = load_series_data(series_id)
+
+    df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.sort_values('Date').set_index('Date')
+
+    smoothed = df['Value'].rolling(window=window, min_periods=window).mean()
+    slope = smoothed.diff()
+    sign = np.sign(slope)
+    sign_change = sign.diff()
+
+    raw_signal = np.where(sign_change >= 2, 1, np.where(sign_change <= -2, -1, 0))
+
+    cooldown = max(window // 2, 1)
+    debounced = np.zeros_like(raw_signal)
+    last_signal_idx = -cooldown - 1
+    for i in range(len(raw_signal)):
+        if raw_signal[i] != 0 and (i - last_signal_idx) > cooldown:
+            debounced[i] = raw_signal[i]
+            last_signal_idx = i
+
+    df['Signal'] = debounced
+    df = df.loc[smoothed.dropna().index]
+
+    return {
+        'data': [[idx, int(row['Signal'])] for idx, row in df.iterrows()],
+        'title': f"{data['title']} REV{window}",
+    }
+
+
 def is_expression(chart_id):
     """判斷是否為運算式（含聚合運算式間的二元運算）"""
     if isinstance(chart_id, tuple):
@@ -375,13 +521,15 @@ def is_expression(chart_id):
     return False
 
 
-def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600):
+def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600,
+                        visible_config=None):
     """生成圖表數據
     
     Parameters:
     chart_id_entry: 圖表 ID 配置（可以是 list, str, int, tuple）
     get_y_axis_config_func: 獲取 Y 軸配置的函數
     months: 要顯示的月份數
+    visible_config: 每條 series 的預設可見性 (list of bool)，None 表示全部可見
     """
     chart_data = {"series": []}
 
@@ -402,6 +550,15 @@ def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600):
         # 處理 MA 移動平均線
         elif is_ma_expression(chart_id):
             data = process_ma(chart_id)
+        # 處理 DIFF 差分
+        elif is_diff_expression(chart_id):
+            data = process_diff(chart_id)
+        # 處理 DD 回撤
+        elif is_dd_expression(chart_id):
+            data = process_dd(chart_id)
+        # 處理 REV 極值翻轉信號
+        elif is_rev_expression(chart_id):
+            data = process_rev(chart_id)
         # 處理運算式
         elif is_expression(chart_id):
             data = process_expression(chart_id)
@@ -440,7 +597,7 @@ def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600):
             "data": data_dict,
             "yAxis": y_axis,
             "color": color,
-            "visible": True
+            "visible": visible_config[i] if visible_config else True
         })
 
     return chart_data
@@ -551,6 +708,12 @@ def resolve_series_title(chart_id_entry, fallback_title=''):
         return process_yoy(chart_id_entry)['title']
     if is_ma_expression(chart_id_entry):
         return process_ma(chart_id_entry)['title']
+    if is_diff_expression(chart_id_entry):
+        return process_diff(chart_id_entry)['title']
+    if is_dd_expression(chart_id_entry):
+        return process_dd(chart_id_entry)['title']
+    if is_rev_expression(chart_id_entry):
+        return process_rev(chart_id_entry)['title']
     if is_expression(chart_id_entry):
         return process_expression(chart_id_entry)['title']
     if isinstance(chart_id_entry, list):
@@ -589,6 +752,7 @@ class ChartModule:
             self.SUMMARY_LIST = [c.get("summary") for c in charts]
             self._chart_titles = [c.get("title") for c in charts]
             self._axis_config = [c.get("axis") for c in charts]
+            self._visible_config = [c.get("visible") for c in charts]
             pl = []
             for i, c in enumerate(charts):
                 for target_id, values in c.get("plot_lines", []):
@@ -599,6 +763,7 @@ class ChartModule:
             self.SUMMARY_LIST = summary_list
             self._chart_titles = chart_titles or []
             self._axis_config = axis_config or []
+            self._visible_config = []
             self._plot_lines_config = plot_lines_config or []
 
     # -- 標題查詢 --
@@ -639,9 +804,21 @@ class ChartModule:
             add_plot_line(self.CHART_IDS, chart_id_list, chart_id_entry,
                           group_idx, target_id, values, y_axis)
 
+    # -- visible 查詢 --
+    def get_visible_config(self, chart_id_list):
+        for i, ids in enumerate(self.CHART_IDS):
+            if chart_id_list == ids:
+                if i < len(self._visible_config) and self._visible_config[i] is not None:
+                    return self._visible_config[i]
+                return None
+        return None
+
     # -- 生成圖表資料 --
     def generate_chart_data(self, chart_id_entry, months=600):
-        return generate_chart_data(chart_id_entry, self.get_y_axis_config, months)
+        return generate_chart_data(
+            chart_id_entry, self.get_y_axis_config, months,
+            visible_config=self.get_visible_config(chart_id_entry),
+        )
 
     # -- 生成 Highcharts 配置 --
     def get_chart_config(self, chart_id_list):

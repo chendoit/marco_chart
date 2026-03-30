@@ -9,7 +9,7 @@ timeout /t 2 /nobreak >nul
 echo === Starting production Flask ===
 cd /d "%~dp0"
 set FLASK_ENV=production
-start "" /min "..\venv\Scripts\python.exe" main.py
+start "" /min "..\venv\Scripts\pythonw.exe" main.py
 timeout /t 3 /nobreak >nul
 
 echo === Verifying ===

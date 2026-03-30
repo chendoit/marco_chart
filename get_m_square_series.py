@@ -207,7 +207,8 @@ url_list = [
     # 全球金融壓力指數（OFR）
     # 全球金融壓力指數（OFR）是一個衡量全球金融體系穩定性的指標。它通常根據市場價格、波動性和流動性等數據來評估金融市場的風險水平。
     # 當OFR指數上升時，表示金融市場面臨著更大的壓力和風險，可能預示著金融危機的可能性增加。
-    "https://www.macromicro.me/series/4869/global-ofr-fsi", #
+    "https://www.macromicro.me/series/4869/global-ofr-fsi", # 全球金融壓力指數(OFR)
+    "https://www.macromicro.me/series/4866/us-ofr-fsi", # 美國金融壓力指數(OFR)
 
     # 美德利差 DXY 歐元匯率
     "https://www.macromicro.me/series/4448/de-10-year-yield-spread-germany-us", # 美德-10年期公債利差
@@ -311,6 +312,17 @@ url_list = [
     # 黃金 ETF 波動率指數
     "https://www.macromicro.me/series/7147/gvz", # 黃金 GVZ 波動率指數
     "https://www.macromicro.me/series/485/gold-futures", # 黃金 GVZ 波動率指數
+
+    # 5-Year CDS (主權信用違約交換)
+    "https://www.macromicro.me/series/27118/uk-5year-cds",       # 英國
+    "https://www.macromicro.me/series/27119/germany-5year-cds",  # 德國
+    "https://www.macromicro.me/series/27126/france-5year-cds",   # 法國
+    "https://www.macromicro.me/series/27135/italy-5year-cds",    # 義大利
+    "https://www.macromicro.me/series/27129/portugal-5year-cds", # 葡萄牙
+    "https://www.macromicro.me/series/27131/spain-5year-cds",    # 西班牙
+    "https://www.macromicro.me/series/27136/brazil-5year-cds",   # 巴西
+    "https://www.macromicro.me/series/27138/turkey-5year-cds",   # 土耳其
+    "https://www.macromicro.me/series/27134/mexico-5year-cds",   # 墨西哥
 
 ]
 

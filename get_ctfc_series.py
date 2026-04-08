@@ -27,6 +27,8 @@ logger.add("./logs/{time:YYYY-MM-DD}.log", enqueue=True)
 
 def get_exchange_code(report_name):
     """從報告名稱中提取交易所代碼"""
+    if isinstance(report_name, tuple):
+        report_name = report_name[0]
     exchange_mapping = {
         'CHICAGO MERCANTILE EXCHANGE': 'cme',
         'INTERNATIONAL MONETARY MARKET': 'imm',
@@ -73,8 +75,9 @@ def clean_column_name(column_name):
 
 def get_prefix_from_name(report_name):
     """從報告名稱生成檔案前綴"""
-    # 提取商品名稱（第一個破折號之前的部分）
-    product_name = report_name.split('-')[0].strip()
+    if isinstance(report_name, tuple):
+        report_name = report_name[0]
+    product_name = report_name.split(' - ')[0].strip()
 
     name_mapping = {
         'JAPANESE YEN': 'jpy',
@@ -88,7 +91,8 @@ def get_prefix_from_name(report_name):
         '3-MO. EUROYEN': 'eur_jpy_3m',
         '3-MONTH EURODOLLARS': 'eur_usd_3m',
         'CRUDE OIL, LIGHT SWEET': 'cl',
-        'EURODOLLARS': 'ed'
+        'EURODOLLARS': 'ed',
+        'E-MINI S&P 500': 'emini_spx',
     }
 
     # 尋找匹配的前綴
@@ -108,7 +112,8 @@ class COTReportCache:
         os.makedirs(cache_dir, exist_ok=True)
 
     def _get_cache_filename(self, report_name):
-        safe_name = clean_column_name(report_name)
+        label = report_name[0] if isinstance(report_name, tuple) else report_name
+        safe_name = clean_column_name(label)
         return os.path.join(self.cache_dir, f'{safe_name}_cache.pkl')
 
     def _is_cache_fresh(self, cache_file):
@@ -118,26 +123,29 @@ class COTReportCache:
         age = datetime.now() - file_time
         return age.total_seconds() < (self.max_age_hours * 3600)
 
-    def get_report(self, report_name):
+    def get_report(self, report_name, report_type="legacy_fut"):
         cache_file = self._get_cache_filename(report_name)
 
         if self._is_cache_fresh(cache_file):
-            logger.info(f"Using cached report data for {report_name}...") # 使用logger
+            logger.info(f"Using cached report data for {report_name}...")
             try:
                 with open(cache_file, 'rb') as f:
                     return pickle.load(f)
             except Exception as e:
-                logger.error(f"Error reading cache: {e}") # 使用logger
-                return self._fetch_and_cache_report(report_name, cache_file)
+                logger.error(f"Error reading cache: {e}")
+                return self._fetch_and_cache_report(
+                    report_name, cache_file, report_type)
         else:
-            return self._fetch_and_cache_report(report_name, cache_file)
+            return self._fetch_and_cache_report(
+                report_name, cache_file, report_type)
 
-    def _fetch_and_cache_report(self, report_name, cache_file):
-        logger.info(f"Fetching fresh report data for {report_name}...") # 使用logger
-        cot = CommitmentsOfTraders("legacy_fut")
+    def _fetch_and_cache_report(self, report_name, cache_file,
+                                report_type="legacy_fut"):
+        logger.info(f"Fetching fresh report data for {report_name} ({report_type})...")
+        cot = CommitmentsOfTraders(report_type)
         report_data = cot.report(report_name)
 
-        logger.info("Caching report data...") # 使用logger
+        logger.info("Caching report data...")
         with open(cache_file, 'wb') as f:
             pickle.dump(report_data, f)
 
@@ -167,19 +175,19 @@ def convert_and_save_column(df, column_name, output_dir, prefix, exchange_code):
     return filepath
 
 
-def get_cot_data(report_name, base_dir=None):
+def get_cot_data(report_name, base_dir=None, report_type="legacy_fut"):
     """主要處理函數"""
     if base_dir is None:
-        base_dir = os.getenv("DATA_DIR") # 優先使用環境變數
+        base_dir = os.getenv("DATA_DIR")
 
-    data_dir = base_dir # change
+    data_dir = base_dir
     cache_dir = os.path.join(base_dir, "cache")
     os.makedirs(data_dir, exist_ok=True)
     os.makedirs(cache_dir, exist_ok=True)
 
     report_cache = COTReportCache(cache_dir)
-    logger.info(f"Processing report: {report_name}") # 使用logger
-    df = report_cache.get_report(report_name)
+    logger.info(f"Processing report: {report_name} ({report_type})")
+    df = report_cache.get_report(report_name, report_type=report_type)
 
     prefix = get_prefix_from_name(report_name)
     exchange_code = get_exchange_code(report_name)
@@ -212,6 +220,21 @@ def fetch_cftc_data():
         # 顯示部分結果作為範例
         for original_name, filepath in list(results.items())[:1]:
             logger.info(f"Sample output: {os.path.basename(filepath)}") # 使用logger
+
+def fetch_cftc_tff_data():
+    """抓取 TFF (Traders in Financial Futures) 報告 — E-mini S&P 500"""
+    report_name = (
+        "E-MINI S&P 500 - CHICAGO MERCANTILE EXCHANGE",
+        "E-MINI S&P 500 STOCK INDEX - CHICAGO MERCANTILE EXCHANGE",
+    )
+    logger.info(f"Processing TFF: {report_name[0]}")
+    results = get_cot_data(
+        report_name,
+        report_type="traders_in_financial_futures_fut",
+    )
+    for original_name, filepath in list(results.items())[:1]:
+        logger.info(f"TFF sample output: {os.path.basename(filepath)}")
+
 
 # 使用範例
 if __name__ == "__main__":

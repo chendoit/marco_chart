@@ -2,10 +2,10 @@
 
 Fund flow formula: (shares_today - shares_prev) * 1000 * nav_today
   - shares in CSV is in thousands (000)
-  - skip reverse-split dates where shares drop dramatically due to consolidation
+  - skip split dates where shares change dramatically due to split/consolidation
 
 Sources:
-  ProShares (UVXY, VIXY, SVXY): direct CSV download
+  ProShares (UVXY, VIXY, SVXY, TQQQ, SQQQ): direct CSV download
 """
 # [時間戳規範] 所有寫入 pkl 的 datetime 時間部分統一為 08:00:00 (UTC+8)
 # 以與 MacroMicro series 的 fromtimestamp() 產出一致。新增抓取腳本時請遵循此規範。
@@ -31,9 +31,11 @@ PROSHARES_TICKERS = {
     "UVXY": "https://accounts.profunds.com/etfdata/ByFund/UVXY-historical_nav.csv",
     "VIXY": "https://accounts.profunds.com/etfdata/ByFund/VIXY-historical_nav.csv",
     "SVXY": "https://accounts.profunds.com/etfdata/ByFund/SVXY-historical_nav.csv",
+    "TQQQ": "https://accounts.profunds.com/etfdata/ByFund/TQQQ-historical_nav.csv",
+    "SQQQ": "https://accounts.profunds.com/etfdata/ByFund/SQQQ-historical_nav.csv",
 }
 
-REVERSE_SPLITS = {
+SPLITS = {
     "UVXY": [
         datetime(2012, 3, 8), datetime(2012, 9, 7), datetime(2013, 6, 10),
         datetime(2014, 1, 24), datetime(2015, 5, 20), datetime(2016, 7, 25),
@@ -47,15 +49,25 @@ REVERSE_SPLITS = {
     "SVXY": [
         datetime(2018, 9, 18),
     ],
+    "TQQQ": [
+        datetime(2011, 2, 25), datetime(2012, 5, 11), datetime(2014, 1, 24),
+        datetime(2017, 1, 12), datetime(2018, 5, 24), datetime(2021, 1, 21),
+        datetime(2022, 1, 13), datetime(2025, 11, 20),
+    ],
+    "SQQQ": [
+        datetime(2012, 5, 11), datetime(2014, 1, 24), datetime(2017, 1, 12),
+        datetime(2019, 5, 24), datetime(2020, 8, 18), datetime(2022, 1, 13),
+        datetime(2024, 11, 7), datetime(2025, 11, 20),
+    ],
 }
 
 SPLIT_WINDOW_DAYS = 3
 
 
 def _is_split_day(dt, ticker):
-    """Check if dt falls within SPLIT_WINDOW_DAYS of any known reverse split."""
+    """Check if dt falls within SPLIT_WINDOW_DAYS of any known split."""
     from datetime import timedelta
-    for split_dt in REVERSE_SPLITS.get(ticker, []):
+    for split_dt in SPLITS.get(ticker, []):
         if abs((dt - split_dt).days) <= SPLIT_WINDOW_DAYS:
             return True
     return False

@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, render_template, send_from_directory, request, make_response
+import json
+import math
 import os
 import time
 import hashlib
@@ -88,6 +90,17 @@ _load_all_modules()
 logger.info("Loaded groups: {}", list(chart_id_list.keys()))
 
 
+def _sanitize_value(v):
+    """將 NaN / Infinity / 非數值 替換為 None，確保 JSON 序列化合法且 Highcharts 可用。"""
+    if v is None:
+        return None
+    if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
+        return None
+    if isinstance(v, str):
+        return None
+    return v
+
+
 def _build_group_charts(group_name):
     """計算一個 group 的所有 chart 資料（純運算，不含 HTTP 邏輯）。"""
     module = _loaded_modules[group_name]
@@ -103,16 +116,25 @@ def _build_group_charts(group_name):
             data = module.generate_chart_data([chart_group])
             config = module.get_chart_config([chart_group])
 
-        config["series"] = [
-            {
+        series_list = []
+        for series_info in data["series"]:
+            s = {
                 "name": series_info.get("name"),
-                "data": list(series_info.get("data", {}).items()),
                 "yAxis": series_info.get("yAxis", 0),
                 "color": series_info.get("color", "rgba(75, 192, 192, 1)"),
                 "visible": series_info.get("visible", True),
             }
-            for series_info in data["series"]
-        ]
+            if series_info.get("ohlc"):
+                s["data"] = series_info["data"]
+                s["type"] = "candlestick"
+            else:
+                s["data"] = [
+                    [k, _sanitize_value(v)]
+                    for k, v in series_info.get("data", {}).items()
+                    if _sanitize_value(v) is not None
+                ]
+            series_list.append(s)
+        config["series"] = series_list
 
         summary = summary_list[i] if i < len(summary_list) else None
         charts.append({"config": config, "summary": summary})

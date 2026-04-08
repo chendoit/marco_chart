@@ -324,6 +324,26 @@ url_list = [
     "https://www.macromicro.me/series/27138/turkey-5year-cds",   # 土耳其
     "https://www.macromicro.me/series/27134/mexico-5year-cds",   # 墨西哥
 
+    # 美國股市經濟總覽
+    "https://www.macromicro.me/series/7249/weekly-economic-index",  # WEI
+    "https://www.macromicro.me/series/4/us-real-gdp",  # 美國實質GDP
+    "https://www.macromicro.me/series/75/us-personal-saving-rate",  # 儲蓄率
+    "https://www.macromicro.me/series/7359/us-personal-consumption-expenditure",  # 個人消費支出
+    "https://www.macromicro.me/series/560/us-disposable-personal-income",  # 可支配所得
+    "https://www.macromicro.me/series/246/us-existing-home-sales",  # 成屋銷售
+    "https://www.macromicro.me/series/254/us-new-home-sales",  # 新屋銷售
+    "https://www.macromicro.me/series/255/us-median-new-home-sale-price",  # 新屋房價中位數
+    "https://www.macromicro.me/series/261/us-case-shiller-home-price",  # S&P/Case-Shiller 前20大城市房價
+    "https://www.macromicro.me/series/22910/us-sahm-rule-recession-indicator",  # 薩姆規則
+    "https://www.macromicro.me/series/44/us-nonfarm-payrolls",  # 非農就業
+    "https://www.macromicro.me/series/37/us-unemployment-rate",  # 失業率
+    "https://www.macromicro.me/series/34/us-initial-jobless-claims",  # 初次申請失業金
+    "https://www.macromicro.me/series/36/us-continued-jobless-claims",  # 連續申請失業金
+    "https://www.macromicro.me/series/4481/copper-gold-ratio",  # 銅金比
+    "https://www.macromicro.me/series/17586/sp500-eps-growth-rate",  # S&P 500 EPS 成長率
+
+    # 愛克榭
+    "https://www.macromicro.me/series/319/us-durable-goods-orders-nondefense-capital",  # 耐久財新訂單-非國防資本財
 ]
 
 

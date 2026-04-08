@@ -186,9 +186,16 @@ def process_aggregate(expr):
 
 
 def _resolve_operand(operand):
-    """解析運算式的操作元，支援 int/str（一般 series）和 dict（聚合運算式）。"""
+    """解析運算式的操作元，支援 int/str（一般 series）、dict（聚合運算式）及衍生表達式。"""
     if is_aggregate_expression(operand):
         return process_aggregate(operand)
+    if isinstance(operand, str):
+        if is_rvol_expression(operand):
+            return process_rvol(operand)
+        if is_ma_expression(operand):
+            return process_ma(operand)
+        if is_trend_expression(operand):
+            return process_trend(operand)
     return load_series_data(operand)
 
 
@@ -267,8 +274,8 @@ def is_yoy_expression(chart_id):
 
 def is_ma_expression(chart_id):
     """判斷是否為 MA (Moving Average) 移動平均線格式
-    
-    支援格式: "6785.MA20" 表示 20 期移動平均線
+
+    支援格式: "6785.MA20" 或 "cboe_SPX.MA50"
     """
     if isinstance(chart_id, str) and re.search(r'\.MA\d+', chart_id.upper()):
         return True
@@ -277,40 +284,31 @@ def is_ma_expression(chart_id):
 
 def process_ma(expr):
     """處理 MA (Moving Average) 移動平均線計算
-    
+
     Parameters:
-    expr: 格式為 "series_id.MAn"，例如 "6785.MA20" 表示 20 期移動平均
-    
-    Returns:
-    dict: 包含 'data' 和 'title' 的字典
+    expr: "series_id.MAn"，例如 "6785.MA20" 或 "cboe_SPX.MA50"
     """
-    match = re.match(r'(\d+)\.MA(\d+)', expr.upper())
+    match = re.match(r'(.+)\.MA(\d+)', expr, re.IGNORECASE)
     if not match:
         raise ValueError(f"無效的 MA 格式: {expr}")
-    
-    series_id = int(match.group(1))
+
+    raw_id = match.group(1)
     periods = int(match.group(2))
-    
-    # 載入原始數據
+
+    series_id = int(raw_id) if raw_id.isdigit() else raw_id
     data = load_series_data(series_id)
-    
-    # 轉換為 DataFrame
+
     df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
     df['Date'] = pd.to_datetime(df['Date'])
     df = df.sort_values('Date').set_index('Date')
-    
-    # 計算移動平均
+
     df['Value_MA'] = df['Value'].rolling(window=periods).mean()
-    
-    # 移除 NaN 值
     df = df.dropna(subset=['Value_MA'])
-    
-    # 構建結果
-    result = {
+
+    return {
         'data': [[idx, row['Value_MA']] for idx, row in df.iterrows()],
         'title': f"{data['title']} MA{periods}"
     }
-    return result
 
 
 def process_yoy(expr):
@@ -509,6 +507,140 @@ def process_rev(expr):
     }
 
 
+def is_rvol_expression(chart_id):
+    """判斷是否為 RVOL (Realized Volatility) 格式
+
+    支援格式: "cboe_SPX.RVOL20" (20 日已實現波動率, 年化)
+    """
+    return isinstance(chart_id, str) and re.search(r'\.RVOL\d+$', chart_id.upper())
+
+
+def process_rvol(expr):
+    """計算已實現波動率 (annualized realized volatility)
+
+    公式: log_return.rolling(window).std() * sqrt(252) * 100
+
+    Parameters:
+    expr: "series_id.RVOLn"，例如 "cboe_SPX.RVOL20"
+
+    Returns:
+    dict: {'data': [[date, value], ...], 'title': str}
+    """
+    match = re.match(r'(.+)\.RVOL(\d+)', expr, re.IGNORECASE)
+    if not match:
+        raise ValueError(f"無效的 RVOL 格式: {expr}")
+
+    raw_id = match.group(1)
+    window = int(match.group(2))
+
+    series_id = int(raw_id) if raw_id.isdigit() else raw_id
+    data = load_series_data(series_id)
+
+    df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.sort_values('Date').set_index('Date')
+
+    log_ret = np.log(df['Value'] / df['Value'].shift(1))
+    rvol = log_ret.rolling(window=window, min_periods=window).std() * np.sqrt(252) * 100
+    df['RVOL'] = rvol
+    df = df.dropna(subset=['RVOL'])
+
+    return {
+        'data': [[idx, row['RVOL']] for idx, row in df.iterrows()],
+        'title': f"{data['title']} RVol{window}d",
+    }
+
+
+def is_trend_expression(chart_id):
+    """判斷是否為 TREND (MA 趨勢計數) 格式
+
+    支援格式: "cboe_SPX.TREND" — 計算 price 高於幾條 MA (10/20/50/100/200) 的數量 (0-5)
+    """
+    return isinstance(chart_id, str) and chart_id.upper().endswith('.TREND')
+
+
+def process_trend(expr):
+    """計算 CTA 趨勢信號：price 高於幾條 MA 的數量
+
+    MA windows: 10, 20, 50, 100, 200
+    輸出 0-5：5=強勢上升（CTA 全面做多），0=強勢下降（CTA 全面做空）
+    """
+    raw_id = re.match(r'(.+)\.TREND', expr, re.IGNORECASE).group(1)
+    series_id = int(raw_id) if raw_id.isdigit() else raw_id
+    data = load_series_data(series_id)
+
+    df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.sort_values('Date').set_index('Date')
+
+    ma_windows = [10, 20, 50, 100, 200]
+    for w in ma_windows:
+        df[f'MA{w}'] = df['Value'].rolling(window=w).mean()
+
+    df = df.dropna(subset=[f'MA{w}' for w in ma_windows])
+
+    trend_count = sum(
+        (df['Value'] > df[f'MA{w}']).astype(int) for w in ma_windows
+    )
+
+    return {
+        'data': [[idx, int(val)] for idx, val in trend_count.items()],
+        'title': f"{data['title']} CTA Trend (0-5)",
+    }
+
+
+def is_ohlc_expression(chart_id):
+    """判斷是否為 OHLC (K 線) 格式
+
+    支援格式: "cboe_SPX.OHLC" — 從對應的 _ohlc.pkl 載入 OHLC 資料
+    """
+    return isinstance(chart_id, str) and chart_id.upper().endswith('.OHLC')
+
+
+def process_ohlc(expr):
+    """載入 OHLC 資料，回傳 Highcharts candlestick 格式
+
+    Parameters:
+    expr: "series_id.OHLC"，例如 "cboe_SPX.OHLC"
+
+    Returns:
+    dict: {'data': [[timestamp_ms, open, high, low, close], ...],
+           'title': str, 'ohlc': True}
+    """
+    raw_id = re.match(r'(.+)\.OHLC$', expr, re.IGNORECASE).group(1)
+
+    cache_key = (raw_id, '_ohlc')
+    if cache_key in _series_cache:
+        pkl_data = _series_cache[cache_key]
+    else:
+        data_dir = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data")
+        escaped_id = re.escape(str(raw_id))
+        pattern = re.compile(rf'(?:^|_){escaped_id}_ohlc\.pkl$')
+        matching_files = [f for f in os.listdir(data_dir) if pattern.search(f)]
+        matching_files.sort(key=len)
+
+        if not matching_files:
+            raise FileNotFoundError(
+                f"No OHLC pkl for '{raw_id}' found in {data_dir}")
+
+        file_path = os.path.join(data_dir, matching_files[0])
+        with open(file_path, 'rb') as f:
+            pkl_data = pickle.load(f)
+        _series_cache[cache_key] = pkl_data
+
+    ohlc_rows = []
+    for row in pkl_data['data']:
+        dt, o, h, l, c = row
+        ts_ms = int(pd.Timestamp(dt).timestamp() * 1000)
+        ohlc_rows.append([ts_ms, o, h, l, c])
+
+    return {
+        'data': ohlc_rows,
+        'title': pkl_data.get('title', raw_id),
+        'ohlc': True,
+    }
+
+
 def is_expression(chart_id):
     """判斷是否為運算式（含聚合運算式間的二元運算）"""
     if isinstance(chart_id, tuple):
@@ -541,34 +673,57 @@ def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600,
             chart_id_entry['charts']]
 
     for i, chart_id in enumerate(chart_id_list):
-        # 處理聚合運算式 {"SUM": [...]} / {"ZSUM": [...]}
+        # OHLC (candlestick) — 獨立分支，不做 interpolation
+        if is_ohlc_expression(chart_id):
+            data = process_ohlc(chart_id)
+            ohlc_rows = data['data']
+
+            if months:
+                max_ts = max(r[0] for r in ohlc_rows)
+                min_ts = max_ts - months * 30 * 24 * 3600 * 1000
+                ohlc_rows = [r for r in ohlc_rows if r[0] >= min_ts]
+
+            color = colors[i % len(colors)]
+            y_axis_config = get_y_axis_config_func(chart_id_list)
+            y_axis = y_axis_config[i]
+
+            chart_data["series"].append({
+                "name": data['title'],
+                "data": ohlc_rows,
+                "yAxis": y_axis,
+                "color": color,
+                "type": "candlestick",
+                "visible": visible_config[i] if visible_config else True,
+                "ohlc": True,
+            })
+            continue
+
         if is_aggregate_expression(chart_id):
             data = process_aggregate(chart_id)
-        # 處理 YOY 年增率
         elif is_yoy_expression(chart_id):
             data = process_yoy(chart_id)
-        # 處理 MA 移動平均線
         elif is_ma_expression(chart_id):
             data = process_ma(chart_id)
-        # 處理 DIFF 差分
         elif is_diff_expression(chart_id):
             data = process_diff(chart_id)
-        # 處理 DD 回撤
         elif is_dd_expression(chart_id):
             data = process_dd(chart_id)
-        # 處理 REV 極值翻轉信號
         elif is_rev_expression(chart_id):
             data = process_rev(chart_id)
-        # 處理運算式
+        elif is_rvol_expression(chart_id):
+            data = process_rvol(chart_id)
+        elif is_trend_expression(chart_id):
+            data = process_trend(chart_id)
         elif is_expression(chart_id):
             data = process_expression(chart_id)
         else:
             data = load_series_data(chart_id)
 
-        # 數據處理邏輯
         df = pd.DataFrame(data['data'], columns=['Date', 'Value'])
+        df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
         df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
         df = df.dropna(subset=['Date']).set_index('Date').sort_index()
+        df = df[~df.index.duplicated(keep='last')]
 
         max_date = df.index.max()
         if not months:
@@ -580,15 +735,14 @@ def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600,
         biz_dates = pd.date_range(start=df.index.min(), end=df.index.max(), freq='B')
         all_dates = biz_dates.union(df.index)
         df_filled = df.reindex(all_dates)
-        df_filled['Value'] = df_filled['Value'].interpolate(method='linear')
+        df_filled['Value'] = df_filled['Value'].infer_objects(copy=False).interpolate(method='linear')
+        df_filled['Value'] = df_filled['Value'].replace([np.inf, -np.inf], np.nan)
 
         data_dict = df_filled[['Value']].to_dict(orient='index')
-        # 過濾掉 NaN 值，避免 JSON 解析錯誤
         data_dict = {str(k.date()): v['Value'] for k, v in data_dict.items() if pd.notna(v['Value'])}
 
         color = colors[i % len(colors)]
 
-        # 根據 y_axis_config 設定 yAxis
         y_axis_config = get_y_axis_config_func(chart_id_list)
         y_axis = y_axis_config[i]
 
@@ -702,6 +856,9 @@ def build_y_axis(title, index, reversed_flag=False, plot_lines=None):
 
 def resolve_series_title(chart_id_entry, fallback_title=''):
     """根據單一 series entry 取得顯示標題。"""
+    if is_ohlc_expression(chart_id_entry):
+        raw_id = re.match(r'(.+)\.OHLC$', chart_id_entry, re.IGNORECASE).group(1)
+        return f"CBOE {raw_id.split('_')[-1]}" if '_' in raw_id else raw_id
     if is_aggregate_expression(chart_id_entry):
         return process_aggregate(chart_id_entry)['title']
     if is_yoy_expression(chart_id_entry):
@@ -714,6 +871,10 @@ def resolve_series_title(chart_id_entry, fallback_title=''):
         return process_dd(chart_id_entry)['title']
     if is_rev_expression(chart_id_entry):
         return process_rev(chart_id_entry)['title']
+    if is_rvol_expression(chart_id_entry):
+        return process_rvol(chart_id_entry)['title']
+    if is_trend_expression(chart_id_entry):
+        return process_trend(chart_id_entry)['title']
     if is_expression(chart_id_entry):
         return process_expression(chart_id_entry)['title']
     if isinstance(chart_id_entry, list):
@@ -730,7 +891,8 @@ class ChartModule:
     1. 新格式 — charts (list of dict)，每張圖的設定集中在一起：
        ChartModule(filename='...', charts=[
            {"title": "...", "ids": [...], "axis": [...], "summary": "...",
-            "plot_lines": [(target_id, value), ...]},
+            "plot_lines": [(target_id, value), ...],
+            "pctrank_id": "series_id"},  # Nomura 風格：標題附歷史百分位
            ...
        ], reverse_ids=[...], range_selector_override={...})
 
@@ -753,6 +915,7 @@ class ChartModule:
             self._chart_titles = [c.get("title") for c in charts]
             self._axis_config = [c.get("axis") for c in charts]
             self._visible_config = [c.get("visible") for c in charts]
+            self._pctrank_ids = [c.get("pctrank_id") for c in charts]
             pl = []
             for i, c in enumerate(charts):
                 for target_id, values in c.get("plot_lines", []):
@@ -764,6 +927,7 @@ class ChartModule:
             self._chart_titles = chart_titles or []
             self._axis_config = axis_config or []
             self._visible_config = []
+            self._pctrank_ids = []
             self._plot_lines_config = plot_lines_config or []
 
     # -- 標題查詢 --
@@ -771,9 +935,31 @@ class ChartModule:
         for i, ids in enumerate(self.CHART_IDS):
             if chart_id_list == ids:
                 if i < len(self._chart_titles) and self._chart_titles[i] is not None:
-                    return self._chart_titles[i]
-                return '圖表'
+                    title = self._chart_titles[i]
+                else:
+                    title = '圖表'
+                return self._append_pctrank(title, i)
         return '圖表'
+
+    def _append_pctrank(self, title, chart_index):
+        """讀取 _pctrank.pkl，取最後一筆百分位值附加到標題（Nomura 風格）。"""
+        if chart_index >= len(self._pctrank_ids):
+            return title
+        pctrank_id = self._pctrank_ids[chart_index]
+        if not pctrank_id:
+            return title
+        try:
+            data = load_series_data(f"{pctrank_id}_pctrank")
+            points = data.get("data", [])
+            if not points:
+                return title
+            last_val = points[-1][1]
+            if last_val is None:
+                return title
+            pctile = round(last_val * 100)
+            return f"{title} ({pctile}%tile)"
+        except Exception:
+            return title
 
     # -- Y 軸分配 --
     def get_y_axis_config(self, chart_id_list):

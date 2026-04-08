@@ -224,3 +224,9 @@ __marimo__/
 cache/
 data/
 history/
+
+# Browser profile (CME scraper)
+.cme_browser_profile/
+
+# Cursor IDE
+.cursor/

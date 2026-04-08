@@ -174,6 +174,12 @@ def fetch_and_save_sofr_data(start_date, end_date):
         logger.error(f"Error processing or saving SOFR data: {e}")
 
 
+def fetch_sofr_data():
+    """Orchestrator 用的無參數版本，自動抓取 2021-08-05 到今天的 SOFR 資料。"""
+    end_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    fetch_and_save_sofr_data("2021-08-05", end_date)
+
+
 def save_to_pickle(data, filename):
     """
     將數據保存為 pickle 文件。

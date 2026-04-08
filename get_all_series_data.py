@@ -8,12 +8,17 @@ import numpy as np
 import pandas as pd
 from loguru import logger
 
-from get_fed_series import fetch_and_save_fred_data
+from get_fed_series import fetch_and_save_fred_data, fetch_sofr_data
 from get_m_square_chart import fetch_m_square_charts
 from get_m_square_series import fetch_m_square_series
 from get_m_square_etf import fetch_m_square_etfs
-from get_ctfc_series import fetch_cftc_data
+from get_ctfc_series import fetch_cftc_data, fetch_cftc_tff_data
 from get_cboe_index import fetch_cboe_indices
+from get_etf_csv import fetch_all as fetch_etf_csv
+from get_nyfed_termpremium import fetch_nyfed_acm
+from get_gex_series import fetch_gex_series
+from get_cme_daily_volume import fetch_cme_daily_volume
+from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 
 LOGS_DIR = Path(__file__).resolve().parent / "logs"
@@ -29,12 +34,24 @@ CONSECUTIVE_DAYS_THRESHOLD = 3
 # 1. 執行所有抓取任務
 # ---------------------------------------------------------------------------
 tasks = [
-    ("FRED data", lambda: fetch_and_save_fred_data('STLFSI4')),
+    ("FRED STLFSI4", lambda: fetch_and_save_fred_data('STLFSI4')),
+    ("FRED THREEFYTP10 (Kim-Wright Term Premium)", lambda: fetch_and_save_fred_data('THREEFYTP10')),
+    ("FRED DGS2 (2Y Treasury)", lambda: fetch_and_save_fred_data('DGS2')),
+    ("FRED T10Y2Y (10Y-2Y Spread)", lambda: fetch_and_save_fred_data('T10Y2Y')),
+    ("FRED DFII10 (10Y Real Yield)", lambda: fetch_and_save_fred_data('DFII10')),
+    ("FRED MMMFFAQ027S (MMF AUM)", lambda: fetch_and_save_fred_data('MMMFFAQ027S')),
+    ("NY Fed SOFR (rate/percentiles)", fetch_sofr_data),
     ("MacroMicro charts", fetch_m_square_charts),
     ("MacroMicro series", fetch_m_square_series),
     ("MacroMicro ETFs", fetch_m_square_etfs),
     ("CFTC data", fetch_cftc_data),
+    ("CFTC E-mini SPX TFF", fetch_cftc_tff_data),
     ("CBOE indices", fetch_cboe_indices),
+    ("ETF fund flow (ProShares CSV)", fetch_etf_csv),
+    ("NY Fed ACM Term Premium", fetch_nyfed_acm),
+    ("GEX-lieta (SPX/SPY/VIX)", fetch_gex_series),
+    ("CME daily_volume (OI+Volume)", fetch_cme_daily_volume),
+    ("Percentile rank (all targets)", calc_pctrank),
 ]
 
 failed = []

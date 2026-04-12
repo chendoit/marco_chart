@@ -106,7 +106,7 @@ _module = ChartModule(
             "title": "Gamma Flip Distance — SPX + VIX 緩衝/風險度量",
             "pctrank_id": "gex_spx_flip_distance",
             "ids": ["gex_spx_flip_distance", "gex_vix_flip_distance"],
-            "axis": [0, 0],
+            "axis": [0, 1],
             "plot_lines": [("gex_spx_flip_distance", 0), ("gex_vix_flip_distance", 0)],
             "summary":
                 "SPX 和 VIX 各自距離 Gamma Flip Level 的百分比距離，合併在一張圖上。<br>"
@@ -117,10 +117,21 @@ _module = ChartModule(
                 "SPX 距離為正 + VIX 距離為正 = '雙重穩定器'，最有利於 Vol Selling 和 Carry Trade。",
         },
         {
+            "title": "Gamma Flip Distance 歷史百分位 — SPX + VIX",
+            "ids": [2, 355, "gex_spx_flip_distance_pctrank", "gex_vix_flip_distance_pctrank"],
+            "axis": [0, 1, 2, 2],
+            "summary":
+                "SPX 和 VIX Flip Distance 的 2 年滾動歷史百分位（0–100%），搭配 SPX/VIX 價格背景。<br>"
+                "將上圖的絕對百分比距離轉化為歷史分佈位置，消除量級變化的干擾。<br>"
+                "SPX Flip Distance 百分位極低 = 當前距離 Flip 的緩衝處於歷史罕見低水位，體制翻轉風險高；"
+                "VIX Flip Distance 百分位極低 = VIX 接近或已進入 Negative Gamma 加速區。<br>"
+                "雙線同時低百分位 = '雙重加速'的前兆，適合跨時期比較。",
+        },
+        {
             "title": "SPX Call/Put Gamma 拆分 — Dealer GEX 量化",
             "pctrank_id": "gex_spx_net_gamma",
-            "ids": ["gex_spx_call_gamma", "gex_spx_put_gamma", "gex_spx_net_gamma", 2],
-            "axis": [0, 0, 0, 1],
+            "ids": [2, 355, "gex_spx_call_gamma", "gex_spx_put_gamma", "gex_spx_net_gamma"],
+            "axis": [0, 1, 2, 2, 2],
             "plot_lines": [("gex_spx_net_gamma", 0)],
             "summary":
                 "SPX Dealer GEX 的正/負拆分（$B 單位）。<br>"
@@ -130,6 +141,20 @@ _module = ChartModule(
                 "比 Gamma Environment（+1/-1 二元指標）更精細——可觀察量級變化："
                 "Net Gamma 從 +$500M 降至 +$100M 但仍為正 = 表面安全但緩衝已大幅縮減。<br>"
                 "Net Gamma 負值的量級決定「加速器」的力度：-$200M vs -$1B 的衝擊完全不同。",
+        },
+        {
+            "title": "SPX Net/Call/Put Gamma 歷史百分位",
+            "ids": [2, 355,
+                    "gex_spx_net_gamma_pctrank.MA5", "gex_spx_call_gamma_pctrank.MA5",
+                    "gex_spx_put_gamma_pctrank.MA5"],
+            "axis": [0, 1, 2, 2, 2],
+            "summary":
+                "Net Gamma、Call Gamma、Put Gamma 各自的 2 年滾動歷史百分位（0–100%）。<br>"
+                "三條線同時觀察可判斷 Gamma 結構的相對位置："
+                "Net Gamma 百分位極低 = 當前 Gamma 處於歷史罕見的低水位，加速風險高；"
+                "Call Gamma 百分位高 + Put Gamma 百分位低 = 正 Gamma 主導的穩定環境。<br>"
+                "此圖將上方 GEX 量化圖的絕對值轉化為歷史分佈位置，"
+                "消除量級變化的干擾，更適合跨時期比較。",
         },
         {
             "title": "SPX 0DTE vs 非0DTE Net Gamma — 短期 Gamma 結構",

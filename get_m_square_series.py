@@ -247,9 +247,10 @@ url_list = [
     # # 美國 公債殖利率
     "https://www.macromicro.me/series/5547/1month-bond-yield", #美國 1個月期
     "https://www.macromicro.me/series/5549/1year-bond-yield", # 美國 1年期
+    "https://www.macromicro.me/series/363/2year-bond-yield", # 美國 2年期
     "https://www.macromicro.me/series/354/10year-bond-yield", # 美國 10年期
     "https://www.macromicro.me/series/5551/20year-bond-yield", # 美國 20年期
-    "https://www.macromicro.me/series/5551/20year-bond-yield", # 美國 30年期
+    "https://www.macromicro.me/series/3394/us-30-year-bond-yield", # 美國 30年期
     "https://www.macromicro.me/series/17581/us-treasury-move-index", # 美債波動率
 
     # 原油CFTC
@@ -350,8 +351,9 @@ url_list = [
 
 
 local_url_list = [
-    "https://www.macromicro.me/series/7054/consumer-confidence", # 美國-經濟諮商局消費者信心指數
-    "https://www.macromicro.me/series/72/michigan-consumer-confidence", # 美國-密大消費者信心指數
+    # "https://www.macromicro.me/series/7054/consumer-confidence", # 美國-經濟諮商局消費者信心指數
+    # "https://www.macromicro.me/series/72/michigan-consumer-confidence",
+    "https://www.macromicro.me/series/363/2year-bond-yield", # 美國 2年期 # 美國-密大消費者信心指數
 ]
 
 folder = os.getenv("DATA_DIR")  # 默認數據目錄

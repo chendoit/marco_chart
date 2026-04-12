@@ -30,13 +30,14 @@ _module = ChartModule(
         },
         {
             "title": "美國公債殖利率曲線（含 2Y）",
-            "ids": ["cboe_IRX", "fed_DGS2", "cboe_FVX", "cboe_TNX", "cboe_TYX"],
-            "axis": [0, 0, 0, 0, 0],
+            "ids": [356, 5547, 5549, 363, 354, 5551],
+            "axis": [0, 0, 0, 0, 0, 0],
             "summary":
-                "13W（IRX）/ 2Y（DGS2, FRED）/ 5Y（FVX）/ 10Y（TNX）/ 30Y（TYX）完整殖利率曲線。"
-                "CBOE CDN 無 2Y 指數，故 2Y 改用 FRED DGS2。<br>"
+                "Fed Fund Rate / 1M / 1Y / 2Y / 10Y / 20Y 完整殖利率曲線。<br>"
+                "Fed Fund Rate 是聯準會的政策利率下限，殖利率曲線的錨點——"
+                "所有天期殖利率相對於 FFR 的利差反映市場對經濟前景與 Fed 路徑的定價。<br>"
                 "McElligott 的 Fed 路徑框架：2Y 對 Fed 路徑重新定價最敏感（CTA 觸發價追蹤 2Y）；"
-                "10Y 是成長/通膨的混合晴雨表和跨資產傳導中樞；30Y 受 Term Premium 和財政擔憂主導。<br>"
+                "10Y 是成長/通膨的混合晴雨表和跨資產傳導中樞；20Y 受 Term Premium 和財政擔憂主導。<br>"
                 "曲線形狀的變化是 CTA 債券部位翻轉的觸發器——"
                 "2024/08 期間 CTA 從巨額做空債券轉為巨額做多（+$289B 名義金額），"
                 "伴隨著 'Hard Landing' 敘事的成型。",

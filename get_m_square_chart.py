@@ -13,6 +13,10 @@ import os
 import subprocess
 
 from dotenv import load_dotenv
+
+from macromicro_login import ensure_macromicro_session
+from line_notify import send_line_notification
+
 load_dotenv()
 
 logger.add("./logs/{time:YYYY-MM-DD}.log", enqueue=True)
@@ -98,6 +102,48 @@ def save_response_data(response, chart_id):
         except Exception as e:
             logger.error(f"Error processing response data for {chart_id}: {e}")
 
+
+def chart_label_from_url(url: str) -> str:
+    """從 chart URL 抽出可讀標的（id + slug）；無法解析時截斷原 URL。"""
+    match = re.search(r"/charts/(\d+)/([\w-]+)", url)
+    if match:
+        return f"{match.group(1)} {match.group(2)}"
+    match_id = re.search(r"/charts/(\d+)", url)
+    if match_id:
+        return match_id.group(1)
+    return url if len(url) <= 160 else url[:157] + "..."
+
+
+def _chart_pkl_path(chart_id: str) -> str:
+    return os.path.join("data", f"chart_{chart_id}.pkl")
+
+
+def process_chart_url(page, url) -> bool:
+    """載入單一 chart 頁並透過 response 攔截存檔。成功時 data/chart_{id}.pkl 存在且非空。"""
+    mid = re.search(r"/charts/(\d+)", url)
+    if not mid:
+        logger.error(f"Invalid URL format (no chart id): {url}")
+        return False
+    chart_id = mid.group(1)
+    handler = lambda response, cid=chart_id: save_response_data(response, cid)
+    page.on("response", handler)
+    try:
+        logger.info(f"Fetching data for URL: {url}")
+        page.goto(url)
+        page.wait_for_timeout(5000)
+    except Exception as e:
+        logger.error(f"Error processing URL {url}: {e}")
+        return False
+    finally:
+        page.remove_listener("response", handler)
+
+    pkl_path = _chart_pkl_path(chart_id)
+    if os.path.isfile(pkl_path) and os.path.getsize(pkl_path) > 0:
+        return True
+    logger.warning(f"Chart file missing or empty: {pkl_path}")
+    return False
+
+
 def fetch_data_from_urls(urls):
     """Fetch data from a list of URLs and save them as pickle files."""
     with sync_playwright() as playwright:
@@ -109,25 +155,33 @@ def fetch_data_from_urls(urls):
         page.add_init_script(path="stealth.min.js")  # You need to provide the path to your stealth.min.js
         page.set_viewport_size({'width': 1024, 'height': 768})
 
+        ensure_macromicro_session(page, "get_m_square_chart.py")
+
+        failures: list[str] = []
         for url in urls:
-            try:
-                # Extract chart ID from the URL using regex
-                chart_id_match = re.search(r'\d+', url)
-                if chart_id_match:
-                    chart_id = chart_id_match.group()
-                else:
-                    logger.error(f"Invalid URL format: {url}")
-                    continue
-
-                page.on('response', lambda response, cid=chart_id: save_response_data(response, cid))
-                logger.info(f"Fetching data for URL: {url}")
-                page.goto(url)
-                page.wait_for_timeout(5000)  # Wait for data to load
-
-            except Exception as e:
-                logger.error(f"Error processing URL {url}: {e}")
+            success = process_chart_url(page, url)
+            if not success:
+                logger.warning(f"Retrying URL {url} with a new browser instance...")
+                browser.close()
+                browser = playwright.chromium.launch(headless=False, args=browser_args)
+                page = browser.new_page()
+                page.add_init_script(path="stealth.min.js")
+                page.set_viewport_size({'width': 1024, 'height': 768})
+                ensure_macromicro_session(page, "get_m_square_chart.py")
+                success = process_chart_url(page, url)
+                if not success:
+                    logger.error(f"Failed to process URL {url} after retry.")
+                    label = chart_label_from_url(url)
+                    failures.append(f"{label}\n{url}")
 
         browser.close()
+
+        if failures:
+            body = "\n\n".join(failures)
+            max_len = 4500
+            if len(body) > max_len:
+                body = body[: max_len - 30] + f"\n...(共 {len(failures)} 筆，已截斷)"
+            send_line_notification(f"[M² chart 抓取失敗 {len(failures)} 筆]\n{body}")
 
 
 

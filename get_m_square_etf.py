@@ -17,6 +17,9 @@ from playwright.sync_api import sync_playwright
 from loguru import logger
 from dotenv import load_dotenv
 
+from macromicro_login import ensure_macromicro_session
+from line_notify import send_line_notification
+
 load_dotenv()
 
 logger.add("./logs/{time:YYYY-MM-DD}.log", enqueue=True)
@@ -168,28 +171,53 @@ def _launch_browser(p):
     page = browser.new_page()
     page.add_init_script(path="stealth.min.js")
     page.set_viewport_size({'width': 1024, 'height': 768})
+    ensure_macromicro_session(page, "get_m_square_etf.py")
     return browser, page
+
+
+def _etf_page_url(ticker: str) -> str:
+    return f"https://www.macromicro.me/etf/us/intro/{ticker}"
+
+
+def _process_one_etf(page, ticker) -> bool:
+    """擷取價量與資金淨流量；兩段皆成功才回傳 True。"""
+    if not fetch_etf_data(page, ticker):
+        return False
+    if not fetch_etf_fundflow(page, ticker):
+        return False
+    return True
 
 
 def fetch_m_square_etfs():
     """Fetch all ETFs in etf_list."""
     with sync_playwright() as p:
         browser, page = _launch_browser(p)
+        failures: list[str] = []
 
         for ticker in etf_list:
             try:
-                success = fetch_etf_data(page, ticker)
+                success = _process_one_etf(page, ticker)
                 if not success:
-                    logger.warning(f"Retrying fetch_etf_data({ticker}) with new browser...")
+                    logger.warning(f"Retrying ETF {ticker} with new browser...")
                     browser.close()
                     browser, page = _launch_browser(p)
-                    fetch_etf_data(page, ticker)
-
-                fetch_etf_fundflow(page, ticker)
+                    success = _process_one_etf(page, ticker)
+                if not success:
+                    logger.error(f"Failed ETF {ticker} after retry.")
+                    url = _etf_page_url(ticker)
+                    failures.append(f"{ticker}\n{url}")
             except Exception as e:
                 logger.error(f"Error processing {ticker}: {e}")
+                failures.append(f"{ticker}\n{_etf_page_url(ticker)}")
 
         browser.close()
+
+        if failures:
+            body = "\n\n".join(failures)
+            max_len = 4500
+            if len(body) > max_len:
+                body = body[: max_len - 30] + f"\n...(共 {len(failures)} 筆，已截斷)"
+            send_line_notification(f"[M² ETF 抓取失敗 {len(failures)} 筆]\n{body}")
 
 
 if __name__ == "__main__":

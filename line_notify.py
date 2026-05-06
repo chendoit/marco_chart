@@ -37,3 +37,9 @@ def send_line_notification(message: str) -> None:
         logger.info("已發送 LINE 通知: %s", message[:80])
     except Exception as e:
         logger.error("LINE 通知發送失敗: %s", e)
+
+
+def notify_macromicro_login_failure(script_name: str, error_message: str) -> None:
+    """MacroMicro 登入失敗時推播（帳密錯誤、Cloudflare、表單找不到等）。"""
+    text = f"[MacroMicro 登入失敗]\n腳本: {script_name}\n原因: {error_message}"
+    send_line_notification(text)

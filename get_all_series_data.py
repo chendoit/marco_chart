@@ -20,6 +20,7 @@ from get_gex_series import fetch_gex_series
 from get_cme_daily_volume import fetch_cme_daily_volume
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
+from notify_macromicro_blog import run as check_macromicro_blog_new_posts
 
 LOGS_DIR = Path(__file__).resolve().parent / "logs"
 LOGS_DIR.mkdir(exist_ok=True)
@@ -195,3 +196,13 @@ def check_nfci_signal():
 
 
 check_nfci_signal()
+
+# ---------------------------------------------------------------------------
+# 4. MacroMicro 部落格新文章 → Gmail（失敗不影響上方任務結束）
+# ---------------------------------------------------------------------------
+try:
+    logger.info("Starting: MacroMicro blog new-post email check")
+    check_macromicro_blog_new_posts()
+    logger.info("Completed: MacroMicro blog new-post email check")
+except Exception as e:
+    logger.error(f"Failed: MacroMicro blog new-post email check — {e}")

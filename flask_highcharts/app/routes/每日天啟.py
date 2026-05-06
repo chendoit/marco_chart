@@ -175,6 +175,11 @@ _module = ChartModule(
             "plot_lines": [("5696.REV1", [1, -1])],
         },
         {
+            "title": "SPX vs Bitcoin",
+            "ids": [2, 4249],
+            "axis": [0, 1],
+        },
+        {
             "title": "歐洲及新興市場 5-Year CDS",
             "ids": [27118, 27119, 27126, 27135, 27129, 27131, 27136, 27138, 27134],
             "visible": [True, True, True, True, False, False, False, True, False],

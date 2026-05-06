@@ -109,6 +109,11 @@ def _build_group_charts(group_name):
     charts = []
 
     for i, chart_group in enumerate(chart_ids):
+        custom = module.get_custom_config(i) if hasattr(module, 'get_custom_config') else None
+        if custom is not None:
+            charts.append(custom)
+            continue
+
         if isinstance(chart_group, list):
             data = module.generate_chart_data(chart_group)
             config = module.get_chart_config(chart_group)

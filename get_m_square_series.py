@@ -12,6 +12,10 @@ import json
 import os
 
 from dotenv import load_dotenv
+
+from macromicro_login import ensure_macromicro_session
+from line_notify import send_line_notification
+
 load_dotenv()
 
 # Configure logger
@@ -83,6 +87,13 @@ def extract_data_from_script(html):
     return None
 
 
+def series_label_from_url(url: str) -> str:
+    """從 series URL 抽出可讀標的（id + slug）；無法解析時截斷原 URL。"""
+    match = re.search(r"/series/(\d+)/([\w-]+)", url)
+    if match:
+        return f"{match.group(1)} {match.group(2)}"
+    return url if len(url) <= 160 else url[:157] + "..."
+
 
 def process_url(page, url, output_dir):
     """Process a single URL and save the extracted data."""
@@ -111,16 +122,15 @@ def process_url(page, url, output_dir):
                 pickle_data = {'title': title, 'data': data}
                 save_to_pickle(pickle_data, output_file)
                 print(f"Data saved to {output_file}")
-            else:
-                print("URL format does not match.")
-        else:
-            logger.warning(f"No data extracted from URL: {url}")
+                return True
+            logger.warning(f"URL format does not match: {url}")
+            return False
+        logger.warning(f"No data extracted from URL: {url}")
+        return False
 
     except Exception as e:
         logger.error(f"Error processing URL {url}: {e}")
-        return False  # Indicate failure to process URL
-
-    return True  # Indicate success
+        return False
 
 
 def fetch_data_from_urls(urls, output_dir=r'.\data'):
@@ -136,6 +146,9 @@ def fetch_data_from_urls(urls, output_dir=r'.\data'):
         page.add_init_script(path="stealth.min.js")  # Provide the path to your stealth.min.js
         page.set_viewport_size({'width': 1024, 'height': 768})
 
+        ensure_macromicro_session(page, "get_m_square_series.py")
+
+        failures: list[str] = []
         for url in urls:
             success = process_url(page, url, output_dir)
             if not success:
@@ -146,12 +159,22 @@ def fetch_data_from_urls(urls, output_dir=r'.\data'):
                 page = browser.new_page()
                 page.add_init_script(path="stealth.min.js")
                 page.set_viewport_size({'width': 1024, 'height': 768})
+                ensure_macromicro_session(page, "get_m_square_series.py")
                 # Retry processing the URL
                 success = process_url(page, url, output_dir)
                 if not success:
                     logger.error(f"Failed to process URL {url} after retry.")
+                    label = series_label_from_url(url)
+                    failures.append(f"{label}\n{url}")
 
         browser.close()
+
+        if failures:
+            body = "\n\n".join(failures)
+            max_len = 4500
+            if len(body) > max_len:
+                body = body[: max_len - 30] + f"\n...(共 {len(failures)} 筆，已截斷)"
+            send_line_notification(f"[M² series 抓取失敗 {len(failures)} 筆]\n{body}")
 
 
 url_list = [
@@ -326,25 +349,28 @@ url_list = [
     "https://www.macromicro.me/series/27134/mexico-5year-cds",   # 墨西哥
 
     # 美國股市經濟總覽
-    "https://www.macromicro.me/series/7249/weekly-economic-index",  # WEI
-    "https://www.macromicro.me/series/4/us-real-gdp",  # 美國實質GDP
-    "https://www.macromicro.me/series/75/us-personal-saving-rate",  # 儲蓄率
-    "https://www.macromicro.me/series/7359/us-personal-consumption-expenditure",  # 個人消費支出
-    "https://www.macromicro.me/series/560/us-disposable-personal-income",  # 可支配所得
-    "https://www.macromicro.me/series/246/us-existing-home-sales",  # 成屋銷售
-    "https://www.macromicro.me/series/254/us-new-home-sales",  # 新屋銷售
-    "https://www.macromicro.me/series/255/us-median-new-home-sale-price",  # 新屋房價中位數
-    "https://www.macromicro.me/series/261/us-case-shiller-home-price",  # S&P/Case-Shiller 前20大城市房價
-    "https://www.macromicro.me/series/22910/us-sahm-rule-recession-indicator",  # 薩姆規則
-    "https://www.macromicro.me/series/44/us-nonfarm-payrolls",  # 非農就業
-    "https://www.macromicro.me/series/37/us-unemployment-rate",  # 失業率
-    "https://www.macromicro.me/series/34/us-initial-jobless-claims",  # 初次申請失業金
-    "https://www.macromicro.me/series/36/us-continued-jobless-claims",  # 連續申請失業金
-    "https://www.macromicro.me/series/4481/copper-gold-ratio",  # 銅金比
-    "https://www.macromicro.me/series/17586/sp500-eps-growth-rate",  # S&P 500 EPS 成長率
+    "https://www.macromicro.me/series/7249/fereral-reserve-bank-of-new-york-weekly-economic-index",  # WEI
+    "https://www.macromicro.me/series/4/realgdp-yoy",  # 美國實質GDP
+    "https://www.macromicro.me/series/75/saving-rate",  # 儲蓄率
+    "https://www.macromicro.me/series/7359/pce-real-yoy",  # 個人消費支出
+    "https://www.macromicro.me/series/560/real-disposable-personal-income-yoy",  # 可支配所得
+    "https://www.macromicro.me/series/246/existing-home-sales-yoy",  # 成屋銷售
+    "https://www.macromicro.me/series/254/new-home-sales-yoy",  # 新屋銷售
+    "https://www.macromicro.me/series/255/price-new-houses",  # 新屋房價中位數
+    # "https://www.macromicro.me/series/261/us-case-shiller-home-price",  # S&P/Case-Shiller 前20大城市房價
+    "https://www.macromicro.me/series/414/sp-case-shillar-20-home-price-nsa",  # S&P/Case-Shiller 前20大城市房價
+    "https://www.macromicro.me/series/22910/sahm-rule-recession-indicator",  # 薩姆規則
+    "https://www.macromicro.me/series/44/nonfarm-payrolls-yearlychange",  # 非農就業
+    "https://www.macromicro.me/series/37/unemployment-rate",  # 失業率
+    "https://www.macromicro.me/series/34/initialclaims",  # 初次申請失業金
+    "https://www.macromicro.me/series/36/continuedclaims",  # 連續申請失業金
+    "https://www.macromicro.me/series/4481/coppergold",  # 銅金比
+    "https://www.macromicro.me/series/17586/sp500-eps",  # S&P 500 EPS 成長率
 
     # 愛克榭
-    "https://www.macromicro.me/series/319/us-durable-goods-orders-nondefense-capital",  # 耐久財新訂單-非國防資本財
+    "https://www.macromicro.me/series/319/durable-goods",  # 耐久財新訂單-非國防資本財
+
+    "https://www.macromicro.me/series/4249/bitcoin-usd", # 比特幣
 ]
 
 
@@ -353,7 +379,9 @@ url_list = [
 local_url_list = [
     # "https://www.macromicro.me/series/7054/consumer-confidence", # 美國-經濟諮商局消費者信心指數
     # "https://www.macromicro.me/series/72/michigan-consumer-confidence",
-    "https://www.macromicro.me/series/363/2year-bond-yield", # 美國 2年期 # 美國-密大消費者信心指數
+    # "https://www.macromicro.me/series/363/2year-bond-yield", # 美國 2年期 # 美國-密大消費者信心指數。
+    "https://www.macromicro.me/series/4249/bitcoin-usd",
+    "https://www.macromicro.me/series/355/vix", # vix
 ]
 
 folder = os.getenv("DATA_DIR")  # 默認數據目錄

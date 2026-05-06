@@ -893,6 +893,7 @@ class ChartModule:
            {"title": "...", "ids": [...], "axis": [...], "summary": "...",
             "plot_lines": [(target_id, value), ...],
             "pctrank_id": "series_id"},  # Nomura 風格：標題附歷史百分位
+           {"custom_config": callable_or_dict, "summary": "..."},  # 自定義圖表
            ...
        ], reverse_ids=[...], range_selector_override={...})
 
@@ -910,7 +911,10 @@ class ChartModule:
         self._filename = filename
 
         if charts is not None:
-            self.CHART_IDS = [c["ids"] for c in charts]
+            self._custom_configs = [c.get("custom_config") for c in charts]
+            self.CHART_IDS = [
+                c.get("ids", "__custom__") for c in charts
+            ]
             self.SUMMARY_LIST = [c.get("summary") for c in charts]
             self._chart_titles = [c.get("title") for c in charts]
             self._axis_config = [c.get("axis") for c in charts]
@@ -922,6 +926,7 @@ class ChartModule:
                     pl.append((i, target_id, values))
             self._plot_lines_config = pl
         else:
+            self._custom_configs = []
             self.CHART_IDS = chart_ids
             self.SUMMARY_LIST = summary_list
             self._chart_titles = chart_titles or []
@@ -929,6 +934,19 @@ class ChartModule:
             self._visible_config = []
             self._pctrank_ids = []
             self._plot_lines_config = plot_lines_config or []
+
+    # -- 自定義圖表 --
+    def get_custom_config(self, index):
+        """回傳第 index 張 chart 的 custom config（支援 callable lazy eval），
+        若非 custom chart 則回傳 None。"""
+        if index < len(self._custom_configs):
+            cfg = self._custom_configs[index]
+            if cfg is None:
+                return None
+            if callable(cfg):
+                return cfg()
+            return cfg
+        return None
 
     # -- 標題查詢 --
     def get_chart_title(self, chart_id_list):

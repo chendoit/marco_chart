@@ -48,6 +48,10 @@ PCTRANK_TARGETS = [
     "gex_spx_put_gamma",
     "gex_spx_gamma_0dte",
     "gex_spx_gamma_non0dte",
+    # VIX Gamma summary
+    "gex_vix_net_gamma",
+    "gex_vix_call_gamma",
+    "gex_vix_put_gamma",
     # GEX levels
     "gex_spx_flip_distance",
     "gex_vix_flip_distance",

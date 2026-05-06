@@ -1,4 +1,279 @@
-from app.utils import ChartModule
+import numpy as np
+import pandas as pd
+
+from app.utils import ChartModule, load_series_data
+
+
+def _build_vvix_outperformance_scatter():
+    """計算 VVIX vs VIX 1D change 散佈圖 + 回歸線 + outperformance percentile。
+
+    回傳 {"config": {完整 Highcharts config}, "summary": "..."}。
+    """
+    vix = load_series_data("cboe_VIX")
+    vvix = load_series_data("cboe_VVIX")
+
+    df_vix = pd.DataFrame(vix["data"], columns=["Date", "VIX"])
+    df_vvix = pd.DataFrame(vvix["data"], columns=["Date", "VVIX"])
+    for df in (df_vix, df_vvix):
+        df["Date"] = pd.to_datetime(df["Date"])
+        df.set_index("Date", inplace=True)
+        df.sort_index(inplace=True)
+
+    df = df_vix.join(df_vvix, how="inner")
+    df["VIX_chg"] = df["VIX"].pct_change() * 100
+    df["VVIX_chg"] = df["VVIX"].pct_change() * 100
+    df = df.dropna()
+
+    two_years_ago = df.index.max() - pd.DateOffset(years=2)
+    df = df[df.index >= two_years_ago]
+
+    x = df["VIX_chg"].values
+    y = df["VVIX_chg"].values
+
+    slope, intercept = np.polyfit(x, y, 1)
+    predicted = slope * x + intercept
+    ss_res = np.sum((y - predicted) ** 2)
+    ss_tot = np.sum((y - np.mean(y)) ** 2)
+    r2 = 1 - ss_res / ss_tot if ss_tot > 0 else 0.0
+
+    residuals = y - predicted
+
+    dates = df.index
+    today_x = float(x[-1])
+    today_y = float(y[-1])
+    today_residual = float(residuals[-1])
+    today_pctile = float(np.sum(residuals <= today_residual) / len(residuals) * 100)
+
+    RECENT_DAYS = 30
+    n_total = len(x)
+    cut = max(n_total - RECENT_DAYS, 0)
+
+    history_data = [[round(float(xi), 4), round(float(yi), 4)]
+                    for xi, yi in zip(x[:cut], y[:cut])]
+
+    # 四象限色系：(正色 >90%tile, 中間色, 淡色 <10%tile)
+    Q_COLORS = {
+        "RU": ("#cc0000", "#e06666", "#f4cccc"),  # 右上 恐慌爆發 — 紅
+        "LD": ("#16a34a", "#4ade80", "#bbf7d0"),  # 左下 天下太平 — 綠
+        "LU": ("#2563eb", "#60a5fa", "#bfdbfe"),  # 左上 暗流湧動 — 藍
+        "RD": ("#ea580c", "#fb923c", "#fed7aa"),  # 右下 跌勢衰竭 — 橙
+    }
+
+    def _point_color(vix_chg, vvix_chg, pctile):
+        if vix_chg > 0 and vvix_chg > 0:
+            strong, mid, light = Q_COLORS["RU"]
+        elif vix_chg < 0 and vvix_chg < 0:
+            strong, mid, light = Q_COLORS["LD"]
+        elif vix_chg < 0 and vvix_chg > 0:
+            strong, mid, light = Q_COLORS["LU"]
+        else:
+            strong, mid, light = Q_COLORS["RD"]
+        if pctile >= 90:
+            return strong
+        if pctile <= 10:
+            return light
+        return mid
+
+    n_recent = n_total - 1 - cut
+
+    recent_series = []
+    for j in range(n_recent):
+        idx = cut + j
+        xi_j, yi_j = float(x[idx]), float(y[idx])
+        res_j = float(residuals[idx])
+        pct_j = float(np.sum(residuals <= res_j) / len(residuals) * 100)
+        color = _point_color(xi_j, yi_j, pct_j)
+        dt_str = dates[idx].strftime("%m/%d")
+        sign_j = "+" if res_j >= 0 else ""
+        recent_series.append({
+            "name": f"{dt_str} ({sign_j}{res_j:.1f}, {pct_j:.0f}%tile)",
+            "type": "scatter",
+            "data": [[round(xi_j, 4), round(yi_j, 4)]],
+            "color": color,
+            "marker": {"radius": 6, "symbol": "circle"},
+        })
+
+    today_dt_str = dates[-1].strftime("%m/%d")
+    today_sign = "+" if today_residual >= 0 else ""
+    today_label = (f"Today {today_dt_str} "
+                   f"({today_sign}{today_residual:.1f}, {today_pctile:.0f}%tile)")
+
+    x_min, x_max = float(np.min(x)), float(np.max(x))
+    y_min, y_max = float(np.min(y)), float(np.max(y))
+    margin = (x_max - x_min) * 0.05
+    reg_x1, reg_x2 = x_min - margin, x_max + margin
+    reg_data = [
+        [round(reg_x1, 4), round(slope * reg_x1 + intercept, 4)],
+        [round(reg_x2, 4), round(slope * reg_x2 + intercept, 4)],
+    ]
+
+    if today_x > 0 and today_y > 0:
+        quadrant = "恐慌爆發 (VIX↑ VVIX↑)"
+    elif today_x < 0 and today_y < 0:
+        quadrant = "天下太平 (VIX↓ VVIX↓)"
+    elif today_x < 0 and today_y > 0:
+        quadrant = "暗流湧動 (VIX↓ VVIX↑)"
+    else:
+        quadrant = "跌勢衰竭 (VIX↑ VVIX↓)"
+
+    eq_text = f"y = {slope:.4f}x + {intercept:.4f}"
+    r2_text = f"R2 = {r2 * 100:.1f}%"
+    outperf_text = (f"Today's Outperformance {today_sign}{today_residual:.1f} "
+                    f"{today_pctile:.1f}%tile")
+
+    config = {
+        "chart": {"type": "scatter", "zoomType": "xy"},
+        "title": {"text": f"VVIX OUTPERFORMANCE VS VIX ({today_pctile:.1f}%tile)",
+                  "style": {"fontWeight": "bold"}},
+        "xAxis": {
+            "title": {"text": "VIX 1D Change (%)"},
+            "gridLineWidth": 1,
+            "labels": {"enabled": True, "format": "{value}"},
+            "plotLines": [{
+                "value": 0, "color": "#333", "width": 2,
+                "zIndex": 3,
+            }],
+        },
+        "yAxis": {
+            "title": {"text": "VVIX 1D Change (%)"},
+            "gridLineWidth": 1,
+            "labels": {"enabled": True, "format": "{value}"},
+            "plotLines": [{
+                "value": 0, "color": "#333", "width": 2,
+                "zIndex": 3,
+            }],
+        },
+        "legend": {
+            "enabled": True,
+            "layout": "horizontal",
+            "align": "center",
+            "verticalAlign": "top",
+        },
+        "tooltip": {"valueDecimals": 2},
+        "annotations": [
+            {
+                "draggable": "",
+                "labelOptions": {
+                    "backgroundColor": "rgba(255,255,200,0.85)",
+                    "borderColor": "#999",
+                    "shape": "rect",
+                    "style": {"fontSize": "12px"},
+                },
+                "labels": [{
+                    "point": {"x": 300, "y": 350},
+                    "useHTML": True,
+                    "text": (
+                        f"{eq_text}<br>{r2_text}<br>"
+                        f"<span style='color:#cc0000;font-weight:bold'>"
+                        f"{outperf_text}</span><br>"
+                        f"<b>{quadrant}</b><br>"
+                        f"<span style='font-size:11px'>"
+                        f"<span style='color:#cc0000'>\u25cf</span> 恐慌爆發 "
+                        f"<span style='color:#16a34a'>\u25cf</span> 天下太平 "
+                        f"<span style='color:#2563eb'>\u25cf</span> 暗流湧動 "
+                        f"<span style='color:#ea580c'>\u25cf</span> 跌勢衰竭<br>"
+                        f"正色=Outperf>90% 淡色=Outperf<10%"
+                        f"</span>"
+                    ),
+                }],
+            },
+            {
+                "draggable": "",
+                "labelOptions": {
+                    "backgroundColor": "rgba(255,255,255,0)",
+                    "borderWidth": 0,
+                    "style": {"fontSize": "11px", "color": "#888"},
+                },
+                "labels": [
+                    {"point": {"xAxis": 0, "yAxis": 0,
+                               "x": x_max * 0.7, "y": y_max * 0.7},
+                     "text": "恐慌爆發"},
+                    {"point": {"xAxis": 0, "yAxis": 0,
+                               "x": x_min * 0.7, "y": y_min * 0.7},
+                     "text": "天下太平"},
+                    {"point": {"xAxis": 0, "yAxis": 0,
+                               "x": x_min * 0.7, "y": y_max * 0.7},
+                     "text": "暗流湧動"},
+                    {"point": {"xAxis": 0, "yAxis": 0,
+                               "x": x_max * 0.7, "y": y_min * 0.7},
+                     "text": "跌勢衰竭"},
+                ],
+            },
+        ],
+        "series": [
+            {
+                "name": "Past 2 Years",
+                "type": "scatter",
+                "data": history_data,
+                "color": "#999999",
+                "marker": {"radius": 3, "symbol": "circle"},
+            },
+            *recent_series,
+            {
+                "name": today_label,
+                "type": "scatter",
+                "data": [[round(today_x, 4), round(today_y, 4)]],
+                "color": "#ff0000",
+                "marker": {"radius": 8, "symbol": "diamond",
+                           "lineWidth": 1, "lineColor": "#cc0000"},
+            },
+            {
+                "name": "Regression",
+                "type": "line",
+                "data": reg_data,
+                "color": "#cc0000",
+                "dashStyle": "Dot",
+                "lineWidth": 2,
+                "marker": {"enabled": False},
+                "enableMouseTracking": False,
+            },
+        ],
+    }
+
+    summary = (
+        "VVIX vs VIX 每日百分比變動散佈圖（過去 2 年）。"
+        "Outperformance = 實際 VVIX 變動 − 回歸預測值（殘差），"
+        "本質上衡量「市場情緒脫離常軌的程度」。<br>"
+        "Outperformance 為正 (+)：市場買保險（VIX 選擇權）的力道比歷史常態更瘋狂。"
+        "Outperformance 為負 (-)：市場對風險的無感程度比歷史常態更鬆懈（或該買保險的人都買完了）。"
+        "Percentile：這個脫軌現象有多罕見——"
+        "99% = 極度異常的正脫軌；1% = 極度異常的負脫軌。<br><br>"
+
+        "<b>四象限解讀框架：</b><br>"
+
+        "<b>右上：恐慌爆發 (VIX↑ VVIX↑)</b> — 散戶與法人同步恐慌，瘋狂搶買避險。"
+        "正常情境，迴歸預測值為正。"
+        "極端正 Outperformance (>99%tile)：非理性恐慌頂部 (Climax)——"
+        "VVIX 漲得比預期誇張太多，恐慌情緒已耗盡，短線隨時報復性反彈。"
+        "負 Outperformance (<10%tile)：虛假恐慌——"
+        "VIX 雖大漲但大戶未瘋狂搶保險，暗示下跌殺傷力有限、不會持久。<br>"
+
+        "<b>左下：天下太平 (VIX↓ VVIX↓)</b> — 市場樂觀，風險偏好高，不需要保險。"
+        "正常情境，迴歸預測值為負。"
+        "極端負 Outperformance (<5%tile)：極度自滿——"
+        "大家瘋狂拋售保險，常見於重大事件落地後（選舉、FED 降息），"
+        "短期利多但過度自滿可能埋下波動種子。"
+        "正 Outperformance (>80%tile)：黏滯的恐懼——"
+        "大盤大漲但法人死抱保險不放，暗示上漲可能是假突破（誘多）。<br>"
+
+        "<b>左上：暗流湧動 (VIX↓ VVIX↑)</b> — 大盤還在漲，但大戶趁便宜偷偷買保險。"
+        "VIX↓ 預測值為負 + 實際 VVIX↑ 為正 → 必然巨大正 Outperformance。"
+        "極端正 Outperformance (>95%tile)：<b>最強烈空頭預警</b>——"
+        "聰明錢 (Smart Money) 砸重金急迫買保險，預示接下來幾天可能出現巨大市場修正。<br>"
+
+        "<b>右下：跌勢衰竭 (VIX↑ VVIX↓)</b> — 大盤還在跌，但恐慌情緒不再蔓延。"
+        "VIX↑ 預測值為正 + 實際 VVIX↓ 為負 → 必然巨大負 Outperformance。"
+        "極端負 Outperformance (<5%tile)：<b>極佳底部訊號</b>——"
+        "已無人願花高價買保險，恐慌擴散徹底衰竭 (exhaustion)，大盤隨時見底反轉。<br><br>"
+
+        "<b>三大極端交易機會：</b><br>"
+        "1. VIX↑ VVIX↑ + Outperf >99%tile → 恐慌極致，尋找 VIX 做空點或大盤抄底點（左側交易）。<br>"
+        "2. VIX↓ VVIX↑ + Outperf >95%tile → 籌碼背離，佈局大盤空單或買入 VIX Call（避險預警）。<br>"
+        "3. VIX↑ VVIX↓ + Outperf <5%tile → 恐慌衰竭，佈局大盤多單或賣出 VIX Call（尋找底部）。"
+    )
+
+    return {"config": config, "summary": summary}
+
 
 _module = ChartModule(
     filename='McElligott波動率微結構',
@@ -241,6 +516,23 @@ _module = ChartModule(
                 "持續流入做多槓桿 = 風險偏好高位；突然轉向做空槓桿 = 恐慌避險。<br>"
                 "拆股日期間 fund flow 被排除（Shares Outstanding 劇變但非資金流）。",
         },
+        {
+            "title": "VIX Call/Put/Net Gamma 歷史百分位",
+            "ids": [2, 355, 22904,
+                    "gex_vix_call_gamma_pctrank",
+                    "gex_vix_put_gamma_pctrank",
+                    "gex_vix_net_gamma_pctrank"],
+            "axis": [0, 1, 2, 3, 3, 3],
+            "summary":
+                "VIX 選擇權 Dealer Gamma 的 Call / Put / Net 三條線各自 2 年滾動歷史百分位（5 日均線平滑）。<br>"
+                "VIX 的 dealer gamma 結構與 SPX 獨立，是理解 VIX spike 自我加速機制的關鍵量化指標。<br>"
+                "Net Gamma 百分位極低 = VIX dealer 的 negative gamma 處於歷史罕見水位，VIX spike 加速風險最高；"
+                "Call Gamma 百分位急升 = 大量 VIX call 買入（投機或避險）正在改變 dealer 曝險結構。<br>"
+                "搭配 VIX / VVIX 價格背景觀察：百分位急跌 + VVIX 飆升 = 'VIX 選擇權 dealer 被擠壓' 的量化確認。",
+        },
+        {
+            "custom_config": _build_vvix_outperformance_scatter,
+        },
     ],
     reverse_ids=[],
 )
@@ -249,3 +541,4 @@ CHART_IDS = _module.CHART_IDS
 SUMMARY_LIST = _module.SUMMARY_LIST
 generate_chart_data = _module.generate_chart_data
 get_chart_config = _module.get_chart_config
+get_custom_config = _module.get_custom_config

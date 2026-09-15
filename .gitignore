@@ -242,3 +242,11 @@ google_session/__pycache__/
 
 # Temp batch fetch results
 batches/_tmp_5series/results/
+
+# --- etl refactor (2026-09-15) ---
+state/
+_golden/
+_new/
+_snapshots/
+reports/
+!requirements.txt

@@ -14,7 +14,7 @@
 
 1. **M² series 爬蟲已經壞了**。`logs/2026-09-15.log` 裡 91 個 URL 全部回報 `No target script or base64 data found`,`series_2.pkl`、`series_854.pkl` 等檔最後寫入時間是 **2026-08-20**。原因是 orchestrator 只把「拋出例外」當成失敗,而 `get_m_square_series.py` 自己吞掉錯誤,所以 `error_history.json` 每天都是 `[]`,也就沒有發 LINE。附錄 A 那些還沒找到替代源的項目,目前**同樣停在 08-20**。本計畫把修復排成 WP-R2E。
 2. **log 每行被寫 12 次**:12 個模組在 import 時各自 `logger.add` 同一個檔,單日 log 約 3.5 MB / 23,552 行。
-3. **每天的正式排程 `\get_all_series_data`(08:00)是在 main 工作目錄直接跑的**。所以開發一律在另一個 **git worktree** 進行,切換前 main 完全不動(§4.2)。
+3. **正式排程 `\get_all_series_data` 每天 08:00 和 18:00 各跑一次(約 50 分鐘),而且是在 main 工作目錄直接跑**。所以開發一律在另一個 **git worktree** 進行,切換前 main 完全不動(§4.2)。
 4. **金鑰**:`EIA_API_KEY`、`CONFERENCE_BOARD_ACCOUNT`、`CONFERENCE_BOARD_PW` 目前只放在 fincept-terminal 的 `.env`。**請使用者自行加到原專案 `.env`**(G0)。加好之前,854 / 19080 / 374 / 376 先暫停,不影響其他工作。
 
 ---

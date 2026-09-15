@@ -8,7 +8,12 @@ import numpy as np
 import pandas as pd
 from loguru import logger
 
-from get_fed_series import fetch_and_save_fred_data, fetch_sofr_data
+from get_fed_series import (
+    fetch_and_save_fred_data,
+    fetch_sofr_data,
+    fetch_fed_liquidity_reference_rates,
+    fetch_fed_treasury_yields,
+)
 from get_m_square_chart import fetch_m_square_charts
 from get_m_square_series import fetch_m_square_series
 from get_m_square_etf import fetch_m_square_etfs
@@ -18,6 +23,7 @@ from get_etf_csv import fetch_all as fetch_etf_csv
 from get_nyfed_termpremium import fetch_nyfed_acm
 from get_gex_series import fetch_gex_series
 from get_cme_daily_volume import fetch_cme_daily_volume
+from get_financial_stress import fetch_financial_stress
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 from notify_macromicro_blog import run as check_macromicro_blog_new_posts
@@ -37,11 +43,12 @@ CONSECUTIVE_DAYS_THRESHOLD = 3
 tasks = [
     ("FRED STLFSI4", lambda: fetch_and_save_fred_data('STLFSI4')),
     ("FRED THREEFYTP10 (Kim-Wright Term Premium)", lambda: fetch_and_save_fred_data('THREEFYTP10')),
-    ("FRED DGS2 (2Y Treasury)", lambda: fetch_and_save_fred_data('DGS2')),
+    ("FRED Treasury Yields (DGS1MO/1/2/10/20/30)", fetch_fed_treasury_yields),
     ("FRED T10Y2Y (10Y-2Y Spread)", lambda: fetch_and_save_fred_data('T10Y2Y')),
     ("FRED DFII10 (10Y Real Yield)", lambda: fetch_and_save_fred_data('DFII10')),
     ("FRED MMMFFAQ027S (MMF AUM)", lambda: fetch_and_save_fred_data('MMMFFAQ027S')),
     ("NY Fed SOFR (rate/percentiles)", fetch_sofr_data),
+    ("FRED IORB + ON RRP + DFF", fetch_fed_liquidity_reference_rates),
     ("MacroMicro charts", fetch_m_square_charts),
     ("MacroMicro series", fetch_m_square_series),
     ("MacroMicro ETFs", fetch_m_square_etfs),
@@ -52,6 +59,7 @@ tasks = [
     ("NY Fed ACM Term Premium", fetch_nyfed_acm),
     ("GEX-lieta (SPX/SPY/VIX)", fetch_gex_series),
     ("CME daily_volume (OI+Volume)", fetch_cme_daily_volume),
+    ("Chicago Fed NFCI + OFR FSI", fetch_financial_stress),
     ("Percentile rank (all targets)", calc_pctrank),
 ]
 
@@ -121,7 +129,7 @@ def record_and_check_errors(today_failed: list[str]):
 record_and_check_errors(failed)
 
 # ---------------------------------------------------------------------------
-# 3. NFCI 翻轉信號 (5696.REV1) 檢查 → LINE 通知
+# 3. NFCI 翻轉信號 (chicagofed_NFCI.REV1) 檢查 → LINE 通知
 # ---------------------------------------------------------------------------
 
 def _compute_rev_signal(series_id, window: int):
@@ -171,7 +179,7 @@ def _compute_rev_signal(series_id, window: int):
 
 
 def check_nfci_signal():
-    last_date, signal = _compute_rev_signal(5696, window=1)
+    last_date, signal = _compute_rev_signal("chicagofed_NFCI", window=1)
     if last_date is None:
         logger.info("NFCI REV1: 無信號")
         return

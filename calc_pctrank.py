@@ -72,8 +72,8 @@ PCTRANK_TARGETS = [
     # --- Expression targets ---
     # 格式: {"id": 輸出名稱, "expr": (pkl1, op, pkl2)}
     # pkl 名稱需完整對應 data/ 下的檔名（不含 .pkl）
-    {"id": "expr_vvix_div_vix", "expr": ("series_22904", "/", "series_355")},
-    {"id": "expr_vix_div_spx", "expr": ("series_355", "/", "series_2")},
+    {"id": "expr_vvix_div_vix", "expr": ("series_cboe_VVIX", "/", "series_cboe_VIX")},
+    {"id": "expr_vix_div_spx", "expr": ("series_cboe_VIX", "/", "series_2")},
     {"id": "expr_vix_div_vix3m", "expr": ("series_cboe_VIX", "/", "series_cboe_VIX3M")},
     {"id": "expr_bxm_div_spx", "expr": ("series_cboe_BXM", "/", "series_2")},
     {"id": "expr_put_div_spx", "expr": ("series_cboe_PUT", "/", "series_2")},

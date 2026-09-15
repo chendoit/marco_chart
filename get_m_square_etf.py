@@ -17,7 +17,7 @@ from playwright.sync_api import sync_playwright
 from loguru import logger
 from dotenv import load_dotenv
 
-from macromicro_login import ensure_macromicro_session
+from google_session.auth import create_macromicro_browser_context
 from line_notify import send_line_notification
 
 load_dotenv()
@@ -163,16 +163,13 @@ def fetch_etf_fundflow(page, ticker):
 
 
 def _launch_browser(p):
-    """Create a fresh browser + page with stealth settings."""
-    browser = p.chromium.launch(
-        headless=False,
-        args=['--disable-blink-features=AutomationControlled']
+    """Create a fresh browser + page with Google OAuth session."""
+    browser, context, page = create_macromicro_browser_context(
+        p, headless=False, prefer_cached=True
     )
-    page = browser.new_page()
     page.add_init_script(path="stealth.min.js")
-    page.set_viewport_size({'width': 1024, 'height': 768})
-    ensure_macromicro_session(page, "get_m_square_etf.py")
-    return browser, page
+    page.set_viewport_size({"width": 1024, "height": 768})
+    return browser, context, page
 
 
 def _etf_page_url(ticker: str) -> str:
@@ -191,7 +188,7 @@ def _process_one_etf(page, ticker) -> bool:
 def fetch_m_square_etfs():
     """Fetch all ETFs in etf_list."""
     with sync_playwright() as p:
-        browser, page = _launch_browser(p)
+        browser, context, page = _launch_browser(p)
         failures: list[str] = []
 
         for ticker in etf_list:
@@ -199,8 +196,9 @@ def fetch_m_square_etfs():
                 success = _process_one_etf(page, ticker)
                 if not success:
                     logger.warning(f"Retrying ETF {ticker} with new browser...")
+                    context.close()
                     browser.close()
-                    browser, page = _launch_browser(p)
+                    browser, context, page = _launch_browser(p)
                     success = _process_one_etf(page, ticker)
                 if not success:
                     logger.error(f"Failed ETF {ticker} after retry.")
@@ -210,6 +208,7 @@ def fetch_m_square_etfs():
                 logger.error(f"Error processing {ticker}: {e}")
                 failures.append(f"{ticker}\n{_etf_page_url(ticker)}")
 
+        context.close()
         browser.close()
 
         if failures:

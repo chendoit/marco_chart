@@ -13,7 +13,7 @@ import os
 
 from dotenv import load_dotenv
 
-from macromicro_login import ensure_macromicro_session
+from google_session.auth import create_macromicro_browser_context
 from line_notify import send_line_notification
 
 load_dotenv()
@@ -138,35 +138,31 @@ def fetch_data_from_urls(urls, output_dir=r'.\data'):
     os.makedirs(output_dir, exist_ok=True)  # Ensure output directory exists
 
     with sync_playwright() as playwright:
-        browser_args = ['--disable-blink-features=AutomationControlled']
-
-        # Initialize browser and page
-        browser = playwright.chromium.launch(headless=False, args=browser_args)
-        page = browser.new_page()
-        page.add_init_script(path="stealth.min.js")  # Provide the path to your stealth.min.js
-        page.set_viewport_size({'width': 1024, 'height': 768})
-
-        ensure_macromicro_session(page, "get_m_square_series.py")
+        browser, context, page = create_macromicro_browser_context(
+            playwright, headless=False, prefer_cached=True
+        )
+        page.add_init_script(path="stealth.min.js")
+        page.set_viewport_size({"width": 1024, "height": 768})
 
         failures: list[str] = []
         for url in urls:
             success = process_url(page, url, output_dir)
             if not success:
                 logger.warning(f"Retrying URL {url} with a new browser instance...")
-                # Close current browser and create a new one
+                context.close()
                 browser.close()
-                browser = playwright.chromium.launch(headless=False, args=browser_args)
-                page = browser.new_page()
+                browser, context, page = create_macromicro_browser_context(
+                    playwright, headless=False, prefer_cached=True
+                )
                 page.add_init_script(path="stealth.min.js")
-                page.set_viewport_size({'width': 1024, 'height': 768})
-                ensure_macromicro_session(page, "get_m_square_series.py")
-                # Retry processing the URL
+                page.set_viewport_size({"width": 1024, "height": 768})
                 success = process_url(page, url, output_dir)
                 if not success:
                     logger.error(f"Failed to process URL {url} after retry.")
                     label = series_label_from_url(url)
                     failures.append(f"{label}\n{url}")
 
+        context.close()
         browser.close()
 
         if failures:
@@ -190,7 +186,6 @@ url_list = [
 
     "https://www.macromicro.me/series/483/us-dollar-index",
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us",
-    "https://www.macromicro.me/series/354/10year-bond-yield",
     "https://www.macromicro.me/series/2018/japan-bond-10-year",
     "https://www.macromicro.me/series/29123/us-treasury-general-account-daily", # 政部帳戶(TGA)餘額
     "https://www.macromicro.me/series/7449/us-fed-excess-reserves-weekly", # 商業銀行在聯邦儲備系統超額準備金
@@ -215,30 +210,22 @@ url_list = [
     # 當指數下降時，表示全球製造業活動正在收縮。這個指數可以幫助我們了解全球製造業的整體趨勢和變化。
     "https://www.macromicro.me/series/20508/global-pmi-leading-yoy-diffusion",
 
-    # 流動性 FED 利率
-    "https://www.macromicro.me/series/17449/us-fed-onrrp", # 美國-聯準會隔夜逆回購操作(ON RRP)
-    "https://www.macromicro.me/series/40593/us-fed-onrrp-rate", # 美國-聯準會隔夜逆回購利率(ON RRP Rate)
-    "https://www.macromicro.me/series/19268/interest-rate-on-reserve-balances", # 美國-準備金利率(IORB)
-    "https://www.macromicro.me/series/6222/us-secured-overnight-financing-rate", #  美國-有擔保隔夜融資利率(SOFR)
-    "https://www.macromicro.me/series/356/federal-funds-rate", # 美國-基準利率 (日)
-    "https://www.macromicro.me/series/6226/us-secured-overnight-financing-rate-99th-percentile", # SOFR 99th
-    "https://www.macromicro.me/series/6225/us-secured-overnight-financing-rate-75th-percentile", # SOFR 75
-    "https://www.macromicro.me/series/6223/us-secured-overnight-financing-rate-1st-percentile", # 美國-有擔保隔夜融資利率(第1百分位數)
-    "https://www.macromicro.me/series/6226/us-secured-overnight-financing-rate-99th-percentile", # 美國-有擔保隔夜融資利率(第99百分位數)
+
+    # 流動性 FED 利率 / 公債殖利率 → 改由 get_fed_series.py（FRED + NY Fed SOFR API）
 
 
     # 全球金融壓力指數（OFR）
     # 全球金融壓力指數（OFR）是一個衡量全球金融體系穩定性的指標。它通常根據市場價格、波動性和流動性等數據來評估金融市場的風險水平。
     # 當OFR指數上升時，表示金融市場面臨著更大的壓力和風險，可能預示著金融危機的可能性增加。
     "https://www.macromicro.me/series/4869/global-ofr-fsi", # 全球金融壓力指數(OFR)
-    "https://www.macromicro.me/series/4866/us-ofr-fsi", # 美國金融壓力指數(OFR)
+    # 美國金融壓力指數(OFR) → 改由 get_financial_stress.py（OFR 官方 CSV）
+    # "https://www.macromicro.me/series/4866/us-ofr-fsi",
 
     # 美德利差 DXY 歐元匯率
     "https://www.macromicro.me/series/4448/de-10-year-yield-spread-germany-us", # 美德-10年期公債利差
     "https://www.macromicro.me/series/562/fx-eur-usd", # 歐元/美元
     "https://www.macromicro.me/series/483/us-dollar-index", # DXY 美元指數
     "https://www.macromicro.me/series/1916/germany-bond-10-year", # 德國-10年期公債殖利率
-    "https://www.macromicro.me/series/354/10year-bond-yield", # 美國-10年期公債殖利率
 
 
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us", # 美日-10年期公債利差
@@ -254,26 +241,12 @@ url_list = [
     # "",
 
     # vix 與黑天鵝
-    "https://www.macromicro.me/series/355/vix", # vix
-    "https://www.macromicro.me/series/22904/vvix", # vvix
+    # VIX 30D、VVIX、VIX 期限結構 皆改由 get_cboe_index.py（CBOE CDN）→ series_cboe_*.pkl
     "https://www.macromicro.me/series/4407/cboe-skew", # 黑天鵝
     "https://www.macromicro.me/series/1650/us-put-call-ratio-total", # put call ratio
 
-    # VIX 期限結構
-    "https://www.macromicro.me/series/28769/vix1d",  # VIX 1-Day
-    "https://www.macromicro.me/series/7173/vix9d",   # VIX 9-Day
-    "https://www.macromicro.me/series/7174/vix3m",   # VIX 3-Month
-    "https://www.macromicro.me/series/7175/vix6m",   # VIX 6-Month
-    "https://www.macromicro.me/series/7770/vix1y",   # VIX 1-Year
+    # VIX 期限結構（M² 28769/7173/7174/7175/7770）已改 CBOE：cboe_VIX1D…VIX1Y
     #
-    #
-    # # 美國 公債殖利率
-    "https://www.macromicro.me/series/5547/1month-bond-yield", #美國 1個月期
-    "https://www.macromicro.me/series/5549/1year-bond-yield", # 美國 1年期
-    "https://www.macromicro.me/series/363/2year-bond-yield", # 美國 2年期
-    "https://www.macromicro.me/series/354/10year-bond-yield", # 美國 10年期
-    "https://www.macromicro.me/series/5551/20year-bond-yield", # 美國 20年期
-    "https://www.macromicro.me/series/3394/us-30-year-bond-yield", # 美國 30年期
     "https://www.macromicro.me/series/17581/us-treasury-move-index", # 美債波動率
 
     # 原油CFTC
@@ -322,7 +295,8 @@ url_list = [
     "https://www.macromicro.me/series/376/cb-coincident-index",  # 衰退指鰾  同時指標
 
     # 美國-芝加哥聯儲當週金融狀況指數
-    "https://www.macromicro.me/series/5696/united-states-chicago-fed-national-financial-conditions-index",
+    # 芝加哥聯儲 NFCI → 改由 get_financial_stress.py（Chicago Fed 官方 CSV）
+    # "https://www.macromicro.me/series/5696/united-states-chicago-fed-national-financial-conditions-index",
 
     # 油價共振
     "https://www.macromicro.me/series/386/fx-usd-cad",
@@ -381,7 +355,7 @@ local_url_list = [
     # "https://www.macromicro.me/series/72/michigan-consumer-confidence",
     # "https://www.macromicro.me/series/363/2year-bond-yield", # 美國 2年期 # 美國-密大消費者信心指數。
     "https://www.macromicro.me/series/4249/bitcoin-usd",
-    "https://www.macromicro.me/series/355/vix", # vix
+    # VIX 改 CBOE，本地測試勿再用 M² 355
 ]
 
 folder = os.getenv("DATA_DIR")  # 默認數據目錄

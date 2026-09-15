@@ -14,7 +14,7 @@ import subprocess
 
 from dotenv import load_dotenv
 
-from macromicro_login import ensure_macromicro_session
+from google_session.auth import create_macromicro_browser_context
 from line_notify import send_line_notification
 
 load_dotenv()
@@ -147,33 +147,31 @@ def process_chart_url(page, url) -> bool:
 def fetch_data_from_urls(urls):
     """Fetch data from a list of URLs and save them as pickle files."""
     with sync_playwright() as playwright:
-        browser_args = ['--disable-blink-features=AutomationControlled']
-        browser = playwright.chromium.launch(headless=False, args=browser_args)
-        page = browser.new_page()
-
-        # Load stealth.min.js or mimic stealth behavior with your custom JS
-        page.add_init_script(path="stealth.min.js")  # You need to provide the path to your stealth.min.js
-        page.set_viewport_size({'width': 1024, 'height': 768})
-
-        ensure_macromicro_session(page, "get_m_square_chart.py")
+        browser, context, page = create_macromicro_browser_context(
+            playwright, headless=False, prefer_cached=True
+        )
+        page.add_init_script(path="stealth.min.js")
+        page.set_viewport_size({"width": 1024, "height": 768})
 
         failures: list[str] = []
         for url in urls:
             success = process_chart_url(page, url)
             if not success:
                 logger.warning(f"Retrying URL {url} with a new browser instance...")
+                context.close()
                 browser.close()
-                browser = playwright.chromium.launch(headless=False, args=browser_args)
-                page = browser.new_page()
+                browser, context, page = create_macromicro_browser_context(
+                    playwright, headless=False, prefer_cached=True
+                )
                 page.add_init_script(path="stealth.min.js")
-                page.set_viewport_size({'width': 1024, 'height': 768})
-                ensure_macromicro_session(page, "get_m_square_chart.py")
+                page.set_viewport_size({"width": 1024, "height": 768})
                 success = process_chart_url(page, url)
                 if not success:
                     logger.error(f"Failed to process URL {url} after retry.")
                     label = chart_label_from_url(url)
                     failures.append(f"{label}\n{url}")
 
+        context.close()
         browser.close()
 
         if failures:

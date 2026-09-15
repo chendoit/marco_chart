@@ -26,6 +26,17 @@ if not os.path.exists(DATA_DIR):
 
 logger.info(f"fed log is saved to {DATA_DIR}")
 
+
+def _coerce_numeric(value):
+    """NY Fed API 可能回傳 'NA' 字串，FRED 缺值為 '.'。"""
+    if value is None or value in ('NA', 'N/A', '.', ''):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
 def fetch_and_save_fred_data(series_id):
     """
     從 FRED API 獲取數據並保存為與 STLFSI4 相同的數據結構。
@@ -38,12 +49,13 @@ def fetch_and_save_fred_data(series_id):
         # 獲取系列數據
         data = fred.series_observations(series_id=series_id)
 
-        # 格式化數據
+        # 格式化數據（按日期升序）
         formatted_data = []
         for index, row in data.iterrows():
             date = index.to_pydatetime().replace(hour=8)
-            value = row['value']
+            value = _coerce_numeric(row['value'])
             formatted_data.append([date, value])
+        formatted_data.sort(key=lambda x: x[0])
 
         # 創建最終的數據結構
         result = {
@@ -110,31 +122,31 @@ def fetch_and_save_sofr_data(start_date, end_date):
             entry_date = datetime.datetime.strptime(entry["effectiveDate"], "%Y-%m-%d").replace(hour=8)
 
             if entry_type == "BGCR":
-                bgcr_data['percent1'].append([entry_date, entry.get("percentPercentile1", None)])
-                bgcr_data['percent25'].append([entry_date, entry.get("percentPercentile25", None)])
-                bgcr_data['percent75'].append([entry_date, entry.get("percentPercentile75", None)])
-                bgcr_data['percent99'].append([entry_date, entry.get("percentPercentile99", None)])
-                bgcr_data['rate'].append([entry_date, entry.get("percentRate", None)])
-                bgcr_data['volume'].append([entry_date, entry.get("volumeInBillions", None)])
+                bgcr_data['percent1'].append([entry_date, _coerce_numeric(entry.get("percentPercentile1"))])
+                bgcr_data['percent25'].append([entry_date, _coerce_numeric(entry.get("percentPercentile25"))])
+                bgcr_data['percent75'].append([entry_date, _coerce_numeric(entry.get("percentPercentile75"))])
+                bgcr_data['percent99'].append([entry_date, _coerce_numeric(entry.get("percentPercentile99"))])
+                bgcr_data['rate'].append([entry_date, _coerce_numeric(entry.get("percentRate"))])
+                bgcr_data['volume'].append([entry_date, _coerce_numeric(entry.get("volumeInBillions"))])
 
             elif entry_type == "TGCR":
-                tgcr_data['percent1'].append([entry_date, entry.get("percentPercentile1", None)])
-                tgcr_data['percent25'].append([entry_date, entry.get("percentPercentile25", None)])
-                tgcr_data['percent75'].append([entry_date, entry.get("percentPercentile75", None)])
-                tgcr_data['percent99'].append([entry_date, entry.get("percentPercentile99", None)])
-                tgcr_data['rate'].append([entry_date, entry.get("percentRate", None)])
-                tgcr_data['volume'].append([entry_date, entry.get("volumeInBillions", None)])
+                tgcr_data['percent1'].append([entry_date, _coerce_numeric(entry.get("percentPercentile1"))])
+                tgcr_data['percent25'].append([entry_date, _coerce_numeric(entry.get("percentPercentile25"))])
+                tgcr_data['percent75'].append([entry_date, _coerce_numeric(entry.get("percentPercentile75"))])
+                tgcr_data['percent99'].append([entry_date, _coerce_numeric(entry.get("percentPercentile99"))])
+                tgcr_data['rate'].append([entry_date, _coerce_numeric(entry.get("percentRate"))])
+                tgcr_data['volume'].append([entry_date, _coerce_numeric(entry.get("volumeInBillions"))])
 
             elif entry_type == "SOFR":
-                sofr_data['percent1'].append([entry_date, entry.get("percentPercentile1", None)])
-                sofr_data['percent25'].append([entry_date, entry.get("percentPercentile25", None)])
-                sofr_data['percent75'].append([entry_date, entry.get("percentPercentile75", None)])
-                sofr_data['percent99'].append([entry_date, entry.get("percentPercentile99", None)])
-                sofr_data['rate'].append([entry_date, entry.get("percentRate", None)])
-                sofr_data['volume'].append([entry_date, entry.get("volumeInBillions", None)])
+                sofr_data['percent1'].append([entry_date, _coerce_numeric(entry.get("percentPercentile1"))])
+                sofr_data['percent25'].append([entry_date, _coerce_numeric(entry.get("percentPercentile25"))])
+                sofr_data['percent75'].append([entry_date, _coerce_numeric(entry.get("percentPercentile75"))])
+                sofr_data['percent99'].append([entry_date, _coerce_numeric(entry.get("percentPercentile99"))])
+                sofr_data['rate'].append([entry_date, _coerce_numeric(entry.get("percentRate"))])
+                sofr_data['volume'].append([entry_date, _coerce_numeric(entry.get("volumeInBillions"))])
 
             elif entry_type == "SOFRAI":
-                sofrai_data.append([entry_date, entry.get("index", None)])
+                sofrai_data.append([entry_date, _coerce_numeric(entry.get("index"))])
 
         # 保存 BGCR 數據
         for key, values in bgcr_data.items():
@@ -180,10 +192,29 @@ def fetch_sofr_data():
     fetch_and_save_sofr_data("2021-08-05", end_date)
 
 
+def fetch_fed_liquidity_reference_rates():
+    """IORB、ON RRP、Fed Funds 等 FRED 系列，供 SOFR 流動性圖表使用。"""
+    for series_id in ("IORB", "RRPONTSYAWARD", "RRPONTSYD", "DFF"):
+        fetch_and_save_fred_data(series_id)
+
+
+def fetch_fed_treasury_yields():
+    """美國公債殖利率曲線（FRED DGS 系列）。"""
+    for series_id in ("DGS1MO", "DGS1", "DGS2", "DGS10", "DGS20", "DGS30"):
+        fetch_and_save_fred_data(series_id)
+
+
+def _sort_series_data(values):
+    """NY Fed API 回傳順序不固定，存檔前統一按日期升序。"""
+    return sorted(values, key=lambda x: x[0])
+
+
 def save_to_pickle(data, filename):
     """
     將數據保存為 pickle 文件。
     """
+    if data.get('data'):
+        data = {**data, 'data': _sort_series_data(data['data'])}
     output_file = os.path.join(DATA_DIR, filename)
     with open(output_file, 'wb') as f:
         pickle.dump(data, f)

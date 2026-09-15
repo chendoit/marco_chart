@@ -59,9 +59,9 @@ _module = ChartModule(
         },
         {
             "title": "日圓 Carry Trade 壓力指標 — McElligott's Canary",
-            "ids": [2, 355, 22904, "jpy_cme_noncommercial_short", "jpy_cme_net_position_large_spec"],
+            "ids": [2, "cboe_VIX", "cboe_VVIX", "jpy_cme_noncommercial_short", "jpy_cme_net_position_large_spec"],
             "axis": [0, 1, 2, 3, 3],
-            "plot_lines": [(22904, 100)],
+            "plot_lines": [("cboe_VVIX", 100)],
             "summary":
                 "McElligott 的經典組合指標：日圓投機空頭（反轉軸）+ VVIX。"
                 "'日圓空頭由高點滑落 + VVIX 由底部上升到 100 = 強力風險警示'。<br>"

@@ -5,7 +5,7 @@ _module = ChartModule(
     charts=[
         {
             "title": "VIXM Volume vs S&P 500 vs VIX",
-            "ids": ["etf_VIXM_volume", 2, 355],
+            "ids": ["etf_VIXM_volume", 2, "cboe_VIX"],
             "axis": [0, 1, 2],
             "summary":
                 "VIXM (ProShares VIX Mid-Term Futures ETF) 成交量可作為市場避險需求的觀察指標。"

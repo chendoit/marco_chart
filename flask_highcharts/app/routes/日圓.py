@@ -23,7 +23,7 @@ _module = ChartModule(
         },
         {
             "title": "日圓投機空頭 vs VIX — 風險預警",
-            "ids": [385, "jpy_cme_noncommercial_short", 355],
+            "ids": [385, "jpy_cme_noncommercial_short", "cboe_VIX"],
             "summary":
                 "1. 日圓空頭高點向下快速滑落, VIX 隨後升高<br>"
                 "2. 或 VIX 先發生危機, 觸發日圓空頭滑落, 引起日圓升值（避險貨幣）<br>"
@@ -31,7 +31,7 @@ _module = ChartModule(
         },
         {
             "title": "日圓, VIX, SP500共振",
-            "ids": [385, 2, 355],
+            "ids": [385, 2, "cboe_VIX"],
             "summary": "",
         },
         {
@@ -46,7 +46,7 @@ _module = ChartModule(
         },
         {
             "title": "澳幣日圓, 紐幣日圓, VIX",
-            "ids": [7145, (7145, '/', 7146), 355],
+            "ids": [7145, (7145, '/', 7146), "cboe_VIX"],
             "axis": [0, 0, 1],
             "summary":
                 "當AUDJPY上行，對應的是波動率下降和低波動率時代，其實就是確定性的增加，<br>"

@@ -5,7 +5,7 @@ _module = ChartModule(
     charts=[
         {
             "title": "SPX Gamma Flip Level vs SPX Price vs VIX",
-            "ids": ["gex_spx_spot_price", "gex_spx_gamma_flip", "gex_spx_gamma_flip_ce", 355],
+            "ids": ["gex_spx_spot_price", "gex_spx_gamma_flip", "gex_spx_gamma_flip_ce", "cboe_VIX"],
             "axis": [0, 0, 0, 1],
             "summary":
                 "McElligott 追蹤的最重要單一水準：SPX Gamma Flip Level。<br>"
@@ -35,7 +35,7 @@ _module = ChartModule(
         },
         {
             "title": "SPY Gamma Flip Level vs SPY Price — ETF 級對照",
-            "ids": ["gex_spy_spot_price", "gex_spy_gamma_flip", "gex_spy_gamma_flip_ce", 355],
+            "ids": ["gex_spy_spot_price", "gex_spy_gamma_flip", "gex_spy_gamma_flip_ce", "cboe_VIX"],
             "axis": [0, 0, 0, 1],
             "summary":
                 "SPY（ETF）的 Gamma Flip Level，與 SPX（指數）互為對照。"
@@ -47,7 +47,7 @@ _module = ChartModule(
         },
         {
             "title": "SPX Gamma Environment 體制 vs VIX vs VVIX",
-            "ids": ["gex_spx_spot_price", "gex_spx_gamma_env", 355, 22904],
+            "ids": ["gex_spx_spot_price", "gex_spx_gamma_env", "cboe_VIX", "cboe_VVIX"],
             "axis": [0, 1, 2, 3],
             "summary":
                 "SPX Gamma Environment 二元體制指標：+1 = Positive Gamma（穩定器），"
@@ -61,7 +61,7 @@ _module = ChartModule(
         },
         {
             "title": "VIX Gamma Flip Level vs VIX Price — VIX Dealer Gamma",
-            "ids": ["gex_vix_spot_price", "gex_vix_gamma_flip", "gex_vix_gamma_flip_ce", 2],
+            "ids": ["gex_vix_spot_price", "gex_vix_gamma_flip", "gex_vix_gamma_flip_ce", "cboe_VIX"],
             "axis": [0, 0, 0, 1],
             "summary":
                 "McElligott 在文章 01 明確區分的 'VIX Aggregate Dealer Gamma'。"
@@ -91,7 +91,7 @@ _module = ChartModule(
         },
         {
             "title": "VIX Gamma Environment — VIX 自身的體制",
-            "ids": ["gex_vix_spot_price", "gex_vix_gamma_env", 2, "cboe_VVIX"],
+            "ids": ["gex_vix_spot_price", "gex_vix_gamma_env", "cboe_VIX", "cboe_VVIX"],
             "axis": [0, 1, 2, 3],
             "summary":
                 "VIX Gamma Environment：+1 = VIX 在 Positive Gamma（VIX 被壓制、均值回歸）；"
@@ -118,7 +118,7 @@ _module = ChartModule(
         },
         {
             "title": "Gamma Flip Distance 歷史百分位 — SPX + VIX",
-            "ids": [2, 355, "gex_spx_flip_distance_pctrank", "gex_vix_flip_distance_pctrank"],
+            "ids": [2, "cboe_VIX", "gex_spx_flip_distance_pctrank", "gex_vix_flip_distance_pctrank"],
             "axis": [0, 1, 2, 2],
             "summary":
                 "SPX 和 VIX Flip Distance 的 2 年滾動歷史百分位（0–100%），搭配 SPX/VIX 價格背景。<br>"
@@ -130,7 +130,7 @@ _module = ChartModule(
         {
             "title": "SPX Call/Put Gamma 拆分 — Dealer GEX 量化",
             "pctrank_id": "gex_spx_net_gamma",
-            "ids": [2, 355, "gex_spx_call_gamma", "gex_spx_put_gamma", "gex_spx_net_gamma"],
+            "ids": [2, "cboe_VIX", "gex_spx_call_gamma", "gex_spx_put_gamma", "gex_spx_net_gamma"],
             "axis": [0, 1, 2, 2, 2],
             "plot_lines": [("gex_spx_net_gamma", 0)],
             "summary":
@@ -144,9 +144,9 @@ _module = ChartModule(
         },
         {
             "title": "SPX Net/Call/Put Gamma 歷史百分位",
-            "ids": [2, 355,
-                    "gex_spx_net_gamma_pctrank.MA5", "gex_spx_call_gamma_pctrank.MA5",
-                    "gex_spx_put_gamma_pctrank.MA5"],
+            "ids": [2, "cboe_VIX",
+                    "gex_spx_net_gamma_pctrank", "gex_spx_call_gamma_pctrank",
+                    "gex_spx_put_gamma_pctrank"],
             "axis": [0, 1, 2, 2, 2],
             "summary":
                 "Net Gamma、Call Gamma、Put Gamma 各自的 2 年滾動歷史百分位（0–100%）。<br>"
@@ -173,7 +173,7 @@ _module = ChartModule(
         {
             "title": "SPX Net Gamma vs VIX — Gamma-Vol 負相關追蹤",
             "pctrank_id": "gex_spx_net_gamma",
-            "ids": ["gex_spx_net_gamma", 355],
+            "ids": ["gex_spx_net_gamma", "cboe_VIX"],
             "axis": [0, 1],
             "summary":
                 "SPX Net Gamma（$B）與 VIX 的對照圖。<br>"

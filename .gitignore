@@ -230,3 +230,15 @@ history/
 
 # Cursor IDE
 .cursor/
+
+# CME login marker file
+.cme_login_ready
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Python cache in google_session
+google_session/__pycache__/
+
+# Temp batch fetch results
+batches/_tmp_5series/results/

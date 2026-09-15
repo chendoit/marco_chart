@@ -20,34 +20,34 @@ _module = ChartModule(
         },
         {
             "title": "日圓/美元, DXY與SOFR IORB spread, 美日利差",
-            "ids": [4456, 385, 483, (6225, '-', 19268)],
+            "ids": [4456, 385, 483, ("sofr_percent75", '-', "fed_IORB")],
             "summary":
                 "當美日利差小於3就需要注意是否會發生<mark>日圓反轉</mark> <br> "
                 "當SOFR75-IORB>0.07 <mark>日圓反轉 DXY反轉 2023Mar, 2023Dec 2024Oct 2024Dec 都有這個趨勢</mark><br> "
                 "2024/3月開始 美日匯率與利差背離 就預示了一種趨勢 當反轉到 7/9, <br>"
                 "轉成同向,此時持續出現美元流動性不足,這就會出現重大波動"
                 "<mark>也就是如果再出現, 日圓持續上漲, 流動性不足 就是一種徵兆!</mark>",
-            "plot_lines": [((6225, '-', 19268), 0.07), (4456, 3)],
+            "plot_lines": [(("sofr_percent75", '-', "fed_IORB"), 0.07), (4456, 3)],
         },
         {
             "title": "日圓/美元與SOFR IORB spread, 美日利差",
-            "ids": [4456, 385, (6225, '-', 19268)],
+            "ids": [4456, 385, ("sofr_percent75", '-', "fed_IORB")],
             "summary":
                 "當美日利差小於3就需要注意是否會發生<mark>日圓反轉</mark> <br> "
                 "當SOFR75-IORB>0.07 <mark>日圓反轉 DXY反轉 2023Mar, 2023Dec 2024Oct 2024Dec 都有這個趨勢</mark><br> "
                 "2024/3月開始 美日匯率與利差背離 就預示了一種趨勢 當反轉到 7/9, <br>"
                 "轉成同向,此時持續出現美元流動性不足,這就會出現重大波動"
                 "<mark>也就是如果再出現, 日圓持續上漲, 流動性不足 就是一種徵兆!</mark>",
-            "plot_lines": [((6225, '-', 19268), 0.07)],
+            "plot_lines": [(("sofr_percent75", '-', "fed_IORB"), 0.07)],
         },
         {
             "title": "日圓/美元與SOFR IORB spread",
-            "ids": [(6222, '-', 19268), 385, (6225, '-', 19268)],
+            "ids": [("sofr_rate", '-', "fed_IORB"), 385, ("sofr_percent75", '-', "fed_IORB")],
             "summary": "單看SOFR7和IORB拉大, 日圓反轉",
         },
         {
             "title": "美日利差與Fedwatch升降息機率",
-            "ids": [356, 354, 1645, 484, 4456, 385],
+            "ids": ["fed_DFF", "fed_DGS10", 1645, 484, 4456, 385],
             "axis": [3, 3, 2, 2, 3, 5],
             "summary": "注意升降息, 機率急遽變化",
             "plot_lines": [(4456, 3)],

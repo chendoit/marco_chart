@@ -6,7 +6,7 @@ _module = ChartModule(
         {
             "title": "跨市場壓力指標 — MOVE + VIX + 信用利差",
             "pctrank_id": "series_17581",
-            "ids": [2, 17581, 355, 3612],
+            "ids": [2, 17581, "cboe_VIX", 3612],
             "axis": [0, 1, 2, 3],
             "summary":
                 "MOVE Index（利率波動率）+ VIX（股票波動率）+ 信用利差。"
@@ -18,7 +18,7 @@ _module = ChartModule(
         },
         {
             "title": "金融條件反身性 — NFCI + OFR FSI",
-            "ids": [2, 5696, 4866, 355],
+            "ids": [2, "chicagofed_NFCI", "ofr_FSI_US", "cboe_VIX"],
             "axis": [0, 1, 1, 2],
             "summary":
                 "McElligott 最強的總經概念：FCI 反身性。<br>"
@@ -30,7 +30,7 @@ _module = ChartModule(
         },
         {
             "title": "美國公債殖利率曲線（含 2Y）",
-            "ids": [356, 5547, 5549, 363, 354, 5551],
+            "ids": ["fed_DFF", "fed_DGS1MO", "fed_DGS1", "fed_DGS2", "fed_DGS10", "fed_DGS20"],
             "axis": [0, 0, 0, 0, 0, 0],
             "summary":
                 "Fed Fund Rate / 1M / 1Y / 2Y / 10Y / 20Y 完整殖利率曲線。<br>"
@@ -59,7 +59,7 @@ _module = ChartModule(
         {
             "title": "10Y 實質殖利率（TIPS） — FCI 收緊代理",
             "pctrank_id": "fed_DFII10",
-            "ids": ["fed_DFII10", 2, 355],
+            "ids": ["fed_DFII10", 2, "cboe_VIX"],
             "axis": [0, 1, 2],
             "summary":
                 "10Y 實質殖利率（DFII10）是 McElligott 追蹤的 'FCI 收緊代理'。"
@@ -83,7 +83,7 @@ _module = ChartModule(
         },
         {
             "title": "OIS 1Y-3M 利差 vs SPX vs VIX — Fed 路徑定價",
-            "ids": [2, 356, (1150443, '-', 1150441)],
+            "ids": [2, "fed_DFF", (1150443, '-', 1150441)],
             "axis": [0, 1, 2],
             "plot_lines": [((1150443, '-', 1150441), [0.25, -0.25])],
             "summary":
@@ -142,7 +142,7 @@ _module = ChartModule(
                 "也反映了市場對利率路徑的不確定性。",
         },
     ],
-    reverse_ids=[5696, 4866],
+    reverse_ids=["chicagofed_NFCI", "ofr_FSI_US"],
 )
 
 CHART_IDS = _module.CHART_IDS

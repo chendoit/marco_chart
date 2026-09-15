@@ -281,9 +281,9 @@ _module = ChartModule(
         {
             "title": "VVIX/VIX 凸性比率 — VVIX Never Lies",
             "pctrank_id": "expr_vvix_div_vix",
-            "ids": [2, (22904, '/', 355), 355],
+            "ids": [2, ("cboe_VVIX", '/', "cboe_VIX"), "cboe_VIX"],
             "axis": [0, 1, 2],
-            "plot_lines": [((22904, '/', 355), [5, 6, 7])],
+            "plot_lines": [(("cboe_VVIX", '/', "cboe_VIX"), [5, 6, 7])],
             "summary":
                 "VVIX/VIX 比率量化選擇權交易商的凸性壓力。"
                 "McElligott 反覆強調 'VVIX never lies'——VVIX 捕捉了 VIX 本身無法反映的東西："
@@ -295,7 +295,7 @@ _module = ChartModule(
         {
             "title": "VIX Spot Beta — 波動率-現貨敏感度",
             "pctrank_id": "expr_vix_div_spx",
-            "ids": [2, (355, '/', 2)],
+            "ids": [2, ("cboe_VIX", '/', 2)],
             "axis": [0, 1],
             "summary":
                 "VIX/SPX 比率作為 VIX Spot Beta 的長期趨勢代理。"
@@ -306,7 +306,7 @@ _module = ChartModule(
         },
         {
             "title": "Spot-Vol 相關性體制 — Crash-Up vs Crash-Down",
-            "ids": [2, 355, 22904],
+            "ids": [2, "cboe_VIX", "cboe_VVIX"],
             "axis": [0, 1, 2],
             "summary":
                 "SPX + VIX + VVIX 三者同框觀察 Spot-Vol 相關性體制。"
@@ -378,7 +378,7 @@ _module = ChartModule(
         },
         {
             "title": "VIX ETF 資金流向 — 尾部避險需求",
-            "ids": [2, 355, ({"ZSUM": ["etf_UVXY_fundflow", "etf_VIXY_fundflow"]}, '-', {"ZSUM": ["etf_SVXY_fundflow"]})],
+            "ids": [2, "cboe_VIX", ({"ZSUM": ["etf_UVXY_fundflow", "etf_VIXY_fundflow"]}, '-', {"ZSUM": ["etf_SVXY_fundflow"]})],
             "axis": [0, 1, 2],
             "summary":
                 "做多 VIX ETF（UVXY+VIXY）vs 做空 VIX ETF（SVXY）的 Z-score 正規化淨資金流。<br>"
@@ -400,7 +400,7 @@ _module = ChartModule(
         },
         {
             "title": "CBOE Put/Call Ratio vs SPX vs VIX — 選擇權情緒風向標",
-            "ids": [2, 1650, 355],
+            "ids": [2, 1650, "cboe_VIX"],
             "axis": [0, 1, 2],
             "plot_lines": [(1650, [1.2, 1, 0.75])],
             "summary":
@@ -518,7 +518,7 @@ _module = ChartModule(
         },
         {
             "title": "VIX Call/Put/Net Gamma 歷史百分位",
-            "ids": [2, 355, 22904,
+            "ids": [2, "cboe_VIX", "cboe_VVIX",
                     "gex_vix_call_gamma_pctrank",
                     "gex_vix_put_gamma_pctrank",
                     "gex_vix_net_gamma_pctrank"],

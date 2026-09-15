@@ -8,32 +8,32 @@ _module = ChartModule(
     charts=[
         {
             "title": "VVIX 日圓投機空頭, 預見突發危機",
-            "ids": [2, 22904, 355, "jpy_cme_noncommercial_short"],
+            "ids": [2, "cboe_VVIX", "cboe_VIX", "jpy_cme_noncommercial_short"],
             "summary": """ 日圓空頭由高點滑落, 且VVIX由底部上升到達100, 強力風險警示!! <br>
     有時VVIX領跑, 如果日圓空頭高位有機會伴隨日圓升值(避險貨幣真義)! """,
-            "plot_lines": [(22904, 100)],
+            "plot_lines": [("cboe_VVIX", 100)],
         },
         {
             "title": "VVIX, PutCall, 預見突發危機, 並估算反彈",
-            "ids": [2, 22904, 355, 1650],
+            "ids": [2, "cboe_VVIX", "cboe_VIX", 1650],
             "summary": "VVIX 100以上高位就有風險, 如果有日圓空頭下滑更好, 但是PutCall ratio為跟隨信號, 可以觀察極值(>1.2),PutCall下滑,伴隨回檔,當到達0.8一般反彈趨緩!",
-            "plot_lines": [(22904, 100), (1650, [1.2, 1, 0.75])],
+            "plot_lines": [("cboe_VVIX", 100), (1650, [1.2, 1, 0.75])],
         },
         {
             "title": "市場寬度",
-            "ids": [2, 18331, 22718, 355],
+            "ids": [2, 18331, 22718, "cboe_VIX"],
             "summary": "當50Ma到達25,或200ma到達50,為低點,當50Ma到達75,或200ma到達75,為高點,",
             "plot_lines": [(18331, [25, 75]), (22718, [50, 75])],
         },
         {
             "title": "SOFR 預見流動性危機",
-            "ids": [2, 40593, 19268, 6222, 6225],
-            "axis": [0, 1, 1, 1, 1, 1],
+            "ids": [2, "fed_RRPONTSYAWARD", "fed_IORB", "sofr_rate", "sofr_percent75"],
+            "axis": [0, 1, 1, 1, 1],
             "summary": "當SOFR高於IORB,警示流動性危機, 伴隨短期危機, SOFR75可提前一些",
         },
         {
             "title": "美國OIS隔夜指數掉期3M和1Y",
-            "ids": [1150443, 1150441, 354, 5551],
+            "ids": [1150443, 1150441, "fed_DGS10", "fed_DGS20"],
             "axis": [2, 2, 2, 2],
             "summary":
                 "USD 1Y FED FUNDS OIS、USD 3M FED FUNDS OIS 與美國 10、20 年期公債殖利率。<br>"
@@ -41,7 +41,7 @@ _module = ChartModule(
         },
         {
             "title": "美國OIS利差 1Y-3M FED FUNDS OIS",
-            "ids": [2,356, (1150443, '-', 1150441)],
+            "ids": [2, "fed_DFF", (1150443, '-', 1150441)],
             "axis": [0, 1, 2],
             "summary":
                 "USD 1Y FED FUNDS OIS - USD 3M FED FUNDS OIS 利差。<br>"
@@ -51,7 +51,7 @@ _module = ChartModule(
         },
         {
             "title": "澳紐元vs.日幣 VIX",
-            "ids": [7145, (7145, '*', 7146), 355, (385, '/', 386)],
+            "ids": [7145, (7145, '*', 7146), "cboe_VIX", (385, '/', 386)],
             "axis": [1, 1, 0, 1, 1, 1],
             "summary":
                 "當AUDJPY上行，對應的是波動率下降和低波動率時代，其實就是確定性的增加，<br>"
@@ -61,7 +61,7 @@ _module = ChartModule(
         },
         {
             "title": "信用風險利差 vs S&P500 vs VIX",
-            "ids": [2, 3612, 355],
+            "ids": [2, 3612, "cboe_VIX"],
             "summary":
                 "信用利差到達高點快速下降行為與Vix相似 <br> "
                 "信用利差到達高點下降行為通常也象徵市場反轉一般有延續性<br>"
@@ -70,7 +70,7 @@ _module = ChartModule(
         },
         {
             "title": "芝加哥聯儲當週金融狀況指數 vs 美國金融壓力指數 OFR FSI",
-            "ids": [2, 5696, 4866],
+            "ids": [2, "chicagofed_NFCI", "ofr_FSI_US"],
             "summary":
                 '<img src="https://raw.githubusercontent.com/chendoit/PicBed/main/image-20250812220738637.png" alt="圖片描述" style="width:40%; height:auto;" >'
                 "有預示能力, 有提早下彎警示下跌的功能, 但是下彎後就沒有意義(like 2024/Aug之後), 但是下彎後改變趨勢, 也可以預示上漲 (每周更新 尚須確認時效性 似乎會有兩周的delay)"
@@ -78,14 +78,14 @@ _module = ChartModule(
         },
         {
             "title": "日經225 vs Vix",
-            "ids": [1281, 355],
+            "ids": [1281, "cboe_VIX"],
             "summary":
                 "一般來說，如果日經指數持續上漲，但波動率拒絕下降時，就需要特別注意。 (日經軸反轉)"
                 '<img src="https://raw.githubusercontent.com/chendoit/PicBed/main/image-20250829224909178.png" alt="圖片描述" style="width:40%; height:auto;" >',
         },
         {
             "title": "SP500, MOVE and VIX",
-            "ids": [2, 17581, 355],
+            "ids": [2, 17581, "cboe_VIX"],
         },
         {
             "title": "日圓加幣, vs 油價",
@@ -93,7 +93,7 @@ _module = ChartModule(
         },
         {
             "title": "SPX vs VIX 期限結構 (raw)",
-            "ids": [2, 355, 28769, 7173, 7174, 7175, 7770],
+            "ids": [2, "cboe_VIX", "cboe_VIX1D", "cboe_VIX9D", "cboe_VIX3M", "cboe_VIX6M", "cboe_VIX1Y"],
             "axis": [0, 1, 1, 1, 1, 1, 1],
             "summary":
                 "SPX 搭配 VIX 各期限原始數值：VIX(30D), VIX1D, VIX9D, VIX3M, VIX6M, VIX1Y。"
@@ -101,7 +101,7 @@ _module = ChartModule(
         },
         {
             "title": "SPX vs VIX 期限結構 (ratio)",
-            "ids": [2, (355, '/', 7174), (28769, '/', 7175)],
+            "ids": [2, ("cboe_VIX", '/', "cboe_VIX3M"), ("cboe_VIX1D", '/', "cboe_VIX6M")],
             "axis": [0, 1, 1],
             "summary":
                 "VIX/VIX3M：VIX 與 3 個月期 VIX 的比率，衡量短期 vs 中期波動預期。"
@@ -109,11 +109,11 @@ _module = ChartModule(
                 "<br><b>&gt;1</b>：期限結構倒掛 (backwardation)，短期恐慌高於中長期 → 市場恐慌。"
                 "<br><b>&lt;1</b>：期限結構正常 (contango)，市場穩定。"
                 "<br>數值越高代表恐慌越劇烈，歷史上突破 1.5 通常對應重大市場事件。",
-            "plot_lines": [((355, '/', 7174), 1)],
+            "plot_lines": [(("cboe_VIX", '/', "cboe_VIX3M"), 1)],
         },
         # {
         #     "title": "VIX ETF 淨做多資金流 vs SPX vs VIX",
-        #     "ids": [({"SUM": _VIX_LONG_FLOW}, '-', {"SUM": _VIX_SHORT_FLOW}), 2, 355],
+        #     "ids": [({"SUM": _VIX_LONG_FLOW}, '-', {"SUM": _VIX_SHORT_FLOW}), 2, "cboe_VIX"],
         #     "axis": [0, 1, 2],
         #     "summary":
         #         "做多VIX ETF (UVXY+VIXY) 資金淨流量減去做空VIX ETF (SVXY) 資金淨流量。<br>"
@@ -124,7 +124,7 @@ _module = ChartModule(
         # },
         # {
         #     "title": "VIX ETF 做多/做空資金流 vs SPX vs VIX",
-        #     "ids": [{"SUM": _VIX_LONG_FLOW}, {"SUM": _VIX_SHORT_FLOW}, 2, 355],
+        #     "ids": [{"SUM": _VIX_LONG_FLOW}, {"SUM": _VIX_SHORT_FLOW}, 2, "cboe_VIX"],
         #     "axis": [0, 1, 2, 3],
         #     "summary":
         #         "分別顯示做多VIX ETF (UVXY+VIXY) 與做空VIX ETF (SVXY) 的資金流量。<br>"
@@ -133,7 +133,7 @@ _module = ChartModule(
         # },
         {
             "title": "VIX ETF 正規化淨做多資金流 vs SPX vs VIX",
-            "ids": [2, 355, ({"ZSUM": _VIX_LONG_FLOW}, '-', {"ZSUM": _VIX_SHORT_FLOW}) ],
+            "ids": [2, "cboe_VIX", ({"ZSUM": _VIX_LONG_FLOW}, '-', {"ZSUM": _VIX_SHORT_FLOW}) ],
             "axis": [0, 1, 2],
             "summary":
                 "各ETF先做Z-score正規化後再加總，避免規模大的ETF主導信號。<br>"
@@ -142,7 +142,7 @@ _module = ChartModule(
         },
         {
             "title": "CBOE VIX Futures Index SHORTVOL DD60 vs SPX vs VIX",
-            "ids": [2, 355, 5696, "cboe_SHORTVOL", "cboe_SHORTVOL.DD60"],
+            "ids": [2, "cboe_VIX", "chicagofed_NFCI", "cboe_SHORTVOL", "cboe_SHORTVOL.DD60"],
             "axis": [0, 1, 2, 3, 4],
             "summary":
                 "<b>【核心指標：SHORTVOL DD60（綠色虛線）】</b><br>"
@@ -165,14 +165,14 @@ _module = ChartModule(
         },
         {
             "title": "SPX vs VIX vs NFCI vs NFCI翻轉信號",
-            "ids": [2, 355, 5696, "5696.REV1"],
+            "ids": [2, "cboe_VIX", "chicagofed_NFCI", "chicagofed_NFCI.REV1"],
             "axis": [0, 1, 2, 3],
             "summary":
                 "SPX 搭配 VIX、芝加哥聯儲 綜合觀察。<br>"
                 "NFCI 下彎代表金融環境收緊，搭配 VIX 上升。<br>"
                 "<b>REV10 翻轉信號</b>：+1 = NFCI 從谷底翻上（金融環境開始收緊），-1 = NFCI 從峰頂翻下（金融環境開始放鬆）。<br>",
                 # "MA10 平滑（週度數據 ≈ 2.5 個月），可換 REV5/REV20 調整靈敏度。"
-            "plot_lines": [("5696.REV1", [1, -1])],
+            "plot_lines": [("chicagofed_NFCI.REV1", [1, -1])],
         },
         {
             "title": "SPX vs Bitcoin",
@@ -192,7 +192,7 @@ _module = ChartModule(
     reverse_ids=[
         "eur_cme_noncommercial_short",
         "jpy_cme_noncommercial_short",
-        5696, "NFCI", 1281, 4866,
+        "chicagofed_NFCI", 1281, "ofr_FSI_US",
     ],
 )
 

@@ -25,7 +25,7 @@ _module = ChartModule(
         },
         {
             "title": "使用日圓投機空頭預測Vix Peak",
-            "ids": [385, "jpy_cme_noncommercial_short", 355],
+            "ids": [385, "jpy_cme_noncommercial_short", "cboe_VIX"],
             "summary":
                 "1. 日圓空頭高點向下快速滑落, Vix隨後升高<br>"
                 "2. 或Vix先發生危機, 觸發日圓空頭滑落, 引起日圓升值(避險貨幣)",

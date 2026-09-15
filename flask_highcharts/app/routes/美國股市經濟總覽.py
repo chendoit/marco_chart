@@ -30,7 +30,7 @@ _module = ChartModule(
         },
         {
             "title": "銅金比 領先 SP500 EPS成長率 幾個月",
-            "ids": [4481, "17586.YOY", 17586, 356],
+            "ids": [4481, "17586.YOY", 17586, "fed_DFF"],
         },
     ],
     reverse_ids=[385],

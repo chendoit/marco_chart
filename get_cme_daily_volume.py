@@ -35,7 +35,12 @@ from line_notify import send_line_notification
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 load_dotenv()
 
-logger.add("./logs/{time:YYYY-MM-DD}.log", enqueue=True)
+logger.add(
+    "./logs/{time:YYYY-MM-DD}.log",
+    enqueue=True,
+    retention="1 month",
+    compression="gz",
+)
 
 DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
 XLSX_DIR = DATA_DIR / "cme_daily_volume"

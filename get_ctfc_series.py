@@ -23,7 +23,12 @@ def setup_data_folder():
     return folder
 
 data_folder = setup_data_folder()
-logger.add("./logs/{time:YYYY-MM-DD}.log", enqueue=True)
+logger.add(
+    "./logs/{time:YYYY-MM-DD}.log",
+    enqueue=True,
+    retention="1 month",
+    compression="gz",
+)
 
 def get_exchange_code(report_name):
     """從報告名稱中提取交易所代碼"""

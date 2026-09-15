@@ -9,7 +9,12 @@ from pystlouisfed import FRED
 from loguru import logger
 
 # 配置日誌記錄
-logger.add("./logs/{time:YYYY-MM-DD}.log")
+logger.add(
+    "./logs/{time:YYYY-MM-DD}.log",
+    enqueue=True,
+    retention="1 month",
+    compression="gz",
+)
 
 from dotenv import load_dotenv
 load_dotenv()

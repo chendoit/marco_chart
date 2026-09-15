@@ -19,7 +19,12 @@ from line_notify import send_line_notification
 
 load_dotenv()
 
-logger.add("./logs/{time:YYYY-MM-DD}.log", enqueue=True)
+logger.add(
+    "./logs/{time:YYYY-MM-DD}.log",
+    enqueue=True,
+    retention="1 month",
+    compression="gz",
+)
 
 user_agents = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',

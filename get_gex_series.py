@@ -10,7 +10,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logger.add("./logs/{time:YYYY-MM-DD}.log", enqueue=True)
+logger.add(
+    "./logs/{time:YYYY-MM-DD}.log",
+    enqueue=True,
+    retention="1 month",
+    compression="gz",
+)
 
 DATA_DIR = os.getenv("DATA_DIR")
 if not os.path.exists(DATA_DIR):

@@ -269,9 +269,10 @@ url_list = [
     # "https://www.macromicro.me/series/17581/us-treasury-move-index",
 
     # 原油CFTC
-    "https://www.macromicro.me/series/8297/crude-oil-futures-and-options-manage-money-long-position",
-    "https://www.macromicro.me/series/8298/crude-oil-futures-and-options-manage-money-short-position",
-    "https://www.macromicro.me/series/8296/crude-oil-futures-and-options-manage-money-net-position",
+    # [2026-09-22] sid 8297/8298/8296 改由 get_cftc_crude_mm.py 抓取(WN-A WP-A5)
+    # "https://www.macromicro.me/series/8297/crude-oil-futures-and-options-manage-money-long-position",
+    # "https://www.macromicro.me/series/8298/crude-oil-futures-and-options-manage-money-short-position",
+    # "https://www.macromicro.me/series/8296/crude-oil-futures-and-options-manage-money-net-position",
 
     # 市場寬度
     "https://www.macromicro.me/series/18331/sp500-50ma-breadth",

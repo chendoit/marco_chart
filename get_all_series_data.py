@@ -34,6 +34,7 @@ from get_ism_pmi import fetch_ism_pmi
 from get_fiscal_data import fetch_fiscal_data
 from get_eia_series import fetch_eia_series
 from get_jp_yield import fetch_jp_yield_and_spread
+from get_cftc_crude_mm import fetch_cftc_crude_mm
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 from notify_macromicro_blog import run as check_macromicro_blog_new_posts
@@ -81,6 +82,7 @@ tasks = [
     ("Fiscal Data TGA (sid 29123)", fetch_fiscal_data),
     ("EIA oil inventory + SPR (sid 854/19080)", fetch_eia_series),
     ("日本10Y + 美日利差 (sid 2018/4456, 需排在 FRED Treasury Yields 之後)", fetch_jp_yield_and_spread),
+    ("CFTC 原油 Managed Money long/short/net (sid 8297/8298/8296)", fetch_cftc_crude_mm),
 ]
 
 failed = []

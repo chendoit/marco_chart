@@ -176,17 +176,20 @@ def fetch_data_from_urls(urls, output_dir=r'.\data'):
 
 url_list = [
     # [2026-09-16] sid 20508、32377 已改由 get_m_square_chart_api.py(M2 chart API, curl_cffi)抓取,自此清單移除
-    "https://www.macromicro.me/series/2/sp500", # S&P500
+    # [2026-09-22] sid 2 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/2/sp500", # S&P500
 
     # 原油
     "https://www.macromicro.me/series/4934/crude-oil-cracking-spread",
-    "https://www.macromicro.me/series/486/crude-oil-futures",
+    # [2026-09-22] sid 486 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/486/crude-oil-futures",
     "https://www.macromicro.me/series/7148/ovx",  # 石油ETF波動率
     "https://www.macromicro.me/series/8219/us-wti-crude-oil-spot-price-daily",
     "https://www.macromicro.me/series/854/us-oil-inventory", # 美國-原油庫存
     "https://www.macromicro.me/series/19080/us-strategic-petroleum-reserve", # 美國-戰略石油儲備[SPR]
 
-    "https://www.macromicro.me/series/483/us-dollar-index",
+    # [2026-09-22] sid 483 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/483/us-dollar-index",
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us",
     "https://www.macromicro.me/series/2018/japan-bond-10-year",
     "https://www.macromicro.me/series/29123/us-treasury-general-account-daily", # 政部帳戶(TGA)餘額
@@ -228,13 +231,15 @@ url_list = [
 
     # 美德利差 DXY 歐元匯率
     "https://www.macromicro.me/series/4448/de-10-year-yield-spread-germany-us", # 美德-10年期公債利差
-    "https://www.macromicro.me/series/562/fx-eur-usd", # 歐元/美元
-    "https://www.macromicro.me/series/483/us-dollar-index", # DXY 美元指數
+    # [2026-09-22] sid 562/483 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/562/fx-eur-usd", # 歐元/美元
+    # "https://www.macromicro.me/series/483/us-dollar-index", # DXY 美元指數
     "https://www.macromicro.me/series/1916/germany-bond-10-year", # 德國-10年期公債殖利率
 
 
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us", # 美日-10年期公債利差
-    "https://www.macromicro.me/series/385/fx-usd-jpy", #美元/日圓
+    # [2026-09-22] sid 385 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/385/fx-usd-jpy", #美元/日圓
     # [2026-09-16] sid 32377 改由 get_m_square_chart_api.py 抓取(chart 102471 series[0])
 
 
@@ -277,15 +282,17 @@ url_list = [
     # "https://en.macromicro.me/series/6783/aaii-sentiment-survey-bullish"
 
     # 澳元日幣,
-    "https://www.macromicro.me/series/7145/fx-aud-jpy",
-    "https://www.macromicro.me/series/7146/fx-aud-nzd", # 澳幣/紐必
-    "https://www.macromicro.me/series/745/fx-aud-usd",
+    # [2026-09-22] sid 7145/7146/745 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/7145/fx-aud-jpy",
+    # "https://www.macromicro.me/series/7146/fx-aud-nzd", # 澳幣/紐必
+    # "https://www.macromicro.me/series/745/fx-aud-usd",
 
     # 台股 台幣
     # [2026-09-17] sid 2752/2756 改由 get_official_xlsx.py 抓取(WSTS)
     # "https://www.macromicro.me/series/2752/americas-semiconductor-billings-yoy",
     # "https://www.macromicro.me/series/2756/global-semiconductor-billings-yoy"
-    "https://www.macromicro.me/series/621/fx-usd-twd",  # 台幣匯率
+    # [2026-09-22] sid 621 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/621/fx-usd-twd",  # 台幣匯率
     # [2026-09-17] sid 5683 改由 get_official_xlsx.py 抓取(TWSE)
     # "https://www.macromicro.me/series/5683/taiwan-stock-price-to-earnings-ratio"
 
@@ -309,17 +316,20 @@ url_list = [
     # "https://www.macromicro.me/series/5696/united-states-chicago-fed-national-financial-conditions-index",
 
     # 油價共振
-    "https://www.macromicro.me/series/386/fx-usd-cad",
+    # [2026-09-22] sid 386 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/386/fx-usd-cad",
 
     # Nikkei 225
-    "https://www.macromicro.me/series/1281/japan-nikkei225",
+    # [2026-09-22] sid 1281 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/1281/japan-nikkei225",
 
-    # 美元/加幣
-    "https://www.macromicro.me/series/386/fx-usd-cad",
+    # 美元/加幣 (重複行,同 sid 386 已於上方移除)
+    # "https://www.macromicro.me/series/386/fx-usd-cad",
 
     # 黃金 ETF 波動率指數
     "https://www.macromicro.me/series/7147/gvz", # 黃金 GVZ 波動率指數
-    "https://www.macromicro.me/series/485/gold-futures", # 黃金 GVZ 波動率指數
+    # [2026-09-22] sid 485 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/485/gold-futures", # 黃金 GVZ 波動率指數
 
     # 5-Year CDS (主權信用違約交換)
     # [2026-09-17] 9 條 CDS 改由 get_cds_series.py 抓取(investing.com + WGB)
@@ -350,13 +360,15 @@ url_list = [
     "https://www.macromicro.me/series/37/unemployment-rate",  # 失業率
     "https://www.macromicro.me/series/34/initialclaims",  # 初次申請失業金
     "https://www.macromicro.me/series/36/continuedclaims",  # 連續申請失業金
-    "https://www.macromicro.me/series/4481/coppergold",  # 銅金比
+    # [2026-09-22] sid 4481 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/4481/coppergold",  # 銅金比
     "https://www.macromicro.me/series/17586/sp500-eps",  # S&P 500 EPS 成長率
 
     # 愛克榭
     "https://www.macromicro.me/series/319/durable-goods",  # 耐久財新訂單-非國防資本財
 
-    "https://www.macromicro.me/series/4249/bitcoin-usd", # 比特幣
+    # [2026-09-22] sid 4249 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
+    # "https://www.macromicro.me/series/4249/bitcoin-usd", # 比特幣
 ]
 
 

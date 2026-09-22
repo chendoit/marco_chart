@@ -19,6 +19,7 @@ from get_m_square_chart_api import fetch_m_square_chart_api  # 2026-09-16 起取
 from get_m_square_series import fetch_m_square_series
 from get_m_square_etf import fetch_m_square_etfs
 from get_yahoo_series import fetch_move_index
+from get_yfinance_series import fetch_yfinance_series
 from get_cds_series import fetch_cds_series
 from get_official_xlsx import fetch_official_xlsx
 from get_ctfc_series import fetch_cftc_data, fetch_cftc_tff_data
@@ -60,6 +61,7 @@ tasks = [
     ("MacroMicro series", fetch_m_square_series),
     ("MacroMicro ETFs", fetch_m_square_etfs),
     ("Yahoo Finance MOVE index (sid 17581, ex-M²)", fetch_move_index),
+    ("yfinance 14 series (WN-A WP-A2, ex-M²)", fetch_yfinance_series),
     ("CFTC data", fetch_cftc_data),
     ("CFTC E-mini SPX TFF", fetch_cftc_tff_data),
     ("CBOE indices", fetch_cboe_indices),

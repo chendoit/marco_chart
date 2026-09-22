@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
-"""FRED fredgraph.csv 免 key 端點，接管 3 條 M² series (sid 261/4/7249)
+"""FRED fredgraph.csv 免 key 端點，接管 M² series (sid 261/4/7249 + WN-2026-09-22-A批 WP-A1/A1b)
 
 來源: migration/reference_fetchers/04_fred_csv.py 已驗證函式
 - sid=261 Case-Shiller 20城(SA) → FRED SPCS20RSA, 月頻, ok
 - sid=4 美國實質 GDP 年增 → FRED GDPC1 自算 YoY, 季頻, ok
 - sid=7249 NY Fed WEI → FRED WEI, 日頻(週六), approx(early revision)
+
+WP-A1（11 條直接對應）+ WP-A1b（1 條拼接）：抓法沿用
+`C:/code/2026-09-11-fincept-terminal/migration/fetch_mapped.py` 的 `fetch_fred()`/`fetch_246_splice()`
+（已用 verify_mapped.py 驗證過），改走本檔既有的免 key fredgraph.csv 端點。
 
 備份: C:/Users/chendoit/AppData/Local/Temp/pkl_backup_04/
 """
@@ -30,27 +34,46 @@ TITLE_MAP = {
     261: "sp-case-shillar-20-home-price",
     4: "realgdp-yoy",
     7249: "fereral-reserve-bank-of-new-york-weekly-economic-index",
+    36: "continuedclaims",
+    34: "initialclaims",
+    37: "unemployment-rate",
+    22910: "sahm-rule-recession-indicator",
+    255: "price-new-houses",
+    755: "delinquency-rate-on-business-loans",
+    634: "bofa-merrill-lynch-us-corporate-ccc",
+    319: "durable-goods",
+    7449: "us-fed-excess-reserves-weekly",
+    348: "pce-core-price-yoy",
+    560: "real-disposable-personal-income-yoy",
+    246: "existing-home-sales-yoy",
 }
 
 
 def _save_series(sid, obs):
-    """寫出 {'title', 'data': [[datetime(08:00), float], ...]} 格式 pkl,同舊格式。
-    防呆:新點數少於既有 pkl 的一半時不覆寫(避免 API 異常清空歷史)。"""
+    """逐日期 merge 存檔:新舊資料以日期 union,同日期新值覆蓋,其餘舊點全保留。
+    `lost`(union 後仍缺失的舊日期)理論上必為空集合,用 assert 當防呆而非事後檢查。
+    (2026-09-22 由整批覆寫+筆數防呆改為逐日期 merge:WP-A2 實測發現某些新來源可回溯的
+    歷史範圍比舊 pkl 短,筆數防呆抓不到「新資料筆數變多但早期歷史被默默丟掉」這種情況。)"""
     out_file = os.path.join(folder, f"series_{sid}.pkl")
-    old = None
+    old_data = []
     if os.path.exists(out_file):
-        with open(out_file, "rb") as f:
-            old = pickle.load(f)
-    old_n = len(old.get("data", [])) if isinstance(old, dict) else 0
-    if old and len(obs) < old_n * 0.5:
-        raise RuntimeError(
-            f"series_{sid}: new data n={len(obs)} < 50% of existing n={old_n}, skip write"
-        )
-    data = {"title": TITLE_MAP.get(sid, str(sid)), "data": [[d, v] for d, v in obs]}
+        try:
+            with open(out_file, "rb") as f:
+                old = pickle.load(f)
+            old_data = old.get("data", []) if isinstance(old, dict) else []
+        except Exception:
+            old_data = []
+    merged = {d.date(): (d, v) for d, v in old_data}
+    merged.update({d.date(): (d, v) for d, v in obs})
+    lost = set(d.date() for d, v in old_data) - set(merged)
+    assert not lost, f"series_{sid}: 資料倒退！遺失 {len(lost)} 個舊日期: {sorted(lost)[:5]}"
+    rows = sorted(merged.values(), key=lambda x: x[0])
+    data = {"title": TITLE_MAP.get(sid, str(sid)), "data": [[d, v] for d, v in rows]}
     with open(out_file, "wb") as f:
         pickle.dump(data, f)
     logger.info(
-        f"Saved: series_{sid}.pkl n={len(obs)} last={obs[-1][0]:%Y-%m-%d} (old n={old_n})"
+        f"Saved: series_{sid}.pkl n={len(rows)} (old n={len(old_data)}, new n={len(obs)}) "
+        f"range={rows[0][0]:%Y-%m-%d}~{rows[-1][0]:%Y-%m-%d}"
     )
 
 
@@ -134,10 +157,84 @@ def fetch_series_7249():
     return data
 
 
+# ============================================================================
+# WP-A1: 11 條直接對應 FRED series (raw,免轉換)
+# ============================================================================
+
+
+def _fetch_fred_direct(series_id: str) -> list:
+    """單一 FRED series 的 fredgraph.csv 直接取值,不做任何轉換。"""
+    url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
+    r = requests.get(url, timeout=60)
+    r.raise_for_status()
+    out = []
+    for row in csv.DictReader(io.StringIO(r.text)):
+        v = row.get(series_id)
+        if v in (None, ".", ""):
+            continue
+        d = datetime.strptime(row["observation_date"], "%Y-%m-%d").replace(hour=8)
+        out.append((d, float(v)))
+    return out
+
+
+def _fetch_fred_yoy(series_id: str) -> list:
+    """單一 FRED series 的 fredgraph.csv,自算月頻 YoY(本月/去年同月-1)。"""
+    pts = _fetch_fred_direct(series_id)
+    by_month = {d.strftime("%Y-%m"): v for d, v in pts}
+    keys = sorted(by_month)
+    out = []
+    for i, k in enumerate(keys):
+        if i < 12:
+            continue
+        prev = by_month[keys[i - 12]]
+        if prev:
+            y, m = int(k[:4]), int(k[5:7])
+            out.append((datetime(y, m, 1, 8), round((by_month[k] / prev - 1) * 100, 4)))
+    return out
+
+
+# ============================================================================
+# WP-A1b: sid=246 成屋銷售 YoY 拼接
+# FRED EXHOSLUSM495S 是 2025-08 才建立的新 series(舊 EXHOSLUS 已下架),
+# 重疊段(2025-08~)以 FRED 自算 YoY 為準,之前沿用舊 pkl 既有值(M² 計算的 YoY)。
+# ============================================================================
+
+
+def fetch_246_splice() -> list:
+    fred_yoy = {d.strftime("%Y-%m"): v for d, v in _fetch_fred_yoy("EXHOSLUSM495S")}
+    old_file = os.path.join(folder, "series_246.pkl")
+    old_by_month = {}
+    if os.path.exists(old_file):
+        with open(old_file, "rb") as f:
+            old = pickle.load(f)
+        old_by_month = {d.strftime("%Y-%m"): v for d, v in old.get("data", [])}
+    out = []
+    for m in sorted(set(old_by_month) | set(fred_yoy)):
+        v = fred_yoy.get(m, old_by_month.get(m))
+        if v is not None:
+            y, mo = int(m[:4]), int(m[5:7])
+            out.append((datetime(y, mo, 1, 8), v))
+    return out
+
+
 JOBS = [
     ("FRED SPCS20RSA (sid 261, Case-Shiller 20城 SA)", 261, fetch_sp_case_shiller_20_sa),
     ("FRED GDPC1 YoY (sid 4, 美國實質 GDP 年增)", 4, fetch_realgdp_yoy),
     ("FRED WEI (sid 7249, NY Fed WEI)", 7249, fetch_series_7249),
+    # WP-A1 (WN-2026-09-22-A批)
+    ("FRED CCSA (sid 36, 連續申請失業金)", 36, lambda: _fetch_fred_direct("CCSA")),
+    ("FRED ICSA (sid 34, 初次申請失業金)", 34, lambda: _fetch_fred_direct("ICSA")),
+    ("FRED UNRATE (sid 37, 失業率)", 37, lambda: _fetch_fred_direct("UNRATE")),
+    ("FRED SAHMREALTIME (sid 22910, 薩姆規則)", 22910, lambda: _fetch_fred_direct("SAHMREALTIME")),
+    ("FRED MSPUS (sid 255, 新屋售價中位數)", 255, lambda: _fetch_fred_direct("MSPUS")),
+    ("FRED DRBLACBS (sid 755, 商銀企業貸款拖欠率)", 755, lambda: _fetch_fred_direct("DRBLACBS")),
+    ("FRED BAMLH0A3HYCEY (sid 634, CCC 有效殖利率)", 634, lambda: _fetch_fred_direct("BAMLH0A3HYCEY")),
+    ("FRED DGORDER (sid 319, 耐久財新訂單)", 319, lambda: _fetch_fred_direct("DGORDER")),
+    ("FRED WLODLL (sid 7449, 超額準備金週頻)", 7449, lambda: _fetch_fred_direct("WLODLL")),
+    ("FRED PCEPILFE YoY (sid 348, 核心 PCE 年增自算)", 348, lambda: _fetch_fred_yoy("PCEPILFE")),
+    ("FRED DSPIC96 YoY (sid 560, 實質可支配所得年增自算)", 560, lambda: _fetch_fred_yoy("DSPIC96")),
+    # WP-A1b
+    ("FRED EXHOSLUSM495S 拼接 (sid 246, 成屋銷售 YoY)", 246, fetch_246_splice),
 ]
 
 

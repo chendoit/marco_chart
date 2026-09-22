@@ -193,9 +193,10 @@ url_list = [
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us",
     "https://www.macromicro.me/series/2018/japan-bond-10-year",
     "https://www.macromicro.me/series/29123/us-treasury-general-account-daily", # 政部帳戶(TGA)餘額
-    "https://www.macromicro.me/series/7449/us-fed-excess-reserves-weekly", # 商業銀行在聯邦儲備系統超額準備金
+    # [2026-09-22] sid 7449/348 改由 get_fred_csv.py 抓取(WN-A WP-A1)
+    # "https://www.macromicro.me/series/7449/us-fed-excess-reserves-weekly", # 商業銀行在聯邦儲備系統超額準備金
     "https://www.macromicro.me/series/131/core-consumer-price-index-sa-yoy", # 美國-核心消費者物價指數(Core PCI) 年增
-    "https://www.macromicro.me/series/348/pce-core-price-yoy", # 美國-核心個人消費支出物價指數[PCE](年增率)
+    # "https://www.macromicro.me/series/348/pce-core-price-yoy", # 美國-核心個人消費支出物價指數[PCE](年增率)
 
     # 差值 是景氣循環的基礎 台灣比美國領先 zavy 和台灣指數比對一下
     # [2026-09-17] sid 590/595 改由 get_ism_pmi.py 處理(透過 05 檔已寫入的 pkl 合成)
@@ -298,8 +299,9 @@ url_list = [
 
     # 愛克榭 CCC 信用利差
     "https://www.macromicro.me/series/3612/us-credit-spread",  # 信用風險利差
-    "https://www.macromicro.me/series/755/delinquency-rate-on-business-loans",  # 商銀貸款拖欠率-企業
-    "https://www.macromicro.me/series/634/bofa-merrill-lynch-us-corporate-ccc",  # CCC級或以下高收益債券有效殖利率
+    # [2026-09-22] sid 755/634 改由 get_fred_csv.py 抓取(WN-A WP-A1)
+    # "https://www.macromicro.me/series/755/delinquency-rate-on-business-loans",  # 商銀貸款拖欠率-企業
+    # "https://www.macromicro.me/series/634/bofa-merrill-lynch-us-corporate-ccc",  # CCC級或以下高收益債券有效殖利率
 
     # 愛克榭 CBR vs 10年
     "https://www.macromicro.me/series/3776/crb-index",
@@ -344,28 +346,34 @@ url_list = [
     #"https://www.macromicro.me/series/27134/mexico-5year-cds",   # 墨西哥
 
     # 美國股市經濟總覽
-    "https://www.macromicro.me/series/7249/fereral-reserve-bank-of-new-york-weekly-economic-index",  # WEI
-    "https://www.macromicro.me/series/4/realgdp-yoy",  # 美國實質GDP
+    # [2026-09-16 遺漏補清] sid 7249/4 其實 09-16/17 那批就已經改由 get_fred_csv.py 抓取,漏了清 url_list
+    # "https://www.macromicro.me/series/7249/fereral-reserve-bank-of-new-york-weekly-economic-index",  # WEI
+    # "https://www.macromicro.me/series/4/realgdp-yoy",  # 美國實質GDP
     "https://www.macromicro.me/series/75/saving-rate",  # 儲蓄率
     "https://www.macromicro.me/series/7359/pce-real-yoy",  # 個人消費支出
-    "https://www.macromicro.me/series/560/real-disposable-personal-income-yoy",  # 可支配所得
-    "https://www.macromicro.me/series/246/existing-home-sales-yoy",  # 成屋銷售
+    # [2026-09-22] sid 560/246 改由 get_fred_csv.py 抓取(WN-A WP-A1/A1b)
+    # "https://www.macromicro.me/series/560/real-disposable-personal-income-yoy",  # 可支配所得
+    # "https://www.macromicro.me/series/246/existing-home-sales-yoy",  # 成屋銷售
     "https://www.macromicro.me/series/254/new-home-sales-yoy",  # 新屋銷售
-    "https://www.macromicro.me/series/255/price-new-houses",  # 新屋房價中位數
+    # [2026-09-22] sid 255 改由 get_fred_csv.py 抓取(WN-A WP-A1)
+    # "https://www.macromicro.me/series/255/price-new-houses",  # 新屋房價中位數
     # https://www.macromicro.me/series/261/us-case-shiller-home-price  # S&P/Case-Shiller 前20大城市房價
     # [2026-09-17] sid 261 改由 get_fred_csv.py 抓取(FRED SPCS20RSA)
     "https://www.macromicro.me/series/414/sp-case-shillar-20-home-price-nsa",  # S&P/Case-Shiller 前20大城市房價 NSA
-    "https://www.macromicro.me/series/22910/sahm-rule-recession-indicator",  # 薩姆規則
+    # [2026-09-22] sid 22910 改由 get_fred_csv.py 抓取(WN-A WP-A1)
+    # "https://www.macromicro.me/series/22910/sahm-rule-recession-indicator",  # 薩姆規則
     "https://www.macromicro.me/series/44/nonfarm-payrolls-yearlychange",  # 非農就業
-    "https://www.macromicro.me/series/37/unemployment-rate",  # 失業率
-    "https://www.macromicro.me/series/34/initialclaims",  # 初次申請失業金
-    "https://www.macromicro.me/series/36/continuedclaims",  # 連續申請失業金
+    # [2026-09-22] sid 37/34/36 改由 get_fred_csv.py 抓取(WN-A WP-A1)
+    # "https://www.macromicro.me/series/37/unemployment-rate",  # 失業率
+    # "https://www.macromicro.me/series/34/initialclaims",  # 初次申請失業金
+    # "https://www.macromicro.me/series/36/continuedclaims",  # 連續申請失業金
     # [2026-09-22] sid 4481 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/4481/coppergold",  # 銅金比
     "https://www.macromicro.me/series/17586/sp500-eps",  # S&P 500 EPS 成長率
 
     # 愛克榭
-    "https://www.macromicro.me/series/319/durable-goods",  # 耐久財新訂單-非國防資本財
+    # [2026-09-22] sid 319 改由 get_fred_csv.py 抓取(WN-A WP-A1)
+    # "https://www.macromicro.me/series/319/durable-goods",  # 耐久財新訂單-非國防資本財
 
     # [2026-09-22] sid 4249 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/4249/bitcoin-usd", # 比特幣

@@ -48,7 +48,7 @@ CONSECUTIVE_DAYS_THRESHOLD = 3
 # 1. 執行所有抓取任務
 # ---------------------------------------------------------------------------
 tasks = [
-    ("FRED csv (261/4/7249)", fetch_fred_csv),
+    ("FRED csv (261/4/7249 + WN-A WP-A1/A1b 12條)", fetch_fred_csv),
     ("FRED STLFSI4", lambda: fetch_and_save_fred_data('STLFSI4')),
     ("FRED THREEFYTP10 (Kim-Wright Term Premium)", lambda: fetch_and_save_fred_data('THREEFYTP10')),
     ("FRED Treasury Yields (DGS1MO/1/2/10/20/30)", fetch_fed_treasury_yields),

@@ -64,7 +64,7 @@ tasks = [
     ("MacroMicro series", fetch_m_square_series),
     ("MacroMicro ETFs", fetch_m_square_etfs),
     ("Yahoo Finance MOVE index (sid 17581, ex-M²)", fetch_move_index),
-    ("yfinance 14 series (WN-A WP-A2, ex-M²)", fetch_yfinance_series),
+    ("yfinance 15 series (WN-A WP-A2+A8, ex-M²)", fetch_yfinance_series),
     ("CFTC data", fetch_cftc_data),
     ("CFTC E-mini SPX TFF", fetch_cftc_tff_data),
     ("CBOE indices", fetch_cboe_indices),

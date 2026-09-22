@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Yahoo Finance chart API 替代 fetcher（WN-2026-09-22-A批 WP-A2，14 條）。
+"""Yahoo Finance chart API 替代 fetcher（WN-2026-09-22-A批 WP-A2，14 條 + WP-A8，1 條）。
 
 來源評估、tickers、驗證數字見 `C:/code/2026-09-11-fincept-terminal/migration/fetch_mapped.py`
 的 `fetch_yf()`/`fetch_yf_spread()`（已用 `verify_mapped.py` 驗證過）。
@@ -51,6 +51,11 @@ TICKERS = {
 }
 RATIO_SID = 4481  # 銅金比：HG=F * 100 / GC=F，沿用舊 pkl 的 0.1x 量級（不是單純比值）
 RATIO_TITLE = "coppergold"
+
+# WN-2026-09-22-A批 WP-A8：3-2-1 裂解價差（每桶原油 USD/bbl）
+# (2×RBOB×42gal + 1×HO×42gal)/3 − WTI；RB=F/HO=F 報價 USD/gal(×42換桶)，CL=F 報價 USD/bbl
+CRACK321_SID = 4934
+CRACK321_TITLE = "crude-oil-cracking-spread"
 
 
 def _yf_chart(symbol: str) -> dict:
@@ -117,6 +122,15 @@ def _fetch_coppergold() -> list:
     ]
 
 
+def _fetch_crack321() -> list:
+    rb, ho, cl = _yf_chart("RB=F"), _yf_chart("HO=F"), _yf_chart("CL=F")
+    common = sorted(set(rb) & set(ho) & set(cl))
+    return [
+        (datetime.strptime(d, "%Y-%m-%d").replace(hour=8), round((rb[d] * 2 * 42 + ho[d] * 42) / 3 - cl[d], 4))
+        for d in common
+    ]
+
+
 def fetch_yfinance_series():
     """供 get_all_series_data.py 呼叫的入口。任一抓取失敗會彙整後 raise。"""
     failures = []
@@ -136,6 +150,15 @@ def fetch_yfinance_series():
         logger.info(f"Starting: {name}")
         obs = _fetch_coppergold()
         _save_series(RATIO_SID, RATIO_TITLE, obs)
+        logger.info(f"Completed: {name} (n={len(obs)})")
+    except Exception as e:
+        logger.error(f"Failed: {name} — {e}")
+        failures.append(f"{name}: {e}")
+    try:
+        name = f"yfinance {CRACK321_SID} (crack321)"
+        logger.info(f"Starting: {name}")
+        obs = _fetch_crack321()
+        _save_series(CRACK321_SID, CRACK321_TITLE, obs)
         logger.info(f"Completed: {name} (n={len(obs)})")
     except Exception as e:
         logger.error(f"Failed: {name} — {e}")

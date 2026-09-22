@@ -180,7 +180,8 @@ url_list = [
     # "https://www.macromicro.me/series/2/sp500", # S&P500
 
     # 原油
-    "https://www.macromicro.me/series/4934/crude-oil-cracking-spread",
+    # [2026-09-22] sid 4934 改由 get_yfinance_series.py 抓取(WN-A WP-A8)
+    # "https://www.macromicro.me/series/4934/crude-oil-cracking-spread",
     # [2026-09-22] sid 486 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/486/crude-oil-futures",
     # [2026-09-22] sid 7148 改由 get_cboe_index.py 抓取(WN-A WP-A3)

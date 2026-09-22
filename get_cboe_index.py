@@ -27,6 +27,8 @@ CBOE_INDICES = [
     "RVX", "VXN",
     # 市場結構 (McElligott 01, 02)
     "SKEW", "GAMMA", "SMILE",
+    # WN-2026-09-22-A批 WP-A3：石油/黃金 ETF 波動率指數，取代 M² sid 7148/7147
+    "OVX", "GVZ",
     # 隱含相關性 (McElligott 06)
     "COR1M", "COR3M", "COR6M", "COR1Y",
     # VRP 策略基準 (McElligott 03)
@@ -42,6 +44,35 @@ CBOE_INDICES = [
 CBOE_OHLC_INDICES = ["SPX", "VIX", "VVIX"]
 
 API_URL = "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical/_{symbol}.json"
+
+# WN-2026-09-22-A批 WP-A3：這幾個 symbol 除了原本的 series_cboe_<symbol>.pkl，
+# 同時複用同一份抓到的資料多寫一份 M² sid 命名的 series_<sid>.pkl（不重打 API）。
+M2_SID_ALIAS = {"SKEW": 4407, "OVX": 7148, "GVZ": 7147}
+M2_SID_TITLE = {4407: "cboe-skew", 7148: "ovx", 7147: "gvz"}
+
+
+def _save_m2_alias(sid: int, close_data: list):
+    """逐日期 merge 存檔（同 get_yfinance_series.py／get_fred_csv.py 的防呆邏輯）：
+    新舊資料以日期 union，同日期新值覆蓋，其餘舊點全保留，lost 必為空集合。"""
+    out_file = os.path.join(folder, f"series_{sid}.pkl")
+    old_data = []
+    if os.path.exists(out_file):
+        try:
+            with open(out_file, "rb") as f:
+                old = pickle.load(f)
+            old_data = old.get("data", []) if isinstance(old, dict) else []
+        except Exception:
+            old_data = []
+    merged = {d.date(): (d, v) for d, v in old_data}
+    merged.update({d.date(): (d, v) for d, v in close_data})
+    lost = set(d.date() for d, v in old_data) - set(merged)
+    assert not lost, f"series_{sid}: 資料倒退！遺失 {len(lost)} 個舊日期: {sorted(lost)[:5]}"
+    rows = sorted(merged.values(), key=lambda x: x[0])
+    with open(out_file, "wb") as f:
+        pickle.dump({"title": M2_SID_TITLE[sid], "data": [[d, v] for d, v in rows]}, f)
+    logger.info(
+        f"Saved: series_{sid}.pkl n={len(rows)} (old n={len(old_data)}, new n={len(close_data)})"
+    )
 
 
 def fetch_cboe_index(symbol):
@@ -66,6 +97,9 @@ def fetch_cboe_index(symbol):
     with open(pkl_path, "wb") as f:
         pickle.dump({"title": f"CBOE {symbol}", "data": close_data}, f)
     logger.info(f"Saved {len(close_data)} records -> {pkl_path}")
+
+    if symbol in M2_SID_ALIAS:
+        _save_m2_alias(M2_SID_ALIAS[symbol], close_data)
 
     return True
 

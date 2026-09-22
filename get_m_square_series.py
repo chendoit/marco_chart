@@ -183,7 +183,8 @@ url_list = [
     "https://www.macromicro.me/series/4934/crude-oil-cracking-spread",
     # [2026-09-22] sid 486 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/486/crude-oil-futures",
-    "https://www.macromicro.me/series/7148/ovx",  # 石油ETF波動率
+    # [2026-09-22] sid 7148 改由 get_cboe_index.py 抓取(WN-A WP-A3)
+    # "https://www.macromicro.me/series/7148/ovx",  # 石油ETF波動率
     "https://www.macromicro.me/series/8219/us-wti-crude-oil-spot-price-daily",
     "https://www.macromicro.me/series/854/us-oil-inventory", # 美國-原油庫存
     "https://www.macromicro.me/series/19080/us-strategic-petroleum-reserve", # 美國-戰略石油儲備[SPR]
@@ -253,7 +254,8 @@ url_list = [
 
     # vix 與黑天鵝
     # VIX 30D、VVIX、VIX 期限結構 皆改由 get_cboe_index.py（CBOE CDN）→ series_cboe_*.pkl
-    "https://www.macromicro.me/series/4407/cboe-skew", # 黑天鵝
+    # [2026-09-22] sid 4407 改由 get_cboe_index.py 抓取(WN-A WP-A3，series_cboe_SKEW.pkl 同源複用)
+    # "https://www.macromicro.me/series/4407/cboe-skew", # 黑天鵝
     "https://www.macromicro.me/series/1650/us-put-call-ratio-total", # put call ratio
 
     # VIX 期限結構（M² 28769/7173/7174/7175/7770）已改 CBOE：cboe_VIX1D…VIX1Y
@@ -329,7 +331,8 @@ url_list = [
     # "https://www.macromicro.me/series/386/fx-usd-cad",
 
     # 黃金 ETF 波動率指數
-    "https://www.macromicro.me/series/7147/gvz", # 黃金 GVZ 波動率指數
+    # [2026-09-22] sid 7147 改由 get_cboe_index.py 抓取(WN-A WP-A3)
+    # "https://www.macromicro.me/series/7147/gvz", # 黃金 GVZ 波動率指數
     # [2026-09-22] sid 485 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/485/gold-futures", # 黃金 GVZ 波動率指數
 

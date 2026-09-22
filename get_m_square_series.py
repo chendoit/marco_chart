@@ -192,8 +192,9 @@ url_list = [
 
     # [2026-09-22] sid 483 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/483/us-dollar-index",
-    "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us",
-    "https://www.macromicro.me/series/2018/japan-bond-10-year",
+    # [2026-09-22] sid 4456/2018 改由 get_jp_yield.py 抓取(WN-A WP-A6)
+    # "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us",
+    # "https://www.macromicro.me/series/2018/japan-bond-10-year",
     # [2026-09-22] sid 29123 改由 get_fiscal_data.py 抓取(WN-A WP-A4)
     # "https://www.macromicro.me/series/29123/us-treasury-general-account-daily", # 政部帳戶(TGA)餘額
     # [2026-09-22] sid 7449/348 改由 get_fred_csv.py 抓取(WN-A WP-A1)
@@ -241,7 +242,8 @@ url_list = [
     "https://www.macromicro.me/series/1916/germany-bond-10-year", # 德國-10年期公債殖利率
 
 
-    "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us", # 美日-10年期公債利差
+    # [2026-09-22] sid 4456 改由 get_jp_yield.py 抓取(WN-A WP-A6，重複行同上方已一併移除)
+    # "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us", # 美日-10年期公債利差
     # [2026-09-22] sid 385 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/385/fx-usd-jpy", #美元/日圓
     # [2026-09-16] sid 32377 改由 get_m_square_chart_api.py 抓取(chart 102471 series[0])

@@ -31,6 +31,8 @@ from get_cme_daily_volume import fetch_cme_daily_volume
 from get_financial_stress import fetch_financial_stress
 from get_ofr_fsi_global import fetch_ofr_fsi_global
 from get_ism_pmi import fetch_ism_pmi
+from get_fiscal_data import fetch_fiscal_data
+from get_eia_series import fetch_eia_series
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 from notify_macromicro_blog import run as check_macromicro_blog_new_posts
@@ -75,6 +77,8 @@ tasks = [
     ("Percentile rank (all targets)", calc_pctrank),
     ("Official XLSX 10 series (6783-5683)", fetch_official_xlsx),
     ("ISM PMI 5 series (267/277/281/22807/22806)", fetch_ism_pmi),
+    ("Fiscal Data TGA (sid 29123)", fetch_fiscal_data),
+    ("EIA oil inventory + SPR (sid 854/19080)", fetch_eia_series),
 ]
 
 failed = []

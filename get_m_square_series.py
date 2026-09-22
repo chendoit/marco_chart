@@ -186,14 +186,16 @@ url_list = [
     # [2026-09-22] sid 7148 改由 get_cboe_index.py 抓取(WN-A WP-A3)
     # "https://www.macromicro.me/series/7148/ovx",  # 石油ETF波動率
     "https://www.macromicro.me/series/8219/us-wti-crude-oil-spot-price-daily",
-    "https://www.macromicro.me/series/854/us-oil-inventory", # 美國-原油庫存
-    "https://www.macromicro.me/series/19080/us-strategic-petroleum-reserve", # 美國-戰略石油儲備[SPR]
+    # [2026-09-22] sid 854/19080 改由 get_eia_series.py 抓取(WN-A WP-A7)
+    # "https://www.macromicro.me/series/854/us-oil-inventory", # 美國-原油庫存
+    # "https://www.macromicro.me/series/19080/us-strategic-petroleum-reserve", # 美國-戰略石油儲備[SPR]
 
     # [2026-09-22] sid 483 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/483/us-dollar-index",
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us",
     "https://www.macromicro.me/series/2018/japan-bond-10-year",
-    "https://www.macromicro.me/series/29123/us-treasury-general-account-daily", # 政部帳戶(TGA)餘額
+    # [2026-09-22] sid 29123 改由 get_fiscal_data.py 抓取(WN-A WP-A4)
+    # "https://www.macromicro.me/series/29123/us-treasury-general-account-daily", # 政部帳戶(TGA)餘額
     # [2026-09-22] sid 7449/348 改由 get_fred_csv.py 抓取(WN-A WP-A1)
     # "https://www.macromicro.me/series/7449/us-fed-excess-reserves-weekly", # 商業銀行在聯邦儲備系統超額準備金
     "https://www.macromicro.me/series/131/core-consumer-price-index-sa-yoy", # 美國-核心消費者物價指數(Core PCI) 年增

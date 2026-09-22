@@ -19,15 +19,11 @@ from dotenv import load_dotenv
 
 from google_session.auth import create_macromicro_browser_context
 from line_notify import send_line_notification
+import log_config  # noqa: F401
+# [日誌規範] 日期檔日誌已集中設定於 log_config.py，本檔「禁止」再呼叫 logger.add()，
+# 否則多個 sink 指向同一 log 檔，每筆訊息會重複寫入 N 次（2026-09 已踩過此坑）。
 
 load_dotenv()
-
-logger.add(
-    "./logs/{time:YYYY-MM-DD}.log",
-    enqueue=True,
-    retention="1 month",
-    compression="gz",
-)
 
 folder = os.getenv("DATA_DIR")
 if not os.path.exists(folder):

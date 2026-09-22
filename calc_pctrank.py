@@ -25,12 +25,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logger.add(
-    "./logs/{time:YYYY-MM-DD}.log",
-    enqueue=True,
-    retention="1 month",
-    compression="gz",
-)
+import log_config  # noqa: F401
+# [日誌規範] 日期檔日誌已集中設定於 log_config.py，本檔「禁止」再呼叫 logger.add()，
+# 否則多個 sink 指向同一 log 檔，每筆訊息會重複寫入 N 次（2026-09 已踩過此坑）。
 
 DATA_DIR = os.getenv("DATA_DIR")
 
@@ -69,6 +66,27 @@ PCTRANK_TARGETS = [
     "series_17581",
     # FRED
     "fed_DFII10",
+    "series_261",  # Case-Shiller 20城 SA (FRED SPCS20RSA)
+    "series_4",    # 美國實質 GDP 年增 (GDPC1 YoY)
+    "series_7249", # NY Fed WEI
+    "series_4869", # OFR FSI global
+    # M² official xlsx 10 series (2026-09-17)
+    "series_6783", # AAII Bullish
+    "series_6784", # AAII Neutral
+    "series_6785", # AAII Bearish
+    "series_17586", # S&P500 EPS
+    "series_2752", # Americas Semi YoY
+    "series_2756", # Global Semi YoY
+    "series_4433", # Student Loan Delinquency
+    "series_590", # TW PMI New Orders
+    "series_595", # TW PMI Customer Inventories
+    # ISM PMI 合成差值 (2026-09-17)
+    "series_267", # ISM New Orders
+    "series_277", # ISM Customers' Inventories
+    "series_281", # ISM Backlog of Orders
+    "series_22807", # US PMI diff
+    "series_22806", # TW PMI diff
+    "series_5683", # TWSE PE
     # NY Fed
     "series_nyfed_acmtp10",
     # CFTC E-mini

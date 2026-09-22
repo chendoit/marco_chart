@@ -9,12 +9,9 @@ from pystlouisfed import FRED
 from loguru import logger
 
 # 配置日誌記錄
-logger.add(
-    "./logs/{time:YYYY-MM-DD}.log",
-    enqueue=True,
-    retention="1 month",
-    compression="gz",
-)
+import log_config  # noqa: F401
+# [日誌規範] 日期檔日誌已集中設定於 log_config.py，本檔「禁止」再呼叫 logger.add()，
+# 否則多個 sink 指向同一 log 檔，每筆訊息會重複寫入 N 次（2026-09 已踩過此坑）。
 
 from dotenv import load_dotenv
 load_dotenv()

@@ -8,15 +8,19 @@ import numpy as np
 import pandas as pd
 from loguru import logger
 
+from get_fred_csv import fetch_fred_csv
 from get_fed_series import (
     fetch_and_save_fred_data,
+    fetch_fed_treasury_yields,
     fetch_sofr_data,
     fetch_fed_liquidity_reference_rates,
-    fetch_fed_treasury_yields,
 )
-from get_m_square_chart import fetch_m_square_charts
+from get_m_square_chart_api import fetch_m_square_chart_api  # 2026-09-16 起取代 get_m_square_chart.py(Playwright+OAuth)→ curl_cffi chart API
 from get_m_square_series import fetch_m_square_series
 from get_m_square_etf import fetch_m_square_etfs
+from get_yahoo_series import fetch_move_index
+from get_cds_series import fetch_cds_series
+from get_official_xlsx import fetch_official_xlsx
 from get_ctfc_series import fetch_cftc_data, fetch_cftc_tff_data
 from get_cboe_index import fetch_cboe_indices
 from get_etf_csv import fetch_all as fetch_etf_csv
@@ -24,6 +28,8 @@ from get_nyfed_termpremium import fetch_nyfed_acm
 from get_gex_series import fetch_gex_series
 from get_cme_daily_volume import fetch_cme_daily_volume
 from get_financial_stress import fetch_financial_stress
+from get_ofr_fsi_global import fetch_ofr_fsi_global
+from get_ism_pmi import fetch_ism_pmi
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 from notify_macromicro_blog import run as check_macromicro_blog_new_posts
@@ -41,6 +47,7 @@ CONSECUTIVE_DAYS_THRESHOLD = 3
 # 1. 執行所有抓取任務
 # ---------------------------------------------------------------------------
 tasks = [
+    ("FRED csv (261/4/7249)", fetch_fred_csv),
     ("FRED STLFSI4", lambda: fetch_and_save_fred_data('STLFSI4')),
     ("FRED THREEFYTP10 (Kim-Wright Term Premium)", lambda: fetch_and_save_fred_data('THREEFYTP10')),
     ("FRED Treasury Yields (DGS1MO/1/2/10/20/30)", fetch_fed_treasury_yields),
@@ -49,9 +56,10 @@ tasks = [
     ("FRED MMMFFAQ027S (MMF AUM)", lambda: fetch_and_save_fred_data('MMMFFAQ027S')),
     ("NY Fed SOFR (rate/percentiles)", fetch_sofr_data),
     ("FRED IORB + ON RRP + DFF", fetch_fed_liquidity_reference_rates),
-    ("MacroMicro charts", fetch_m_square_charts),
+    ("MacroMicro charts (curl_cffi API, 13 series)", fetch_m_square_chart_api),
     ("MacroMicro series", fetch_m_square_series),
     ("MacroMicro ETFs", fetch_m_square_etfs),
+    ("Yahoo Finance MOVE index (sid 17581, ex-M²)", fetch_move_index),
     ("CFTC data", fetch_cftc_data),
     ("CFTC E-mini SPX TFF", fetch_cftc_tff_data),
     ("CBOE indices", fetch_cboe_indices),
@@ -60,7 +68,11 @@ tasks = [
     ("GEX-lieta (SPX/SPY/VIX)", fetch_gex_series),
     ("CME daily_volume (OI+Volume)", fetch_cme_daily_volume),
     ("Chicago Fed NFCI + OFR FSI", fetch_financial_stress),
+    ("OFR FSI global (sid 4869)", fetch_ofr_fsi_global),
+    ("CDS 9 countries (27118-27138)", fetch_cds_series),
     ("Percentile rank (all targets)", calc_pctrank),
+    ("Official XLSX 10 series (6783-5683)", fetch_official_xlsx),
+    ("ISM PMI 5 series (267/277/281/22807/22806)", fetch_ism_pmi),
 ]
 
 failed = []

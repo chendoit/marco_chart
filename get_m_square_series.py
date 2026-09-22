@@ -18,13 +18,9 @@ from line_notify import send_line_notification
 
 load_dotenv()
 
-# Configure logger
-logger.add(
-    "./logs/{time:YYYY-MM-DD}.log",
-    enqueue=True,
-    retention="1 month",
-    compression="gz",
-)
+import log_config  # noqa: F401
+# [日誌規範] 日期檔日誌已集中設定於 log_config.py，本檔「禁止」再呼叫 logger.add()，
+# 否則多個 sink 指向同一 log 檔，每筆訊息會重複寫入 N 次（2026-09 已踩過此坑）。
 
 user_agents = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -179,6 +175,7 @@ def fetch_data_from_urls(urls, output_dir=r'.\data'):
 
 
 url_list = [
+    # [2026-09-16] sid 20508、32377 已改由 get_m_square_chart_api.py(M2 chart API, curl_cffi)抓取,自此清單移除
     "https://www.macromicro.me/series/2/sp500", # S&P500
 
     # 原油
@@ -198,22 +195,24 @@ url_list = [
     "https://www.macromicro.me/series/348/pce-core-price-yoy", # 美國-核心個人消費支出物價指數[PCE](年增率)
 
     # 差值 是景氣循環的基礎 台灣比美國領先 zavy 和台灣指數比對一下
-    "https://www.macromicro.me/series/590/tw-pmi-new-orders", #台灣-製造業採購經理人指數[PMI]-新增訂單
-    "https://www.macromicro.me/series/595/tw-pmi-customers-invertories", # 台灣-製造業採購經理人指數[PMI]-客戶存貨
+    # [2026-09-17] sid 590/595 改由 get_ism_pmi.py 處理(透過 05 檔已寫入的 pkl 合成)
+    # "https://www.macromicro.me/series/590/tw-pmi-new-orders", #台灣-製造業採購經理人指數[PMI]-新增訂單
+    # "https://www.macromicro.me/series/595/tw-pmi-customers-invertories", # 台灣-製造業採購經理人指數[PMI]-客戶存貨
     # 流動性 落後指標 但是很值得參考的指標
     "https://www.macromicro.me/series/31742/global-money-supply-m2-yoy", # 全球-四大央行貨幣供給[M2](年增率)
 
     # 和 S&P 500 比較一下 景氣循環 zavy
-    "https://www.macromicro.me/series/281/ism-manufacturing-backlogoforders", # 美國-ISM製造業指數[PMI]-未完成訂單
-    "https://www.macromicro.me/series/267/ism-manufacturing-neworders", # 美國-ISM製造業指數[PMI]-新訂單
-    "https://www.macromicro.me/series/277/ism-manufacturing-customersinventories", # 美國-ISM製造業指數[PMI]-客戶端存貨
-    "https://www.macromicro.me/series/22807/us-pmi-new-orders-minus-customers-invertories", # 美國-PMI新訂單減客戶端存貨
+    # [2026-09-17] sid 267/277/281 改由 get_ism_pmi.py 抓取
+    # "https://www.macromicro.me/series/281/ism-manufacturing-backlogoforders", # 美國-ISM製造業指數[PMI]-未完成訂單
+    # "https://www.macromicro.me/series/267/ism-manufacturing-neworders", # 美國-ISM製造業指數[PMI]-新訂單
+    # "https://www.macromicro.me/series/277/ism-manufacturing-customersinventories", # 美國-ISM製造業指數[PMI]-客戶端存貨
+    # "https://www.macromicro.me/series/22807/us-pmi-new-orders-minus-customers-invertories", # 美國-PMI新訂單減客戶端存貨
 
     #
     # 全球-PMI年變動擴散指數是一個衡量全球製造業活動變化的指標。PMI代表採購經理人指數，它通常用來衡量製造業的活動水平。
     # 年變動擴散指數則是指過去一年中全球各地的PMI變動情況。當這個指數上升時，表示全球製造業活動正在擴散增長；
     # 當指數下降時，表示全球製造業活動正在收縮。這個指數可以幫助我們了解全球製造業的整體趨勢和變化。
-    "https://www.macromicro.me/series/20508/global-pmi-leading-yoy-diffusion",
+    # [2026-09-16] sid 20508 改由 get_m_square_chart_api.py 抓取
 
 
     # 流動性 FED 利率 / 公債殖利率 → 改由 get_fed_series.py（FRED + NY Fed SOFR API）
@@ -222,7 +221,8 @@ url_list = [
     # 全球金融壓力指數（OFR）
     # 全球金融壓力指數（OFR）是一個衡量全球金融體系穩定性的指標。它通常根據市場價格、波動性和流動性等數據來評估金融市場的風險水平。
     # 當OFR指數上升時，表示金融市場面臨著更大的壓力和風險，可能預示著金融危機的可能性增加。
-    "https://www.macromicro.me/series/4869/global-ofr-fsi", # 全球金融壓力指數(OFR)
+    # [2026-09-17] 改由 get_ofr_fsi_global.py 抓取
+    # "https://www.macromicro.me/series/4869/global-ofr-fsi", # 全球金融壓力指數(OFR)
     # 美國金融壓力指數(OFR) → 改由 get_financial_stress.py（OFR 官方 CSV）
     # "https://www.macromicro.me/series/4866/us-ofr-fsi",
 
@@ -235,7 +235,7 @@ url_list = [
 
     "https://www.macromicro.me/series/4456/jp-10-year-yield-spread-japan-us", # 美日-10年期公債利差
     "https://www.macromicro.me/series/385/fx-usd-jpy", #美元/日圓
-    "https://www.macromicro.me/series/32377/jpy-vix", # 日圓波動率指數
+    # [2026-09-16] sid 32377 改由 get_m_square_chart_api.py 抓取(chart 102471 series[0])
 
 
     # fedwatch 升降息
@@ -252,7 +252,8 @@ url_list = [
 
     # VIX 期限結構（M² 28769/7173/7174/7175/7770）已改 CBOE：cboe_VIX1D…VIX1Y
     #
-    "https://www.macromicro.me/series/17581/us-treasury-move-index", # 美債波動率
+    # 美債波動率(MOVE) → 改由 get_yahoo_series.py（Yahoo Finance ^MOVE，2026-09-16）
+    # "https://www.macromicro.me/series/17581/us-treasury-move-index",
 
     # 原油CFTC
     "https://www.macromicro.me/series/8297/crude-oil-futures-and-options-manage-money-long-position",
@@ -265,13 +266,15 @@ url_list = [
     # "",
 
     # 週期
-    "https://www.macromicro.me/series/22807/us-pmi-new-orders-minus-customers-invertories",
-    "https://www.macromicro.me/series/22806/tw-pmi-new-orders-minus-customers-invertories",
+    # [2026-09-17] sid 22807/22806 改由 get_ism_pmi.py 抓取
+    # "https://www.macromicro.me/series/22807/us-pmi-new-orders-minus-customers-invertories",
+    # "https://www.macromicro.me/series/22806/tw-pmi-new-orders-minus-customers-invertories",
 
     # AAII 情緒
-    "https://en.macromicro.me/series/6785/aaii-sentiment-survey-bearish",  # AAII bearish
-    "https://en.macromicro.me/series/6784/aaii-sentiment-survey-neutral",  # AAII Neutral
-    "https://en.macromicro.me/series/6783/aaii-sentiment-survey-bullish",  # AAII Bullish
+    # [2026-09-17] sid 6783/6784/6785 改由 get_official_xlsx.py 抓取
+    # "https://en.macromicro.me/series/6785/aaii-sentiment-survey-bearish",
+    # "https://en.macromicro.me/series/6784/aaii-sentiment-survey-neutral",
+    # "https://en.macromicro.me/series/6783/aaii-sentiment-survey-bullish"
 
     # 澳元日幣,
     "https://www.macromicro.me/series/7145/fx-aud-jpy",
@@ -279,10 +282,12 @@ url_list = [
     "https://www.macromicro.me/series/745/fx-aud-usd",
 
     # 台股 台幣
-    "https://www.macromicro.me/series/2752/americas-semiconductor-billings-yoy",  # 美國半導體產值年增率
-    "https://www.macromicro.me/series/2756/global-semiconductor-billings-yoy", # 全球導體產值年增率
+    # [2026-09-17] sid 2752/2756 改由 get_official_xlsx.py 抓取(WSTS)
+    # "https://www.macromicro.me/series/2752/americas-semiconductor-billings-yoy",
+    # "https://www.macromicro.me/series/2756/global-semiconductor-billings-yoy"
     "https://www.macromicro.me/series/621/fx-usd-twd",  # 台幣匯率
-    "https://www.macromicro.me/series/5683/taiwan-stock-price-to-earnings-ratio",  # 台股PE
+    # [2026-09-17] sid 5683 改由 get_official_xlsx.py 抓取(TWSE)
+    # "https://www.macromicro.me/series/5683/taiwan-stock-price-to-earnings-ratio"
 
     # 愛克榭 CCC 信用利差
     "https://www.macromicro.me/series/3612/us-credit-spread",  # 信用風險利差
@@ -317,15 +322,16 @@ url_list = [
     "https://www.macromicro.me/series/485/gold-futures", # 黃金 GVZ 波動率指數
 
     # 5-Year CDS (主權信用違約交換)
-    "https://www.macromicro.me/series/27118/uk-5year-cds",       # 英國
-    "https://www.macromicro.me/series/27119/germany-5year-cds",  # 德國
-    "https://www.macromicro.me/series/27126/france-5year-cds",   # 法國
-    "https://www.macromicro.me/series/27135/italy-5year-cds",    # 義大利
-    "https://www.macromicro.me/series/27129/portugal-5year-cds", # 葡萄牙
-    "https://www.macromicro.me/series/27131/spain-5year-cds",    # 西班牙
-    "https://www.macromicro.me/series/27136/brazil-5year-cds",   # 巴西
-    "https://www.macromicro.me/series/27138/turkey-5year-cds",   # 土耳其
-    "https://www.macromicro.me/series/27134/mexico-5year-cds",   # 墨西哥
+    # [2026-09-17] 9 條 CDS 改由 get_cds_series.py 抓取(investing.com + WGB)
+    #"https://www.macromicro.me/series/27118/uk-5year-cds",       # 英國
+    #"https://www.macromicro.me/series/27119/germany-5year-cds",  # 德國
+    #"https://www.macromicro.me/series/27126/france-5year-cds",   # 法國
+    #"https://www.macromicro.me/series/27135/italy-5year-cds",    # 義大利
+    #"https://www.macromicro.me/series/27129/portugal-5year-cds", # 葡萄牙
+    #"https://www.macromicro.me/series/27131/spain-5year-cds",    # 西班牙
+    #"https://www.macromicro.me/series/27136/brazil-5year-cds",   # 巴西
+    #"https://www.macromicro.me/series/27138/turkey-5year-cds",   # 土耳其
+    #"https://www.macromicro.me/series/27134/mexico-5year-cds",   # 墨西哥
 
     # 美國股市經濟總覽
     "https://www.macromicro.me/series/7249/fereral-reserve-bank-of-new-york-weekly-economic-index",  # WEI
@@ -336,8 +342,9 @@ url_list = [
     "https://www.macromicro.me/series/246/existing-home-sales-yoy",  # 成屋銷售
     "https://www.macromicro.me/series/254/new-home-sales-yoy",  # 新屋銷售
     "https://www.macromicro.me/series/255/price-new-houses",  # 新屋房價中位數
-    # "https://www.macromicro.me/series/261/us-case-shiller-home-price",  # S&P/Case-Shiller 前20大城市房價
-    "https://www.macromicro.me/series/414/sp-case-shillar-20-home-price-nsa",  # S&P/Case-Shiller 前20大城市房價
+    # https://www.macromicro.me/series/261/us-case-shiller-home-price  # S&P/Case-Shiller 前20大城市房價
+    # [2026-09-17] sid 261 改由 get_fred_csv.py 抓取(FRED SPCS20RSA)
+    "https://www.macromicro.me/series/414/sp-case-shillar-20-home-price-nsa",  # S&P/Case-Shiller 前20大城市房價 NSA
     "https://www.macromicro.me/series/22910/sahm-rule-recession-indicator",  # 薩姆規則
     "https://www.macromicro.me/series/44/nonfarm-payrolls-yearlychange",  # 非農就業
     "https://www.macromicro.me/series/37/unemployment-rate",  # 失業率

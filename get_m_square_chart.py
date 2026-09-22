@@ -1,5 +1,14 @@
 # [時間戳規範] 所有寫入 pkl 的 datetime 時間部分統一為 08:00:00 (UTC+8)
 # 以與 MacroMicro series 的 fromtimestamp() 產出一致。新增抓取腳本時請遵循此規範。
+#
+# ============================================================
+# [2026-09-16 退役] 本檔已由 get_m_square_chart_api.py 取代
+# (curl_cffi 兩段式 token 打 M2 chart API,不再需要 Playwright + Google OAuth,
+#  執行約 8 秒 vs 舊制數十分鐘)。
+# 覆蓋範圍: chart 115044(OIS 7 條)、71245(FedWatch 2 條)、56752(LEI/CEI 2 條),
+#           pkl 逐點比對重疊期零差異(71245 未來 FOMC 日 3 點為 M2 官方重估)。
+# 保留本檔僅作為 fallback 參考,排程已不再呼叫 fetch_m_square_charts。
+# ============================================================
 import re
 import pickle
 from playwright.sync_api import sync_playwright
@@ -19,12 +28,9 @@ from line_notify import send_line_notification
 
 load_dotenv()
 
-logger.add(
-    "./logs/{time:YYYY-MM-DD}.log",
-    enqueue=True,
-    retention="1 month",
-    compression="gz",
-)
+import log_config  # noqa: F401
+# [日誌規範] 日期檔日誌已集中設定於 log_config.py，本檔「禁止」再呼叫 logger.add()，
+# 否則多個 sink 指向同一 log 檔，每筆訊息會重複寫入 N 次（2026-09 已踩過此坑）。
 
 user_agents = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',

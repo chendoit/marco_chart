@@ -318,8 +318,9 @@ url_list = [
     "https://www.macromicro.me/series/4433/us-debt-severe-delinquency-student",
 
     # 衰退指鰾 領先
-    "https://www.macromicro.me/series/374/cb-leading-index",  # 經濟諮商局-領先指標
-    "https://www.macromicro.me/series/376/cb-coincident-index",  # 衰退指鰾  同時指標
+    # [2026-09-22] sid 374/376 改由 get_conference_board.py 抓取(WN-A WP-A9)
+    # "https://www.macromicro.me/series/374/cb-leading-index",  # 經濟諮商局-領先指標
+    # "https://www.macromicro.me/series/376/cb-coincident-index",  # 衰退指鰾  同時指標
 
     # 美國-芝加哥聯儲當週金融狀況指數
     # 芝加哥聯儲 NFCI → 改由 get_financial_stress.py（Chicago Fed 官方 CSV）

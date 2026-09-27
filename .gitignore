@@ -250,3 +250,5 @@ _new/
 _snapshots/
 reports/
 !requirements.txt
+logs/
+*.log.gz

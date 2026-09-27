@@ -13,6 +13,7 @@
 #   chart 46503 series[1] → series_20508(全球 PMI 年變動擴散指數)
 #   chart 102471 series[0] → series_32377(JPY VIX 日圓隱含波動率)
 #   chart 77 series[0]/[1] → series_484 / 1645(FedWatch 下次會議升息/降息機率)
+#   chart 35720 series[0] → series_17586(S&P500 EPS,含 M² 的未來預估)
 import os
 import re
 import pickle
@@ -46,6 +47,7 @@ TITLE_MAP = {
     32377: "jpy-vix",
     484: "probability-fed-rate",
     1645: "probability-fed-rate-decrease",
+    17586: "sp500-eps",
 }
 
 STK_RE = re.compile(r"stk[\x22\x27\s]*[:=][\x22\x27\s]*[\x22\x27]([^\x22\x27]+)")
@@ -192,6 +194,22 @@ def fetch_chart_77():
         _save_series(sid, obs)
 
 
+# ============================================================================
+# chart 35720 series[0] S&P500 EPS → series_17586  [stale]
+# ============================================================================
+def fetch_series_17586():
+    """series[0] = S&P 500 EPS(季,2008Q1 起,含到 2027Q4 的預估);series[1] = YoY;series[2] = 指數。
+    ⚠️ S&P DJI 已停發 EPS 檔,M² 自 2025Q1 起仍是舊的 S&P 預估值(非實際值),
+    2008Q1~2024Q4 與 S&P 官方逐點一致(2026-09-27 驗證)。
+    持續更新的替代序列見 get_official_xlsx.py 的 factset_SP500EPS。"""
+    series = _fetch_chart_series(35720, "sp500-eps")
+    obs = []
+    for d, v in series[0]:
+        dt = datetime.strptime(d, "%Y-%m-%d").replace(hour=8)
+        obs.append((dt, float(v)))
+    _save_series(17586, obs)
+
+
 JOBS = [
     ("chart 115044 US OIS (7 series)", fetch_chart_115044),
     ("chart 71245 FedWatch (2 series)", fetch_chart_71245),
@@ -199,6 +217,7 @@ JOBS = [
     ("series 20508 global PMI diffusion", fetch_series_20508),
     ("series 32377 JPY VIX", fetch_series_32377),
     ("chart 77 FedWatch hike/cut probability (2 series)", fetch_chart_77),
+    ("series 17586 S&P500 EPS", fetch_series_17586),
 ]
 
 

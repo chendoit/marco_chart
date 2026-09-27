@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""官方 Excel/CSV/ZIP 報告下載(AAII / S&P DJI / WSTS / NY Fed / CIER / TWSE)
+"""官方 Excel/CSV/ZIP 報告下載(AAII / S&P DJI + FactSet / WSTS / NY Fed / CIER / TWSE)
 
-10 條 M² series 落地,動態推算目前應發布期別 + 失敗 fallback。
+9 條 M² series + FactSet 版 S&P500 EPS 落地,動態推算目前應發布期別 + 失敗 fallback。
 """
 
 import io
@@ -36,7 +36,7 @@ TITLE_MAP = {
     6783: "aaii-sentiment-survey-bullish",
     6784: "aaii-sentiment-survey-neutral",
     6785: "aaii-sentiment-survey-bearish",
-    17586: "sp500-eps",
+    "factset_SP500EPS": "S&P 500 EPS (S&P operating ~2025Q3 + FactSet YoY)",
     2752: "americas-semiconductor-billings-yoy",
     2756: "global-semiconductor-billings-yoy",
     4433: "us-debt-severe-delinquency-student",
@@ -54,16 +54,17 @@ OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
 # ============================================================================
 # 來源只提供「近期視窗」(非完整歷史)的 sid:與既有 pkl 依日期合併,而非整份覆寫
 # 5683: TWSE 月報只含近 5 年年度值 + 近 12 個月(~17 點),歷史 1999~ 來自 M² 舊 pkl
-# 17586: 暫定季(財報季進行中)的值每週被新值覆寫;來源異常少抓時也不會丟掉既有點
-MERGE_SIDS = {5683, 17586}
+# factset_SP500EPS: 暫定季(財報季進行中)的值每週被新值覆寫;來源異常少抓時也不會丟掉既有點
+MERGE_SIDS = {5683, "factset_SP500EPS"}
 
 
-def _save_series(sid: int, obs: list):
+def _save_series(sid, obs: list):
     """寫出 {'title', 'data': [[datetime(08:00), float], ...]} 格式 pkl,同舊格式。
     防呆:新點數少於既有 pkl 的一半時不覆寫(避免 API 異常清空歷史)。
     例外:若新數據最新日期 > 舊數據最新日期,允許寫入。
-    MERGE_SIDS 內的 sid 改為依日期 upsert 到既有資料(同日期以新值為準)。"""
-    out_file = Path(folder) / f"series_{sid}.pkl"
+    MERGE_SIDS 內的 sid 改為依日期 upsert 到既有資料(同日期以新值為準)。
+    sid 為 int → series_{sid}.pkl;為字串(非 M² 自有序列)→ {sid}.pkl。"""
+    out_file = Path(folder) / (f"series_{sid}.pkl" if isinstance(sid, int) else f"{sid}.pkl")
     old_n = 0
     old_last_dt = None
     old_data = []
@@ -92,7 +93,7 @@ def _save_series(sid: int, obs: list):
     with open(out_file, "wb") as f:
         pickle.dump(data, f)
     logger.info(
-        f"Saved: series_{sid}.pkl n={len(obs)} last={obs[-1][0]:%Y-%m-%d} (old n={old_n})"
+        f"Saved: {out_file.name} n={len(obs)} last={obs[-1][0]:%Y-%m-%d} (old n={old_n})"
     )
 
 
@@ -212,7 +213,8 @@ def _fetch_aaii_bearish() -> list:
 
 
 # ============================================================================
-# 2) S&P500 EPS (sid 17586) — S&P operating EPS + FactSet 年增率外推
+# 2) FactSet 版 S&P500 EPS(factset_SP500EPS.pkl)— S&P operating EPS + FactSet 年增率外推
+#    sid 17586 本身改由 get_m_square_chart_api.py 抓 M² chart 35720;這條是獨立維護的替代序列。
 #    S&P DJI 已停發 sp-500-eps-est.xlsx(官網 404;YCharts 標 DISCONTINUED,
 #    最後一筆 2025Q3=72.03,2026-01-16 更新)。
 #    - 2008Q1~2025Q2: archive.org 2026-05-27 快照(最後一份可用的 xlsx)
@@ -220,7 +222,7 @@ def _fetch_aaii_bearish() -> list:
 #    - 2025Q4 起: EPS_t = EPS_{t-4} × (1 + g),g = FactSet Earnings Insight 週報
 #      該季 blended(year-over-year)earnings growth rate;該季財報季結束
 #      (週報改報下一季 estimated)前的最後一期即為定案值,之前的是暫定值。
-#    週報解析結果快取在 data/series_17586_factset.json,只抓新的期別。
+#    週報解析結果快取在 data/factset_earnings_insight.json,只抓新的期別。
 # ============================================================================
 SP_EPS_ARCHIVE_URL = "https://web.archive.org/web/20260527232437if_/https://www.spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx"
 SP_EPS_FINAL_EXTRA = {datetime(2025, 7, 1, 8, 0): 72.03}  # S&P 停發前最後一筆(2025Q3)
@@ -230,7 +232,7 @@ FACTSET_EI_URL = (
     "Research%20Desk/Earnings%20Insight/EarningsInsight_{:%m%d%y}.pdf"
 )
 FACTSET_SCAN_START = datetime(2026, 1, 1)  # 2025Q4 財報季起點
-FACTSET_CACHE = Path(folder) / "series_17586_factset.json"
+FACTSET_CACHE = Path(folder) / "factset_earnings_insight.json"
 FACTSET_GROWTH_RE = re.compile(
     r"For\s+Q\s?([1-4])\s+(\d{4}),\s+the\s+(estimated|blended)\s+\(year-over-year\)\s+"
     r"earnings\s+(?:growth\s+rate|decline)\s+for\s+the\s+S&P\s+500\s+is\s+(-?\d+(?:\.\s?\d+)?)\s?%"
@@ -270,8 +272,8 @@ def _sp500_eps_official() -> dict:
     try:
         base = dict(_try_sp500_eps_url(SP_EPS_ARCHIVE_URL))
     except Exception as e:
-        logger.warning(f"17586: archive xlsx failed ({e}), using existing pkl official segment")
-        with open(Path(folder) / "series_17586.pkl", "rb") as f:
+        logger.warning(f"FactSet EPS: archive xlsx failed ({e}), using existing pkl official segment")
+        with open(Path(folder) / "factset_SP500EPS.pkl", "rb") as f:
             old = pickle.load(f)
         base = {d: v for d, v in old["data"] if d <= SP_EPS_LAST_OFFICIAL}
     base.update(SP_EPS_FINAL_EXTRA)
@@ -318,11 +320,11 @@ def _scan_factset_issues() -> dict:
                     if parsed:
                         qdt, kind, g = parsed
                         cache[f"{day:%Y-%m-%d}"] = [qdt.isoformat(), kind, g]
-                        logger.info(f"17586: FactSet {day:%Y-%m-%d} {qdt:%Y-%m} {kind} {g}%")
+                        logger.info(f"FactSet EPS: FactSet {day:%Y-%m-%d} {qdt:%Y-%m} {kind} {g}%")
                     else:
-                        logger.warning(f"17586: FactSet {day:%Y-%m-%d} growth sentence not found")
+                        logger.warning(f"FactSet EPS: FactSet {day:%Y-%m-%d} growth sentence not found")
             except Exception as e:
-                logger.warning(f"17586: FactSet {day:%Y-%m-%d} fetch failed: {e}")
+                logger.warning(f"FactSet EPS: FactSet {day:%Y-%m-%d} fetch failed: {e}")
         day += timedelta(days=1)
     _save_factset_cache(cache)
     return cache
@@ -340,7 +342,7 @@ def _factset_quarter_growth(cache: dict) -> dict:
     return {q: (g, newest_q is not None and newest_q > q) for q, g in latest.items()}
 
 
-def _fetch_sp500_eps() -> list:
+def _fetch_factset_sp500_eps() -> list:
     """S&P 500 operating EPS 季資料:官方段 + FactSet 年增率外推段。"""
     eps = _sp500_eps_official()
     growth = _factset_quarter_growth(_scan_factset_issues())
@@ -350,11 +352,11 @@ def _fetch_sp500_eps() -> list:
         g, final = growth[q]
         prev = eps.get(q.replace(year=q.year - 1))
         if prev is None:
-            logger.warning(f"17586: {q:%Y-%m} no EPS one year earlier, skip")
+            logger.warning(f"FactSet EPS: {q:%Y-%m} no EPS one year earlier, skip")
             continue
         eps[q] = round(prev * (1 + g / 100), 2)
         logger.info(
-            f"17586: {q:%Y-%m} = {prev} x (1+{g}%) = {eps[q]} ({'final' if final else 'provisional'})"
+            f"FactSet EPS: {q:%Y-%m} = {prev} x (1+{g}%) = {eps[q]} ({'final' if final else 'provisional'})"
         )
     return sorted(eps.items())
 
@@ -617,7 +619,7 @@ JOBS = [
     ("AAII Bullish 6783", _fetch_aaii_bullish),
     ("AAII Neutral 6784", _fetch_aaii_neutral),
     ("AAII Bearish 6785", _fetch_aaii_bearish),
-    ("S&P500 EPS 17586", _fetch_sp500_eps),
+    ("FactSet S&P500 EPS factset_SP500EPS", _fetch_factset_sp500_eps),
     ("WSTS Americas 2752", _fetch_2752),
     ("WSTS Worldwide 2756", _fetch_2756),
     ("NY Fed Student Delinquency 4433", _fetch_4433),
@@ -634,7 +636,8 @@ def fetch_official_xlsx():
         try:
             logger.info(f"Starting: {name}")
             obs = fn()
-            sid = int(name.split()[-1])
+            key = name.split()[-1]
+            sid = int(key) if key.isdigit() else key
             _save_series(sid, obs)
             logger.info(f"Completed: {name} (n={len(obs)})")
         except Exception as e:

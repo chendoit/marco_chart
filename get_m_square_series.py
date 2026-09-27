@@ -381,7 +381,7 @@ url_list = [
     # "https://www.macromicro.me/series/36/continuedclaims",  # 連續申請失業金
     # [2026-09-22] sid 4481 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/4481/coppergold",  # 銅金比
-    # [2026-09-27] sid 17586 改由 get_official_xlsx.py 抓取(S&P 官方 + FactSet 年增率外推)
+    # [2026-09-27] sid 17586 改由 get_m_square_chart_api.py 抓 chart 35720(FactSet 版另存 factset_SP500EPS)
     # "https://www.macromicro.me/series/17586/sp500-eps",  # S&P 500 EPS 成長率
 
     # 愛克榭

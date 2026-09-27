@@ -12,6 +12,7 @@
 #   chart 56752  → series_567520 / 567521(CB LEI / CEI yoy vs NBER)
 #   chart 46503 series[1] → series_20508(全球 PMI 年變動擴散指數)
 #   chart 102471 series[0] → series_32377(JPY VIX 日圓隱含波動率)
+#   chart 77 series[0]/[1] → series_484 / 1645(FedWatch 下次會議升息/降息機率)
 import os
 import re
 import pickle
@@ -43,6 +44,8 @@ TITLE_MAP = {
     567521: "美國領先、同時指標年增率 vs NBER經濟衰退美國-經濟諮商局-同時指標 (SA,yoy)",
     20508: "global-pmi-leading-yoy-diffusion",
     32377: "jpy-vix",
+    484: "probability-fed-rate",
+    1645: "probability-fed-rate-decrease",
 }
 
 STK_RE = re.compile(r"stk[\x22\x27\s]*[:=][\x22\x27\s]*[\x22\x27]([^\x22\x27]+)")
@@ -168,12 +171,34 @@ def fetch_series_32377():
     _save_series(32377, obs)
 
 
+# ============================================================================
+# chart 77 FedWatch 升/降息機率 → series_484 / 1645  [ok]
+# ============================================================================
+def fetch_chart_77():
+    """series[0] = 下次 FOMC 升息機率(%) ← sid 484;series[1] = 降息機率(%) ← sid 1645。
+    日頻,2016-07-05 起;與舊 pkl 重疊的 81/81 點全等(2026-09-27 驗證)。
+    舊 series_484 有 5 點早於 chart 起始日(2015-11~2016-06),合併時保留。"""
+    series = _fetch_chart_series(77, "probability-fed-rate-hike")
+    for idx, sid in [(0, 484), (1, 1645)]:
+        obs = []
+        for d, v in series[idx]:
+            dt = datetime.strptime(d, "%Y-%m-%d").replace(hour=8)
+            obs.append((dt, float(v)))
+        out_file = os.path.join(folder, f"series_{sid}.pkl")
+        if os.path.exists(out_file):
+            with open(out_file, "rb") as f:
+                old = pickle.load(f)
+            obs = [(d, v) for d, v in old["data"] if d < obs[0][0]] + obs
+        _save_series(sid, obs)
+
+
 JOBS = [
     ("chart 115044 US OIS (7 series)", fetch_chart_115044),
     ("chart 71245 FedWatch (2 series)", fetch_chart_71245),
     ("chart 56752 CB LEI/CEI (2 series)", fetch_chart_56752),
     ("series 20508 global PMI diffusion", fetch_series_20508),
     ("series 32377 JPY VIX", fetch_series_32377),
+    ("chart 77 FedWatch hike/cut probability (2 series)", fetch_chart_77),
 ]
 
 

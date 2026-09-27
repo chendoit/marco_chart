@@ -46,6 +46,7 @@ TITLE_MAP = {
     348: "pce-core-price-yoy",
     560: "real-disposable-personal-income-yoy",
     246: "existing-home-sales-yoy",
+    8219: "us-wti-crude-oil-spot-price-daily",
 }
 
 
@@ -235,6 +236,9 @@ JOBS = [
     ("FRED DSPIC96 YoY (sid 560, 實質可支配所得年增自算)", 560, lambda: _fetch_fred_yoy("DSPIC96")),
     # WP-A1b
     ("FRED EXHOSLUSM495S 拼接 (sid 246, 成屋銷售 YoY)", 246, fetch_246_splice),
+    # [2026-09-27] sid 8219: EIA Cushing 現貨,與舊 pkl 243 個重疊日 0 誤差(同源);
+    # FRED 有 16 個早期日期為空值,舊點由 _save_series merge 保留
+    ("FRED DCOILWTICO (sid 8219, WTI 現貨日頻)", 8219, lambda: _fetch_fred_direct("DCOILWTICO")),
 ]
 
 

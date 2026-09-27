@@ -186,7 +186,8 @@ url_list = [
     # "https://www.macromicro.me/series/486/crude-oil-futures",
     # [2026-09-22] sid 7148 改由 get_cboe_index.py 抓取(WN-A WP-A3)
     # "https://www.macromicro.me/series/7148/ovx",  # 石油ETF波動率
-    "https://www.macromicro.me/series/8219/us-wti-crude-oil-spot-price-daily",
+    # [2026-09-27] sid 8219 改由 get_fred_csv.py 抓取(FRED DCOILWTICO,0 誤差)
+    # "https://www.macromicro.me/series/8219/us-wti-crude-oil-spot-price-daily",
     # [2026-09-22] sid 854/19080 改由 get_eia_series.py 抓取(WN-A WP-A7)
     # "https://www.macromicro.me/series/854/us-oil-inventory", # 美國-原油庫存
     # "https://www.macromicro.me/series/19080/us-strategic-petroleum-reserve", # 美國-戰略石油儲備[SPR]
@@ -251,8 +252,9 @@ url_list = [
 
 
     # fedwatch 升降息
-    "https://www.macromicro.me/series/484/probability-fed-rate", #生息
-    "https://www.macromicro.me/series/1645/probability-fed-rate-decrease", #降息
+    # [2026-09-27] sid 484、1645 改由 get_m_square_chart_api.py 抓取(chart 77 series[0]/[1])
+    # "https://www.macromicro.me/series/484/probability-fed-rate", #生息
+    # "https://www.macromicro.me/series/1645/probability-fed-rate-decrease", #降息
     # "",
     # "",
     # "",
@@ -379,7 +381,8 @@ url_list = [
     # "https://www.macromicro.me/series/36/continuedclaims",  # 連續申請失業金
     # [2026-09-22] sid 4481 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/4481/coppergold",  # 銅金比
-    "https://www.macromicro.me/series/17586/sp500-eps",  # S&P 500 EPS 成長率
+    # [2026-09-27] sid 17586 改由 get_official_xlsx.py 抓取(S&P 官方 + FactSet 年增率外推)
+    # "https://www.macromicro.me/series/17586/sp500-eps",  # S&P 500 EPS 成長率
 
     # 愛克榭
     # [2026-09-22] sid 319 改由 get_fred_csv.py 抓取(WN-A WP-A1)

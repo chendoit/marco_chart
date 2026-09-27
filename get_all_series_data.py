@@ -24,6 +24,7 @@ from get_cds_series import fetch_cds_series
 from get_official_xlsx import fetch_official_xlsx
 from get_ctfc_series import fetch_cftc_data, fetch_cftc_tff_data
 from get_cboe_index import fetch_cboe_indices
+from get_cboe_pcr import fetch_cboe_pcr_main
 from get_etf_csv import fetch_all as fetch_etf_csv
 from get_nyfed_termpremium import fetch_nyfed_acm
 from get_gex_series import fetch_gex_series
@@ -36,6 +37,7 @@ from get_eia_series import fetch_eia_series
 from get_jp_yield import fetch_jp_yield_and_spread
 from get_cftc_crude_mm import fetch_cftc_crude_mm
 from get_conference_board import fetch_conference_board
+from get_tradingview_series import fetch_tradingview_series
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 from notify_macromicro_blog import run as check_macromicro_blog_new_posts
@@ -70,6 +72,7 @@ tasks = [
     ("CFTC data", fetch_cftc_data),
     ("CFTC E-mini SPX TFF", fetch_cftc_tff_data),
     ("CBOE indices", fetch_cboe_indices),
+    ("CBOE Put/Call Ratio (sid 1650, daily increment)", fetch_cboe_pcr_main),
     ("ETF fund flow (ProShares CSV)", fetch_etf_csv),
     ("NY Fed ACM Term Premium", fetch_nyfed_acm),
     ("GEX-lieta (SPX/SPY/VIX)", fetch_gex_series),
@@ -85,9 +88,11 @@ tasks = [
     ("日本10Y + 美日利差 (sid 2018/4456, 需排在 FRED Treasury Yields 之後)", fetch_jp_yield_and_spread),
     ("CFTC 原油 Managed Money long/short/net (sid 8297/8298/8296)", fetch_cftc_crude_mm),
     ("Conference Board LEI/CEI (sid 374/376)", fetch_conference_board),
+    ("TradingView 德10Y/美德利差/SP500均線breadth (sid 1916/4448/18331/22718, WN-2026-09-22-C批)", fetch_tradingview_series),
 ]
 
 failed = []
+failed_reasons: dict[str, str] = {}
 for name, func in tasks:
     try:
         logger.info(f"Starting: {name}")
@@ -96,6 +101,7 @@ for name, func in tasks:
     except Exception as e:
         logger.error(f"Failed: {name} — {e}")
         failed.append(name)
+        failed_reasons[name] = str(e)
 
 if failed:
     logger.warning(f"Failed tasks: {', '.join(failed)}")
@@ -121,7 +127,7 @@ def _save_json(path, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def record_and_check_errors(today_failed: list[str]):
+def record_and_check_errors(today_failed: list[str], reasons: dict[str, str]):
     today_str = date.today().isoformat()
     history: dict[str, list[str]] = _load_json(ERROR_HISTORY_FILE)
     history[today_str] = today_failed
@@ -141,16 +147,21 @@ def record_and_check_errors(today_failed: list[str]):
     if not tasks_in_all:
         return
 
-    msg = (
-        f"⚠️ 資料抓取連續 {CONSECUTIVE_DAYS_THRESHOLD} 天失敗\n"
-        f"任務：{', '.join(sorted(tasks_in_all))}\n"
-        f"日期：{recent_days[-1]} ~ {recent_days[0]}"
-    )
+    lines = [
+        f"⚠️ {len(tasks_in_all)} 項任務連續 {CONSECUTIVE_DAYS_THRESHOLD} 天失敗",
+        f"期間：{recent_days[-1]} ~ {recent_days[0]}",
+    ]
+    for t in sorted(tasks_in_all):
+        lines.append(f"\n▸ {t}")
+        if t in reasons:
+            lines.append(f"  原因：{reasons[t][:300]}")
+    lines.append(f"\nLog：logs/{date.today().isoformat()}.log")
+    msg = "\n".join(lines)
     logger.warning(msg)
-    send_line_notification(msg)
+    send_line_notification(msg, job="每日總表抓取 get_all_series_data")
 
 
-record_and_check_errors(failed)
+record_and_check_errors(failed, failed_reasons)
 
 # ---------------------------------------------------------------------------
 # 3. NFCI 翻轉信號 (chicagofed_NFCI.REV1) 檢查 → LINE 通知
@@ -222,7 +233,7 @@ def check_nfci_signal():
     direction = "金融環境開始收緊（從谷底翻上）" if signal == 1 else "金融環境開始放鬆（從峰頂翻下）"
     msg = f"📊 NFCI 翻轉信號 ({date_str})\n信號: {signal:+d} → {direction}"
     logger.info(msg)
-    send_line_notification(msg)
+    send_line_notification(msg, job="NFCI 翻轉信號監控")
 
     _save_json(NFCI_LAST_SIGNAL_FILE, {"date": date_str, "signal": signal})
 

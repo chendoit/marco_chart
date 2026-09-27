@@ -5,6 +5,7 @@
 """
 
 import io
+import json
 import os
 import pickle
 import re
@@ -51,23 +52,36 @@ OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
 # ============================================================================
 # 通用 _save_series 防呆
 # ============================================================================
+# 來源只提供「近期視窗」(非完整歷史)的 sid:與既有 pkl 依日期合併,而非整份覆寫
+# 5683: TWSE 月報只含近 5 年年度值 + 近 12 個月(~17 點),歷史 1999~ 來自 M² 舊 pkl
+# 17586: 暫定季(財報季進行中)的值每週被新值覆寫;來源異常少抓時也不會丟掉既有點
+MERGE_SIDS = {5683, 17586}
+
+
 def _save_series(sid: int, obs: list):
     """寫出 {'title', 'data': [[datetime(08:00), float], ...]} 格式 pkl,同舊格式。
     防呆:新點數少於既有 pkl 的一半時不覆寫(避免 API 異常清空歷史)。
-    例外:若新數據最新日期 > 舊數據最新日期,允許寫入。"""
+    例外:若新數據最新日期 > 舊數據最新日期,允許寫入。
+    MERGE_SIDS 內的 sid 改為依日期 upsert 到既有資料(同日期以新值為準)。"""
     out_file = Path(folder) / f"series_{sid}.pkl"
     old_n = 0
     old_last_dt = None
+    old_data = []
     if out_file.exists():
         try:
             with open(out_file, "rb") as f:
                 old = pickle.load(f)
-            old_n = len(old.get("data", [])) if isinstance(old, dict) else 0
-            old_data = old.get("data", [])
+            old_data = old.get("data", []) if isinstance(old, dict) else []
+            old_n = len(old_data)
             if old_data:
                 old_last_dt = old_data[-1][0]
         except Exception:
             old_n = 0
+            old_data = []
+    if sid in MERGE_SIDS and old_data:
+        merged = {d: v for d, v in old_data}
+        merged.update({d: v for d, v in obs})
+        obs = sorted(merged.items())
     new_has_more = len(obs) > old_n if old_n > 0 else True
     new_is_newer = (obs[-1][0] > old_last_dt) if old_last_dt else True
     if old_n > 0 and not new_has_more and not new_is_newer and len(obs) < old_n * 0.5:
@@ -198,13 +212,30 @@ def _fetch_aaii_bearish() -> list:
 
 
 # ============================================================================
-# 2) S&P500 EPS (sid 17586) [partial]
-#    來源: S&P DJI sp-500-eps-est.xlsx, 官網 403 → web.archive.org if_ 鏡像
-#    URL 寫死 2026-05-27 快照;檢查是否過期(>2 個月)→ 嘗試最新快照
+# 2) S&P500 EPS (sid 17586) — S&P operating EPS + FactSet 年增率外推
+#    S&P DJI 已停發 sp-500-eps-est.xlsx(官網 404;YCharts 標 DISCONTINUED,
+#    最後一筆 2025Q3=72.03,2026-01-16 更新)。
+#    - 2008Q1~2025Q2: archive.org 2026-05-27 快照(最後一份可用的 xlsx)
+#    - 2025Q3: S&P 最終公布值 72.03(快照沒有,寫死)
+#    - 2025Q4 起: EPS_t = EPS_{t-4} × (1 + g),g = FactSet Earnings Insight 週報
+#      該季 blended(year-over-year)earnings growth rate;該季財報季結束
+#      (週報改報下一季 estimated)前的最後一期即為定案值,之前的是暫定值。
+#    週報解析結果快取在 data/series_17586_factset.json,只抓新的期別。
 # ============================================================================
 SP_EPS_ARCHIVE_URL = "https://web.archive.org/web/20260527232437if_/https://www.spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx"
-SP_EPS_CDX_URL = "https://web.archive.org/cdx/search/cdx?url=spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx&output=json&from=20260101"
-SP_EPS_STALE_LIMIT = timedelta(days=60)
+SP_EPS_FINAL_EXTRA = {datetime(2025, 7, 1, 8, 0): 72.03}  # S&P 停發前最後一筆(2025Q3)
+SP_EPS_LAST_OFFICIAL = datetime(2025, 7, 1, 8, 0)
+FACTSET_EI_URL = (
+    "https://advantage.factset.com/hubfs/Website/Resources%20Section/"
+    "Research%20Desk/Earnings%20Insight/EarningsInsight_{:%m%d%y}.pdf"
+)
+FACTSET_SCAN_START = datetime(2026, 1, 1)  # 2025Q4 財報季起點
+FACTSET_CACHE = Path(folder) / "series_17586_factset.json"
+FACTSET_GROWTH_RE = re.compile(
+    r"For\s+Q\s?([1-4])\s+(\d{4}),\s+the\s+(estimated|blended)\s+\(year-over-year\)\s+"
+    r"earnings\s+(?:growth\s+rate|decline)\s+for\s+the\s+S&P\s+500\s+is\s+(-?\d+(?:\.\s?\d+)?)\s?%"
+)
+Q_MONTH = {1: 1, 2: 4, 3: 7, 4: 10}
 
 
 def _try_sp500_eps_url(url: str) -> list:
@@ -234,43 +265,98 @@ def _try_sp500_eps_url(url: str) -> list:
     return pairs
 
 
-def _check_archive_stale(url: str) -> bool:
-    """檢查 archive 快照是否過期(>2 個月)。"""
+def _sp500_eps_official() -> dict:
+    """S&P 官方 operating EPS(2008Q1~2025Q3)。archive 失敗時退回既有 pkl 的官方段。"""
     try:
-        match = re.search(r"/web/(\d{14})", url)
-        if not match:
-            return True
-        snap_date = datetime.strptime(match.group(1), "%Y%m%d%H%M%S")
-        return (datetime.now() - snap_date) > SP_EPS_STALE_LIMIT
-    except Exception:
-        return True
+        base = dict(_try_sp500_eps_url(SP_EPS_ARCHIVE_URL))
+    except Exception as e:
+        logger.warning(f"17586: archive xlsx failed ({e}), using existing pkl official segment")
+        with open(Path(folder) / "series_17586.pkl", "rb") as f:
+            old = pickle.load(f)
+        base = {d: v for d, v in old["data"] if d <= SP_EPS_LAST_OFFICIAL}
+    base.update(SP_EPS_FINAL_EXTRA)
+    return base
 
 
-def _fetch_sp500_eps_fallback_url() -> str:
-    """從 CDX 取得最新快照 URL。"""
-    try:
-        cdx = requests.get(SP_EPS_CDX_URL, timeout=60).json()
-        for row in reversed(cdx[1:]):
-            if "spreadsheet" in row[3] or row[3] == "application/octet-stream":
-                return f"https://web.archive.org/web/{row[1]}id_/{row[2]}"
-    except Exception:
-        pass
-    return None
+def _parse_factset_issue(content: bytes):
+    """回傳 (quarter_dt, kind, growth%) 或 None。只看第 1 頁 Key Metrics。"""
+    from pypdf import PdfReader
+
+    text = PdfReader(io.BytesIO(content)).pages[0].extract_text() or ""
+    m = FACTSET_GROWTH_RE.search(re.sub(r"\s+", " ", text))
+    if not m:
+        return None
+    q, yr, kind, g = int(m.group(1)), int(m.group(2)), m.group(3), m.group(4)
+    return datetime(yr, Q_MONTH[q], 1, 8, 0), kind, float(g.replace(" ", ""))
+
+
+def _load_factset_cache() -> dict:
+    if FACTSET_CACHE.exists():
+        return json.loads(FACTSET_CACHE.read_text(encoding="utf-8"))
+    return {}
+
+
+def _save_factset_cache(cache: dict):
+    FACTSET_CACHE.write_text(json.dumps(cache, indent=1, sort_keys=True), encoding="utf-8")
+
+
+def _scan_factset_issues() -> dict:
+    """掃 FactSet Earnings Insight(週四/週五出刊),回傳 {'YYYY-MM-DD': [quarter_iso, kind, g]}。
+    只抓快取中最新一期之後的日期。"""
+    cache = _load_factset_cache()
+    start = FACTSET_SCAN_START
+    if cache:
+        start = datetime.strptime(max(cache), "%Y-%m-%d") + timedelta(days=1)
+    day = start
+    today = datetime.now()
+    while day <= today:
+        if day.weekday() in (3, 4):
+            try:
+                r = requests.get(FACTSET_EI_URL.format(day), headers={"User-Agent": "Mozilla/5.0"}, timeout=60)
+                if r.status_code == 200 and r.content[:4] == b"%PDF":
+                    parsed = _parse_factset_issue(r.content)
+                    if parsed:
+                        qdt, kind, g = parsed
+                        cache[f"{day:%Y-%m-%d}"] = [qdt.isoformat(), kind, g]
+                        logger.info(f"17586: FactSet {day:%Y-%m-%d} {qdt:%Y-%m} {kind} {g}%")
+                    else:
+                        logger.warning(f"17586: FactSet {day:%Y-%m-%d} growth sentence not found")
+            except Exception as e:
+                logger.warning(f"17586: FactSet {day:%Y-%m-%d} fetch failed: {e}")
+        day += timedelta(days=1)
+    _save_factset_cache(cache)
+    return cache
+
+
+def _factset_quarter_growth(cache: dict) -> dict:
+    """每季取最後一期 blended 年增率 → {quarter_dt: (g, is_final)}。
+    之後已有報導更晚季度的期別 → 該季定案。"""
+    latest = {}
+    for day in sorted(cache):
+        qiso, kind, g = cache[day]
+        if kind == "blended":
+            latest[datetime.fromisoformat(qiso)] = g
+    newest_q = max((datetime.fromisoformat(v[0]) for v in cache.values()), default=None)
+    return {q: (g, newest_q is not None and newest_q > q) for q, g in latest.items()}
 
 
 def _fetch_sp500_eps() -> list:
-    """Fetch S&P 500 EPS (quarterly, 2008-Q1 ~ latest).
-    [partial]: 2027 預估抓不到(官網 403),舊 pkl 有 8 筆 2027 預估。
-    新 pkl 不含 2027 預估是預期行為。"""
-    url = SP_EPS_ARCHIVE_URL
-    if _check_archive_stale(url):
-        latest_url = _fetch_sp500_eps_fallback_url()
-        if latest_url:
-            url = latest_url
-            logger.info(f"17586: archive stale, using fallback: {url}")
-        else:
-            logger.warning("17586: no fresh snapshot, using original archive URL")
-    return _try_sp500_eps_url(url)
+    """S&P 500 operating EPS 季資料:官方段 + FactSet 年增率外推段。"""
+    eps = _sp500_eps_official()
+    growth = _factset_quarter_growth(_scan_factset_issues())
+    for q in sorted(growth):
+        if q <= SP_EPS_LAST_OFFICIAL:
+            continue
+        g, final = growth[q]
+        prev = eps.get(q.replace(year=q.year - 1))
+        if prev is None:
+            logger.warning(f"17586: {q:%Y-%m} no EPS one year earlier, skip")
+            continue
+        eps[q] = round(prev * (1 + g / 100), 2)
+        logger.info(
+            f"17586: {q:%Y-%m} = {prev} x (1+{g}%) = {eps[q]} ({'final' if final else 'provisional'})"
+        )
+    return sorted(eps.items())
 
 
 # ============================================================================

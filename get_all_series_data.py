@@ -38,6 +38,7 @@ from get_jp_yield import fetch_jp_yield_and_spread
 from get_cftc_crude_mm import fetch_cftc_crude_mm
 from get_conference_board import fetch_conference_board
 from get_tradingview_series import fetch_tradingview_series
+from get_cme_fedwatch import fetch_cme_fedwatch_main
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 from notify_macromicro_blog import run as check_macromicro_blog_new_posts
@@ -89,6 +90,7 @@ tasks = [
     ("CFTC 原油 Managed Money long/short/net (sid 8297/8298/8296)", fetch_cftc_crude_mm),
     ("Conference Board LEI/CEI (sid 374/376)", fetch_conference_board),
     ("TradingView 德10Y/美德利差/SP500均線breadth (sid 1916/4448/18331/22718, WN-2026-09-22-C批)", fetch_tradingview_series),
+    ("CME FedWatch 官方結算 hike/cut (chart 77 備援, ex-M², 不接儀表板)", fetch_cme_fedwatch_main),
 ]
 
 failed = []

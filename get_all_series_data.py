@@ -16,7 +16,7 @@ from get_fed_series import (
     fetch_fed_liquidity_reference_rates,
 )
 from get_m_square_chart_api import fetch_m_square_chart_api  # 2026-09-16 起取代 get_m_square_chart.py(Playwright+OAuth)→ curl_cffi chart API
-from get_m_square_series import fetch_m_square_series
+# from get_m_square_series import fetch_m_square_series  # 2026-09-28 url_list 已清空
 from get_m_square_etf import fetch_m_square_etfs
 from get_yahoo_series import fetch_move_index
 from get_yfinance_series import fetch_yfinance_series
@@ -66,7 +66,8 @@ tasks = [
     ("NY Fed SOFR (rate/percentiles)", fetch_sofr_data),
     ("FRED IORB + ON RRP + DFF", fetch_fed_liquidity_reference_rates),
     ("MacroMicro charts (curl_cffi API, 16 series)", fetch_m_square_chart_api),
-    ("MacroMicro series", fetch_m_square_series),
+    # [2026-09-28] get_m_square_series.url_list 已清空(全數改由其他來源或停抓),不再登入 M² 抓 series
+    # ("MacroMicro series", fetch_m_square_series),
     ("MacroMicro ETFs", fetch_m_square_etfs),
     ("Yahoo Finance MOVE index (sid 17581, ex-M²)", fetch_move_index),
     ("yfinance 15 series (WN-A WP-A2+A8, ex-M²)", fetch_yfinance_series),

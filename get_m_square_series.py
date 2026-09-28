@@ -214,7 +214,8 @@ url_list = [
     # "https://www.macromicro.me/series/29123/us-treasury-general-account-daily", # 政部帳戶(TGA)餘額
     # [2026-09-22] sid 7449/348 改由 get_fred_csv.py 抓取(WN-A WP-A1)
     # "https://www.macromicro.me/series/7449/us-fed-excess-reserves-weekly", # 商業銀行在聯邦儲備系統超額準備金
-    "https://www.macromicro.me/series/131/core-consumer-price-index-sa-yoy", # 美國-核心消費者物價指數(Core PCI) 年增
+    # [2026-09-28] sid 131 儀表板沒使用,停抓(WN-2026-09-28 M²剩餘依賴盤點)
+    # "https://www.macromicro.me/series/131/core-consumer-price-index-sa-yoy", # 美國-核心消費者物價指數(Core PCI) 年增
     # "https://www.macromicro.me/series/348/pce-core-price-yoy", # 美國-核心個人消費支出物價指數[PCE](年增率)
 
     # 差值 是景氣循環的基礎 台灣比美國領先 zavy 和台灣指數比對一下
@@ -222,7 +223,8 @@ url_list = [
     # "https://www.macromicro.me/series/590/tw-pmi-new-orders", #台灣-製造業採購經理人指數[PMI]-新增訂單
     # "https://www.macromicro.me/series/595/tw-pmi-customers-invertories", # 台灣-製造業採購經理人指數[PMI]-客戶存貨
     # 流動性 落後指標 但是很值得參考的指標
-    "https://www.macromicro.me/series/31742/global-money-supply-m2-yoy", # 全球-四大央行貨幣供給[M2](年增率)
+    # [2026-09-28] sid 31742 儀表板沒使用,停抓(WN-2026-09-28 M²剩餘依賴盤點)
+    # "https://www.macromicro.me/series/31742/global-money-supply-m2-yoy", # 全球-四大央行貨幣供給[M2](年增率)
 
     # 和 S&P 500 比較一下 景氣循環 zavy
     # [2026-09-17] sid 267/277/281 改由 get_ism_pmi.py 抓取
@@ -333,7 +335,8 @@ url_list = [
     # "https://www.macromicro.me/series/634/bofa-merrill-lynch-us-corporate-ccc",  # CCC級或以下高收益債券有效殖利率
 
     # 愛克榭 CBR vs 10年
-    "https://www.macromicro.me/series/3776/crb-index",
+    # [2026-09-28] sid 3776 儀表板沒使用,停抓(WN-2026-09-28 M²剩餘依賴盤點)
+    # "https://www.macromicro.me/series/3776/crb-index",
 
     # 就學貸款違約率  影響消費意願
     # [2026-09-28] 改由 get_official_xlsx.py 抓取(NY Fed)
@@ -381,20 +384,25 @@ url_list = [
     # [2026-09-16 遺漏補清] sid 7249/4 其實 09-16/17 那批就已經改由 get_fred_csv.py 抓取,漏了清 url_list
     # "https://www.macromicro.me/series/7249/fereral-reserve-bank-of-new-york-weekly-economic-index",  # WEI
     # "https://www.macromicro.me/series/4/realgdp-yoy",  # 美國實質GDP
-    "https://www.macromicro.me/series/75/saving-rate",  # 儲蓄率
-    "https://www.macromicro.me/series/7359/pce-real-yoy",  # 個人消費支出
+    # [2026-09-28] sid 75 改由 get_fred_csv.py 抓(FRED PSAVERT 直取)
+    # "https://www.macromicro.me/series/75/saving-rate",  # 儲蓄率
+    # [2026-09-28] sid 7359 改由 get_fred_csv.py 抓(FRED DPCERA3M086SBEA 自算 YoY)
+    # "https://www.macromicro.me/series/7359/pce-real-yoy",  # 個人消費支出
     # [2026-09-22] sid 560/246 改由 get_fred_csv.py 抓取(WN-A WP-A1/A1b)
     # "https://www.macromicro.me/series/560/real-disposable-personal-income-yoy",  # 可支配所得
     # "https://www.macromicro.me/series/246/existing-home-sales-yoy",  # 成屋銷售
-    "https://www.macromicro.me/series/254/new-home-sales-yoy",  # 新屋銷售
+    # [2026-09-28] sid 254 改由 get_fred_csv.py 抓(HSN1F 自算 YoY)
+    # "https://www.macromicro.me/series/254/new-home-sales-yoy",  # 新屋銷售
     # [2026-09-22] sid 255 改由 get_fred_csv.py 抓取(WN-A WP-A1)
     # "https://www.macromicro.me/series/255/price-new-houses",  # 新屋房價中位數
     # https://www.macromicro.me/series/261/us-case-shiller-home-price  # S&P/Case-Shiller 前20大城市房價
     # [2026-09-17] sid 261 改由 get_fred_csv.py 抓取(FRED SPCS20RSA)
-    "https://www.macromicro.me/series/414/sp-case-shillar-20-home-price-nsa",  # S&P/Case-Shiller 前20大城市房價 NSA
+    # [2026-09-28] sid 414 儀表板沒使用,停抓(WN-2026-09-28 M²剩餘依賴盤點)
+    # "https://www.macromicro.me/series/414/sp-case-shillar-20-home-price-nsa",  # S&P/Case-Shiller 前20大城市房價 NSA
     # [2026-09-22] sid 22910 改由 get_fred_csv.py 抓取(WN-A WP-A1)
     # "https://www.macromicro.me/series/22910/sahm-rule-recession-indicator",  # 薩姆規則
-    "https://www.macromicro.me/series/44/nonfarm-payrolls-yearlychange",  # 非農就業
+    # [2026-09-28] sid 44 改由 get_fred_csv.py 抓(PAYEMS 自算 12 個月差)
+    # "https://www.macromicro.me/series/44/nonfarm-payrolls-yearlychange",  # 非農就業
     # [2026-09-22] sid 37/34/36 改由 get_fred_csv.py 抓取(WN-A WP-A1)
     # "https://www.macromicro.me/series/37/unemployment-rate",  # 失業率
     # "https://www.macromicro.me/series/34/initialclaims",  # 初次申請失業金

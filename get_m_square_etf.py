@@ -178,11 +178,13 @@ def _etf_page_url(ticker: str) -> str:
 
 
 def _process_one_etf(page, ticker) -> bool:
-    """擷取價量與資金淨流量；兩段皆成功才回傳 True。"""
+    """擷取價量；成功才回傳 True。"""
     if not fetch_etf_data(page, ticker):
         return False
-    if not fetch_etf_fundflow(page, ticker):
-        return False
+    # [2026-09-28] m2fundflow / m2fundflow_cum 儀表板與其他腳本都沒用
+    # (fund flow 圖用的是 get_etf_csv.py 的 etf_*_fundflow),停抓
+    # if not fetch_etf_fundflow(page, ticker):
+    #     return False
     return True
 
 

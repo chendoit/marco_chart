@@ -46,10 +46,14 @@ TITLE_MAP = {
     348: "pce-core-price-yoy",
     560: "real-disposable-personal-income-yoy",
     246: "existing-home-sales-yoy",
+    254: "new-home-sales-yoy",
     8219: "us-wti-crude-oil-spot-price-daily",
     3612: "us-credit-spread",
+    44: "nonfarm-payrolls-yearlychange",
+    75: "saving-rate",
     93001: "us-bbb-credit-spread",
     93002: "us-aaa-credit-spread",
+    7359: "pce-real-yoy",
 }
 
 
@@ -197,6 +201,17 @@ def _fetch_fred_yoy(series_id: str) -> list:
     return out
 
 
+def _fetch_fred_diff12(series_id: str) -> list:
+    """單一 FRED series 的 fredgraph.csv,自算月頻 12 個月差(本月-去年同月,原單位)。"""
+    by_month = {d.strftime("%Y-%m"): v for d, v in _fetch_fred_direct(series_id)}
+    keys = sorted(by_month)
+    return [
+        (datetime(int(k[:4]), int(k[5:7]), 1, 8), by_month[k] - by_month[keys[i - 12]])
+        for i, k in enumerate(keys)
+        if i >= 12
+    ]
+
+
 # ============================================================================
 # WP-A1b: sid=246 成屋銷售 YoY 拼接
 # FRED EXHOSLUSM495S 是 2025-08 才建立的新 series(舊 EXHOSLUS 已下架),
@@ -254,6 +269,9 @@ JOBS = [
     ("FRED DSPIC96 YoY (sid 560, 實質可支配所得年增自算)", 560, lambda: _fetch_fred_yoy("DSPIC96")),
     # WP-A1b
     ("FRED EXHOSLUSM495S 拼接 (sid 246, 成屋銷售 YoY)", 246, fetch_246_splice),
+    # [2026-09-28] sid 254: Census 新屋銷售 SAAR 自算 YoY,與舊 pkl 127 個重疊月 125 個相同
+    # (中位差 0.003);僅 2026-05/06 不同,經 ALFRED 查證是 M² 存了 2026-07 月底的初值快照,非口徑差
+    ("FRED HSN1F YoY (sid 254, 新屋銷售年增自算)", 254, lambda: _fetch_fred_yoy("HSN1F")),
     # [2026-09-27] sid 8219: EIA Cushing 現貨,與舊 pkl 243 個重疊日 0 誤差(同源);
     # FRED 有 16 個早期日期為空值,舊點由 _save_series merge 保留
     ("FRED DCOILWTICO (sid 8219, WTI 現貨日頻)", 8219, lambda: _fetch_fred_direct("DCOILWTICO")),
@@ -261,6 +279,16 @@ JOBS = [
     ("FRED BAMLH0A3HYCEY-DGS10 (sid 3612, CCC 信用風險利差)", 3612, lambda: _fetch_credit_spread("BAMLH0A3HYCEY")),
     ("FRED BAMLC0A4CBBBEY-DGS10 (sid 93001, BBB 信用風險利差)", 93001, lambda: _fetch_credit_spread("BAMLC0A4CBBBEY")),
     ("FRED BAMLC0A1CAAAEY-DGS10 (sid 93002, AAA 信用風險利差)", 93002, lambda: _fetch_credit_spread("BAMLC0A1CAAAEY")),
+    # [2026-09-28] sid 44: BLS CES 總非農就業(千人)自算 12 個月差,與舊 pkl 175 個重疊點中位差 2 千人(0.1%);
+    # WN-B 的「17%」只是最後一點 2026-07(M² 停更前存的初值 316,BLS 之後修正為 371),非口徑差
+    ("FRED PAYEMS diff12 (sid 44, 非農就業年增自算)", 44, lambda: _fetch_fred_diff12("PAYEMS")),
+    # [2026-09-28] sid 75: BEA 個人儲蓄率(%),與舊 pkl 137 點中 136 點完全相同(同源);
+    # WN-B 的「3.7%」只是最後一點 2026-06(M² 停更前存的初值 2.7,BEA 之後修正為 2.6,ALFRED 可查),非口徑差
+    ("FRED PSAVERT (sid 75, 個人儲蓄率)", 75, lambda: _fetch_fred_direct("PSAVERT")),
+    # [2026-09-28] sid 7359: BEA 實質 PCE 數量指數(2017=100)自算 YoY,與舊 pkl 39 個重疊點 37 個差 <=0.01;
+    # 僅 2026-05/06 不同(M² 2.39/2.54 vs FRED 2.45/2.63),ALFRED vintage 2026-08-15 算出正是 2.39/2.54 → 初值快照,非口徑差。
+    # 選指數而非 PCEC96(2017 年幣值):兩者 YoY 相同(差 <=0.01),但指數從 1959 起、PCEC96 只從 2007 起
+    ("FRED DPCERA3M086SBEA YoY (sid 7359, 實質 PCE 年增自算)", 7359, lambda: _fetch_fred_yoy("DPCERA3M086SBEA")),
 ]
 
 

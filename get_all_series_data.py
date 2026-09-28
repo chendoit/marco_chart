@@ -65,7 +65,7 @@ tasks = [
     ("FRED MMMFFAQ027S (MMF AUM)", lambda: fetch_and_save_fred_data('MMMFFAQ027S')),
     ("NY Fed SOFR (rate/percentiles)", fetch_sofr_data),
     ("FRED IORB + ON RRP + DFF", fetch_fed_liquidity_reference_rates),
-    ("MacroMicro charts (curl_cffi API, 13 series)", fetch_m_square_chart_api),
+    ("MacroMicro charts (curl_cffi API, 16 series)", fetch_m_square_chart_api),
     ("MacroMicro series", fetch_m_square_series),
     ("MacroMicro ETFs", fetch_m_square_etfs),
     ("Yahoo Finance MOVE index (sid 17581, ex-M²)", fetch_move_index),
@@ -93,22 +93,25 @@ tasks = [
     ("CME FedWatch 官方結算 hike/cut (chart 77 備援, ex-M², 不接儀表板)", fetch_cme_fedwatch_main),
 ]
 
-failed = []
-failed_reasons: dict[str, str] = {}
-for name, func in tasks:
-    try:
-        logger.info(f"Starting: {name}")
-        func()
-        logger.info(f"Completed: {name}")
-    except Exception as e:
-        logger.error(f"Failed: {name} — {e}")
-        failed.append(name)
-        failed_reasons[name] = str(e)
 
-if failed:
-    logger.warning(f"Failed tasks: {', '.join(failed)}")
-else:
-    logger.info("All tasks completed successfully")
+def run_tasks() -> tuple[list[str], dict[str, str]]:
+    failed = []
+    failed_reasons: dict[str, str] = {}
+    for name, func in tasks:
+        try:
+            logger.info(f"Starting: {name}")
+            func()
+            logger.info(f"Completed: {name}")
+        except Exception as e:
+            logger.error(f"Failed: {name} — {e}")
+            failed.append(name)
+            failed_reasons[name] = str(e)
+
+    if failed:
+        logger.warning(f"Failed tasks: {', '.join(failed)}")
+    else:
+        logger.info("All tasks completed successfully")
+    return failed, failed_reasons
 
 # ---------------------------------------------------------------------------
 # 2. 記錄錯誤歷史，檢查連續 3 天失敗 → LINE 通知
@@ -162,8 +165,6 @@ def record_and_check_errors(today_failed: list[str], reasons: dict[str, str]):
     logger.warning(msg)
     send_line_notification(msg, job="每日總表抓取 get_all_series_data")
 
-
-record_and_check_errors(failed, failed_reasons)
 
 # ---------------------------------------------------------------------------
 # 3. NFCI 翻轉信號 (chicagofed_NFCI.REV1) 檢查 → LINE 通知
@@ -240,14 +241,25 @@ def check_nfci_signal():
     _save_json(NFCI_LAST_SIGNAL_FILE, {"date": date_str, "signal": signal})
 
 
-check_nfci_signal()
-
 # ---------------------------------------------------------------------------
 # 4. MacroMicro 部落格新文章 → Gmail（失敗不影響上方任務結束）
 # ---------------------------------------------------------------------------
-try:
-    logger.info("Starting: MacroMicro blog new-post email check")
-    check_macromicro_blog_new_posts()
-    logger.info("Completed: MacroMicro blog new-post email check")
-except Exception as e:
-    logger.error(f"Failed: MacroMicro blog new-post email check — {e}")
+def check_blog_posts():
+    try:
+        logger.info("Starting: MacroMicro blog new-post email check")
+        check_macromicro_blog_new_posts()
+        logger.info("Completed: MacroMicro blog new-post email check")
+    except Exception as e:
+        logger.error(f"Failed: MacroMicro blog new-post email check — {e}")
+
+
+def main():
+    failed, failed_reasons = run_tasks()
+    record_and_check_errors(failed, failed_reasons)
+    check_nfci_signal()
+    check_blog_posts()
+
+
+# import 本檔（例如 `python -c "import get_all_series_data"` 檢查 import）不會觸發抓取/登入/通知
+if __name__ == "__main__":
+    main()

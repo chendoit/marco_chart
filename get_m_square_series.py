@@ -29,10 +29,23 @@ user_agents = [
 ]
 
 def save_to_pickle(data, filename):
-    """Save data to a pickle file."""
+    """逐日期 merge 存檔（同 get_tradingview_series._save_series）：新舊資料以日期 union，
+    同日期新值覆蓋，其餘舊點全保留。避免 M² 只回傳部分區間時整檔覆寫蓋掉其他來源回補的歷史。"""
+    old_data = []
+    if os.path.exists(filename):
+        try:
+            with open(filename, "rb") as f:
+                old = pickle.load(f)
+            old_data = old.get("data", []) if isinstance(old, dict) else []
+        except Exception as e:
+            logger.warning(f"讀取舊 pkl 失敗，改為整檔覆寫 {filename}: {e}")
+            old_data = []
+    merged = {d.date(): (d, v) for d, v in old_data}
+    merged.update({d.date(): (d, v) for d, v in data["data"]})
+    rows = sorted(merged.values(), key=lambda x: x[0])
     with open(filename, "wb") as f:
-        pickle.dump(data, f)
-    logger.info(f"Data saved to {filename}")
+        pickle.dump({**data, "data": [[d, v] for d, v in rows]}, f)
+    logger.info(f"Data saved to {filename} n={len(rows)} (old n={len(old_data)}, new n={len(data['data'])})")
 
 import re
 import base64
@@ -237,11 +250,13 @@ url_list = [
     # "https://www.macromicro.me/series/4866/us-ofr-fsi",
 
     # 美德利差 DXY 歐元匯率
-    "https://www.macromicro.me/series/4448/de-10-year-yield-spread-germany-us", # 美德-10年期公債利差
+    # [2026-09-28] 改由 get_tradingview_series.py 抓取(WN-C批)，M² 整檔覆寫會蓋掉 TV merge 的歷史
+    # "https://www.macromicro.me/series/4448/de-10-year-yield-spread-germany-us", # 美德-10年期公債利差
     # [2026-09-22] sid 562/483 改由 get_yfinance_series.py 抓取(WN-A WP-A2)
     # "https://www.macromicro.me/series/562/fx-eur-usd", # 歐元/美元
     # "https://www.macromicro.me/series/483/us-dollar-index", # DXY 美元指數
-    "https://www.macromicro.me/series/1916/germany-bond-10-year", # 德國-10年期公債殖利率
+    # [2026-09-28] 改由 get_tradingview_series.py 抓取(WN-C批)，M² 整檔覆寫會蓋掉 TV merge 的歷史
+    # "https://www.macromicro.me/series/1916/germany-bond-10-year", # 德國-10年期公債殖利率
 
 
     # [2026-09-22] sid 4456 改由 get_jp_yield.py 抓取(WN-A WP-A6，重複行同上方已一併移除)
@@ -263,7 +278,8 @@ url_list = [
     # VIX 30D、VVIX、VIX 期限結構 皆改由 get_cboe_index.py（CBOE CDN）→ series_cboe_*.pkl
     # [2026-09-22] sid 4407 改由 get_cboe_index.py 抓取(WN-A WP-A3，series_cboe_SKEW.pkl 同源複用)
     # "https://www.macromicro.me/series/4407/cboe-skew", # 黑天鵝
-    "https://www.macromicro.me/series/1650/us-put-call-ratio-total", # put call ratio
+    # [2026-09-28] 改由 get_cboe_pcr.py 抓取，M² 整檔覆寫會蓋掉 CBOE 回補的歷史
+    # "https://www.macromicro.me/series/1650/us-put-call-ratio-total", # put call ratio
 
     # VIX 期限結構（M² 28769/7173/7174/7175/7770）已改 CBOE：cboe_VIX1D…VIX1Y
     #
@@ -277,8 +293,10 @@ url_list = [
     # "https://www.macromicro.me/series/8296/crude-oil-futures-and-options-manage-money-net-position",
 
     # 市場寬度
-    "https://www.macromicro.me/series/18331/sp500-50ma-breadth",
-    "https://www.macromicro.me/series/22718/sp-500-200ma-breadth",
+    # [2026-09-28] 改由 get_tradingview_series.py 抓取(WN-C批)，M² 整檔覆寫會蓋掉 TV merge 的歷史
+    # "https://www.macromicro.me/series/18331/sp500-50ma-breadth",
+    # [2026-09-28] 改由 get_tradingview_series.py 抓取(WN-C批)，M² 整檔覆寫會蓋掉 TV merge 的歷史
+    # "https://www.macromicro.me/series/22718/sp-500-200ma-breadth",
     # "",
 
     # 週期
@@ -308,7 +326,8 @@ url_list = [
     # "https://www.macromicro.me/series/5683/taiwan-stock-price-to-earnings-ratio"
 
     # 愛克榭 CCC 信用利差
-    "https://www.macromicro.me/series/3612/us-credit-spread",  # 信用風險利差
+    # [2026-09-28] sid 3612 改由 get_fred_csv.py 抓(BAMLH0A3HYCEY - DGS10,早期歷史沿用舊 pkl)
+    # "https://www.macromicro.me/series/3612/us-credit-spread",  # 信用風險利差
     # [2026-09-22] sid 755/634 改由 get_fred_csv.py 抓取(WN-A WP-A1)
     # "https://www.macromicro.me/series/755/delinquency-rate-on-business-loans",  # 商銀貸款拖欠率-企業
     # "https://www.macromicro.me/series/634/bofa-merrill-lynch-us-corporate-ccc",  # CCC級或以下高收益債券有效殖利率
@@ -317,7 +336,8 @@ url_list = [
     "https://www.macromicro.me/series/3776/crb-index",
 
     # 就學貸款違約率  影響消費意願
-    "https://www.macromicro.me/series/4433/us-debt-severe-delinquency-student",
+    # [2026-09-28] 改由 get_official_xlsx.py 抓取(NY Fed)
+    # "https://www.macromicro.me/series/4433/us-debt-severe-delinquency-student",
 
     # 衰退指鰾 領先
     # [2026-09-22] sid 374/376 改由 get_conference_board.py 抓取(WN-A WP-A9)

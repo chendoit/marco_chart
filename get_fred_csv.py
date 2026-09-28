@@ -47,6 +47,9 @@ TITLE_MAP = {
     560: "real-disposable-personal-income-yoy",
     246: "existing-home-sales-yoy",
     8219: "us-wti-crude-oil-spot-price-daily",
+    3612: "us-credit-spread",
+    93001: "us-bbb-credit-spread",
+    93002: "us-aaa-credit-spread",
 }
 
 
@@ -218,6 +221,21 @@ def fetch_246_splice() -> list:
     return out
 
 
+# ============================================================================
+# 美國信用風險利差(M² chart 930)= ICE BofA 各評級實際殖利率 - DGS10(不是 OAS)
+# sid 3612 = CCC;BBB / AAA 在 M² 沒有 sid,自編 93001 / 93002(chart 930 series[1]/[2])
+# FRED 的 ICE BofA 序列只給近 3 年,更早的歷史靠 _save_series 按日期 merge 保留舊 pkl
+# (3612 舊 pkl、93001/93002 初始值皆來自 M² chart 930,2026-09-28 一次性回填)。
+# 與 M² 重疊 749 日最大差 0.075:M² 的 10Y 有 3 位小數,DGS10 只有 2 位。
+# ============================================================================
+
+
+def _fetch_credit_spread(ey_id: str) -> list:
+    ey = dict(_fetch_fred_direct(ey_id))
+    t10 = dict(_fetch_fred_direct("DGS10"))
+    return [(d, round(ey[d] - t10[d], 4)) for d in sorted(ey) if d in t10]
+
+
 JOBS = [
     ("FRED SPCS20RSA (sid 261, Case-Shiller 20城 SA)", 261, fetch_sp_case_shiller_20_sa),
     ("FRED GDPC1 YoY (sid 4, 美國實質 GDP 年增)", 4, fetch_realgdp_yoy),
@@ -239,6 +257,10 @@ JOBS = [
     # [2026-09-27] sid 8219: EIA Cushing 現貨,與舊 pkl 243 個重疊日 0 誤差(同源);
     # FRED 有 16 個早期日期為空值,舊點由 _save_series merge 保留
     ("FRED DCOILWTICO (sid 8219, WTI 現貨日頻)", 8219, lambda: _fetch_fred_direct("DCOILWTICO")),
+    # [2026-09-28] 信用風險利差,脫離 M²(見上方 _fetch_credit_spread 說明)
+    ("FRED BAMLH0A3HYCEY-DGS10 (sid 3612, CCC 信用風險利差)", 3612, lambda: _fetch_credit_spread("BAMLH0A3HYCEY")),
+    ("FRED BAMLC0A4CBBBEY-DGS10 (sid 93001, BBB 信用風險利差)", 93001, lambda: _fetch_credit_spread("BAMLC0A4CBBBEY")),
+    ("FRED BAMLC0A1CAAAEY-DGS10 (sid 93002, AAA 信用風險利差)", 93002, lambda: _fetch_credit_spread("BAMLC0A1CAAAEY")),
 ]
 
 

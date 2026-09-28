@@ -131,6 +131,63 @@ def _fetch_crack321() -> list:
     ]
 
 
+# [2026-09-28] 7 檔 ETF 成交量(+收盤價)改由 Yahoo 抓,取代 get_m_square_etf.py(Playwright + Google OAuth 登入 M²)。
+# 實測與舊 M² pkl:日期完全一致(M² 有的日期 Yahoo 全有),近年逐日相同;差異只在
+#   (1) 2010-2012 早期零星點、(2) SOXS 2026-07-15 的 1:10 reverse split M² 沒有回溯調整
+#   (7/15 前成交量大 10 倍),Yahoo 有正確調整 → Yahoo 反而較正確。
+# 因為拆股會回溯改寫整段歷史,這裡**整檔覆寫**(不是逐日 merge),改用「起始日不能變晚、筆數不能變少」防呆。
+ETF_TICKERS = ["VIXM", "UVXY", "SVXY", "TQQQ", "SQQQ", "SOXL", "SOXS"]
+
+
+def _yf_chart_ohlcv(symbol: str) -> list:
+    """symbol -> [(datetime 08:00, close, volume)],split-adjusted。"""
+    r = requests.get(
+        f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(symbol, safe='')}",
+        params={"interval": "1d", "period1": 0, "period2": int(time.time())},
+        headers=HDRS,
+        timeout=30,
+    )
+    r.raise_for_status()
+    result = r.json()["chart"]["result"][0]
+    q = result["indicators"]["quote"][0]
+    out = []
+    for t, c, v in zip(result.get("timestamp") or [], q.get("close") or [], q.get("volume") or []):
+        if c is None or v is None:
+            continue
+        d = datetime.fromtimestamp(t, tz=timezone.utc)
+        out.append((datetime(d.year, d.month, d.day, 8, 0), float(c), float(v)))
+    return out
+
+
+def _overwrite_etf_pkl(ticker: str, kind: str, rows: list):
+    out_file = Path(DATA_DIR) / f"series_etf_{ticker}_{kind}.pkl"
+    if out_file.exists():
+        with open(out_file, "rb") as f:
+            old = pickle.load(f).get("data", [])
+        if old:
+            assert rows[0][0] <= old[0][0], f"{out_file.name}: 起始日變晚 {old[0][0]:%Y-%m-%d} -> {rows[0][0]:%Y-%m-%d}"
+            assert len(rows) >= len(old), f"{out_file.name}: 筆數變少 {len(old)} -> {len(rows)}"
+    with open(out_file, "wb") as f:
+        pickle.dump({"title": f"{ticker}-{kind}", "data": [[d, v] for d, v in rows]}, f)
+    logger.info(f"Saved: {out_file.name} n={len(rows)} range={rows[0][0]:%Y-%m-%d}~{rows[-1][0]:%Y-%m-%d}")
+
+
+def fetch_yfinance_etfs():
+    """ETF close/volume(取代 M² fetch_m_square_etfs)。任一失敗會彙整後 raise。"""
+    failures = []
+    for ticker in ETF_TICKERS:
+        try:
+            rows = _yf_chart_ohlcv(ticker)
+            _overwrite_etf_pkl(ticker, "close", [(d, c) for d, c, v in rows])
+            _overwrite_etf_pkl(ticker, "volume", [(d, v) for d, c, v in rows])
+        except Exception as e:
+            logger.error(f"Failed: yfinance ETF {ticker} — {e}")
+            failures.append(f"{ticker}: {e}")
+        time.sleep(0.2)
+    if failures:
+        raise RuntimeError(f"yfinance ETF 抓取失敗 {len(failures)} 檔:\n" + "\n".join(failures))
+
+
 def fetch_yfinance_series():
     """供 get_all_series_data.py 呼叫的入口。任一抓取失敗會彙整後 raise。"""
     failures = []
@@ -171,3 +228,4 @@ def fetch_yfinance_series():
 
 if __name__ == "__main__":
     fetch_yfinance_series()
+    fetch_yfinance_etfs()

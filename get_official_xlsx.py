@@ -558,22 +558,33 @@ def _fetch_595() -> list:
 TWSE_URL_TPL = "https://www.twse.com.tw/rwd/zh/statistics/count?l1=市場交易月報&l2=【證券市場統計概要與市場總市值、投資報酬率、本益比、殖利率一覽表】月報&url=/staticFiles/inspection/inspection/02/001/{yyyymm}_C02001.zip"
 
 
-def _get_twse_month() -> str:
-    """推算 TWSE 最新月份(YYYYMM)。"""
-    today = datetime.now()
-    ym = (today.replace(day=1) - timedelta(days=1)).strftime("%Y%m")
-    return ym
+def _get_twse_months(n: int = 3) -> list:
+    """TWSE 候選月份(YYYYMM),由上個月往前 n 個月。"""
+    months = []
+    d = datetime.now().replace(day=1)
+    for _ in range(n):
+        d = (d - timedelta(days=1)).replace(day=1)
+        months.append(d.strftime("%Y%m"))
+    return months
 
 
 def _fetch_5683() -> list:
     """台股 PE [ok]。TWSE 市場統計月報,民國年 +1911。
-    算法差 ~7-9%(舊 pkl 與 TWSE 數據比對差 0%)。"""
-    ym = _get_twse_month()
-    url = TWSE_URL_TPL.format(yyyymm=ym)
-    logger.info(f"5683: {url}")
-    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
-    r.raise_for_status()
-    z = zipfile.ZipFile(io.BytesIO(r.content))
+    算法差 ~7-9%(舊 pkl 與 TWSE 數據比對差 0%)。
+    月報於次月中旬前才發布,未發布時 TWSE 回 200 + HTML,改往前一個月抓。"""
+    content = None
+    for ym in _get_twse_months():
+        url = TWSE_URL_TPL.format(yyyymm=ym)
+        logger.info(f"5683: {url}")
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+        r.raise_for_status()
+        if r.content[:2] == b"PK":
+            content = r.content
+            break
+        logger.info(f"5683: {ym} 月報尚未發布,改抓前一個月")
+    if content is None:
+        raise RuntimeError("TWSE 近 3 個月月報皆抓不到 zip")
+    z = zipfile.ZipFile(io.BytesIO(content))
     xls_data = z.read(z.namelist()[0])
     wb = xlrd.open_workbook(file_contents=xls_data)
     sheet = wb.sheet_by_index(0)

@@ -39,6 +39,7 @@ from get_cftc_crude_mm import fetch_cftc_crude_mm
 from get_conference_board import fetch_conference_board
 from get_tradingview_series import fetch_tradingview_series
 from get_cme_fedwatch import fetch_cme_fedwatch_main
+from get_aud_nzd_series import fetch_aud_nzd_series
 from calc_pctrank import main as calc_pctrank
 from line_notify import send_line_notification
 from notify_macromicro_blog import run as check_macromicro_blog_new_posts
@@ -94,6 +95,7 @@ tasks = [
     ("Conference Board LEI/CEI (sid 374/376)", fetch_conference_board),
     ("TradingView 德10Y/美德利差/SP500均線breadth (sid 1916/4448/18331/22718, WN-2026-09-22-C批)", fetch_tradingview_series),
     ("CME FedWatch 官方結算 hike/cut (chart 77 備援, ex-M², 不接儀表板)", fetch_cme_fedwatch_main),
+    ("澳元/紐元頁 (CFTC Legacy+TFF / FX / BIS / OECD BoP / 中國商品 / GDT / Stats NZ 移民)", fetch_aud_nzd_series),
 ]
 
 

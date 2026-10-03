@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>紐元持倉學習案例</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+  --roll: #b9b8b0; --tint: rgba(235,104,52,0.07); --note: #898781;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --roll: #5b5a55; --tint: rgba(217,89,38,0.12); --note: #898781;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+  --roll: #5b5a55; --tint: rgba(217,89,38,0.12); --note: #898781;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+  font: 15px/1.65 system-ui, -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif; }
+main { max-width: 1080px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 26px; line-height: 1.3; margin: 8px 0 4px; }
+h2 { font-size: 18px; margin: 40px 0 8px; }
+h3 { font-size: 15px; margin: 0; }
+p { margin: 6px 0; }
+.sub { color: var(--ink2); }
+.muted { color: var(--muted); font-size: 13px; }
+.bar { position: sticky; top: 0; z-index: 5; background: var(--page); padding: 10px 0;
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border-bottom: 1px solid var(--grid); }
+.bar button { font: inherit; font-size: 13px; padding: 4px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--axis); background: var(--surface); color: var(--ink2); }
+.bar button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.bar .spacer { flex: 1; }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px;
+  padding: 14px 16px 10px; margin: 12px 0; }
+.card .head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.readout { font-size: 13px; color: var(--ink2); display: flex; gap: 14px; flex-wrap: wrap;
+  font-variant-numeric: tabular-nums; }
+.readout b { color: var(--ink); font-weight: 600; }
+.sw { display: inline-block; width: 10px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 5px; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: middle; margin-right: 5px; }
+.how { font-size: 13.5px; color: var(--ink2); margin: 4px 0 2px; }
+.check { font-size: 13.5px; margin: 6px 0 2px; padding: 8px 10px; border-left: 3px solid var(--axis);
+  background: var(--page); border-radius: 0 6px 6px 0; }
+svg { display: block; width: 100%; overflow: visible; }
+svg text { font: 11px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--muted); }
+.grid line { stroke: var(--grid); stroke-width: 1; }
+.axis path, .axis line { stroke: var(--axis); }
+.axis .domain { display: none; }
+.xhair { stroke: var(--ink2); stroke-width: 1; pointer-events: none; }
+details { margin-top: 6px; font-size: 13px; }
+summary { cursor: pointer; color: var(--muted); }
+table { border-collapse: collapse; margin-top: 6px; font-variant-numeric: tabular-nums; width: 100%; }
+th, td { text-align: right; padding: 2px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+.tablewrap { max-height: 260px; overflow: auto; }
+.chain { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0; font-size: 13.5px; }
+.chain span.n { background: var(--page); border: 1px solid var(--axis); border-radius: 8px; padding: 4px 10px; }
+.chain span.a { color: var(--muted); }
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.note { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; }
+.note .k { font-weight: 600; }
+.pill { display: inline-block; font-size: 12px; padding: 0 8px; border-radius: 999px; border: 1px solid var(--axis); color: var(--ink2); }
+ol.frame { padding-left: 20px; } ol.frame li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>紐元持倉學習案例：用付鵬的框架讀 CFTC 與國際收支</h1>
+  <p class="sub">NZD/USD × CME 紐元期貨持倉 × 美紐利差 × 紐西蘭國際收支，2004 至今。資料截至 <span id="asof"></span>（CFTC 為週二持倉、週五公布）。</p>
+  <p class="muted">來源：CFTC 公開報告 Legacy / TFF（僅期貨）、FRED（DEXUSNZ 等 G10 匯率、OECD MEI 利率）、BIS 各央行政策利率、Yahoo（匯率尾端補值）、OECD 國際收支（BPM6）。抓取腳本在 scripts/，逐步解析見同目錄 WN。</p>
+
+  <h2>付鵬的匯率總框架：由慢到快四層</h2>
+  <p class="how">來自〈4.1 匯率的分析框架〉與〈匯率背後的「賽馬」機制〉：匯率是<b>兩國的比值</b>，不是單一國家的故事；方法和索羅斯《金融煉金術》同源，由國際收支推資本流動，再由資本流動推匯率。落到交易層，所有政策最後都會收斂成一個數字：<b>利差與利差預期</b>。</p>
+  <ol class="frame">
+    <li><b>結構（年）｜國際收支兩張表</b>：經常帳、資本與金融帳逐項看。紐西蘭經常帳長期逆差，要靠資本流入補缺口。注意投資收益記在<b>經常帳</b>的初級收入：好的時候藏住問題，壞的時候放大問題（⑪⑫）。</li>
+    <li><b>錨（季）｜賽馬</b>：美國是錨，各國央行相對美國收緊或放鬆的<b>速率</b>決定強弱。看三個面向：資產負債表、利率預期、通脹態度，連措辭細節都要看。要看<b>短端的預期</b>（OIS），不是長端利率水準；匯率的大轉折點就是貨幣政策的轉折點（⑥⑦⑧⑨）。</li>
+    <li><b>價格結構（月）｜空間</b>：在匯率上畫長期低點連線（2015 → 2020 → 2022），判斷趨勢還在不在、有沒有破位（①）。</li>
+    <li><b>持倉（週）｜擁擠與時點</b>：總持倉（OI）和「非商業」多空<b>分開</b>看，不只看淨部位。多空同時減倉 = 盤整；空頭單邊持續加倉 = 擁擠，可能加速破位或踩踏（②–⑤、⑩）。</li>
+  </ol>
+  <p class="how">節奏：央行一個月才開一次會，匯率「至少一週一回顧、一個月一個大的觀察」，看週 K、月 K，槓桿壓低。判斷不需要比央行調整得更頻繁。</p>
+  <div class="card" id="race-card">
+    <div class="head"><h3>賽馬排序：各央行 12／24 個月政策利率變化 vs 同期對美元匯率</h3><span class="muted" id="race-asof"></span></div>
+    <p class="how">依 12 個月政策利率變化排序（BIS 月底值）。規則：<b>找跑最快的馬和跑最慢的馬配對</b>；單一央行收緊不代表匯率會升，要看錨（美國）跑多快。</p>
+    <div class="tablewrap" style="max-height:none"><table id="race-table"></table></div>
+    <div class="check"><b>對照數據：</b>過去 24 個月紐西蘭降息 2.75pp，是 G10 最多；澳洲不降反升（12 個月 +0.75pp）。最快的馬（澳）配最慢的馬（紐），AUDNZD 升到 1.239，是 2013-04 以來新高（⑨）。但對美元，紐元 12 個月只有 +0.3%，24 個月 −5.2%，遠不如對澳元跌得多，因為錨自己也在降息（Fed 24 個月 −1.75pp）；2025 年初到現在，廣義美元指數跌了 6.2%。這就是付鵬說的「RBNZ 收緊不等於紐元上漲」，反過來看，降息也不等於對美元下跌。</div>
+  </div>
+  <div class="chain" aria-label="2026-06-22 付鵬的反身性鏈條">
+    <span class="n">投機空頭加倉</span><span class="a">→</span><span class="n">NZD 承壓</span><span class="a">→</span>
+    <span class="n">資本外流誘因增強</span><span class="a">→</span><span class="n">商業避險需求↑</span><span class="a">→</span>
+    <span class="n">利差優勢被貶值預期侵蝕</span><span class="a">→</span><span class="n">經常帳逆差仍在，BoP 壓力放大</span><span class="a">↺</span>
+  </div>
+
+  <div class="bar" role="toolbar" aria-label="時間範圍">
+    <span class="muted">時間範圍</span>
+    <button data-from="2004-01-01">2004 全期</button>
+    <button data-from="2014-01-01">2014 起（付鵬進場）</button>
+    <button data-from="2024-01-01">2024 起（筆記期間）</button>
+    <span class="spacer"></span>
+    <span class="muted">垂直細線 ⓪–⑤ = 付鵬 6 篇筆記日期</span>
+  </div>
+
+  <div id="panels"></div>
+
+  <h2>6 篇筆記：當時怎麼說，事後怎麼走</h2>
+  <p class="how">報酬 = 以筆記日前一個交易日收盤為起點，之後 4／13／26 週的變化。第一排是 NZD/USD，第二排是紐元對澳元（AUDNZD 取倒數），用來檢查「換一匹對手馬」結論會不會不同。持倉判讀是「描述當下」，不是方向預測；拿事後走勢對照，是為了校準自己該多相信哪一類訊號。</p>
+  <div class="notes" id="notes"></div>
+</main>
+
+<script src="lib/d3.min.js"></script>
+<script src="data/chart_data.js"></script>
+<script>
+(() => {
+const P = window.NZD;
+const pd = d3.timeParse("%Y-%m-%d");
+for (const k of ["fx", "wk", "rates", "bop", "dairy", "migr", "race"]) (P[k] || []).forEach(r => r.date = pd(r.d));
+const ASOF = pd(P.asof);
+const LAST = d3.max(P.fx, r => r.date);
+document.getElementById("asof").textContent = P.asof;
+
+const NOTES = [
+  { n: "⓪", d: "2025-01-27", t: "CFTC 持倉特徵－紐西蘭元篇",
+    claim: "硬著陸劇本：高利率壓通脹 → 衰退 → RBNZ 成為最激進的降息央行 → 利差擴大 → 紐元貶值；0.55、0.5 甚至 2008 年以來新低都不意外，創紀錄空頭是「確定性」的體現。",
+    data: "RBNZ 確實降得最兇（24 個月 −2.75pp，G10 最多），但錨也在下沉：廣義美元指數之後跌 6.2%。NZD/USD 只在 2025-04 關稅衝擊時收在 0.554，之後反彈到 0.609，現在 0.567 和當時持平。換成對澳元看，前 26 週幾乎持平；之後澳洲停止降息、2026 年轉為升息，紐元對澳元至今跌了 12%（AUDNZD 1.105 → 1.239）。論點對，但選錯了對手馬；而對手馬會不會分化，要看對方央行的轉折。" },
+  { n: "①", d: "2025-03-22", t: "紐元世紀持倉減少，投機性空頭仍高",
+    claim: "創紀錄投機空頭減倉但仍很高；移民政策調整可能提升對富人的吸引力，經濟仍不樂觀。",
+    data: "那個「世紀持倉」117,627 口落在 3 月換月週（下一週回到 84,543，正是付鵬圖上的標籤值）。非商業空頭 73.6k → 56.4k。" },
+  { n: "②", d: "2025-03-29", t: "紐元空頭部分獲利了結",
+    claim: "巨量投機空頭部分獲利了結，投機多頭也減倉 → 震盪整理、醞釀下一個突破點。",
+    data: "之後的「突破」是向上：空頭回補帶動 NZD 從 0.573 漲到 6 月約 0.60，非商業空頭一路降到 1.6 萬口。" },
+  { n: "③", d: "2025-07-05", t: "紐元持倉大削，澳元擔憂未消",
+    claim: "紐元持倉大削（總理訪華、推旅遊與農業、免簽）→ 預期扭轉；澳元持倉顯示擔憂未消。",
+    data: "數據上削的是「空頭」（30.5k → 15.8k），多頭反而增加，原文「投機性多頭減倉」應是筆誤。敘事帶來的樂觀沒有延續：之後 26 週 NZD 跌 5%。" },
+  { n: "④", d: "2026-06-22", t: "紐西蘭資本淨流出與持倉變化",
+    claim: "2026Q1 金融帳約 61 億紐元淨流出，長期靠資本流入的結構下罕見；利差收窄 → 商業空頭與總持倉擴張。",
+    data: "OECD 版本 2026Q1 金融帳 +50.3 億（BPM6：正 = 淨流出），方向一致、數字略異（版本/口徑）；但 2026Q2 已轉回淨流入 46 億。單季 BoP 雜訊大，誤差與遺漏項達 62 億。" },
+  { n: "⑤", d: "2026-06-22", t: "NZD 投機空頭加倉可能打破平衡",
+    claim: "若非商業空頭再明顯加倉 → 自我強化的負反饋，擁擠後加速破位。",
+    data: "空頭在 7/7 衝到 76.1k（歷史新高），之後沒有續加，反而在 8 月到 9 月初砍到約 2 萬口；接手的是商業（dealer）空頭。條件沒有觸發，NZD 在 0.57–0.59 橫盤。另外，筆記後不到一個月（2026-07）RBNZ 升息到 2.50%，是這輪第一次升息：筆記剛好寫在政策轉折點上。" },
+];
+NOTES.forEach(n => n.date = pd(n.d));
+const NOTE_LINES = [...new Map(NOTES.map(n => [n.d, n])).values()];
+
+// ---------- shared state ----------
+let from = pd("2014-01-01");
+let hover = null;              // Date or null (null → show latest)
+const panels = [];
+const fmtD = d3.timeFormat("%Y-%m-%d");
+const bisect = d3.bisector(r => r.date).left;
+function at(arr, date, key) {  // nearest record at/before date that has the key
+  let i = Math.min(bisect(arr, date, 0), arr.length - 1);
+  if (arr[i] && arr[i].date > date) i--;
+  while (i >= 0 && (arr[i][key] === undefined || arr[i][key] === null)) i--;
+  return i >= 0 ? arr[i] : null;
+}
+
+// ---------- series specs ----------
+const REGIME = {
+  new_short:   { label: "價跌 + OI 增 = 新空頭進場", c: "var(--s2)" },
+  long_liq:    { label: "價跌 + OI 減 = 多頭平倉",   c: "var(--s4)" },
+  short_cover: { label: "價漲 + OI 減 = 空頭回補",   c: "var(--s3)" },
+  new_long:    { label: "價漲 + OI 增 = 新多頭進場", c: "var(--s1)" },
+  roll:        { label: "換月週（不判讀）",           c: "var(--roll)" },
+};
+
+const SPECS = [
+  { id: "fx", title: "① NZD/USD 與付鵬的低點連線", data: P.fx, h: 230, fmt: d3.format(".4f"),
+    series: [{ key: "nzdusd", label: "NZD/USD", c: "var(--s1)" }],
+    how: "藍線是日收盤。虛線連接 2015、2020、2022 三個低點並往右延伸，就是付鵬圖上的「長期下降支撐」：價格貼近這條線 = 趨勢未破；有效跌破 = 新一輪貶值。",
+    check: "延伸線目前約 0.516。2024 年底到 2025 年初是最接近的一次，仍在線上方約 4.6%；之後一直保持在上方 5–10%。價格一路在「低點墊高 vs 長期下降線」之間壓縮，還沒有破位。趨勢線是判斷空間的工具，不是時點訊號。",
+    extra: drawTrendline },
+  { id: "regime", title: "② 價格 × 持倉四象限（每週）", data: P.wk, h: 38, strip: true,
+    how: "每週用「價格變化方向 × OI 變化方向」分類。這是期貨最基本的讀盤：價跌 OI 增代表有人主動開新空單（趨勢強）；價漲 OI 減代表空頭在回補（反彈多半是軋空，不是新多頭）。換月週 OI 失真，灰色略過。",
+    check: "週度分類雜訊很大。2024-11 到 2025-01 共 13 週，「新空頭進場」5 週最多，對上創紀錄空頭的累積期；2025-04 到 06，「空頭回補」4 週最多，對上筆記②之後的反彈。但每一段都混著其他顏色，要看連續幾週的主色，不要只看單週。" },
+  { id: "oi", title: "③ CME 紐元期貨總持倉（OI）", data: P.wk, h: 200, fmt: d3.format(",.0f"), y0: true,
+    series: [{ key: "oi", label: "總持倉（口）", c: "var(--s1)" }],
+    how: "OI = 市場上還沒平倉的合約總數，代表「有多少資金押在紐元上」。橙色空心圈是季月換月週：舊合約未平、新合約已開，OI 會被雙計而暴衝，下一週又掉回來。",
+    check: "付鵬 2025-03 說的「世紀持倉」117,627 口就是換月週的尖峰。但 2026 年 OI 長期在 10 萬口以上是真實的結構擴張：前 20 大 OI 週只有 20% 是換月週。",
+    extra: drawRollDots },
+  { id: "legacy", title: "④ Legacy 報告：非商業多空分開看＋商業空頭（付鵬的「粉色線」）", data: P.wk, h: 230, fmt: d3.format(",.0f"), y0: true,
+    series: [
+      { key: "nc_long", label: "非商業多頭", c: "var(--s1)" },
+      { key: "nc_short", label: "非商業空頭", c: "var(--s2)" },
+      { key: "comm_short", label: "商業空頭", c: "var(--s3)" }],
+    how: "付鵬的下半張圖只畫多空兩條線、不畫淨部位：淨部位 −40k 可能是「多 10k / 空 50k」也可能是「多 30k / 空 70k」，擁擠度和踩踏風險完全不同。商業空頭 ＝ 銀行、企業的避險盤。",
+    check: "2026-07 非商業空頭 76.1k 創新高後沒有續加，8 月到 9 月初砍到約 2 萬口（9/22 回升到 3.3 萬）；同時商業空頭從 3 萬升到 6–9 萬。付鵬說的「避險需求上升」發生了，「投機空頭續加」沒有發生。" },
+  { id: "tff", title: "⑤ TFF 報告：到底是誰在放空？", data: P.wk.filter(r => r.date >= pd("2006-06-13")), h: 230, fmt: d3.format(",.0f"), y0: true,
+    series: [
+      { key: "am_short", label: "資產管理（空）", c: "var(--s1)" },
+      { key: "lev_short", label: "槓桿基金（空）", c: "var(--s2)" },
+      { key: "dealer_short", label: "交易商（空）", c: "var(--s3)" }],
+    how: "Legacy 的「非商業」把資產管理和避險基金混在一起。TFF 把它拆開：槓桿基金 ＝ 追趨勢的短線投機；資產管理 ＝ 退休金、共同基金，常是避險或 carry 部位。這是付鵬筆記沒有拆、但最值得補的一層。",
+    check: "2025–2026 的「巨量投機空頭」主力是資產管理（高峰約 7 萬口），槓桿基金只有 2–3.6 萬。紐元 3 個月利率已低於美元，放空紐元有正 carry，資產管理放空不一定是看空經濟，可能是把紐元當融資貨幣。" },
+  { id: "rates", title: "⑥ 美紐利差：宏觀錨還在不在", data: P.rates, h: 200, fmt: v => (v > 0 ? "+" : "") + d3.format(".2f")(v) + " pp", zero: true,
+    series: [
+      { key: "sp10", label: "美 − 紐 10Y", c: "var(--s1)" },
+      { key: "sp3m", label: "美 − 紐 3M", c: "var(--s2)" }],
+    how: "美減紐。負值 ＝ 紐西蘭利率比較高，外資有動機流入（carry）。付鵬的核心論點：這個負利差是支撐經常帳逆差融資的錨。淡橙色區 ＝ 利差轉正、紐元失去利率優勢。",
+    check: "2014 年 10Y 利差約 −1.9pp，現在約 0；3M 利差在 2025 年轉正，2025-10 最高 +1.4pp，現在 +0.84pp（RBNZ 降息比 Fed 快）。錨已經消失，這部分被數據支持。但要看對線：2004 年以來 NZD/USD 的 6 個月變化，和 3M 利差變化的相關係數是 −0.47，和 10Y 是 −0.34，和政策利率只有 −0.26。筆記④拿 10Y 當錨，可是付鵬自己的框架說要看短端預期；而 3M 利差從 2025-10 起已經往紐元有利的方向收窄（⑧）。",
+    extra: drawPositiveTint },
+  { id: "race", title: "⑦ 賽馬：對手央行 − 紐西蘭的政策利率差", data: P.race || [], h: 200, fmt: v => (v > 0 ? "+" : "") + d3.format(".2f")(v) + " pp", zero: true,
+    series: [
+      { key: "us_nz", label: "美 − 紐", c: "var(--s1)" },
+      { key: "au_nz", label: "澳 − 紐", c: "var(--s2)" }],
+    how: "BIS 月底政策利率。正值 ＝ 對手利率比紐西蘭高。賽馬：美國是錨，決定紐元對美元的大方向；交叉匯率（AUDNZD）則是兩匹非美元馬之間的速率差。同一個「RBNZ 降息」，對不同的馬結果不同。",
+    check: "2024-07 紐西蘭 OCR 5.50%，還比 Fed 高；之後 RBNZ 降到 2.25%，美 − 紐在 2025-11 拉到 +1.6pp。澳洲 2026 年反而升息三次到 4.35%，澳 − 紐在 2026-05 到 +2.1pp，接近 2011 年 +2.25pp 的最大值。2026-07 RBNZ 升息到 2.50%，是這輪第一次升息，兩條線同時往下折。付鵬說「匯率的大轉折點都是貨幣政策轉折點」，這個轉折點就在這裡。" },
+  { id: "exp", title: "⑧ 短端預期：3M 市場利率 − 政策利率（代替 OIS）", data: P.race || [], h: 190, fmt: v => (v > 0 ? "+" : "") + d3.format(".2f")(v) + " pp", zero: true,
+    series: [
+      { key: "nz_exp", label: "紐：3M 票據 − OCR", c: "var(--s1)" },
+      { key: "us_exp", label: "美：3M − 聯邦基金目標", c: "var(--s2)" }],
+    how: "付鵬用 OIS 看市場對央行下一步的定價。紐西蘭 OIS 沒有免費資料，這裡用 3 個月銀行票據利率減 OCR 代替：正常時約 +0.2pp（期限與信用溢價，虛線是 2004 年以來中位數），明顯高於虛線 ＝ 市場在定價升息，接近或低於 0 ＝ 在定價降息。",
+    check: "紐西蘭這條線從 2025-09 的 −0.07 升到 2026-08 的 +0.48，位在 2004 年以來第 93 百分位。前兩輪升息前也有同樣的抬頭：2014-03 升息前升到 0.43，2021-10 升息前升到 0.32。這次從 2026-04 開始往上，7 月 RBNZ 真的升息。筆記④⑤寫於 6 月，當時短端已經在發出紐元轉強的訊號。美國約 +0.2，屬正常水準，Fed 自 2025-12 起按兵不動。",
+    extra: drawMedianLine },
+  { id: "cross", title: "⑨ AUDNZD：最快的馬 vs 最慢的馬", data: P.fx, h: 190, fmt: d3.format(".4f"),
+    series: [{ key: "audnzd", label: "AUDNZD", c: "var(--s1)" }],
+    how: "澳元兌紐元，上升 ＝ 紐元相對澳元走弱。把美國這個共同因素扣掉，剩下的就是兩國自身的速率差。⓪ 的硬著陸論點如果用這個交叉匯率表達，結果完全不同。",
+    check: "現在 1.239，是 2013-04 以來新高；⓪ 發表時是 1.105，之後紐元對澳元跌了 12%（主要在 2025-08 之後），對美元只跌約 1%。2004 年以來 AUDNZD 月均價和澳 − 紐政策利率差的相關係數 0.64（12 個月變化 0.47），賽馬在交叉匯率上比在對美元上清楚得多。" },
+  { id: "rel", title: "⑩ 紐元 vs 澳元：非商業淨部位佔 OI %", data: P.wk, h: 200, fmt: v => d3.format("+.1f")(v) + "%", zero: true,
+    series: [
+      { key: "nzd_net_pct", label: "紐元", c: "var(--s1)" },
+      { key: "aud_net_pct", label: "澳元", c: "var(--s2)" }],
+    how: "用佔 OI 百分比而不是口數，兩個不同規模的市場才能放在同一條軸上比較。筆記③的邏輯就是「相對」：同樣的宏觀衝擊，市場對紐元和澳元的定價不同。",
+    check: "2025-07 紐元淨部位短暫轉正、澳元仍深度淨空，對上筆記③。但 2026 年是反過來：澳元轉為大幅淨多、紐元回到淨空，對上⑦的澳洲升息。⓪ 提到紐澳週期有約 4 年時差：澳元非商業多頭 52 週均值在 2013-06 見頂，紐元在 2018-06 見頂，實測約 5 年，對應鐵礦石和乳製品週期不同步。" },
+  { id: "bop", title: "⑪ 紐西蘭國際收支（4 季滾動加總，十億紐元）", data: P.bop, h: 220, fmt: v => d3.format("+.1f")(v) + " bn", zero: true,
+    series: [
+      { key: "ca4", label: "經常帳", c: "var(--s1)" },
+      { key: "inflow4", label: "資本淨流入（−金融帳）", c: "var(--s2)" }],
+    how: "恆等式：經常帳 + 資本帳 − 金融帳 + 誤差遺漏 = 0。經常帳逆差（藍線在 0 下）必須由資本淨流入（橙線在 0 上）補。BPM6 金融帳正值 ＝ 淨流出，這裡取負號讓「流入」在上方，對應付鵬圖的橙色柱。",
+    check: "經常帳逆差從 2022 年 −343 億收窄到 2026Q2 的 −146 億，需要補的缺口變小了，這是「雙殺」論點的反面證據。2024 年資本淨流入只有 17 億、誤差遺漏卻有 197 億，季度資料要看滾動值。拆開看更有意思：筆記④說的 2026Q1 淨流出全部來自「其他投資」（銀行跨境資金淨流出 194 億），同季證券投資還淨流入 132 億；到 2026Q2 反過來，總帳轉回淨流入，證券投資卻淨流出 54 億。證券淨流入的 4 季滾動從 2025Q1 的 253 億降到 2026Q2 的 112 億，少了一半多。這比單季淨流出更能支持「錨消失、外資減少配置」。" },
+  { id: "casplit", title: "⑫ 經常帳拆解：初級收入 vs 商品＋服務（4 季滾動，十億紐元）", data: P.bop, h: 200, fmt: v => d3.format("+.1f")(v) + " bn", zero: true,
+    series: [
+      { key: "gs4", label: "商品＋服務", c: "var(--s1)" },
+      { key: "pi4", label: "初級收入（投資收益等）", c: "var(--s2)" }],
+    how: "付鵬在〈4.1〉問過：投資收益記在經常帳還是資本帳？答案是經常帳（初級收入）。紐西蘭銀行業以澳資為主，外債也多，每年付給外資的利息與利潤是一筆固定流出。",
+    check: "初級收入除了 2020 年（−62 億），2005 年以來每年都在 −80 到 −142 億之間，2004–2019 年平均佔經常帳逆差的 126%：貿易大致平衡甚至順差，逆差幾乎全來自付給外資的收益。2022 年逆差擴大到 −343 億是貿易端造成的（疫情後進口大增、旅遊還沒恢復）；現在貿易回到 −30 億，初級收入仍有 −110 億。所以「缺口收窄」只收窄了貿易那一塊，結構性的 −110 億每年都要靠資本流入補。這就是付鵬說的，好的時候藏住問題，壞的時候放大問題。" },
+];
+if (P.dairy) SPECS.push({ id: "dairy", title: "⑬ GDT 乳製品價格指數（子代理抓取）", data: P.dairy, h: 180, fmt: d3.format(",.0f"),
+  series: [{ key: "value", label: "GDT 價格指數", c: "var(--s1)" }],
+  how: "GDT 雙週拍賣價格指數（每月取最後一場），2016-09 起。乳製品是紐西蘭最大宗出口，影響經常帳的收入端。",
+  check: "2022 年乳價衝上 1,579 高點，NZD 卻從 0.70 跌到 0.55：那一年主導匯率的是美元與利差，不是出口價格。付鵬在賽馬篇提醒，商品漲價要分清楚是需求推動還是供給推動，供給推動的漲價不會像需求推動那樣回饋到經常帳和資本帳。2022 年的乳價高點伴隨全球通脹與供給偏緊，比較接近後者。乳價要和⑪⑫一起看，它解釋的是「缺口多大」，不是短線匯率訊號。" });
+if (P.migr) SPECS.push({ id: "migr", title: "⑭ 紐西蘭淨移民（子代理抓取）", data: P.migr, h: 200, fmt: d3.format(",.0f"), zero: true,
+  series: [
+    { key: "net_total", label: "全體淨移民", c: "var(--s1)" },
+    { key: "net_nz_citizens", label: "紐西蘭公民淨移民", c: "var(--s2)" }],
+  how: "Stats NZ 暫定估計，12 個月滾動加總。付鵬講座提到的「人才流向澳洲」：紐西蘭公民淨移民長期為負，負得越深 ＝ 本地人才流失越快。",
+  check: "紐西蘭公民淨流出在 2024-04 達 −45,913 人（12 個月），超過 2012 年澳洲礦業景氣時的 −44,385，創紀錄；至今仍約 −3.8 萬。人才外流這一點被數據支持。⓪ 還說「紐元貶值會吸引人口流入，紐元強勢會把人推向澳洲」：實測全體淨移民和 NZD/USD 的相關係數 −0.38，部分成立；但公民外流和 NZD/USD 幾乎無關（≈0），和 AUDNZD 相關 −0.53。公民比較的是澳洲相對紐西蘭的機會，所以該看⑨，不是紐元對美元。它是慢變數，影響潛在成長，不影響下週匯率。" });
+
+// ---------- build DOM ----------
+const root = d3.select("#panels");
+SPECS.forEach(s => {
+  const card = root.append("section").attr("class", "card").attr("id", "p-" + s.id);
+  const head = card.append("div").attr("class", "head");
+  head.append("h3").text(s.title);
+  s.readout = head.append("div").attr("class", "readout");
+  card.append("p").attr("class", "how").text(s.how);
+  s.svg = card.append("svg").attr("role", "img").attr("aria-label", s.title);
+  if (s.check) card.append("div").attr("class", "check").html("<b>對照數據：</b>" + s.check);
+  const det = card.append("details");
+  det.append("summary").text("表格檢視（目前範圍，最近 40 筆）");
+  s.table = det.append("div").attr("class", "tablewrap");
+  panels.push(s);
+});
+const missing = [!P.dairy && "乳製品價格（data/dairy_index.csv）", !P.migr && "淨移民（data/nz_migration.csv）"].filter(Boolean);
+if (missing.length) root.append("p").attr("class", "muted")
+  .text(`尚未納入：${missing.join("、")}。由子代理另行抓取，CSV 產生後重跑 scripts/build_chart_data.py 就會出現。`);
+
+// ---------- drawing ----------
+const M = { t: 10, r: 56, b: 24, l: 8 };
+function render() {
+  const W = document.getElementById("panels").clientWidth - 34;
+  const x = d3.scaleTime().domain([from, LAST]).range([M.l, W - M.r]);
+  panels.forEach(s => drawPanel(s, x, W));
+  updateHover();
+  d3.selectAll(".bar button").attr("aria-pressed", function () { return +pd(this.dataset.from) === +from; });
+}
+
+function drawPanel(s, x, W) {
+  const H = s.h, svg = s.svg.attr("viewBox", `0 0 ${W} ${H}`).attr("height", H);
+  svg.selectAll("*").remove();
+  const vis = s.data.filter(r => r.date >= from);
+  s.x = x; s.vis = vis;
+  const g = svg.append("g");
+
+  if (s.strip) {
+    const bw = Math.max(1, (x.range()[1] - x.range()[0]) / Math.max(1, vis.length) - 0.6);
+    g.selectAll("rect").data(vis.filter(r => r.regime)).join("rect")
+      .attr("x", r => x(r.date) - bw / 2).attr("width", bw).attr("y", 4).attr("height", H - 22).attr("rx", 1)
+      .style("fill", r => REGIME[r.regime].c);
+    s.readoutFn = r => { const q = r && at(s.data, r, "regime");
+      return q && q.regime ? `<span><span class="dot" style="background:${REGIME[q.regime].c}"></span><b>${REGIME[q.regime].label}</b> · ${q.d}</span>` : ""; };
+    const lg = Object.values(REGIME).map(v => `<span><span class="dot" style="background:${v.c}"></span>${v.label}</span>`).join("");
+    s.legendHtml = lg;
+  } else {
+    let ext = d3.extent(vis.flatMap(r => s.series.map(se => r[se.key])).filter(v => v != null));
+    if (s.y0) ext[0] = Math.min(0, ext[0]);
+    if (s.zero) ext = [Math.min(0, ext[0]), Math.max(0, ext[1])];
+    const y = d3.scaleLinear().domain(ext).nice(5).range([H - M.b, M.t]);
+    s.y = y;
+    g.append("g").attr("class", "grid").selectAll("line").data(y.ticks(5)).join("line")
+      .attr("x1", M.l).attr("x2", W - M.r).attr("y1", d => y(d)).attr("y2", d => y(d));
+    if (s.extra) s.extra(g, x, y, s, W, H);
+    if (s.zero) g.append("line").attr("x1", M.l).attr("x2", W - M.r).attr("y1", y(0)).attr("y2", y(0))
+      .style("stroke", "var(--axis)").style("stroke-width", 1.5);
+    s.series.forEach(se => {
+      g.append("path").datum(vis.filter(r => r[se.key] != null))
+        .attr("fill", "none").style("stroke", se.c).attr("stroke-width", 2).attr("stroke-linejoin", "round")
+        .attr("d", d3.line().x(r => x(r.date)).y(r => y(r[se.key])));
+    });
+    g.append("g").attr("class", "axis").attr("transform", `translate(${W - M.r},0)`)
+      .call(d3.axisRight(y).ticks(5).tickSize(0).tickPadding(6).tickFormat(s.axisFmt || shortFmt(ext)));
+    s.readoutFn = date => s.series.map(se => {
+      const r = at(s.data, date, se.key);
+      return r ? `<span><span class="sw" style="background:${se.c}"></span>${se.label} <b>${s.fmt(r[se.key])}</b></span>` : "";
+    }).join("") + (() => { const r = at(s.data, date, s.series[0].key); return r ? `<span>${r.d}</span>` : ""; })();
+  }
+  // note lines on every panel
+  g.selectAll(".nl").data(NOTE_LINES.filter(n => n.date >= from)).join("line")
+    .attr("x1", n => x(n.date)).attr("x2", n => x(n.date)).attr("y1", 0).attr("y2", H - M.b)
+    .style("stroke", "var(--note)").attr("stroke-width", 1).attr("opacity", 0.55);
+  g.append("g").attr("class", "axis").attr("transform", `translate(0,${H - M.b + 2})`)
+    .call(d3.axisBottom(x).ticks(Math.max(3, Math.floor(W / 110))).tickSize(0).tickPadding(6));
+  s.xh = g.append("line").attr("class", "xhair").attr("y1", 0).attr("y2", H - M.b).style("display", "none");
+  svg.append("rect").attr("x", M.l).attr("width", W - M.r - M.l).attr("height", H).attr("fill", "transparent")
+    .on("pointermove", ev => { hover = x.invert(d3.pointer(ev)[0]); updateHover(); })
+    .on("pointerleave", () => { hover = null; updateHover(); });
+  fillTable(s);
+}
+
+function shortFmt(ext) {
+  const span = Math.max(Math.abs(ext[0]), Math.abs(ext[1]));
+  if (span >= 10000) return d => d3.format("~s")(d).replace("k", "k");
+  if (span < 2) return d3.format(".2f");
+  return d3.format("~r");
+}
+
+function updateHover() {
+  const d = hover || LAST;
+  panels.forEach(s => {
+    if (s.xh) s.xh.style("display", hover ? null : "none").attr("x1", s.x(d)).attr("x2", s.x(d));
+    s.readout.html((s.legendHtml && !hover ? s.legendHtml : "") + (s.readoutFn(d) || ""));
+  });
+}
+
+function fillTable(s) {
+  const rows = s.vis.slice(-40).reverse();
+  const cols = s.strip ? [{ key: "regime", label: "分類" }, { key: "fx", label: "NZD/USD" }, { key: "oi", label: "OI" }] : s.series;
+  const t = s.table.html("").append("table");
+  t.append("thead").append("tr").selectAll("th").data(["日期", ...cols.map(c => c.label)]).join("th").text(d => d);
+  t.append("tbody").selectAll("tr").data(rows).join("tr").selectAll("td")
+    .data(r => [r.d, ...cols.map(c => r[c.key] == null ? "" : (c.key === "regime" ? (REGIME[r.regime] || { label: "" }).label : (s.fmt ? s.fmt(r[c.key]) : r[c.key])))])
+    .join("td").text(d => d);
+}
+
+// ---------- panel extras ----------
+function lowIn(a, b) {
+  const seg = P.fx.filter(r => r.date >= pd(a) && r.date <= pd(b) && r.nzdusd != null);
+  return seg.reduce((m, r) => r.nzdusd < m.nzdusd ? r : m, seg[0]);
+}
+function drawTrendline(g, x, y, s, W) {
+  const lows = [lowIn("2015-06-01", "2015-12-31"), lowIn("2020-01-01", "2020-06-30"), lowIn("2022-08-01", "2022-12-31")];
+  // 用對數價格最小平方法擬合三個低點，延伸到最新日期
+  const t0 = +lows[0].date, xs = lows.map(r => (+r.date - t0) / 864e5), ys = lows.map(r => Math.log(r.nzdusd));
+  const mx = d3.mean(xs), my = d3.mean(ys);
+  const b = d3.sum(xs.map((v, i) => (v - mx) * (ys[i] - my))) / d3.sum(xs.map(v => (v - mx) ** 2)), a = my - b * mx;
+  const f = dt => Math.exp(a + b * ((+dt - t0) / 864e5));
+  const pts = [lows[0].date, LAST].map(dt => ({ date: dt, v: f(dt) })).filter(p => p.date >= from || p.date === LAST);
+  const start = lows[0].date < from ? from : lows[0].date;
+  g.append("line").attr("x1", x(start)).attr("y1", y(f(start))).attr("x2", x(LAST)).attr("y2", y(f(LAST)))
+    .style("stroke", "var(--ink2)").attr("stroke-width", 1.5).attr("stroke-dasharray", "5 4");
+  g.selectAll(".low").data(lows.filter(r => r.date >= from)).join("circle")
+    .attr("cx", r => x(r.date)).attr("cy", r => y(r.nzdusd)).attr("r", 4.5)
+    .style("fill", "var(--surface)").style("stroke", "var(--ink2)").attr("stroke-width", 2);
+  g.append("text").attr("x", x(LAST) - 4).attr("y", y(f(LAST)) + 16).attr("text-anchor", "end")
+    .text(`延伸線 ≈ ${f(LAST).toFixed(3)}`);
+  // 相距 14 天內的筆記合併成一個標籤（①② 只差一週，分開標會疊在一起）
+  const clusters = [];
+  NOTES.filter(n => n.date >= from).forEach(n => {
+    const c = clusters[clusters.length - 1];
+    if (c && (n.date - c.date) / 864e5 <= 14) c.label += n.n; else clusters.push({ date: n.date, label: n.n });
+  });
+  g.selectAll(".nlab").data(clusters).join("text")
+    .attr("x", c => x(c.date) + 3).attr("y", 12).text(c => c.label);
+}
+function drawRollDots(g, x, y, s) {
+  g.selectAll(".roll").data(s.vis.filter(r => r.roll)).join("circle")
+    .attr("cx", r => x(r.date)).attr("cy", r => y(r.oi)).attr("r", 4)
+    .style("fill", "var(--surface)").style("stroke", "var(--s2)").attr("stroke-width", 2);
+  s.legendHtml = `<span><span class="dot" style="background:var(--surface);border:2px solid var(--s2);width:9px;height:9px"></span>換月週</span>`;
+}
+function drawMedianLine(g, x, y, s, W) {
+  const vals = P.race.map(r => r.nz_exp).filter(v => v != null).sort(d3.ascending), med = d3.quantile(vals, 0.5);
+  g.append("line").attr("x1", M.l).attr("x2", W - M.r).attr("y1", y(med)).attr("y2", y(med))
+    .style("stroke", "var(--ink2)").attr("stroke-width", 1).attr("stroke-dasharray", "4 4");
+  g.append("text").attr("x", W - M.r - 4).attr("y", y.range()[1] + 10).attr("text-anchor", "end").text(`虛線：紐 2004 年以來中位數 ${med.toFixed(2)}`);
+}
+function drawPositiveTint(g, x, y, s, W) {
+  g.append("rect").attr("x", M.l).attr("width", W - M.r - M.l).attr("y", y.range()[1]).attr("height", Math.max(0, y(0) - y.range()[1]))
+    .style("fill", "var(--tint)");
+  g.append("text").attr("x", M.l + 4).attr("y", y.range()[1] + 12).text("美元利率較高：紐元失去 carry 優勢");
+}
+
+// ---------- notes grid ----------
+const fx = P.fx.filter(r => r.nzdusd != null);
+function fwd(d, weeks) {
+  const p0 = at(fx, d3.timeDay.offset(d, -1), "nzdusd"), end = d3.timeWeek.offset(d, weeks);
+  if (end > LAST) return null;
+  const p1 = at(fx, end, "nzdusd");
+  return (p1.nzdusd / p0.nzdusd - 1) * 100;
+}
+const fxa = P.fx.filter(r => r.audnzd != null);
+function fwdVsAud(d, weeks) {  // 紐元對澳元 = AUDNZD 取倒數
+  const p0 = at(fxa, d3.timeDay.offset(d, -1), "audnzd"), end = d3.timeWeek.offset(d, weeks);
+  if (end > LAST) return null;
+  return (p0.audnzd / at(fxa, end, "audnzd").audnzd - 1) * 100;
+}
+const pills = (f, d) => [4, 13, 26].map(k => { const v = f(d, k); return `<span class="pill">${k} 週 ${v == null ? "未到" : d3.format("+.1f")(v) + "%"}</span>`; }).join(" ");
+d3.select("#notes").selectAll(".note").data(NOTES).join("div").attr("class", "note").html(n =>
+  `<div class="k">${n.n} ${n.d}｜${n.t}</div><p><b>付鵬：</b>${n.claim}</p><p><b>數據：</b>${n.data}</p>` +
+  `<div class="muted">對美元</div><div>${pills(fwd, n.date)}</div><div class="muted" style="margin-top:4px">對澳元</div><div>${pills(fwdVsAud, n.date)}</div>`);
+
+// ---------- 賽馬排序表 ----------
+if (P.raceTable) {
+  const RT = P.raceTable, f2 = v => v == null ? "—" : (v > 0 ? "+" : "") + d3.format(".2f")(v);
+  const f1 = v => v == null ? "—" : (v > 0 ? "+" : "") + d3.format(".1f")(v) + "%";
+  document.getElementById("race-asof").textContent = `政策利率 ${RT.asof} 月底；匯率 = 對美元，同期`;
+  const t = d3.select("#race-table");
+  t.append("thead").append("tr").selectAll("th")
+    .data(["央行", "政策利率 %", "12 個月變化 pp", "24 個月變化 pp", "對美元 12 個月", "對美元 24 個月"]).join("th").text(d => d);
+  t.append("tbody").selectAll("tr").data(RT.rows).join("tr")
+    .style("font-weight", r => ["紐西蘭", "美國", "澳洲"].includes(r.c) ? 600 : null)
+    .selectAll("td").data(r => [r.c + (r.c === "美國" ? "（錨）" : ""), d3.format(".2f")(r.rate), f2(r.ch12), f2(r.ch24), f1(r.fx12), f1(r.fx24)])
+    .join("td").text(d => d);
+}
+
+d3.selectAll(".bar button").on("click", function () { from = pd(this.dataset.from); render(); });
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(render, 120); });
+render();
+})();
+</script>
+</body>
+</html>

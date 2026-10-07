@@ -1,0 +1,11 @@
+claim_id,claim,verdict,evidence,source_url,as_of
+1,LME 鋁庫存跌至約 24.5 萬噸，本世紀新低；消費天數約 50 天。,部分成立,2026年LME鋁總庫存確實降至約24.5萬噸，創下本世紀新低。但目前庫存水準相當於全球不到「1天」的消費量，50天說法有誤或混淆了過去的高點（2012年約100天，後來降至50天）。,https://www.mysteel.net/article/5049539-0518/LME-aluminum-inventory-drops-to-record-lows.html,2026-10
+2,英美 2024 年制裁禁止交割新俄鋁；42.5 萬噸缺口將引發劇烈現貨逆價差（backwardation）。,部分成立,英美確實於2024年4月制裁禁止新俄鋁於LME交割，引發市場現貨逆價差。但42.5萬噸這數字更可能是某煤礦產能誤植（42.5 million tonnes），當時LME庫存中高達91~95%為舊俄鋁，並非絕對缺口。,https://www.stonex.com,2026-10
+3,歐洲在能源危機後已減產 50% 原鋁。,成立,自2022年歐洲能源危機以來，高昂的電力成本導致歐洲原鋁冶煉產能被迫削減了約50%（約140萬噸），並引發去工業化及碳洩漏的擔憂。,https://think.ing.com/,2026-10
+4,歐洲完稅溢價與美國中西部溢價（US Midwest Premium）將同步突破歷史區間（查證目前水準與歷史高點）。,成立,2026年美國中西部溢價（MWP）因關稅與供應鏈問題突破2100美元/噸創下歷史新高；同時歐洲完稅溢價也維持在歷史高檔，雙雙打破歷史區間。,https://www.cmegroup.com/,2026-10
+5,"中國 4,500 萬噸產能上限；「鋁水直接合金化」使可出口的實體純鋁錠極為緊缺。",成立,中國官方維持4500萬噸原鋁產能上限，2026年產量已逼近紅線。且大量採用「鋁水直接合金化」節省能耗，大幅減少了純鋁錠的產出與出口，導致實體純鋁錠供應緊缺。,https://www.mining.com/,2026-10
+6,"Alcoa（AA）垂直整合、100% 控股 AWAC；LME 鋁價每變動 $10/t，淨利變動約 $1,100 萬美元。",部分成立,Alcoa於2024年8月完成收購Alumina Ltd，達到100%控股AWAC。但根據官方敏感度分析，LME每變動$100/t影響淨利約1.9億美元，換算每$10/t影響約1900萬美元，並非1100萬美元。,https://www.alcoa.com/,2026-10
+7,Century（CENX）滿載出貨 63 萬噸；LME＋溢價每漲 $400/t，EBITDA 增加 $2.52 億美元。,部分成立,Century在2026年的滿載出貨目標確實約為63萬噸。但依其官方敏感度資料，LME每漲$100/t帶動EBITDA增加約5200萬美元，漲$400/t應增加約2.08億美元，2.52億美元有誤。,https://seekingalpha.com/,2026-10
+8,Alcoa 是氧化鋁淨賣方，API 上漲擴大精煉毛利；Century 外購氧化鋁，高價侵蝕冶煉價差。,成立,Alcoa為氧化鋁淨賣方（產量大於內部冶煉需求），受惠於氧化鋁價格API上漲；Century需外購氧化鋁，高昂的氧化鋁價格確實會壓縮其冶煉利潤空間。,https://www.woodmac.com/,2026-10
+9,Alcoa 水電長約＋Massena 廠電價與 LME 收益共享；Century Sebree 廠曝露於 MISO 現貨尖峰電價。,部分成立,Century Sebree廠確實暴露於MISO市場的現貨電價波動。但Alcoa Massena廠於2026年已與NYPA簽訂10年固定再生能源合約，並非與LME收益共享機制。,https://www.gridstatus.io/,2026-10
+10,Alcoa 的 ELYSIS 無碳冶煉技術；Century 受惠 IRA 45X 稅收抵免，每噸約 $90 EBITDA。,部分成立,Alcoa擁有ELYSIS無碳技術，且Century也受惠IRA 45X稅收抵免。但「90」一詞來自Century Mt. Holly廠重啟的「90個電解槽(pots)」，而非每噸90美元的EBITDA貢獻。,https://centuryaluminum.com/,2026-10

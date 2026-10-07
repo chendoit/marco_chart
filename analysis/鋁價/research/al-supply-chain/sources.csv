@@ -1,0 +1,21 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+production,iai_primary_aluminium_global,IAI,https://international-aluminium.org/statistics/primary-aluminium-production/,monthly,1973-01-01,2026-08-31,free,json-api,yes,全球原鋁月度產量（千噸），經 ALVIS REST API 抓取
+production,iai_primary_aluminium_china,IAI,https://international-aluminium.org/statistics/primary-aluminium-production/,monthly,1973-01-01,2026-08-31,free,json-api,yes,中國原鋁月度產量估算（千噸），經 ALVIS REST API 抓取
+production,iai_primary_aluminium_north_america,IAI,https://international-aluminium.org/statistics/primary-aluminium-production/,monthly,1973-01-01,2026-08-31,free,json-api,yes,北美原鋁月度產量（千噸），經 ALVIS REST API 抓取
+production,iai_primary_aluminium_gcc,IAI,https://international-aluminium.org/statistics/primary-aluminium-production/,monthly,1973-01-01,2026-08-31,free,json-api,yes,海灣合作委員會(GCC)原鋁月度產量（千噸），經 ALVIS REST API 抓取
+production,iai_metallurgical_alumina_global,IAI,https://international-aluminium.org/statistics/alumina-production/,monthly,1974-01-01,2026-08-31,free,json-api,yes,全球冶金級氧化鋁月度產量（千噸），經 ALVIS REST API 抓取
+production,iai_metallurgical_alumina_china,IAI,https://international-aluminium.org/statistics/alumina-production/,monthly,1974-01-01,2026-08-31,free,json-api,yes,中國冶金級氧化鋁月度產量估算（千噸），經 ALVIS REST API 抓取
+production,china_electrolytic_aluminum_output_monthly,NBS (via DBnomics),https://api.db.nomics.world/v22/series/NBS/M_A02091H,monthly,2025-02-01,2026-02-01,free,json-api,yes,中國國家統計局電解鋁月度當期/累計產量（萬噸），API固定提供滾動13個月
+production,china_alumina_output_monthly,NBS (via DBnomics),https://api.db.nomics.world/v22/series/NBS/M_A02091C,monthly,2025-02-01,2026-02-01,free,json-api,yes,中國國家統計局氧化鋁月度當期/累計產量（萬噸），API固定提供滾動13個月
+production,china_aluminum_products_output_monthly,NBS (via DBnomics),https://api.db.nomics.world/v22/series/NBS/M_A02091K,monthly,2025-02-01,2026-02-01,free,json-api,yes,中國國家統計局鋁材月度當期/累計產量（萬噸），API固定提供滾動13個月
+production,usgs_world_aluminum_reserves_production,USGS,https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-aluminum.pdf,annual,1995-01-01,2024-01-31,free,pdf,yes,USGS MCS 全球各國原鋁產量與儲量年度統計報告（千噸）
+production,usgs_world_bauxite_reserves_production,USGS,https://www.usgs.gov/centers/national-minerals-information-center/bauxite-and-alumina-statistics-and-information,annual,1995-01-01,,free,xlsx,no,USGS 鋁土礦分國儲量與產量年度資料檔（年報發布）
+production,china_aluminum_operating_capacity,SMM / Baiinfo,https://www.smm.cn/,monthly,,,paid,manual,no,中國電解鋁運行產能與開工率（萬噸），付費報告；免費替代為CNIA官方公報與上市鋁企定期報告
+price,shfe_alumina_futures_ao,SHFE (via Sina),https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_kline=/InnerFuturesNewService.getDailyKLine?symbol=AO0,daily,2023-06-19,2026-09-30,free,json-api,yes,上海期貨交易所氧化鋁期貨連續主力合約日收盤價與持倉量（元/噸）
+price,shfe_aluminium_futures_al,SHFE (via Sina),https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_kline=/InnerFuturesNewService.getDailyKLine?symbol=AL0,daily,2005-01-04,2026-09-30,free,json-api,yes,上海期貨交易所滬鋁期貨連續主力合約日收盤價與持倉量（元/噸）
+price,alumina_fob_australia,Fastmarkets / S&P Platts,https://www.spglobal.com/commodityinsights/,daily,,,paid,manual,no,澳洲 FOB 氧化鋁現貨指數(PAX)，國際基準價；無免費公開API
+price,china_bauxite_guinea_cif_derived,UN Comtrade / China Customs,https://comtradeapi.un.org/public/v1/preview/C/A/HS,annual,2015-12-31,2024-12-31,free,json-api,yes,中國自幾內亞進口鋁土礦推算CIF均價（美元/噸），以進口總值÷進口量計算
+trade,china_bauxite_import_by_partner,UN Comtrade,https://comtradeapi.un.org/public/v1/preview/C/A/HS,annual,2015-12-31,2024-12-31,free,json-api,yes,中國鋁土礦分國進口量與進口值（HS 260600，幾內亞/澳洲/印尼等）
+trade,china_customs_stats_platform,China Customs,http://stats.customs.gov.cn/,monthly,,,free,html-table,no,海關總署統計在線查詢平台，含圖形驗證碼，支援查詢 HS 2606/2818.20/7601
+trade,guinea_bauxite_export_policy,Guinea Ministry of Mines / BCRG,https://mines.gov.gn/,quarterly,,,free,pdf,no,幾內亞鋁土礦季度出口統計與官方政策公告（礦權整頓與最低離岸參考價）
+trade,us_unwrought_aluminum_imports,US Census / UN Comtrade,https://api.census.gov/data/timeseries/intltrade/imports/hs,monthly,2015-01-01,2023-12-31,free,json-api,yes,美國原鋁未鍛軋鋁進口（HS 7601），Census API連線超時，Comtrade(Reporter 842)實測成功

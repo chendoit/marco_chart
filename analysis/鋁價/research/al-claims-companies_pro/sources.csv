@@ -1,0 +1,8 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+Financials,AA Daily Stock,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/AA?range=10y&interval=1d,daily,2016-10-07,2026-10-07,free,json-api,yes,Requires User-Agent Mozilla/5.0
+Financials,CENX Daily Stock,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/CENX?range=10y&interval=1d,daily,2016-10-07,2026-10-07,free,json-api,yes,Requires User-Agent Mozilla/5.0
+Financials,AA SEC XBRL,SEC EDGAR,https://data.sec.gov/api/xbrl/companyfacts/CIK0001675149.json,quarterly,,2026-09-30,free,json-api,yes,Requires User-Agent aluminum-research
+Financials,CENX SEC XBRL,SEC EDGAR,https://data.sec.gov/api/xbrl/companyfacts/CIK0000949157.json,quarterly,,2026-09-30,free,json-api,yes,Requires User-Agent aluminum-research
+Aluminum,LME Aluminum Official Data,LME,https://www.lme.com/en/Metals/Non-ferrous/LME-Aluminium,daily,,,paid,manual,no,Free delayed data available
+Premium,US Midwest Premium,Fastmarkets,https://www.fastmarkets.com/,daily,,,paid,manual,no,No free alternative for full history
+Macro,CFTC Aluminum Positions,CFTC Socrata,https://publicreporting.cftc.gov/resource/6dca-aqww.json,weekly,,,free,json-api,no,Legacy CFTC format

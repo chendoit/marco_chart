@@ -1,0 +1,21 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+premium,US Midwest Premium Futures (AUP),CME / Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/AUP=F,daily,2021-10-07,2026-10-07,free,json-api,yes,美國中西部鋁交易溢價期貨結算價（美元/磅；換算美元/噸需乘2204.62）
+premium,European Duty-Paid Premium Futures (EDP),CME / Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/EDP=F,daily,2021-10-07,2026-10-07,free,json-api,yes,歐洲鹿特丹完稅溢價期貨結算價（美元/公噸）
+premium,US Midwest Transaction Premium Platts Spot,S&P Global Platts,https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/metals,daily,2012-01-01,,paid,manual,no,Platts官方現貨報價為昂貴付費源；可用CME AUP期貨結算價作為高相關免費替代
+premium,Rotterdam Duty-Paid / Unpaid Premium Spot,Fastmarkets MB,https://www.fastmarkets.com/commodities/metals-and-mining/base-metals/aluminium/,biweekly,2010-01-01,,paid,manual,no,歐洲實體現貨溢價基準；商業付費訂閱；可用CME EDP期貨結算價免費替代
+premium,Japan MJP Quarterly Premium,Reuters / Platts News Archive,https://www.reuters.com/markets/commodities/,quarterly,2018-01-01,2026-07-01,free,manual,yes,日本主港（MJP）每季談判結算溢價（美元/公噸）；公開新聞整理連續35季歷史
+futures,CME Aluminum Futures (ALI),CME / Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/ALI=F,daily,2021-10-07,2026-10-07,free,json-api,yes,CME原鋁期貨收盤價、成交量與未平倉量（美元/公噸）
+cot,CFTC Aluminum Futures Legacy (191691),CFTC Socrata API,https://publicreporting.cftc.gov/resource/6dca-aqww.json,weekly,1986-01-15,2026-09-29,free,json-api,yes,COMEX原鋁期貨大額交易商持倉報告（商業/非商業多空部位與未平倉）
+cot,CFTC US Midwest Premium Futures Legacy (191693),CFTC Socrata API,https://publicreporting.cftc.gov/resource/6dca-aqww.json,weekly,2015-10-06,2026-09-29,free,json-api,yes,美國中西部溢價期貨部位（含歷史SWAP與現行合約）
+cot,CFTC European Duty-Paid Premium Futures Legacy (191696),CFTC Socrata API,https://publicreporting.cftc.gov/resource/6dca-aqww.json,weekly,2020-09-29,2026-09-29,free,json-api,yes,歐洲鹿特丹完稅溢價期貨大額交易商持倉報告部位
+cot,CFTC European Duty-Unpaid Premium Futures Legacy (191694),CFTC Socrata API,https://publicreporting.cftc.gov/resource/6dca-aqww.json,weekly,2020-02-18,2023-07-03,free,json-api,yes,歐洲未完稅溢價期貨大額交易商持倉報告歷史部位
+cot,LME Aluminium Commitments of Traders (AH),London Metal Exchange,https://www.lme.com/market-data/reports-and-data/commitments-of-traders/aluminium,weekly,2020-01-03,2026-10-02,free,xlsx,yes,LME原鋁MiFID II格式持倉週報；公開免費；需用curl_cffi避免Akamai 403
+policy,Global Aluminum Policy Timeline,Federal Register / EU / Tax / NDRC,https://www.federalregister.gov/,event-driven,2017-04-12,2026-01-01,free,manual,yes,涵蓋232關稅、俄鋁制裁、歐盟CBAM、中國退稅與天花板、幾內亞礦權收回、歐洲減產量化事件
+energy,Dutch TTF Natural Gas Futures,ICE / Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/TTF=F,daily,2021-10-07,2026-10-07,free,json-api,yes,歐洲天然氣基準價格期貨結算價（歐元/MWh）；歐洲冶煉廠邊際發電成本核心指標
+energy,German Power Day-Ahead Spot Price,Energy-Charts API / ENTSO-E,https://api.energy-charts.info/price?bzn=DE-LU,daily,2018-10-01,2026-10-07,free,json-api,yes,德國盧森堡電網日前批發電價（歐元/MWh）；開源免費API無Key限制
+energy,MISO Day-Ahead Indiana Hub LMP,Midcontinent ISO,https://docs.misoenergy.org/marketreports/,daily,2020-01-01,2026-10-06,free,xlsx,yes,美國中西部Sebree/Kentucky附近電力市場Indiana Hub結算電價（美元/MWh）
+energy,US Industrial Electric Power PPI,BLS / FRED,https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCU221122221122,monthly,2003-12-01,2026-08-01,free,csv-api,yes,美國工業用電生產者物價指數（FRED公開免費無Key）
+energy,Global Coal Newcastle Thermal Spot Price,IMF / FRED,https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCOALAUUSDM,monthly,1990-01-01,2026-07-01,free,csv-api,yes,國際基準澳洲紐卡斯爾動力煤現貨月度均價（美元/公噸）
+energy,CZCE Thermal Coal Futures Continuous (ZC0),CZCE / Sina Finance,https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_ZC0=/InnerFuturesNewService.getDailyKLine?symbol=ZC0,daily,2015-05-26,2022-12-30,free,json-api,yes,鄭商所動力煤連續期貨；2021年底政策限價與提高保證金後成交量萎縮，2022年底實質停滯
+energy,China Thermal Coal Spot Benchmark Price,100ppi (生意社),http://www.100ppi.com/vane/detail-653.html,daily,2019-01-01,2026-10-07,free,html-table,yes,中國國內動力煤現貨基準價（元/噸）；反映國內電廠與港口實際成交水平
+energy,China Coal Mining PPI,NBS / DBnomics,https://api.db.nomics.world/v22/series/NBS/M_A010802/A01080202,monthly,2010-01-01,2026-08-01,free,json-api,yes,中國國家統計局採掘工業PPI指數（DBnomics免費轉載鏡像）

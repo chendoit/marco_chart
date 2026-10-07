@@ -1,0 +1,24 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+prices,lme_cash_settlement,Westmetall,https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Al_cash,daily,2008-01-02,2026-10-06,free,html-table,yes,LME官方現貨結算價(USD/MT)
+prices,lme_3m,Westmetall,https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Al_cash,daily,2008-01-02,2026-10-06,free,html-table,yes,LME官方3個月期貨結算價(USD/MT)
+prices,lme_cash_3m_spread,Westmetall,https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Al_cash,daily,2008-01-02,2026-10-06,free,html-table,yes,Cash-3M價差(USD/MT)，正為逆價差backwardation負為contango
+prices,global_aluminum_price_imf,FRED (IMF),https://fred.stlouisfed.org/graph/fredgraph.csv?id=PALUMUSDM,monthly,1992-01-01,2026-07-01,free,csv-api,yes,IMF全球鋁均價(USD/MT)
+prices,us_ppi_aluminum_mill_shapes,FRED (BLS),https://fred.stlouisfed.org/graph/fredgraph.csv?id=WPU102501,monthly,1947-01-01,2026-08-01,free,csv-api,yes,美國鋁軋製品PPI指數
+prices,us_ppi_primary_aluminum,FRED (BLS),https://fred.stlouisfed.org/graph/fredgraph.csv?id=WPU1022,monthly,1947-01-01,2026-08-01,free,csv-api,yes,美國原鋁PPI指數
+prices,shfe_al_futures,Sina Futures,https://stock2.finance.sina.com.cn/futures/api/jsonp.php//InnerFuturesNewService.getDailyKLine?symbol=AL0,daily,2005-01-04,2026-09-30,free,json-api,yes,上期所滬鋁主力/連續日K線(RMB/MT)
+prices,shfe_ao_alumina_futures,Sina Futures,https://stock2.finance.sina.com.cn/futures/api/jsonp.php//InnerFuturesNewService.getDailyKLine?symbol=AO0,daily,2023-06-19,2026-09-30,free,json-api,yes,上期所氧化鋁主力/連續日K線(RMB/MT)
+prices,comex_ali_futures,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/ALI=F,daily,2016-10-28,2026-10-07,free,json-api,yes,COMEX鋁期貨合約收盤價(USD/MT)
+equities,alcoa_aa,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/AA,daily,1962-01-02,2026-10-07,free,json-api,yes,美鋁Alcoa收盤價(USD)
+equities,century_aluminum_cenx,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/CENX,daily,1996-04-12,2026-10-07,free,json-api,yes,世紀鋁業收盤價(USD)
+equities,norsk_hydro_nhy,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/NHY.OL,daily,2000-01-03,2026-10-07,free,json-api,yes,挪威海德魯收盤價(NOK)
+equities,chalco_2600_hk,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/2600.HK,daily,2001-12-12,2026-10-07,free,json-api,yes,中國鋁業H股收盤價(HKD)
+equities,chalco_601600_ss,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/601600.SS,daily,2007-04-30,2026-10-07,free,json-api,yes,中國鋁業A股收盤價(RMB)
+equities,hongqiao_1378_hk,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/1378.HK,daily,2011-03-24,2026-10-07,free,json-api,yes,中國宏橋收盤價(HKD)
+equities,rio_tinto_rio,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/RIO,daily,1988-06-20,2026-10-07,free,json-api,yes,力拓Rio Tinto收盤價(USD)
+inventory,lme_total_stock,Westmetall,https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Al_cash,daily,2008-01-02,2026-10-06,free,html-table,yes,LME鋁總庫存(MT)
+inventory,shfe_al_warrant,Eastmoney Datacenter,https://datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPT_FUTU_STOCKDATA,daily,2026-06-22,2026-09-30,free,json-api,yes,上期所滬鋁倉單日報庫存(公噸)
+inventory,shfe_ao_warrant,Eastmoney Datacenter,https://datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPT_FUTU_STOCKDATA,daily,2026-06-22,2026-09-30,free,json-api,yes,上期所氧化鋁倉單日報庫存(公噸)
+inventory,comex_aluminum_stock,CME Group,https://www.cmegroup.com/delivery_reports/Aluminum_Stocks.xls,daily,2026-10-06,2026-10-06,free,xlsx,yes,COMEX每日鋁倉單庫存報告(公噸)
+inventory,lme_cancelled_warrants,LME Official,https://www.lme.com/en/market-data/reports-and-data/warehouse-and-stocks-reports,daily,,,registration,xlsx,no,LME每日在冊/註銷倉單報告需註冊帳號；第三方如世鋁網有新聞日報
+inventory,lme_stock_origin_breakdown,LME Official,https://www.lme.com/en/market-data/reports-and-data/warehouse-and-stocks-reports,monthly,,,registration,xlsx,no,LME月度分產地庫存(含俄羅斯金屬份額)，需官網免費註冊登入下載
+inventory,china_social_inventory_smm,SMM (Shanghai Metals Market),https://news.smm.cn,weekly,,,paid,manual,no,中國電解鋁社會庫存(SMM)，每週一/四發布；官方終端付費，各大期貨網有轉載

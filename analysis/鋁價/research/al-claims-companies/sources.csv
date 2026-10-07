@@ -1,0 +1,9 @@
+﻿category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+Company Financials,Alcoa Quarterly Financials (AA),SEC EDGAR,https://data.sec.gov/api/xbrl/companyfacts/CIK0001675149.json,quarterly,2015-09-30,2026-06-30,free,json-api,yes,"SEC EDGAR XBRL companyfacts API, 需帶自訂 User-Agent"
+Company Financials,Century Aluminum Quarterly Financials (CENX),SEC EDGAR,https://data.sec.gov/api/xbrl/companyfacts/CIK0000949157.json,quarterly,2015-03-31,2026-06-30,free,json-api,yes,"SEC EDGAR XBRL companyfacts API, 需帶自訂 User-Agent"
+Stock Market,Alcoa Daily Stock Price (AA),Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/AA,daily,2016-10-06,2026-10-06,free,json-api,yes,"Yahoo Finance 10年日K線, yfinance 套件"
+Stock Market,Century Aluminum Daily Stock Price (CENX),Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/CENX,daily,2016-10-07,2026-10-06,free,json-api,yes,"Yahoo Finance 10年日K線, yfinance 套件"
+Exchange Inventory,LME Aluminum Warehouse Stocks,LME / Westmetall,https://www.westmetall.com/en/marktdaten.php?action=table&field=LME_Al_Cash,daily,1998-01-01,2026-10-06,free,html-table,yes,Westmetall 每日轉載 LME 官方現貨與庫存
+Physical Premium,US Midwest Aluminum Premium Platts,CME Group,https://www.cmegroup.com/markets/metals/base/aluminum-midwest-us-transaction-premium-platts-financial.html,daily,2012-04-01,2026-10-06,free,html-table,yes,CME 官網提供 Midwest Premium 期貨即時報價與結算價
+Physical Premium,Rotterdam Duty-Paid Aluminum Premium,S&P Global Platts / Fastmarkets,https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/metals/040126-platts-rotterdam-duty-paid-aluminum-premium-cbam,daily,2010-01-01,,paid,manual,no,歐洲完稅溢價主要由 Platts/Fastmarkets 評估發布，需付費訂閱；2026年起納入CBAM成本
+Alumina Price,Alumina Price Index (API / PAX),CRU / Fastmarkets,https://www.crugroup.com/analysis/aluminium/,daily,2010-01-01,,paid,manual,no,氧化鋁指數 API 為冶煉原料定價基準，需付費訂閱

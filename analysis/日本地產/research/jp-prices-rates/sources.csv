@@ -1,0 +1,19 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+價格,國交省 不動産価格指数（住宅：総合・住宅地・戸建住宅・マンション）,國土交通省,https://www.mlit.go.jp/totikensangyo/totikensangyo_tk5_000085.html,monthly,2008-04-01,2025-12-01,free,xlsx,yes,官方發布月度住宅與商業價格指數 Excel，涵蓋全國、南関東圏與東京都，2010年=100
+利率,日銀政策金利 (Central Bank Policy Rate),BIS (國際清算銀行),https://stats.bis.org/api/v2/data/dataflow/BIS/WS_CBPOL/1.0/M.JP?format=csv,monthly,1946-01-01,2026-08-01,free,csv-api,yes,BIS 官方彙整中央銀行政策利率序列，附各次升息決策之官方公表文備註
+利率,10年期日本國債殖利率 (JGB 10-Year Benchmark Yield),財務省,https://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv,daily,1974-09-24,2026-09-30,free,csv-api,yes,財務省官方日度金利情報 CSV，Shift_JIS 編碼與和曆（S/H/R）格式
+利率,短期プライムレート（最頻値・最高値・最低値）與長期プライムレート,日本銀行,https://www.boj.or.jp/statistics/dl/loan/prime/prime.htm,monthly,2001-02-09,2026-09-10,free,html-table,yes,主要都市銀行優遇貸出金利基準，浮動房貸（変動金利）之定價錨定基準
+價格,東日本 REINS 首都圈中古マンション・中古戸建・新築戸建成約価格與件數,東日本不動産流通機構,http://www.reins.or.jp/pdf/trend/mw/MW_202608data.pdf,monthly,2025-08-01,2026-08-01,free,pdf,yes,月例速報 Market Watch PDF 彙整 13 個月連續成約價量與每平方公尺單價
+利率,フラット35 借入金利推移（融資率9割以下・期間21-35年）,住宅金融支援機構,https://www.simulation.jhf.go.jp/flat35/kinri/index.php/rates/top,monthly,2024-01-01,2026-10-01,free,html-table,yes,全期固定利率房貸代表指標，每月第1營業日公告，2026-10 最新達 3.83%
+利率,日銀升息決策時間線與政策利率引上げ記録,日本銀行 / BIS,https://www.boj.or.jp/en/mopo/mpmdeci/index.htm,irregular,2000-08-11,2026-09-18,free,manual,yes,整理 2024-03 解除負利率起歷次升息政策決策、實施日及利率誘導目標水準
+價格,首都圏新築分譲マンション平均価格、㎡単価、発売戸数、初月契約率,不動産経済研究所,https://www.fudousankeizai.co.jp/mansion/summary,annual,2015-04-01,2026-04-01,free,pdf,yes,不動產經濟研究所定期新聞稿公佈首都圈及東京23區歷年與年度均價
+購買力,都道府県別・全国新築マンション価格の年収倍率,東京カンテイ,https://www.kantei.ne.jp/report/nenshu/,annual,2015-04-01,2026-04-01,free,pdf,yes,70㎡換算新築分讓大樓價格與縣民所得之比率，2024年全國達 10.38 倍、東京達 17.00 倍
+利率,三大巨型銀行住宅貸款変動金利（店頭表示基準金利・適用金利）,三菱UFJ銀行 / 三井住友銀行 / みずほ銀行,https://www.bk.mufg.jp/kariru/jutaku/kinri/,monthly,2009-01-01,2026-10-01,free,html-table,yes,基準金利長期停留在 2.475%，隨升息於 2026-10 調升至 3.375%（實行金利約 1.25%）
+價格,首都圏建売住宅（新築戸建）平均価格與発売戸数,不動産経済研究所,https://www.fudousankeizai.co.jp/,monthly,2010-01-01,,paid,pdf,no,完整建売資料庫為收費商業數據，免費替代為 REINS 新築戸建成約價格或東京カンテイ月報
+價格,公示地価・都道府県地価調査（住宅地・商業地 全國與三大都市圏變動率）,國土交通省,https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000045.html,annual,1970-01-01,2026-01-01,free,xlsx,yes,每年1月1日標準地價格，國交省提供全日本各縣市標準地 Excel/CSV 下載
+利率,貸出約定平均金利（新規・ストック、国内銀行）,日本銀行,https://www.boj.or.jp/statistics/dl/loan/yaku/index.htm,monthly,1993-10-01,2026-08-01,free,html-table,yes,日本銀行定期統計公佈銀行新承作與存量貸款平均約定利率
+信用,業態別住宅ローン新規貸出額・残高（都銀・地銀・信託・フラット35）,住宅金融支援機構,https://www.jhf.go.jp/about/research/loan_new.html,quarterly,2005-04-01,2026-06-01,free,xlsx,yes,各金融機構類別住宅貸款季度新增借入與餘額統計，官方提供 Excel 免費下載
+購買力,毎月勤労統計 実質賃金指数・現金給与総額（事業所規模5人以上）,厚生労働省 / e-Stat,https://www.mhlw.go.jp/toukei/list/30-1.html,monthly,1990-01-01,2026-07-01,free,xlsx,yes,月度名目薪資與扣除消費者物價後之實質賃金指數，e-Stat 免費下載
+購買力,家計調査（二人以上の世帯のうち勤労者世帯）実収入・可処分所得,總務省統計局 / e-Stat,https://www.stat.go.jp/data/kakei/index.html,monthly,2000-01-01,2026-07-01,free,xlsx,yes,全國家計月度實收入與消費支出，衡量購屋家計可支配所得天花板
+價格,首都圏駅別・築年別・面積分別中古・新築マンション詳細時系列データベース,東京カンテイ,https://www.kantei.ne.jp/service/database/,monthly,1970-01-01,,paid,manual,no,專業付費地產資料庫，免費替代為其每月發布之「三大都市圏中古マンション価格」新聞稿
+價格,全國新築分譲マンション全物件・全戸供給データベース,不動産經濟研究所,https://www.fudousankeizai.co.jp/databank,monthly,1973-01-01,,paid,manual,no,日本最權威建商新建物件登錄資料庫（收費會員制），無免費 API，需透過公表新聞稿提取

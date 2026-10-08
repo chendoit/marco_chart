@@ -1,0 +1,23 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+office_market,tokyo_office_vacancy_rent,三鬼商事,https://www.e-miki.com/rent/assets/market/tokyo.xlsx,monthly,1990-12-01,2026-09-01,free,xlsx,yes,東京都心5區及各區平均空置率與租金月度Excel數據
+office_market,osaka_office_vacancy_rent,三鬼商事,https://www.e-miki.com/rent/assets/market/osaka.xlsx,monthly,1990-12-01,2026-09-01,free,xlsx,yes,大阪商務地區各分區平均空置率與租金月度Excel數據
+office_market,nagoya_office_vacancy_rent,三鬼商事,https://www.e-miki.com/rent/assets/market/nagoya.xlsx,monthly,1990-12-01,2026-09-01,free,xlsx,yes,名古屋商務地區各分區平均空置率與租金月度Excel數據
+cap_rate,jrei_investor_survey_cap_rate,日本不動産研究所,https://www.reinet.or.jp/,semiannual,1999-04-01,2026-04-01,free,pdf,yes,不動產投資家調査丸之內A級辦公住宅物流飯店商業期待利回り
+cap_rate,jrei_urban_land_price_index,日本不動産研究所,https://www.reinet.or.jp/,semiannual,1955-03-31,2026-03-31,free,pdf,yes,市街地価格指数全國三大都市圈東京區部商業地住宅地工業地
+cap_rate,office_cap_rate_jgb10y_spread,日本不動産研究所 / 財務省,https://www.reinet.or.jp/,semiannual,2015-04-30,2026-04-30,free,manual,yes,丸之內A級辦公期待利回り與JGB 10Y公債殖利率估值利差
+jreit,next_funds_tse_reit_etf_1343,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/1343.T,daily,2008-05-23,2026-10-08,free,json-api,yes,NEXT FUNDS 東證REIT ETF (1343.T) 日線開高低收與成交量
+jreit,ares_jreit_dividend_yield_nav,不動産証券化協会 (ARES),https://j-reit.jp/statistics/,monthly,2003-04-01,2026-10-01,free,html-table,yes,ARES J-REIT平均預想分配金利回り與平均NAV倍率月度數據
+jreit,tse_reit_index,東京証券取引所 (JPX),https://www.jpx.co.jp/markets/statistics-equities/misc/02.html,daily,2003-03-31,2026-10-08,free,html-table,yes,東證REIT指數日線與月度投資指標
+jreit,jreit_ma_privatization_events,TDnet / 各REIT公告,https://www.japan-reit.com/,event,2023-03-01,2026-05-18,free,manual,yes,J-REIT公開收購合併非公開化與激進投資人介入事件清單
+bank_lending,boj_loans_real_estate_outstanding,日本銀行,https://www.stat-search.boj.or.jp/,quarterly,1970-03-01,2026-06-01,free,json-api,yes,國內銀行對不動產業貸出殘高(LA01/DLLILKG50_DLLI5DS2TFX)
+bank_lending,boj_loans_real_estate_new,日本銀行,https://www.stat-search.boj.or.jp/,quarterly,1977-06-01,2026-06-01,free,json-api,yes,國內銀行對不動產業設備資金新規貸出額(LA01/DLLILKG50_DLLI5DS5TFX)
+bank_lending,boj_loans_spc_outstanding_new,日本銀行,https://www.stat-search.boj.or.jp/,quarterly,2009-06-01,2026-06-01,free,json-api,yes,國內銀行對不動產流動化SPC貸出殘高與新規放款(LA01/DLLILKG89)
+property_index,mlit_commercial_property_price_index,国土交通省,https://www.mlit.go.jp/common/001465568.xlsx,quarterly,2008-06-01,2025-12-01,free,xlsx,yes,國交省商業用不動產價格指數(店鋪辦公室倉庫工廠一棟公寓)
+property_index,mlit_chika_look_report,国土交通省,https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000045.html,quarterly,2007-12-01,2026-03-31,free,pdf,yes,主要都市高度利用地地價動向報告(全44地區上漲橫盤下跌數)
+transaction_volume,mrii_real_estate_transaction_survey,都市未来総合研究所,https://www.tmri.co.jp/,semiannual,2005-04-01,2026-06-01,free,pdf,yes,不動產買賣實態調査上場企業等不動產賣買取引額
+transaction_volume,jll_japan_commercial_investment,JLL (ジョーンズ ラング ラサール),https://www.jll.co.jp/,semiannual,2007-01-01,2026-06-01,free,manual,yes,日本商業用不動產投資額及海外投資家佔比新聞稿
+tourism,jnto_inbound_visitors,日本政府観光局 (JNTO),https://www.jnto.go.jp/statistics/data/visitors-statistics/,monthly,2019-01-01,2026-08-01,free,xlsx,yes,訪日外客數月度推計値(2025年突破4200萬人創歷史高)
+tourism,mlit_hotel_occupancy_rate,観光庁,https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html,monthly,2007-01-01,2026-08-01,free,xlsx,yes,宿泊旅行統計調査客室稼働率(全國約64%東京都高達78.7%)
+paid_database,reei_commercial_building_database,不動産経済研究所,https://www.reei.co.jp/,monthly,,,paid,manual,no,大型商業建築物與分售公寓完整付費數據庫
+paid_database,cbre_marketview_japan,CBRE,https://www.cbre.co.jp/,quarterly,,,paid,manual,no,CBRE日本頂級辦公室與物流研報完整數據庫付費版
+paid_database,tokyo_kantei_commercial_data,東京カンテイ,https://www.kantei.ne.jp/,monthly,,,paid,manual,no,東京カンテイ法人向商業不動產及租賃大樓評估數據庫

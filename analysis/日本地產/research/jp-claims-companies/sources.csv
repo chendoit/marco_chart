@@ -1,0 +1,13 @@
+﻿category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+株價,飯田 GHD (3291.T) 日股價,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/3291.T?range=10y&interval=1d,daily,2016-10-11,2026-10-08,free,json-api,yes,10年歷史日收盤價與成交量，需帶 User-Agent
+株價,Open House (3288.T) 日股價,Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/3288.T?range=10y&interval=1d,daily,2016-10-11,2026-10-08,free,json-api,yes,10年歷史日收盤價與成交量，需帶 User-Agent
+財務,飯田 GHD 季度財務與戶建單價,IR BANK,https://irbank.net/3291/quarter,quarterly,2022-06-30,2026-06-30,free,html-table,yes,近5年營收、毛利、營業利益、純益、毛利率、販管費率與棟數
+財務,Open House 季度財務與戶建單價,IR BANK,https://irbank.net/3288/quarter,quarterly,2021-12-31,2026-06-30,free,html-table,yes,近5年營收、毛利、營業利益、純益、毛利率、販管費率與棟數
+利率,日本政策利率 (WS_CBPOL),BIS,https://stats.bis.org/api/v2/data/dataflow/BIS/WS_CBPOL/1.0/M.JP?format=csv,monthly,2000-01-01,2026-08-01,free,csv-api,yes,BIS 官方中央銀行政策利率序列，無須 API key
+株價,日本地產與供應鏈上市公司日股價 (8檔),Yahoo Finance,https://query1.finance.yahoo.com/v8/finance/chart/1419.T?range=10y&interval=1d,daily,2016-10-11,2026-10-08,free,json-api,yes,"包含 1419, 7822, 7943, 6083, 2975, 1928, 1925, 1306"
+總體住宅,新設住宅着工統計調査,國土交通省 / e-Stat,https://www.e-stat.go.jp/stat-search/files?stat_infid=000040134812,monthly,1965-01-01,,free,xlsx,no,月度新設住宅著工戶數與床面積，e-Stat 免費下載
+不動產價格,首都圏新築マンション市場動向,不動産経済研究所,https://www.fudousankeizai.co.jp/mansion/summary,monthly,1973-01-01,,paid,pdf,no,完整資料庫需付費購置，每月新聞稿發布平均價格摘要
+不動產價格,首都圏建売住宅・一戸建て価格動向,東京カンテイ,https://www.kantei.ne.jp/report/kodate/,monthly,2010-01-01,,paid,pdf,no,詳細資料庫付費，月度發布新築一戶建平均價格新聞稿
+倒產動向,木造建築工事業倒産動向,帝国データバンク (TDB),https://www.tdb.co.jp/report/watching/press/p240801.html,monthly,2015-01-01,,paid,manual,no,TDB 倒產數據庫收費，定期有工務店倒產調查新聞稿
+企業開示,有価証券報告書 (EDINET API),金融庁 EDINET,https://disclosure.edinet-fsa.go.jp/api/v2/,quarterly,2010-01-01,,registration,json-api,no,EDINET API v2 需申請 API key，可查閱詳細財務附註
+長期預測,2040年度新設住宅着工予測,野村総合研究所 (NRI),https://www.nri.com/jp/knowledge/report/lst/2026/cc/mediaforum/forum361,annual,2020-01-01,,free,pdf,no,NRI 每年定期發布住宅市場長期推計報告

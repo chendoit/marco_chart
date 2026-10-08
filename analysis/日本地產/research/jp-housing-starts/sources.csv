@@ -1,0 +1,22 @@
+﻿category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+housing_starts,新設住宅着工戸数（総数・利用関係別・季調年率）,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/jyuu_ken.xls,monthly,1965-01-01,2026-08-01,free,xlsx,yes,含總數、持家、貸家、給與住宅、分譲住宅（マンション/一戸建）、床面積與季節調整年率換算値
+housing_starts,新設住宅着工戸数・床面積（暦年長歴史）,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/001979030.xls,annual,1948-01-01,2025-01-01,free,xlsx,yes,"回溯至昭和23年（1948年），可驗證2025年740,667戶為1963年以來62年新低"
+housing_starts,新設住宅着工戸数（年度長歴史）,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/jyuu_ken.xls,fiscal_year,1994-04-01,2025-04-01,free,xlsx,yes,"令和7年度（2025年度，2025-04至2026-03）共711,171戶，年減12.89%"
+housing_starts_region,首都圏新設住宅着工戸数（1都3県・利用関係別）,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/kenbetu808.xls,monthly,2005-04-01,2026-08-01,free,xlsx,yes,東京、神奈川、埼玉、千葉各都縣月度總數、持家、貸家、分譲マンション與分譲一戸建
+housing_starts_region,都道府県別新設住宅着工戸数・床面積（暦年）,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/001979029.xls,annual,1951-01-01,2025-01-01,free,xlsx,yes,全國47個都道府縣自昭和26年以來的年計著工戶數與床面積
+housing_starts_structure,新設住宅着工戸数（構造別：木造・SRC・RC・S）,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/jyuu3.xls,monthly,2004-08-01,2026-08-01,free,xlsx,yes,月度木造戶數占比約58%~62%，用於觀測工務店主力之木造結構趨勢
+housing_starts_method,工法別新設住宅着工戸数（プレハブ・ツーバイフォー）,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/jyuu2.xls,monthly,2004-08-01,2026-08-01,free,xlsx,yes,工業化標準生產占比，ツーバイフォー約12%、プレハブ約12%~14%
+housing_starts_size,新設住宅一戸あたり平均床面積,国土交通省「建築着工統計調査」,https://www.mlit.go.jp/sogoseisaku/jouhouka/content/jyuu_ken.xls,monthly,1965-01-01,2026-08-01,free,xlsx,yes,由總床面積除以總戶數計算，長期呈縮小趨勢
+building_confirmation,建築確認申請・交付件数及び省エネ適判審査状況,国土交通省住宅局「円滑施行に関する連絡会議」,https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000168.html,semimonthly,2025-03-01,2025-09-16,free,pdf,yes,2025年4号特例縮小前後專案追蹤：3月搶送審高峰、4月交付落差與塞車滯留、9月回穩
+building_confirmation,木造3階建て住宅及び丸太組構法建築物の建築確認統計,国土交通省住宅局,https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000010.html,quarterly,2000-01-01,2021-12-01,free,xlsx,yes,官方確認統計調查已於令和3年度（2021年度）終止，轉為常態著工統計
+long_term_demand,2040年度新設住宅着工戸数予測（NRI歷年發布版本）,株式会社野村総合研究所（NRI）,https://www.nri.com/jp/news/newsrelease/lst/2026/dd/0618_1,annual,2015-06-25,2026-06-18,free,manual,yes,2026年6月發布最新版：2030年度80萬戶、2040年度61萬戶；歷史預測從41萬戶逐步上調
+housing_stock,空き家数及び空き家率（5年周期）,総務省統計局「住宅・土地統計調査」,https://www.stat.go.jp/data/jyutaku/2023/index.html,5-year,1968-10-01,2023-10-01,free,xlsx,yes,2023年最新調查：空屋數900萬戶、空屋率13.8%（歷史新高）
+long_term_demand,日本の世帯数の将来推計（全国・都道府県別）,国立社会保障・人口問題研究所（IPSS）,https://www.ipss.go.jp/pp-ajsetai/j/Hhousest2024/t-page.asp,5-year,2020-01-01,2024-04-12,free,xlsx,yes,"2024年4月最新推計：全國世帶總數將於2030年達5,773萬戶峰值，2033年平均每戶跌破2人"
+demographics,人口推計（全国男女・年齡各歲別人口）,総務省統計局,https://www.stat.go.jp/data/jinsui/,monthly,1950-10-01,2026-08-01,free,csv-api,yes,各月1日現在概算值與確定值，提供CSV下載與e-Stat查詢
+renovation_market,住宅リフォーム市場規模推計,公益財団法人 住宅リフォーム・紛争処理支援センター,https://www.chord.or.jp/,annual,2010-01-01,2026-09-01,free,manual,yes,"2025年市場規模7兆4,200億日圓（增改築4,600億＋設備修繕維護6兆9,600億），廣義8兆6,700億"
+existing_housing,既存住宅販売量指数（戸建・マンション）,国土交通省 不動産・建設経済局,https://www.mlit.go.jp/totikensangyo/totikensangyo_tk5_000085.html,monthly,2010-01-01,,free,xlsx,no,以不動產登記法移轉登記為基礎的月度中古住宅流通指數（2010年=100）
+existing_housing,既存住宅流通シェア・流通量推計,国土交通省 住宅局,https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk4_000004.html,annual,2003-01-01,,free,pdf,no,中古住宅流通比率自2013年30.8%上升至2023年40.4%
+housing_starts,Work Started: Dwellings Total Japan (WSCNDW01JPQ659S),Federal Reserve Bank of St. Louis (FRED) / OECD,https://fred.stlouisfed.org/graph/fredgraph.csv?id=WSCNDW01JPQ659S,quarterly,1965-01-01,,free,csv-api,no,OECD轉載之季次著工指數，在sandbox環境受出口代理502限制，建議直接用國交省一手源
+api_portal,建築着工統計調査 API データセット,独立行政法人統計センター（e-Stat）,https://www.e-stat.go.jp/api/,monthly,1965-01-01,,registration,json-api,no,需取得免費 appId，可自動拉取完整結構表，不需API可改用國交省官網直連Excel
+renovation_market,住宅リフォーム市場に関する調査結果（詳細版）,株式会社矢野経済研究所,https://www.yano.co.jp/,annual,2010-01-01,,paid,manual,no,"收費研報（約10-15萬日圓），但每年7月發布之新聞稿有免費摘要（2025年7兆5,119億円）"
+building_confirmation,指定確認検査機関連合会・個別審査機関受託件数,日本ERI株式会社 / 一般財団法人日本建築行政会議 (ICBA),https://www.j-eri.co.jp/ir/,quarterly,2015-01-01,,free,pdf,no,ICBA未統一公布個別公司彙總表，日本ERI(6083)等上市公司財報有揭露受託件數與市占

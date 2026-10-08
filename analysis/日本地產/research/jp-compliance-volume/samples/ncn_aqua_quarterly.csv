@@ -1,0 +1,19 @@
+date,company_code,company_name,fiscal_period,revenue_jpy_mil,revenue_cum_jpy_mil,op_income_jpy_mil,op_income_cum_jpy_mil,disclosure_date,source_pdf_url
+2024-06-01,7057,NCN,2025/03 1Q,1713,1713,-21,-21,2024-08-14,https://www.ncn-se.co.jp/cms/wp-content/uploads/2024/08/202503期1Q四半期決算短信.pdf
+2024-09-01,7057,NCN,2025/03 2Q,2138,3851,109,88,2024-11-14,https://www.ncn-se.co.jp/cms/wp-content/uploads/2024/08/202503期2Q四半期短信.pdf
+2024-12-01,7057,NCN,2025/03 3Q,2541,6392,120,208,2025-02-14,https://www.ncn-se.co.jp/cms/wp-content/uploads/2024/08/202503期3Q四半期短信.pdf
+2025-03-01,7057,NCN,2025/03 4Q,1732,8124,-30,178,2025-05-15,https://www.ncn-se.co.jp/cms/wp-content/uploads/2024/08/2025年3月期決算短信.pdf
+2025-06-01,7057,NCN,2026/03 1Q,1788,1788,-42,-42,2025-08-14,https://www.ncn-se.co.jp/cms/wp-content/uploads/2025/08/2026年3月期1Q決算短信.pdf
+2025-09-01,7057,NCN,2026/03 2Q,2012,3800,54,12,2025-11-14,https://www.ncn-se.co.jp/cms/wp-content/uploads/2025/08/2026年3月期第2四半期-決算短信.pdf
+2025-12-01,7057,NCN,2026/03 3Q,2341,6141,77,89,2026-02-13,https://www.ncn-se.co.jp/cms/wp-content/uploads/2025/08/2026年3月期第3四半期-決算短信.pdf
+2026-03-01,7057,NCN,2026/03 4Q,2273,8414,63,152,2026-05-14,https://www.ncn-se.co.jp/cms/wp-content/uploads/2025/08/2026年3月期決算短信.pdf
+2026-06-01,7057,NCN,2027/03 1Q,1812,1812,-41,-41,2026-08-14,https://www.ncn-se.co.jp/cms/wp-content/uploads/2026/08/2027年3月期1Q決算短信.pdf
+2024-06-01,1429,日本アクア,2024/12 2Q,6625,13110,404,849,2024-08-09,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2024/08/fafa7c8df7c3b252be6f26fa3316be22.pdf
+2024-09-01,1429,日本アクア,2024/12 3Q,7707,20817,672,1521,2024-11-08,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2024/11/d2126113e3e929c9f75bc89176d7e92e-1.pdf
+2024-12-01,1429,日本アクア,2024/12 4Q,9448,30265,1054,2575,2025-02-07,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2025/02/tanshin202412_shusei-1.pdf
+2025-03-01,1429,日本アクア,2025/12 1Q,7501,7501,526,526,2025-05-09,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2025/05/202512_1Q短信20250502.pdf
+2025-06-01,1429,日本アクア,2025/12 2Q,8482,15983,565,1091,2025-08-08,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2025/08/第22期第2四半期決算短信.pdf
+2025-09-01,1429,日本アクア,2025/12 3Q,8305,24288,649,1740,2025-11-07,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2025/11/9881909693710_zenbun-1.pdf
+2025-12-01,1429,日本アクア,2025/12 4Q,9382,33670,1034,2774,2026-02-13,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2026/02/9881900653801ゼンブン２-1.pdf
+2026-03-01,1429,日本アクア,2026/12 1Q,7710,7710,543,543,2026-05-08,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2026/05/１Q短信文章_F.pdf
+2026-06-01,1429,日本アクア,2026/12 2Q,9262,16972,636,1179,2026-08-07,https://www.n-aqua.jp/aqua_wp/wp-content/uploads/2026/08/2026122Q_zenbun.pdf

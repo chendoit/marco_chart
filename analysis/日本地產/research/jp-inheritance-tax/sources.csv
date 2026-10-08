@@ -1,0 +1,11 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+tax,jp_inheritance_tax_stat,国税庁,https://www.nta.go.jp/publication/statistics/kokuzeicho/sozoku2024/xls/05_kazeijokyo.xlsx,annual,2010-04-01,2024-04-01,free,xlsx,yes,国税庁統計年報「５ 相続税」及び申告事績の概要。包含死亡者數、課稅件數、課稅比例、課稅價格、納稅額及土地家屋現金構成比。
+demographics,jp_vital_deaths_monthly,厚生労働省,https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040505435&fileKind=0,monthly,2023-01-01,2026-07-01,free,xlsx,yes,厚勞省人口動態統計月度速報。包含每月總死亡數、出生數、自然增減與年換算死亡率。最新實測至2026年7月。
+demographics,jp_vital_deaths_annual,厚生労働省,https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040484218&fileKind=0,annual,1955-04-01,2024-04-01,free,xlsx,yes,厚勞省人口動態統計特殊報告・確定數。1955-2024年長期序列。其中日本人死亡數為國稅廳繼承稅申報母數之官方唯一定義。
+valuation,jp_rosenka_valuation,国税庁,https://www.rosenka.nta.go.jp/,annual,2010-07-01,2026-07-01,free,html-table,yes,國稅廳每年7月1日公布之路線價圖與評價倍率表。全國約32萬處標準宅地，時價水準約為公示地價之80%。
+tax_rule,jp_condo_evaluation_circular,国税庁,https://www.nta.go.jp/taxes/shiraberu/taxanswer/hyoka/4667.htm,irregular,2024-01-01,2024-01-01,free,html-table,no,2024-01-01施行之居住用分讓公寓評價乖離率通達（Tax Answer No.4667）。嚴格限定居住用區分所有，排除商業用與一棟收益。
+tax_rule,jp_rental_property_tax_reform,国税庁,https://public-comment.e-gov.go.jp/pcm/detail?id=410080055,irregular,2026-09-18,2026-09-18,free,pdf,no,令和8年度稅改後續通達案（e-Gov 案件410080055）。規定5年內出租不動產與不動產小口化商品一律改按通常交易價格（時價）評價，2027-01-01施行。
+securitization,jp_mlit_securitization_survey,国土交通省,https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/tochi_fudousan_kensetsugyo_const_tk3_000001.html,annual,2010-04-01,2025-04-01,free,pdf,no,國交省不動產證券化實態調查。統計REIT與不動產特定共同事業（FTK）累積規模與年度取得額。2025年度末證券化資產達73.4兆日圓。
+securitization,jp_mlit_ftk_operators,国土交通省,https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000017.html,irregular,2017-12-01,2026-06-30,free,pdf,no,國交省不動產特定共同事業許可與註冊業者名冊。截至2025年中許可業者達265社、小規模註冊業者53社。
+digital_securities,jp_sto_market_stats,一般社団法人日本STO協会,https://jstoa.or.jp/,annual,2021-03-31,2026-03-31,free,pdf,no,日本STO協會公募Security Token統計。2025年度末累計發行額約3333億日圓，其中不動產ST佔約85%。ODX START市場8檔掛牌。
+commercial,jp_reei_tokyo_kantei_paid,不動産経済研究所・東京カンテイ,https://www.fudousankeizai.co.jp/,monthly,1990-01-01,,paid,manual,no,民間商業收費數據庫。提供首都圈與近畿圈詳細公寓銷售戶數與小口化發售統計。免費替代為每月新聞稿PDF與上市公司決算開示。

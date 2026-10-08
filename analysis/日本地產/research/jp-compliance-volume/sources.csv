@@ -1,0 +1,16 @@
+category,series,source,url,frequency,history_start,latest_date,access,method,tested,notes
+building_confirmation,建築確認件数長歴史（建築主事・指定機関別、確認済証交付件数）,国土交通省「建築基準法施行関係統計報告」,https://www.mlit.go.jp/jutakukentiku/build/content/001992650.xlsx,annual,2015-04-01,2024-04-01,free,xlsx,yes,"H27至R6長歷史，含確認申請、確認済証交付、完了檢查、中間檢查，指定確認檢查機關市佔93.5%"
+building_confirmation,施行日前後における建築確認・省エネ適判審査状況（半月別追蹤）,国土交通省住宅局「円滑施行に関する連絡会議」第6回資料,https://www.mlit.go.jp/jutakukentiku/build/content/001968861.pdf,semimonthly,2025-03-01,2025-09-16,free,pdf,yes,"2025年4号特例縮小與省エネ義務化前後追蹤：3月搶件高峰、4月交付暴跌腰斬、9月回穩至例年水準"
+superior_housing,長期優良住宅建築等計画認定実績（新築・増改築・既存）,国土交通省住宅局「長期優良住宅の普及の促進に関する法律の施行状況」,https://www.mlit.go.jp/jutakukentiku/house/content/001898237.pdf,annual,2009-04-01,2025-04-01,free,pdf,yes,"H21至R7累計190萬戶，2025年度（R7）新築認定165,271戶創歷史新高"
+housing_performance,住宅性能表示制度の実施状況（設計・建設住宅性能評価交付戸数）,国土交通省住宅局「住宅性能表示制度の実施状況について」報道発表資料,https://www.mlit.go.jp/report/press/content/001873043.pdf,annual,2015-04-01,2025-04-01,free,pdf,yes,"令和7年度設計住宅性能評價交付289,267戶（新設著工比40.7%連10年上升），建設評價198,584戶"
+corporate_financials,ERIホールディングス（6083）連結四半期業績推移（売上・営業利益・指標）,ERIホールディングス株式会社 決算短信（XJ-Storage開示一手源）,https://www.h-eri.co.jp/ir/library/results.html,quarterly,2022-08-01,2026-08-01,free,pdf,yes,"FY2023/5至FY2027/5 Q1，FY2026/5全年營收24,704百萬、營益4,943百萬（+141.7%），FY2027/5 Q1成長放緩至8.6%"
+corporate_financials,ERIホールディングス 建築確認業務月次報告（確認済証・中間・完了検査件数）,ERIホールディングス株式会社 IR月次報告,https://www.h-eri.co.jp/ir/data/getuji_2026K.pdf,monthly,2022-06-01,2026-05-01,free,pdf,yes,"2023至2026年5月期月度件數，驗證2025-03駆け込み（7,076件）與2025-04反落（3,707件）"
+corporate_financials,エヌ・シー・エヌ（7057）連結四半期業績（SE構法・木造耐震設計）,株式会社エヌ・シー・エヌ IRライブラリー 決算短信,https://www.ncn-se.co.jp/ir/library/,quarterly,2024-06-01,2026-06-01,free,pdf,yes,"涵蓋最近9季業績，2026/03期全年營收8,414百萬、營益152百萬"
+corporate_financials,日本アクア（1429）四半期業績（現場発泡断熱材アクアフォーム）,株式会社日本アクア IR 決算短信,https://www.n-aqua.jp/ir/earnings.html,quarterly,2024-06-01,2026-06-01,free,pdf,yes,"涵蓋最近9季業績，2025/12期全年營收33,670百萬、營益2,774百萬"
+human_resources,一級建築士登録者数・構造及び設備一級建築士登録状況,公益社団法人日本建築士会連合会,https://www.kenchikushikai.or.jp/,annual,2016-04-01,2025-04-01,free,html-table,yes,"令和7年4月1日現在一級建築士登録383,923名、構造設計一級10,410名、實務所屬約14萬人，面臨高齡化瓶頸"
+bim_dx,建築分野におけるBIMの活用・普及状況の実態調査,国土交通省「建築BIM推進会議」,https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000150.html,biennial,2020-01-01,2025-01-01,free,pdf,yes,"令和6年度調査導入率58.7%（較令和4年48.4%增10.3pt），2026-04 BIM圖面審查正式上路"
+bim_dx,建築GX・DX推進事業採択状況及び予算,国土交通省 住宅局建築指導課,https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000166.html,annual,2023-04-01,2026-04-01,free,manual,yes,"令和8年度當初預算73億日圓，補助BIM導入追加費用之1/2與LCCO2評估費用"
+energy_compliance,建築物省エネ法 適合性判定・届出件数統計,一般社団法人住宅性能評価・表示協会,https://www.hyoukakyoukai.or.jp/,monthly,2017-04-01,,free,xlsx,no,"協會官方伺服器實施海外IP/特定環境連線阻斷（HTTP/2 RemoteDisconnected），改以國交省円滑施行連絡會議與建築基準法施行統計為主要替代"
+energy_compliance,BELS（建築物省エネ性能表示制度）評価書交付実績,一般社団法人住宅性能評価・表示協会,https://www.hyoukakyoukai.or.jp/bels/,monthly,2016-04-01,,free,pdf,no,住宅性能評價協會原站擋外部爬蟲，數據轉載可於國交省住宅局節能推動研報查閱
+industry_database,日本確認検査機関協会（JCA）会員機関業務量統計,一般社団法人日本確認検査機関協会,http://www.jca.or.jp/,annual,2005-04-01,,free,pdf,no,"JCA彙整各民間確認檢查機關業務，無公開即時月度API，上市公司直接看ERI HD IR即可"
+paid_research,住宅・建築関連データ・確認検査市場規模動向,株式会社矢野経済研究所,https://www.yano.co.jp/,annual,2015-01-01,,paid,manual,no,"付費產業研報（單份15萬日圓以上），免費替代方案為新聞稿摘要與國交省官網統計"

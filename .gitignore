@@ -255,3 +255,4 @@ logs/
 
 # 內嵌 git repo 工作區（agy/taskq）
 analysis/日本地產/mlit-api/_ws*/
+analysis/日本地產/data/_mlit_cache/

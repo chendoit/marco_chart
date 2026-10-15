@@ -1,0 +1,3009 @@
+{
+  "type": "FeatureCollection",
+  "name": "evacuation_facilities",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::6668"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.02440547943115,
+          34.29260839492605
+        ]
+      },
+      "properties": {
+        "_id": "80FsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市一宮町1185-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "一宮中学校",
+        "remarks": "",
+        "common_id": "E3720100009201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.02470588684082,
+          34.29491296511709
+        ]
+      },
+      "properties": {
+        "_id": "9EFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市一宮町1227",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "一宮新池農村公園",
+        "remarks": "",
+        "common_id": "E3720100010201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.02440547943115,
+          34.28590705477119
+        ]
+      },
+      "properties": {
+        "_id": "9UFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市一宮町531",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "高松南高等学校　（体育館）",
+        "remarks": "",
+        "common_id": "E3720100011201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0238904953003,
+          34.29090651789885
+        ]
+      },
+      "properties": {
+        "_id": "9kFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市一宮町672-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "一宮小学校",
+        "remarks": "",
+        "common_id": "E3720100012201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.02891159057617,
+          34.29069378084658
+        ]
+      },
+      "properties": {
+        "_id": "90FsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市一宮町838-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "一宮コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100013201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.00547981262207,
+          34.2854106379438
+        ]
+      },
+      "properties": {
+        "_id": "-EFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市円座町1622-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "円座コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100014201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.00500774383545,
+          34.28470146596075
+        ]
+      },
+      "properties": {
+        "_id": "-UFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市円座町1630-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "円座小学校",
+        "remarks": "",
+        "common_id": "E3720100015201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.00959968566895,
+          34.295090237128704
+        ]
+      },
+      "properties": {
+        "_id": "-kFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市円座町771",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香東中学校",
+        "remarks": "",
+        "common_id": "E3720100016201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0413999557495,
+          34.19639831676449
+        ]
+      },
+      "properties": {
+        "_id": "-0FsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市塩江町安原下第2-1645",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "塩江コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100017201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0407133102417,
+          34.19760517089762
+        ]
+      },
+      "properties": {
+        "_id": "_EFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市塩江町安原下第2-1684",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "安原小学校跡施設",
+        "remarks": "",
+        "common_id": "E3720100018201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0740156173706,
+          34.18170170726633
+        ]
+      },
+      "properties": {
+        "_id": "_kFsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市塩江町安原上231",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "塩江小・中学校",
+        "remarks": "",
+        "common_id": "E3720100020201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.08349990844727,
+          34.17030474762362
+        ]
+      },
+      "properties": {
+        "_id": "_0FsnaABc40qGN8lJcDK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市塩江町安原上東365",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "塩江小学校跡施設",
+        "remarks": "",
+        "common_id": "E3720100021201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.08289909362793,
+          34.16959460574138
+        ]
+      },
+      "properties": {
+        "_id": "AEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市塩江町安原上東394-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "塩江支所　塩江連絡事務所",
+        "remarks": "",
+        "common_id": "E3720100022201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.09937858581543,
+          34.16231530697037
+        ]
+      },
+      "properties": {
+        "_id": "AUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市塩江町安原上東字椛川2173-8",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "椛川集会所",
+        "remarks": "",
+        "common_id": "E3720100023201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.08950805664062,
+          34.30710840700348
+        ]
+      },
+      "properties": {
+        "_id": "FkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市元山町136-4",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川添コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100044201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.99470806121826,
+          34.300904551745845
+        ]
+      },
+      "properties": {
+        "_id": "GEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市御厩町775-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "檀紙コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100046201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.99389266967773,
+          34.300408223527086
+        ]
+      },
+      "properties": {
+        "_id": "GUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市御厩町816",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "檀紙小学校",
+        "remarks": "",
+        "common_id": "E3720100047201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.031400680542,
+          34.212015094289214
+        ]
+      },
+      "properties": {
+        "_id": "HkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市香川町安原下第３号194-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川町多目的研修集会施設",
+        "remarks": "",
+        "common_id": "E3720100052201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.02869701385498,
+          34.25508819589906
+        ]
+      },
+      "properties": {
+        "_id": "H0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町川東下1917-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川総合体育館",
+        "remarks": "",
+        "common_id": "E3720100053201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.03440475463867,
+          34.24150161474407
+        ]
+      },
+      "properties": {
+        "_id": "IEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町川東上1865-13",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川東コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100054201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.03509140014648,
+          34.241111367216504
+        ]
+      },
+      "properties": {
+        "_id": "IUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町川東上1865-8",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川東小学校",
+        "remarks": "",
+        "common_id": "E3720100055201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0377950668335,
+          34.22681286966397
+        ]
+      },
+      "properties": {
+        "_id": "IkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市香川町川東上604-85",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川町グリーンセンター",
+        "remarks": "",
+        "common_id": "E3720100056201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.03170108795166,
+          34.252782533800655
+        ]
+      },
+      "properties": {
+        "_id": "I0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町浅野1188",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川第一中学校",
+        "remarks": "",
+        "common_id": "E3720100057201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.04088497161865,
+          34.25941557570809
+        ]
+      },
+      "properties": {
+        "_id": "JEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町浅野3088",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "浅野小学校",
+        "remarks": "",
+        "common_id": "E3720100058201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.03569221496582,
+          34.256613445331524
+        ]
+      },
+      "properties": {
+        "_id": "JUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町浅野826-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "浅野コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100059201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.02740955352783,
+          34.26711208641446
+        ]
+      },
+      "properties": {
+        "_id": "JkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町大野1045-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "大野小学校",
+        "remarks": "",
+        "common_id": "E3720100060201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.02470588684082,
+          34.26718301872147
+        ]
+      },
+      "properties": {
+        "_id": "J0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町大野1329-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "大野コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100061201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.05049800872803,
+          34.21659310102248
+        ]
+      },
+      "properties": {
+        "_id": "KEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市香川町東谷159-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川町高齢者活動促進センター",
+        "remarks": "",
+        "common_id": "E3720100062201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.06169891357422,
+          34.2045974857142
+        ]
+      },
+      "properties": {
+        "_id": "KUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香川町東谷873-3",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "東谷コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100063201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.00848388671875,
+          34.24160804557394
+        ]
+      },
+      "properties": {
+        "_id": "KkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香南町横井1008",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香南小学校",
+        "remarks": "",
+        "common_id": "E3720100064201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.00681018829346,
+          34.24171447626925
+        ]
+      },
+      "properties": {
+        "_id": "K0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市香南町横井796-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "月見ヶ原公園",
+        "remarks": "",
+        "common_id": "E3720100065201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.00848388671875,
+          34.24260139349694
+        ]
+      },
+      "properties": {
+        "_id": "LEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香南町横井801",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香南中学校",
+        "remarks": "",
+        "common_id": "E3720100066201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.00041580200195,
+          34.24519113831724
+        ]
+      },
+      "properties": {
+        "_id": "LUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香南町池内522-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "池西農村環境改善センター",
+        "remarks": "",
+        "common_id": "E3720100067201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0129041671753,
+          34.24001156899617
+        ]
+      },
+      "properties": {
+        "_id": "LkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香南町由佐1172",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香南コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100068201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.01899814605713,
+          34.2402953892673
+        ]
+      },
+      "properties": {
+        "_id": "L0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市香南町由佐357-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "由佐農村環境改善センター",
+        "remarks": "",
+        "common_id": "E3720100069201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.94651412963867,
+          34.302889835290884
+        ]
+      },
+      "properties": {
+        "_id": "NUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市国分寺町国分2150-7",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分児童館",
+        "remarks": "",
+        "common_id": "E3720100075201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96488189697266,
+          34.29739473923809
+        ]
+      },
+      "properties": {
+        "_id": "N0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町新居1131-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺中学校",
+        "remarks": "",
+        "common_id": "E3720100078201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96531105041504,
+          34.29728837899387
+        ]
+      },
+      "properties": {
+        "_id": "OEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町新居1155-7",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺中学校　第二体育館",
+        "remarks": "",
+        "common_id": "E3720100079201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9592170715332,
+          34.29959282080044
+        ]
+      },
+      "properties": {
+        "_id": "OUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町新居1423-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": false,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺文化センター",
+        "remarks": "",
+        "common_id": "E3720100080201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96239280700684,
+          34.305406823745955
+        ]
+      },
+      "properties": {
+        "_id": "OkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町新居1840-6",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺北部コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100081201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96389484405518,
+          34.3061158209602
+        ]
+      },
+      "properties": {
+        "_id": "O0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町新居1880",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺北部小学校",
+        "remarks": "",
+        "common_id": "E3720100082201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9533805847168,
+          34.273602144784164
+        ]
+      },
+      "properties": {
+        "_id": "PUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市国分寺町新名2069-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "橘ノ丘公園",
+        "remarks": "",
+        "common_id": "E3720100084201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9601182937622,
+          34.29668566839945
+        ]
+      },
+      "properties": {
+        "_id": "PkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市国分寺町新名430-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺会館",
+        "remarks": "",
+        "common_id": "E3720100085201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.95479679107666,
+          34.28998465344881
+        ]
+      },
+      "properties": {
+        "_id": "P0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": false,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市国分寺町柏原41",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川県営住宅　国分寺団地集会場",
+        "remarks": "",
+        "common_id": "E3720100086201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.97282123565674,
+          34.27420502095242
+        ]
+      },
+      "properties": {
+        "_id": "QEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市国分寺町福家甲1951-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "福家児童館",
+        "remarks": "",
+        "common_id": "E3720100087201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96149158477783,
+          34.283105807118716
+        ]
+      },
+      "properties": {
+        "_id": "QUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町福家甲3005",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺勤労青少年ホーム",
+        "remarks": "",
+        "common_id": "E3720100088201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9620065689087,
+          34.283885910782104
+        ]
+      },
+      "properties": {
+        "_id": "QkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町福家甲3005",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺南部小学校",
+        "remarks": "",
+        "common_id": "E3720100088202"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9610195159912,
+          34.28409866506996
+        ]
+      },
+      "properties": {
+        "_id": "Q0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市国分寺町福家甲3106-3",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "国分寺南部コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100089201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0695095062256,
+          34.27771580215558
+        ]
+      },
+      "properties": {
+        "_id": "R0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市三谷町1201-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "三谷コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100093201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.06877994537354,
+          34.27381492510189
+        ]
+      },
+      "properties": {
+        "_id": "SEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市三谷町2173-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "三渓小学校",
+        "remarks": "",
+        "common_id": "E3720100094201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.03831005096436,
+          34.2854106379438
+        ]
+      },
+      "properties": {
+        "_id": "SUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市三名町5-6",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川県農業共済組合",
+        "remarks": "",
+        "common_id": "E3720100095201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0325164794922,
+          34.29920284278511
+        ]
+      },
+      "properties": {
+        "_id": "S0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市鹿角町394",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川大学附属中学校（体育館）",
+        "remarks": "",
+        "common_id": "E3720100097201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.10478591918945,
+          34.27399224162197
+        ]
+      },
+      "properties": {
+        "_id": "TEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市十川西町299-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "十河コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100191201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.10289764404297,
+          34.274595114992906
+        ]
+      },
+      "properties": {
+        "_id": "TUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市十川西町366-5",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "十河小学校",
+        "remarks": "",
+        "common_id": "E3720100098201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0510129928589,
+          34.282715752571676
+        ]
+      },
+      "properties": {
+        "_id": "TkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市出作町331-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "龍雲中学校",
+        "remarks": "",
+        "common_id": "E3720100099201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.09839153289795,
+          34.19359408899406
+        ]
+      },
+      "properties": {
+        "_id": "YEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市菅沢町339",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "東植田小学校菅沢分校",
+        "remarks": "",
+        "common_id": "E3720100115201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.07890796661377,
+          34.2402953892673
+        ]
+      },
+      "properties": {
+        "_id": "Z0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市西植田町2247-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "西植田コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100122201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.07899379730225,
+          34.23940844774275
+        ]
+      },
+      "properties": {
+        "_id": "aEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市西植田町2337",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "植田小学校",
+        "remarks": "",
+        "common_id": "E3720100123201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0923833847046,
+          34.26760861130718
+        ]
+      },
+      "properties": {
+        "_id": "aUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市川島東町1257-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "山田中学校",
+        "remarks": "",
+        "common_id": "E3720100124201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0893793106079,
+          34.27580084876551
+        ]
+      },
+      "properties": {
+        "_id": "akFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市川島東町864-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川島小学校",
+        "remarks": "",
+        "common_id": "E3720100125201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.08568859100342,
+          34.2770065652454
+        ]
+      },
+      "properties": {
+        "_id": "a0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市川島本町191-10",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川島コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100192201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0065097808838,
+          34.267502213362675
+        ]
+      },
+      "properties": {
+        "_id": "bEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市川部町1552",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川岡小学校",
+        "remarks": "",
+        "common_id": "E3720100127201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0099859237671,
+          34.269417355767175
+        ]
+      },
+      "properties": {
+        "_id": "bUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市川部町486-3",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川岡コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100128201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.111909866333,
+          34.29090651789885
+        ]
+      },
+      "properties": {
+        "_id": "b0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": false,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市前田東町690-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "高松東高校（体育館）",
+        "remarks": "",
+        "common_id": "E3720100130201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.11251068115234,
+          34.29618931525111
+        ]
+      },
+      "properties": {
+        "_id": "cEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市前田東町819-3",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "前田小学校",
+        "remarks": "",
+        "common_id": "E3720100131201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.11259651184082,
+          34.29661476098639
+        ]
+      },
+      "properties": {
+        "_id": "cUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市前田東町838",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "前田コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100132201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.05710697174072,
+          34.29640203838808
+        ]
+      },
+      "properties": {
+        "_id": "ckFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市多肥上町1250",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "高松桜井高等学校（体育館）",
+        "remarks": "",
+        "common_id": "E3720100133201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.05590534210205,
+          34.280091702204984
+        ]
+      },
+      "properties": {
+        "_id": "c0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市多肥上町2049-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "彦作池公園",
+        "remarks": "",
+        "common_id": "E3720100134201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0514850616455,
+          34.290410130605665
+        ]
+      },
+      "properties": {
+        "_id": "dEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市多肥上町433-5",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "多肥コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100135201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0526008605957,
+          34.29260839492605
+        ]
+      },
+      "properties": {
+        "_id": "dUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市多肥上町902-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "多肥小学校",
+        "remarks": "",
+        "common_id": "E3720100136201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.04521942138672,
+          34.3063994181698
+        ]
+      },
+      "properties": {
+        "_id": "dkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市太田下町1800",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "太田中学校",
+        "remarks": "",
+        "common_id": "E3720100137201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0435028076172,
+          34.30579677295458
+        ]
+      },
+      "properties": {
+        "_id": "d0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市太田下町1823-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "太田南小学校",
+        "remarks": "",
+        "common_id": "E3720100138201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.04131412506104,
+          34.30189719938441
+        ]
+      },
+      "properties": {
+        "_id": "eEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市太田上町1045-2",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "太田南コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100139201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.04170036315918,
+          34.29721747208954
+        ]
+      },
+      "properties": {
+        "_id": "eUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": false,
+        "flood_flag": false,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市太田上町513-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": false,
+        "high_tide_flag": false,
+        "facility_name_ja": "香川県立聴覚支援学校（体育館）",
+        "remarks": "",
+        "common_id": "E3720100140201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.09298419952393,
+          34.30689571098192
+        ]
+      },
+      "properties": {
+        "_id": "gkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市東山崎町207-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "川添小学校",
+        "remarks": "",
+        "common_id": "E3720100147201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.09912109375,
+          34.23820219227295
+        ]
+      },
+      "properties": {
+        "_id": "g0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市東植田町1825-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "東植田コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100148201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.09761905670166,
+          34.239089146506316
+        ]
+      },
+      "properties": {
+        "_id": "hEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市東植田町2008",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "東植田小学校",
+        "remarks": "",
+        "common_id": "E3720100149201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.0478801727295,
+          34.278495955845486
+        ]
+      },
+      "properties": {
+        "_id": "jkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市仏生山町乙45-4",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "仏生山コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100159201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.04719352722168,
+          34.274311410415706
+        ]
+      },
+      "properties": {
+        "_id": "j0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市仏生山町甲2461",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "仏生山小学校",
+        "remarks": "",
+        "common_id": "E3720100160201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.04929637908936,
+          34.27168709769194
+        ]
+      },
+      "properties": {
+        "_id": "kEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市仏生山町甲2654-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "仏生山公園",
+        "remarks": "",
+        "common_id": "E3720100161201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.07011032104492,
+          34.30168449016381
+        ]
+      },
+      "properties": {
+        "_id": "qkFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市林町1108-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "林小学校",
+        "remarks": "",
+        "common_id": "E3720100186201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.06371593475342,
+          34.29289203774567
+        ]
+      },
+      "properties": {
+        "_id": "q0FsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市林町2217-20",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "香川大学創造工学部",
+        "remarks": "",
+        "common_id": "E3720100187201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.06410217285156,
+          34.30320889434064
+        ]
+      },
+      "properties": {
+        "_id": "rEFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県高松市林町2581",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "長池中央公園",
+        "remarks": "",
+        "common_id": "E3720100188201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.07629013061523,
+          34.297607459322535
+        ]
+      },
+      "properties": {
+        "_id": "rUFsnaABc40qGN8lJcHK",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": true,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県高松市林町329-1",
+        "prefecture_and_city": "香川県高松市",
+        "inland_flooding_flag": true,
+        "high_tide_flag": true,
+        "facility_name_ja": "林コミュニティセンター",
+        "remarks": "",
+        "common_id": "E3720100189201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.1185188293457,
+          34.186813861893455
+        ]
+      },
+      "properties": {
+        "_id": "AkFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県三木町小蓑1351-1",
+        "prefecture_and_city": "香川県三木町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "旧小蓑小中学校",
+        "remarks": "",
+        "common_id": "E3734100014201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.1204071044922,
+          34.24199829079885
+        ]
+      },
+      "properties": {
+        "_id": "C0FsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": false,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": true,
+        "address_ja": "香川県三木町田中4620-2",
+        "prefecture_and_city": "香川県三木町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "田中小学校",
+        "remarks": "",
+        "common_id": "E3734100023201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9501190185547,
+          34.226209653864956
+        ]
+      },
+      "properties": {
+        "_id": "V0FsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町山田下3300",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "綾上農村環境改善　センター",
+        "remarks": "",
+        "common_id": "E3738700008201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.94999027252197,
+          34.22521611254291
+        ]
+      },
+      "properties": {
+        "_id": "WEFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町山田下3352-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "国保総合保健施設いきいきセンター",
+        "remarks": "",
+        "common_id": "E3738700009201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.94921779632568,
+          34.217586744049854
+        ]
+      },
+      "properties": {
+        "_id": "WUFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町山田下3694-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "Ｂ＆Ｇ綾上海洋センター",
+        "remarks": "",
+        "common_id": "E3738700010201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96428108215332,
+          34.221703140323456
+        ]
+      },
+      "properties": {
+        "_id": "WkFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町山田上甲1313-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "山田公民館",
+        "remarks": "",
+        "common_id": "E3738700012201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96900177001953,
+          34.21829648189484
+        ]
+      },
+      "properties": {
+        "_id": "W0FsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町山田上甲1490",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "山田こども園",
+        "remarks": "",
+        "common_id": "E3738700013201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.96990299224854,
+          34.21779966603114
+        ]
+      },
+      "properties": {
+        "_id": "XEFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町山田上甲1494-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "綾上小学校",
+        "remarks": "",
+        "common_id": "E3738700014201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.95132064819336,
+          34.205307332962576
+        ]
+      },
+      "properties": {
+        "_id": "XUFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町西分1377",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "西分公民館",
+        "remarks": "",
+        "common_id": "E3738700015201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.95041942596436,
+          34.20381664683667
+        ]
+      },
+      "properties": {
+        "_id": "XkFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": false,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町西分1406-2",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "西分体育館施設（旧西分小学校）",
+        "remarks": "",
+        "common_id": "E3738700016201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9565134048462,
+          34.1795005452847
+        ]
+      },
+      "properties": {
+        "_id": "X0FsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": false,
+        "large_fire_flag": true,
+        "landslide_flag": false,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町西分2213",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "西分南部公民館",
+        "remarks": "",
+        "common_id": "E3738700017201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.95968914031982,
+          34.20878549806913
+        ]
+      },
+      "properties": {
+        "_id": "ZUFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町東分甲1245-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "東分地域交流館",
+        "remarks": "",
+        "common_id": "E3738700023201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.95020484924316,
+          34.26509049051403
+        ]
+      },
+      "properties": {
+        "_id": "ZkFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町陶1536-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "総合運動公園（体育館）",
+        "remarks": "",
+        "common_id": "E3738700024201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.94870281219482,
+          34.25831601668716
+        ]
+      },
+      "properties": {
+        "_id": "aEFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町陶2087-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "陶こども園",
+        "remarks": "",
+        "common_id": "E3738700026201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.94569873809814,
+          34.247284161521364
+        ]
+      },
+      "properties": {
+        "_id": "aUFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町陶5593-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "綾川中学校",
+        "remarks": "",
+        "common_id": "E3738700027201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.94999027252197,
+          34.252782533800655
+        ]
+      },
+      "properties": {
+        "_id": "akFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町陶5866-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "陶公民館",
+        "remarks": "",
+        "common_id": "E3738700028201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.95132064819336,
+          34.25338555922015
+        ]
+      },
+      "properties": {
+        "_id": "a0FsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町陶5878-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "陶小学校",
+        "remarks": "",
+        "common_id": "E3738700029201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9793872833252,
+          34.24700036481529
+        ]
+      },
+      "properties": {
+        "_id": "bEFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町畑田2373-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "昭和小学校",
+        "remarks": "",
+        "common_id": "E3738700030201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.97831439971924,
+          34.24721321243457
+        ]
+      },
+      "properties": {
+        "_id": "bUFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町畑田2390-8",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "昭和公民館",
+        "remarks": "",
+        "common_id": "E3738700031201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.97801399230957,
+          34.24891597400929
+        ]
+      },
+      "properties": {
+        "_id": "bkFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町畑田2422-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "昭和こども園",
+        "remarks": "",
+        "common_id": "E3738700032201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9805030822754,
+          34.26299791024172
+        ]
+      },
+      "properties": {
+        "_id": "b0FsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町畑田671-8",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "子育て支援施設きらり",
+        "remarks": "",
+        "common_id": "E3738700033201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.99479389190674,
+          34.19710823305245
+        ]
+      },
+      "properties": {
+        "_id": "cUFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町枌所西甲2060",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "枌所体育館施設（旧枌所小学校）",
+        "remarks": "",
+        "common_id": "E3738700035201"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.9950942993164,
+          34.197889134065605
+        ]
+      },
+      "properties": {
+        "_id": "ckFsnaABc40qGN8lKMRH",
+        "_index": "bi001_evacuation_facilities_202609140958",
+        "volcanic_phenomenon_flag": false,
+        "tsunami_flag": false,
+        "earthquake_flag": true,
+        "large_fire_flag": true,
+        "landslide_flag": true,
+        "flood_flag": true,
+        "same_address_flag": false,
+        "address_ja": "香川県綾川町枌所西甲2087-1",
+        "prefecture_and_city": "香川県綾川町",
+        "inland_flooding_flag": true,
+        "high_tide_flag": false,
+        "facility_name_ja": "枌所公民館",
+        "remarks": "",
+        "common_id": "E3738700036201"
+      }
+    }
+  ],
+  "_probe_note": "Total returned: 107, truncated to first 200"
+}

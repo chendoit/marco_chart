@@ -1,0 +1,4 @@
+project: MacroMicro-Data
+workspace: scratch                    # 這個目錄派的 readonly 任務都在空目錄跑，可並行
+deliver_to: research/                 # 收件 → research/<id>/
+archive_tasks: research/_agent-tasks/ # WP 與 DELIVERY.md → research/_agent-tasks/<日期>-<id>/

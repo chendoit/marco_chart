@@ -1,0 +1,12 @@
+卡住原因：東方財富 push2 / push2his 介面大範圍斷線（RemoteDisconnected、502 Bad Gateway、連線被拒），自 2026-10-23 下午起無法穩定取得資料；同機器上 csindex.com.cn、baidu.com 可正常連線，判斷為東財端節流或封鎖，非本機網路問題。
+
+已完成：
+- 中證1000 最新成分股清單 1000 檔（raw/000852cons.xls，官網日期 2026-10-22）。
+- 日 K 快取 cache/kline/ 811 檔（缺 189 檔）；指數日 K cache/index_000852.csv 已抓。
+- 行業快取 cache/meta/ 619 檔（缺 ~192 檔）。
+- AI 概念板塊：全 516 板塊清單已分頁取得，關鍵字命中 25 個；但成員清單未完成（cache/concepts/ 為空，ai_concepts.json 未產生），故 AI 分組無法產出。
+
+未完成：
+- breadth_latest.csv、report.md 未產出（analyze.py 已寫好，但需要完整快取與概念成員才能跑）。
+
+續跑方式：fetch.py 可重跑、已快取者自動跳過。待東財恢復後執行 run_fetch.cmd（或 venv\Scripts\python.exe fetch.py），完成後再跑 analyze.py 產出 breadth_latest.csv 與 report.md。建議先單檔測試連線，確認恢復再全量續跑；並建議降低併發（目前 WORKERS=1、INTERVAL=1.0）。

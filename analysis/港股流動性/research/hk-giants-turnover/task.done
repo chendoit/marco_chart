@@ -1,0 +1,3 @@
+主來源：東方財富 kline 成交額（港幣，不復權），覆蓋 2018-01-02 ~ 2026-10-22，共 2,166 列；備援 Yahoo close×volume 從未啟用。
+與 Yahoo 近似比對：中位數絕對差距約 0.37%，5%–95% 分位多在 ±2% 內；9988、3690 少數日期差距 5%–9%。
+2026-10-23 未收盤已排除；產出 giants_turnover.csv、fetch.py、report.md、compare_em_vs_yahoo.csv。

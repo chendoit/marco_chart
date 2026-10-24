@@ -1,0 +1,3 @@
+主目標（HKEX 主板＋GEM 全市場每日成交額）未達成：HKEX 每日行情 dayquot URL 全部 404、其他 HKEX 端點 404/403，無免費官方來源可程式化取得。
+已交付代理序列：東方財富 100.HSI 成交額（f6），2166 個交易日，2018-01-02 ～ 2026-10-22，寫入 market_turnover.csv（source=eastmoney_HSI_f6_constituent_proxy），為恒指成分股成交額，未與官方核對，不可當全市場使用。
+待辦：找到免費官方每日總成交額來源（或同意採用付費 HKEX Data Marketplace），詳見 report.md。

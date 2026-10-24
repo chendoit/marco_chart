@@ -54,6 +54,11 @@ TITLE_MAP = {
     93001: "us-bbb-credit-spread",
     93002: "us-aaa-credit-spread",
     7359: "pce-real-yoy",
+    95001: "us-high-yield-oas",
+    95002: "us-corporate-ig-oas",
+    95003: "us-5y-breakeven-inflation-rate",
+    95004: "us-10y-breakeven-inflation-rate",
+    95005: "us-5y5y-forward-inflation-expectation-rate",
 }
 
 
@@ -276,6 +281,7 @@ JOBS = [
     # FRED 有 16 個早期日期為空值,舊點由 _save_series merge 保留
     ("FRED DCOILWTICO (sid 8219, WTI 現貨日頻)", 8219, lambda: _fetch_fred_direct("DCOILWTICO")),
     # [2026-09-28] 信用風險利差,脫離 M²(見上方 _fetch_credit_spread 說明)
+    # ⚠️ sid 3612 標題雖是 us-credit-spread,實際是 CCC 有效殖利率 - DGS10,不是 OAS(真 OAS 見 95001/95002)
     ("FRED BAMLH0A3HYCEY-DGS10 (sid 3612, CCC 信用風險利差)", 3612, lambda: _fetch_credit_spread("BAMLH0A3HYCEY")),
     ("FRED BAMLC0A4CBBBEY-DGS10 (sid 93001, BBB 信用風險利差)", 93001, lambda: _fetch_credit_spread("BAMLC0A4CBBBEY")),
     ("FRED BAMLC0A1CAAAEY-DGS10 (sid 93002, AAA 信用風險利差)", 93002, lambda: _fetch_credit_spread("BAMLC0A1CAAAEY")),
@@ -289,6 +295,14 @@ JOBS = [
     # 僅 2026-05/06 不同(M² 2.39/2.54 vs FRED 2.45/2.63),ALFRED vintage 2026-08-15 算出正是 2.39/2.54 → 初值快照,非口徑差。
     # 選指數而非 PCEC96(2017 年幣值):兩者 YoY 相同(差 <=0.01),但指數從 1959 起、PCEC96 只從 2007 起
     ("FRED DPCERA3M086SBEA YoY (sid 7359, 實質 PCE 年增自算)", 7359, lambda: _fetch_fred_yoy("DPCERA3M086SBEA")),
+    # [2026-10-24] 左尾風險指標(WN-2026-10-23):M² 無對應 sid,自編 95001 起。
+    # ICE BofA OAS 為真正的選擇權調整利差(與 3612/93001/93002 的殖利率-DGS10 口徑不同),FRED 同樣只給近 3 年,舊點靠 merge 保留;
+    # 損益兩平通膨率(TIPS 隱含)用來拆解名目殖利率下跌是成長預期下修還是通膨預期下降
+    ("FRED BAMLH0A0HYM2 (sid 95001, 高收益債 OAS)", 95001, lambda: _fetch_fred_direct("BAMLH0A0HYM2")),
+    ("FRED BAMLC0A0CM (sid 95002, 投資級公司債 OAS)", 95002, lambda: _fetch_fred_direct("BAMLC0A0CM")),
+    ("FRED T5YIE (sid 95003, 5Y 損益兩平通膨率)", 95003, lambda: _fetch_fred_direct("T5YIE")),
+    ("FRED T10YIE (sid 95004, 10Y 損益兩平通膨率)", 95004, lambda: _fetch_fred_direct("T10YIE")),
+    ("FRED T5YIFR (sid 95005, 5y5y 遠期通膨預期)", 95005, lambda: _fetch_fred_direct("T5YIFR")),
 ]
 
 

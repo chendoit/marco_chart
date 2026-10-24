@@ -551,6 +551,56 @@ def process_rvol(expr):
     }
 
 
+def is_corr_expression(chart_id):
+    """判斷是否為 CORR (滾動相關係數) 格式
+
+    支援格式: "2:ret~cboe_TNX.CORR20" — 兩條序列以 ~ 連接，:ret 表示取日報酬，
+    省略則取日差分（適用殖利率、VIX 等水準型序列）
+    """
+    return isinstance(chart_id, str) and re.search(r'~.+\.CORR\d+$', chart_id.upper())
+
+
+def process_corr(expr):
+    """計算兩序列「變動」的滾動相關係數
+
+    先依日期 inner join 對齊，再各自轉成變動（:ret = 日報酬 pct_change，否則 diff），
+    最後 rolling(window).corr()。
+
+    Parameters:
+    expr: "a[:ret]~b[:ret].CORRn"，例如 "2:ret~cboe_TNX.CORR20"
+
+    Returns:
+    dict: {'data': [[date, value], ...], 'title': str}
+    """
+    match = re.match(r'(.+?)~(.+)\.CORR(\d+)$', expr, re.IGNORECASE)
+    if not match:
+        raise ValueError(f"無效的 CORR 格式: {expr}")
+
+    window = int(match.group(3))
+    frames = []
+    titles = []
+    for raw, tag in ((match.group(1), 'A'), (match.group(2), 'B')):
+        use_ret = raw.lower().endswith(':ret')
+        raw_id = raw[:-4] if use_ret else raw
+        series_id = int(raw_id) if raw_id.isdigit() else raw_id
+        data = load_series_data(series_id)
+        df = pd.DataFrame(data['data'], columns=['Date', tag])
+        df['Date'] = pd.to_datetime(df['Date'])
+        df[tag] = pd.to_numeric(df[tag], errors='coerce')
+        frames.append((df.sort_values('Date').drop_duplicates('Date', keep='last').set_index('Date'), use_ret))
+        titles.append(f"{data['title']}{'報酬' if use_ret else 'Δ'}")
+
+    combined = frames[0][0].join(frames[1][0], how='inner')
+    for (_, use_ret), col in zip(frames, ('A', 'B')):
+        combined[col] = combined[col].pct_change() if use_ret else combined[col].diff()
+    corr = combined['A'].rolling(window=window, min_periods=window).corr(combined['B']).dropna()
+
+    return {
+        'data': [[idx, val] for idx, val in corr.items()],
+        'title': f"corr({titles[0]}, {titles[1]}) {window}d",
+    }
+
+
 def is_trend_expression(chart_id):
     """判斷是否為 TREND (MA 趨勢計數) 格式
 
@@ -712,6 +762,8 @@ def generate_chart_data(chart_id_entry, get_y_axis_config_func, months=600,
             data = process_rev(chart_id)
         elif is_rvol_expression(chart_id):
             data = process_rvol(chart_id)
+        elif is_corr_expression(chart_id):
+            data = process_corr(chart_id)
         elif is_trend_expression(chart_id):
             data = process_trend(chart_id)
         elif is_expression(chart_id):
@@ -873,6 +925,8 @@ def resolve_series_title(chart_id_entry, fallback_title=''):
         return process_rev(chart_id_entry)['title']
     if is_rvol_expression(chart_id_entry):
         return process_rvol(chart_id_entry)['title']
+    if is_corr_expression(chart_id_entry):
+        return process_corr(chart_id_entry)['title']
     if is_trend_expression(chart_id_entry):
         return process_trend(chart_id_entry)['title']
     if is_expression(chart_id_entry):

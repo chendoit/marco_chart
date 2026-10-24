@@ -22,6 +22,13 @@ GEX_DB_PATH = r"C:\code\2026-03-24-GEX-lieta\gex_analysis.db"
 
 TICKERS = ["spx", "spy", "vix"]
 
+# [2026-10-24] 左尾風險指標盤點 P0：新增代號只匯出不依賴 spot 的序列
+# （spot_price 自 2026-07-17 起在 DB 全是 NULL，spot_price / flip_distance / gamma_env 不產出）。
+# 代號大小寫依 DB 實際值（期貨 ZN/ZF 為大寫），pkl 檔名一律小寫。
+NO_SPOT_TICKERS = ["qqq", "smh", "xlk", "xle", "tlt", "ZN", "ZF"]
+# daily_vol_reference 只有股票/ETF 有資料，ZN/ZF 沒有 IV30
+NO_SPOT_VOL_REF_TICKERS = ["qqq", "smh", "xlk", "xle", "tlt"]
+
 LEVEL_COLS = {
     "gamma_flip":     ("daily_levels", "gamma_flip"),
     "gamma_flip_ce":  ("daily_levels", "gamma_flip_ce"),
@@ -104,7 +111,7 @@ def _export_flip_distance(conn, ticker):
         if spot != 0:
             data.append([dt, (spot - flip) / spot * 100])
     _save_pkl(
-        f"gex_{ticker}_flip_distance",
+        f"gex_{ticker.lower()}_flip_distance",
         f"GEX {ticker.upper()} Gamma Flip Distance %",
         data,
     )
@@ -138,11 +145,11 @@ def _export_skew_series(conn, ticker):
                 call_skew.append([dt, float(r[2])])
             if r[3] is not None:
                 skew_ratio.append([dt, float(r[3])])
-        _save_pkl(f"gex_{ticker}_put_skew_{bucket}",
+        _save_pkl(f"gex_{ticker.lower()}_put_skew_{bucket}",
                   f"{tk_upper} {label} Put Skew 25dP/ATM", put_skew)
-        _save_pkl(f"gex_{ticker}_call_skew_{bucket}",
+        _save_pkl(f"gex_{ticker.lower()}_call_skew_{bucket}",
                   f"{tk_upper} {label} Call Skew 25dC/ATM", call_skew)
-        _save_pkl(f"gex_{ticker}_skew_ratio_{bucket}",
+        _save_pkl(f"gex_{ticker.lower()}_skew_ratio_{bucket}",
                   f"{tk_upper} {label} Skew 25dP/25dC", skew_ratio)
 
 
@@ -158,7 +165,7 @@ def _export_term_slope(conn, ticker):
         if r[1] is not None:
             dt = datetime.strptime(r[0], "%Y-%m-%d").replace(hour=8)
             data.append([dt, float(r[1])])
-    _save_pkl(f"gex_{ticker}_term_slope",
+    _save_pkl(f"gex_{ticker.lower()}_term_slope",
               f"{ticker.upper()} IV Term Slope", data)
 
 
@@ -177,8 +184,8 @@ def _export_vol_reference(conn, ticker):
         if r[1] is not None and r[2] is not None:
             vrp_data.append([dt, (float(r[1]) - float(r[2])) * 100])
     tk_upper = ticker.upper()
-    _save_pkl(f"gex_{ticker}_iv30", f"{tk_upper} IV30", iv30_data)
-    _save_pkl(f"gex_{ticker}_vrp_surface",
+    _save_pkl(f"gex_{ticker.lower()}_iv30", f"{tk_upper} IV30", iv30_data)
+    _save_pkl(f"gex_{ticker.lower()}_vrp_surface",
               f"{tk_upper} Surface VRP (IV30-RVol20)", vrp_data)
 
 
@@ -199,11 +206,11 @@ def _export_gamma_summary(conn, ticker):
             put_data.append([dt, float(r[2]) / 1e9])
         if r[3] is not None:
             net_data.append([dt, float(r[3]) / 1e9])
-    _save_pkl(f"gex_{ticker}_call_gamma",
+    _save_pkl(f"gex_{ticker.lower()}_call_gamma",
               f"{tk_upper} Call Gamma ($B)", call_data)
-    _save_pkl(f"gex_{ticker}_put_gamma",
+    _save_pkl(f"gex_{ticker.lower()}_put_gamma",
               f"{tk_upper} Put Gamma ($B)", put_data)
-    _save_pkl(f"gex_{ticker}_net_gamma",
+    _save_pkl(f"gex_{ticker.lower()}_net_gamma",
               f"{tk_upper} Net Gamma ($B)", net_data)
 
 
@@ -232,14 +239,14 @@ def _export_gamma_0dte(conn, ticker):
         dt = datetime.strptime(date_str, "%Y-%m-%d").replace(hour=8)
         dte0_data.append([dt, by_date[date_str]["0dte"] / 1e9])
         non0_data.append([dt, by_date[date_str]["non0dte"] / 1e9])
-    _save_pkl(f"gex_{ticker}_gamma_0dte",
+    _save_pkl(f"gex_{ticker.lower()}_gamma_0dte",
               f"{tk_upper} 0DTE Net Gamma ($B)", dte0_data)
-    _save_pkl(f"gex_{ticker}_gamma_non0dte",
+    _save_pkl(f"gex_{ticker.lower()}_gamma_non0dte",
               f"{tk_upper} Non-0DTE Net Gamma ($B)", non0_data)
 
 
 def fetch_gex_series():
-    """Read GEX-lieta gex_analysis.db and export SPX/SPY/VIX series as pkl."""
+    """Read GEX-lieta gex_analysis.db and export SPX/SPY/VIX (+ NO_SPOT_TICKERS) series as pkl."""
     if not os.path.exists(GEX_DB_PATH):
         logger.warning(f"GEX DB not found: {GEX_DB_PATH}")
         return
@@ -252,20 +259,20 @@ def fetch_gex_series():
 
         for series_suffix, (table, col) in LEVEL_COLS.items():
             data = _extract_level_series(conn, ticker, col, table)
-            name = f"gex_{ticker}_{series_suffix}"
+            name = f"gex_{ticker.lower()}_{series_suffix}"
             title = f"GEX {ticker.upper()} {series_suffix}"
             _save_pkl(name, title, data)
 
         data = _extract_spot_price(conn, ticker)
         _save_pkl(
-            f"gex_{ticker}_spot_price",
+            f"gex_{ticker.lower()}_spot_price",
             f"GEX {ticker.upper()} Spot Price",
             data,
         )
 
         data = _extract_gamma_env(conn, ticker)
         _save_pkl(
-            f"gex_{ticker}_gamma_env",
+            f"gex_{ticker.lower()}_gamma_env",
             f"GEX {ticker.upper()} Gamma Environment",
             data,
         )
@@ -279,6 +286,18 @@ def fetch_gex_series():
         _export_skew_series(conn, ticker)
         _export_term_slope(conn, ticker)
         _export_vol_reference(conn, ticker)
+
+    for ticker in NO_SPOT_TICKERS:
+        logger.info(f"Exporting GEX series (no spot) for {ticker}")
+        tk = ticker.lower()
+        for series_suffix, (table, col) in LEVEL_COLS.items():
+            data = _extract_level_series(conn, ticker, col, table)
+            _save_pkl(f"gex_{tk}_{series_suffix}",
+                      f"GEX {ticker.upper()} {series_suffix}", data)
+        _export_gamma_summary(conn, ticker)
+        _export_gamma_0dte(conn, ticker)
+        if ticker in NO_SPOT_VOL_REF_TICKERS:
+            _export_vol_reference(conn, ticker)
 
     conn.close()
     logger.info("GEX series export complete")

@@ -317,6 +317,26 @@ _module = ChartModule(
                 "負相關 = 傳統體制，Crash-Down 風險需由 Skew 判斷。",
         },
         {
+            "title": "股債相關性 — corr(SPX 日報酬, Δ10Y 殖利率)",
+            "ids": ["2:ret~cboe_TNX.CORR20", "2:ret~cboe_TNX.CORR60"],
+            "axis": [0, 0],
+            "plot_lines": [("2:ret~cboe_TNX.CORR20", 0)],
+            "summary":
+                "SPX 日報酬與 10Y 殖利率日變動的滾動相關係數（20 日、60 日）。<br>"
+                "正值 = 股跌、殖利率跌（債漲）= 公債在避險；負值 = 股債同跌，公債失去避險功能（通膨/利率衝擊體制）。<br>"
+                "相關係數算在變動上（價格用報酬、殖利率用差分），避免水準值的假相關。",
+        },
+        {
+            "title": "Spot-Vol 相關性 — corr(SPX 日報酬, ΔVIX)",
+            "ids": ["2:ret~cboe_VIX.CORR10", "2:ret~cboe_VIX.CORR20"],
+            "axis": [0, 0],
+            "plot_lines": [("2:ret~cboe_VIX.CORR10", 0)],
+            "summary":
+                "SPX 日報酬與 VIX 日變動的滾動相關係數（10 日、20 日）。<br>"
+                "正常 = 強負相關（約 -0.7 以下，Spot Up/Vol Down）；"
+                "相關係數轉向 0 或轉正 = Spot-Vol 脫鉤，McElligott 的 'Crash-Up' 前兆。",
+        },
+        {
             "title": "VIX 完整期限結構 — 1D/9D/30D/3M/6M/1Y",
             "ids": ["cboe_VIX1D", "cboe_VIX9D", "cboe_VIX", "cboe_VIX3M", "cboe_VIX6M", "cboe_VIX1Y"],
             "axis": [0, 0, 0, 0, 0, 0],

@@ -136,7 +136,13 @@ def _fetch_crack321() -> list:
 #   (1) 2010-2012 早期零星點、(2) SOXS 2026-07-15 的 1:10 reverse split M² 沒有回溯調整
 #   (7/15 前成交量大 10 倍),Yahoo 有正確調整 → Yahoo 反而較正確。
 # 因為拆股會回溯改寫整段歷史,這裡**整檔覆寫**(不是逐日 merge),改用「起始日不能變晚、筆數不能變少」防呆。
-ETF_TICKERS = ["VIXM", "UVXY", "SVXY", "TQQQ", "SQQQ", "SOXL", "SOXS"]
+#
+# [2026-10-24] 加 8 檔左尾風險監控用 ETF(WN-2026-10-23 左尾風險快速重新定價 §6 P0):
+#   QQQ(是否跌破 715)、SMH 半導體、XLK 科技、XLE 能源、IGV 軟體、TLT 長債、HYG 高收益債、LQD 投資級債。
+# 沿用 etf_* close/volume 寫法而非 TICKERS 的 sid 寫法:這些都是 ETF 價量,命名與 VIXM 等一致,不必自編 sid;
+# 且 ETF 配息/拆股會回溯調整歷史,整檔覆寫 + 防呆比逐日 merge 合適。
+ETF_TICKERS = ["VIXM", "UVXY", "SVXY", "TQQQ", "SQQQ", "SOXL", "SOXS",
+               "QQQ", "SMH", "XLK", "XLE", "IGV", "TLT", "HYG", "LQD"]
 
 
 def _yf_chart_ohlcv(symbol: str) -> list:

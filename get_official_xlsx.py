@@ -517,20 +517,36 @@ CIER_BASE_URL = "https://www.cier.edu.tw/wp-content/uploads/{year}/{month:02d}/P
 CIER_SHEET_NAME = "(季調後)臺灣製造業PMI與各項擴散指標時間序列-報告發布"
 
 
-def _get_cier_publish_month() -> tuple:
-    """推算 CIER 報告發布月份(YYYY, MM)。"""
-    today = datetime.now()
-    return today.year, today.month
+def _get_cier_candidate_months(n: int = 4) -> list:
+    """CIER 候選發布月份 [(YYYY, MM)],由當月往前 n 個月。
+    月初新檔尚未上傳時當月 URL 會 404,需回退到上個月。"""
+    d = datetime.now().replace(day=1)
+    months = []
+    for _ in range(n):
+        months.append((d.year, d.month))
+        d = (d - timedelta(days=1)).replace(day=1)
+    return months
+
+
+def _download_cier_xlsx() -> bytes:
+    last_err = None
+    for year, month in _get_cier_candidate_months():
+        url = CIER_BASE_URL.format(year=year, month=month)
+        logger.info(f"CIER: {url}")
+        r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+        if r.status_code == 404:
+            last_err = f"404 {url}"
+            logger.info(f"CIER: {year}-{month:02d} 檔案尚未發布,改抓前一個月")
+            continue
+        r.raise_for_status()
+        return r.content
+    raise RuntimeError(f"CIER PMI 近期月份皆 404 (最後: {last_err})")
 
 
 def _fetch_cierm_pmi(col_idx: int) -> list:
     """通用 CIER PMI 抓取。col_idx: 2=新增訂單, 7=客戶存貨。"""
-    year, month = _get_cier_publish_month()
-    url = CIER_BASE_URL.format(year=year, month=month)
-    logger.info(f"CIER col{col_idx}: {url}")
-    r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
-    r.raise_for_status()
-    wb = openpyxl.load_workbook(io.BytesIO(r.content), data_only=True)
+    content = _download_cier_xlsx()
+    wb = openpyxl.load_workbook(io.BytesIO(content), data_only=True)
     ws = wb[CIER_SHEET_NAME]
     data = []
     for row in ws.iter_rows(min_row=4, max_row=ws.max_row, values_only=True):

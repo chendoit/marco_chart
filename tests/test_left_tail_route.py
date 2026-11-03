@@ -75,6 +75,11 @@ class LeftTailRouteLoadTest(unittest.TestCase):
             n_series = len(ch["config"]["series"])
             self.assertGreaterEqual(len(re.findall(r"\d{4}-\d{2}-\d{2}", sub)), n_series, f"chart {i}: {sub}")
 
+    def test_every_time_series_chart_overlays_vix(self):
+        for i, ch in enumerate(self.payload["charts"][1:], start=1):
+            names = [s["name"] for s in ch["config"]["series"]]
+            self.assertTrue(any("VIX" in n and "VXN" not in n or n == "VIX" for n in names), f"chart {i}: {names}")
+
     def test_charts_with_thresholds_have_plot_lines(self):
         titled = {c["config"]["title"]["text"][:1]: c["config"] for c in self.payload["charts"][1:]}
         for key in "①②③④⑤⑥⑦⑧⑨":
@@ -111,12 +116,12 @@ class LeftTailRouteLoadTest(unittest.TestCase):
         titles = [c["config"]["title"]["text"] for c in self.payload["charts"]]
         aux = [c for c in self.payload["charts"] if c["config"]["title"]["text"].startswith("⑦ 輔助")]
         self.assertEqual(len(aux), 1)
-        self.assertEqual(len(aux[0]["config"]["series"]), 4)       # xsd／xop ivpct + xsd／xop iv
+        self.assertEqual(len(aux[0]["config"]["series"]), 5)       # xsd／xop ivpct + xsd／xop iv + VIX
         self.assertIn("解析度 1 vol 點", aux[0]["config"]["subtitle"]["text"])
         self.assertTrue(any(t.startswith("⑦ 參考：DSI 1W") for t in titles))
         flow = [c for c in self.payload["charts"] if "深價外 put" in c["config"]["title"]["text"]]
         self.assertEqual(len(flow), 1)
-        self.assertEqual({s["name"][:3] for s in flow[0]["config"]["series"]}, {"SPX", "QQQ"})
+        self.assertEqual({s["name"][:3] for s in flow[0]["config"]["series"]}, {"SPX", "QQQ", "VIX"})
 
     def test_flow_table_shows_query_date_deep_otm_marks_and_asof(self):
         flow = [c for c in self.payload["charts"] if "深價外 put" in c["config"]["title"]["text"]][0]

@@ -30,6 +30,7 @@ QQQ_SKEW_PCTL = 85          # ⑨ QQQ 3M put skew 1Y 百分位
 SPREAD_PCTL = 85            # ⑨ (QQQ − SPX) p25/p50 差的 1Y 百分位
 CONTANGO_FALSIFY = 5        # ⑧ 證偽：contango 回到 > 5%
 PCTL_WINDOW, PCTL_MIN = 252, 126
+VIX_OVERLAY = "cboe_VIX"   # 每張圖疊加的 VIX
 
 # 延遲判斷：基準 = 最近一個已收盤的交易日。本 repo 沒有 NYSE 日曆工具，改用 series_2（SPX 收盤）與
 # cboe_VIX 兩者中較新的最後日期；兩者都停更時偵測不到（已知限制）。
@@ -570,6 +571,13 @@ def _flow_chart():
             continue
         series.append({"name": f"{t} 深價外 put 權利金合計", "color": FLOW_COLORS[t],
                        "data": [[int(pd.Timestamp(d).timestamp() * 1000), float(v)] for d, v in s.items()]})
+    try:
+        vix = _series(VIX_OVERLAY).tail(FLOW_TREND_DAYS)
+        asof.append(_asof_text("VIX", VIX_OVERLAY))
+        series.append({"name": "VIX", "color": "#555555", "yAxis": 1, "dashStyle": "ShortDash",
+                       "data": [[int(pd.Timestamp(d).timestamp() * 1000), float(v)] for d, v in vix.items()]})
+    except FileNotFoundError:
+        pass
     note = ("flow 是 query_date 當日成交（underlying 為當日收盤附近），不位移；與 screener／iv_rv（前一日收盤）不同族，"
             f"容忍 {LAG_TOL_DEFAULT} 日。深價外 put = option_type P 且 OTM > {DEEP_OTM_PCT}%。")
     config = {
@@ -577,7 +585,8 @@ def _flow_chart():
         "title": {"text": f"② 翼部需求（三）參考：SPX／QQQ 深價外 put（OTM > {DEEP_OTM_PCT}%）權利金合計（百萬美元，近 {FLOW_TREND_DAYS} 日）"},
         "subtitle": {"text": "as-of：" + " ｜ ".join(asof) + "<br/>" + note, "style": {"fontSize": "11px"}},
         "xAxis": {"type": "datetime"},
-        "yAxis": [{"title": {"text": "百萬美元"}, "min": 0}],
+        "yAxis": [{"title": {"text": "百萬美元"}, "min": 0},
+                  {"title": {"text": "VIX"}, "opposite": True, "gridLineWidth": 0}],
         "tooltip": {"shared": True, "valueDecimals": 1},
         "legend": {"enabled": True},
         "credits": {"enabled": False},
@@ -626,9 +635,7 @@ class _LeftTailModule(ChartModule):
         return config
 
 
-_module = _LeftTailModule(
-    filename='左尾風險監控',
-    charts=[
+_CHARTS = [
         {"custom_config": _overview},
         {
             "title": f"① 科技股 vol 領漲：VXN−VIX（>{VXN_VIX_GAP} 觸發；越大 = 壓力集中在科技股）｜VXN 1Y 百分位（>{VXN_PCTL} 觸發）",
@@ -833,9 +840,16 @@ _module = _LeftTailModule(
                 "ratio < 下緣 標成 breakdown（1），與 goldmine 參考 CSV 50dma 誤差 < 0.3%。"
                 "最後一點取 VVIX、VIX 同日交集，VIX 晚一天時比 VVIX 少一點。",
         },
-    ],
-    reverse_ids=[],
-)
+]
+
+# 每張時間序列圖都疊上 VIX（獨立右軸），方便對照各指標與市場恐慌程度。
+for _c in _CHARTS:
+    if "ids" in _c:
+        _c["axis"] = list(_c.get("axis") or range(len(_c["ids"]))) + [len(_c["ids"])]
+        _c["labels"] = list(_c.get("labels") or [str(e) for e in _c["ids"]]) + ["VIX"]
+        _c["ids"] = list(_c["ids"]) + [VIX_OVERLAY]
+
+_module = _LeftTailModule(filename='左尾風險監控', charts=_CHARTS, reverse_ids=[])
 
 CHART_IDS = _module.CHART_IDS
 SUMMARY_LIST = _module.SUMMARY_LIST

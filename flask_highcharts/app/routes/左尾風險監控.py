@@ -30,6 +30,12 @@ QQQ_SKEW_PCTL = 85          # ⑨ QQQ 3M put skew 1Y 百分位
 SPREAD_PCTL = 85            # ⑨ (QQQ − SPX) p25/p50 差的 1Y 百分位
 CONTANGO_FALSIFY = 5        # ⑧ 證偽：contango 回到 > 5%
 PCTL_WINDOW, PCTL_MIN = 252, 126
+# 反向欄「恐慌極值」（WN-2026-10-28 本地回測：事件後 1 個月 SPX 上漲 86–100%，基準 66%；1 週內優勢不明顯）
+PANIC_VVIX_JUMP = 0.24      # VVIX 單日 ≥ +24%（回測 21 次，+1m 上漲 86%）
+PANIC_VIX_JUMP = 0.50       # VIX 單日 ≥ +50%（回測 8 次，+1m 上漲 100%）
+PANIC_EXCESS_PCTL = 99      # VVIX 相對 SPX 的超額單日漲幅 ≥ 99 百分位（回測 26 次，+1m 上漲 88%）
+PANIC_LOOKBACK = 5          # 近 N 個交易日內出現過即亮（賣壓尾聲的訊號，不是當天抄底）
+PANIC_MIN_HISTORY = 500     # 超額百分位至少要有的歷史樣本數
 VIX_OVERLAY = "cboe_VIX"   # 每張圖疊加的 VIX
 
 # 延遲判斷：基準 = 最近一個已收盤的交易日。本 repo 沒有 NYSE 日曆工具，改用 series_2（SPX 收盤）與
@@ -458,12 +464,57 @@ def compute_status():
     return out
 
 
+def compute_contrarian():
+    """反向欄「恐慌極值」：VVIX 單日 ≥ +24%、VIX 單日 ≥ +50%、VVIX 超額（對 SPX 單日報酬回歸殘差）≥ 99 百分位，
+    任一在近 PANIC_LOOKBACK 個交易日內出現 → ✅。這是「賣壓接近尾聲」的反向訊號（回測 1 個月後 SPX 上漲 86–100%），
+    不是 9 條風險確認清單的一部分，不計入 n/9；1 週內優勢不明顯，不是當天抄底。
+    回傳 {name, status, label, detail, asof}；缺資料或延遲 → ❓（規則同 _cond）。"""
+    labels = [("VVIX", "cboe_VVIX"), ("VIX", "cboe_VIX"), ("SPX", 2)]
+    asof, missing, delayed = _check(labels)
+    out = {"name": "恐慌極值（反向）", "asof": asof}
+    if missing:
+        return {**out, "status": UNK, "label": UNK, "detail": "缺資料：" + "、".join(missing)}
+    vvix, vix, spx = (_series(sid) for _, sid in labels)
+    j = pd.concat([vvix.rename("vvix"), vix.rename("vix"), spx.rename("spx")], axis=1, join="inner").dropna()
+    d = j.pct_change().dropna()
+    try:   # SPX 報酬幾乎沒變動（序列退化）時回歸不可解 → 略過超額百分位這一項，其餘照常判斷
+        vals = (d["vvix"] - np.polyval(np.polyfit(d["spx"], d["vvix"], 1), d["spx"])).values
+    except (np.linalg.LinAlgError, ValueError):
+        vals = None
+    hits = []
+    for t in d.index[-PANIC_LOOKBACK:]:
+        i = d.index.get_loc(t)
+        r = []
+        if d["vvix"].iloc[i] >= PANIC_VVIX_JUMP:
+            r.append(f"VVIX 單日 {d['vvix'].iloc[i] * 100:+.1f}%")
+        if d["vix"].iloc[i] >= PANIC_VIX_JUMP:
+            r.append(f"VIX 單日 {d['vix'].iloc[i] * 100:+.1f}%")
+        if vals is not None and i >= PANIC_MIN_HISTORY:
+            pc = (vals[:i] < vals[i]).mean() * 100
+            if pc >= PANIC_EXCESS_PCTL:
+                r.append(f"VVIX 超額 {pc:.1f} 百分位")
+        if r:
+            hits.append(f"{_d(t)}：{'、'.join(r)}")
+    triggered = bool(hits)
+    detail = (f"最新 {_d(d.index[-1])}：VVIX 單日 {d['vvix'].iloc[-1] * 100:+.1f}%（≥{PANIC_VVIX_JUMP * 100:g}%）、"
+              f"VIX 單日 {d['vix'].iloc[-1] * 100:+.1f}%（≥{PANIC_VIX_JUMP * 100:g}%）；"
+              f"近 {PANIC_LOOKBACK} 個交易日{'出現：' + '；'.join(hits) if hits else '未出現'}。"
+              "回測（2006–2026）事件後 1 個月 SPX 上漲 86–100%（基準 66%）、1 週僅 50–81%：賣壓尾聲訊號，不是當天抄底")
+    status = OK if triggered else NO
+    if delayed:
+        detail = f"延遲（{'；'.join(delayed)}），不能當成未觸發。最後值判斷：{'成立' if triggered else '未成立'}。{detail}"
+        status = UNK
+    return {**out, "status": status, "label": status, "detail": detail}
+
+
 STATUS_COLOR = {OK: "#d64545", NO: "#b8b8b8", UNK: "#e8a838"}
+CONTRA_COLOR = {OK: "#2a9d8f", NO: "#b8b8b8", UNK: "#e8a838"}
 STATUS_HEIGHT = {OK: 1.0, NO: 0.15, UNK: 0.5}
 
 
 def _overview():
     rows = compute_status()
+    contra = compute_contrarian()
     n_ok = sum(r["status"] == OK for r in rows)
     n_unk = sum(r["status"] == UNK for r in rows)
     config = {
@@ -473,24 +524,34 @@ def _overview():
         "subtitle": {"text": "✅ 條件成立 ｜ ⬜ 未成立 ｜ ❓ 缺資料或延遲（不能當成未觸發）。第 7 條顯示「主＋輔助」："
                              "主條件決定狀態與計數，輔助條件缺資料或延遲只標 ❓、不影響主條件。"
                              "各條 as-of 見下方表格，不要拿各序列最後一點直接一起判斷。"},
-        "xAxis": {"categories": [f"{r['no']} {r['name']}" for r in rows], "labels": {"style": {"fontSize": "11px"}}},
+        "xAxis": {"categories": [f"{r['no']} {r['name']}" for r in rows] + [f"反向 {contra['name']}"], "labels": {"style": {"fontSize": "11px"}}},
         "yAxis": {"title": {"text": None}, "min": 0, "max": 1.15, "labels": {"enabled": False},
                   "gridLineWidth": 0},
         "legend": {"enabled": False},
         "tooltip": {"useHTML": True, "pointFormat": "{point.detail}"},
         "credits": {"enabled": False},
-        "plotOptions": {"column": {"dataLabels": {"enabled": True, "format": "{point.label}",
+        "plotOptions": {"column": {"grouping": False, "dataLabels": {"enabled": True, "format": "{point.label}",
                                                   "style": {"fontSize": "16px"}}}},
         "series": [{
             "name": "狀態",
             "data": [{"y": STATUS_HEIGHT[r["status"]], "color": STATUS_COLOR[r["status"]],
                       "label": r.get("label", r["status"]), "detail": r["detail"]} for r in rows],
+        }, {
+            # 反向欄：獨立於 9 條計數，用藍綠色區隔（✅ = 恐慌極值已出現，偏向賣壓尾聲）
+            "name": "反向訊號",
+            "data": [None] * len(rows) + [{"y": STATUS_HEIGHT[contra["status"]],
+                                            "color": CONTRA_COLOR[contra["status"]], "label": contra["label"],
+                                            "detail": contra["detail"]}],
         }],
     }
     tr = "".join(
         f"<tr><td style='padding:2px 8px'>{r['no']}</td><td style='padding:2px 8px'>{r['name']}</td>"
         f"<td style='padding:2px 8px'>{r.get('label', r['status'])}</td><td style='padding:2px 8px'>{r['detail']}</td>"
         f"<td style='padding:2px 8px;font-size:12px'>{' ｜ '.join(r['asof'])}</td></tr>" for r in rows)
+    tr += (f"<tr style='background:#e3f4f1'><td style='padding:2px 8px'>反向</td>"
+           f"<td style='padding:2px 8px'>{contra['name']}</td><td style='padding:2px 8px'>{contra['label']}</td>"
+           f"<td style='padding:2px 8px'>{contra['detail']}</td>"
+           f"<td style='padding:2px 8px;font-size:12px'>{' ｜ '.join(contra['asof'])}</td></tr>")
     summary = (
         "盤點 WN §4 確認清單（含實作 WN §3.2 的修改與新增），同時成立越多越接近「真正去風險化」而不是一般回檔。<br>"
         "狀態：✅ 成立、⬜ 未成立、❓ 缺資料或延遲（序列落後最近收盤交易日超過容忍天數、或序列缺檔；"
@@ -501,7 +562,9 @@ def _overview():
         f"<th>最新值</th><th>各序列 as-of</th></tr>{tr}</table><br>"
         "<b>證偽訊號</b>（出現代表只是部位清洗）：SPX 1–3 天收復 gamma flip 且 VVIX 回到 95 以下；"
         "股債相關性轉負；10Y 下跌主要來自損益兩平而 DFII10 沒跌；CCC 利差回落而 BBB 沒跟上；"
-        "COR1M 單日跳升後快速回落；VX 曲線 2–3 天內回到正價差（contango > 5%）。")
+        "COR1M 單日跳升後快速回落；VX 曲線 2–3 天內回到正價差（contango > 5%）。<br>"
+        "<b>反向欄（藍綠底）</b>：恐慌極值（VVIX 單日 ≥ +24%、VIX 單日 ≥ +50%、VVIX 相對 SPX 超額 ≥ 99 百分位，近 5 日內任一出現）"
+        "代表賣壓接近尾聲，不計入 n/9。依據 WN-2026-10-28 本地回測；事件數 8–26 次、勝率誤差約 ±10–15 個百分點、未做樣本外檢驗。")
     return {"config": config, "summary": summary}
 
 

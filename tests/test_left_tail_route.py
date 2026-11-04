@@ -612,3 +612,82 @@ class LeftTailFlowTest(_FakeSeriesCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LeftTailContrarianTest(_FakeSeriesCase):
+    """反向欄「恐慌極值」：VVIX ≥ +24%、VIX ≥ +50%、VVIX 超額 ≥ 99 百分位，近 5 日內任一出現 → ✅；不計入 9 條。"""
+
+    N = 700
+
+    def _mapping(self, vvix_jump_at=None, vix_jump_at=None, last=None):
+        """隨機但可重現的 SPX／VIX／VVIX（單日波動小，不會自然觸發）；在倒數第 k 日（1 = 最新）插入跳升。"""
+        import numpy as np
+        last = last or self.LAST
+        rng = np.random.default_rng(7)
+        idx = pd.bdate_range(end=pd.Timestamp(last), periods=self.N)
+        spx_r = rng.normal(0, 0.005, self.N)
+        vvix_r = -2.0 * spx_r + rng.normal(0, 0.01, self.N)
+        vix_r = -3.0 * spx_r + rng.normal(0, 0.01, self.N)
+        if vvix_jump_at:
+            vvix_r[-vvix_jump_at] = 0.30
+        if vix_jump_at:
+            vix_r[-vix_jump_at] = 0.55
+        mk = lambda base, r: pd.Series(base * np.cumprod(1 + r), index=idx)
+        return {2: mk(7000.0, spx_r), "cboe_VIX": mk(18.0, vix_r), "cboe_VVIX": mk(90.0, vvix_r)}
+
+    def _run(self, **kw):
+        self._install(self._mapping(**kw))
+        return self.mod.compute_contrarian()
+
+    def test_quiet_market_is_not_triggered(self):
+        r = self._run()
+        self.assertEqual(r["status"], "⬜", r["detail"])
+
+    def test_vvix_jump_within_lookback_triggers(self):
+        r = self._run(vvix_jump_at=1)
+        self.assertEqual(r["status"], "✅", r["detail"])
+        self.assertIn("VVIX 單日 +30.0%", r["detail"])
+        r = self._run(vvix_jump_at=5)   # 近 5 日的邊界仍算
+        self.assertEqual(r["status"], "✅")
+
+    def test_jump_older_than_lookback_does_not_trigger(self):
+        self.assertEqual(self._run(vvix_jump_at=6)["status"], "⬜")
+
+    def test_vix_jump_triggers(self):
+        r = self._run(vix_jump_at=2)
+        self.assertEqual(r["status"], "✅", r["detail"])
+        self.assertIn("VIX 單日 +55.0%", r["detail"])
+
+    def test_missing_series_is_unknown(self):
+        m = self._mapping()
+        del m["cboe_VVIX"]
+        self._install(m)
+        r = self.mod.compute_contrarian()
+        self.assertEqual(r["status"], "❓")
+        self.assertIn("VVIX", r["detail"])
+
+    def test_stale_series_is_unknown_not_not_triggered(self):
+        m = self._mapping()
+        m["cboe_VVIX"] = m["cboe_VVIX"].iloc[:-3]   # VVIX 落後 3 個交易日（容忍 0）
+        self._install(m)
+        r = self.mod.compute_contrarian()
+        self.assertEqual(r["status"], "❓")
+        self.assertIn("延遲", r["detail"])
+
+    def test_overview_shows_contrarian_column_without_changing_nine_count(self):
+        self._install(self._mapping(vvix_jump_at=1))
+        orig = self.mod.compute_status
+        self.mod.compute_status = lambda: [
+            {"no": i, "name": f"c{i}", "status": "⬜", "detail": "d", "asof": ["x 2026-10-23"]}
+            for i in range(1, 10)]
+        self.addCleanup(setattr, self.mod, "compute_status", orig)
+        ov = self.mod._overview()
+        cfg = ov["config"]
+        self.assertEqual(len(cfg["series"][0]["data"]), 9)          # 主序列仍是 9 條
+        self.assertIn("0/9 成立", cfg["title"]["text"])             # 反向欄不計入
+        self.assertEqual(len(cfg["xAxis"]["categories"]), 10)
+        self.assertTrue(cfg["xAxis"]["categories"][-1].startswith("反向"))
+        contra = cfg["series"][1]["data"]
+        self.assertEqual(len(contra), 10)
+        self.assertEqual(contra[-1]["label"], "✅")
+        self.assertIn("恐慌極值", ov["summary"])

@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, render_template, send_from_directory, request, make_response
+import ctypes
 import gzip
 import json
 import math
 import os
+import threading
 import time
 import hashlib
 import importlib.util
@@ -27,6 +29,17 @@ _last_check_time = 0.0
 _CHECK_INTERVAL = 60  # 每 60 秒最多重掃一次 pkl mtime
 _api_cache = {}
 _gzip_cache = {}  # (path, etag) -> gzip bytes
+_cache_generation = 0  # 每次清快取 +1；計算途中若改變，結果就是舊資料，不可寫入快取
+_code_token = format(time.time_ns(), "x")  # 重啟或熱更新就換，讓瀏覽器不會用 304 留住舊圖表設定
+_version_lock = threading.Lock()
+_group_locks = {}  # group -> Lock，同一群組同時間只算一次
+
+# --- 預熱：資料批次更新完後，先算好常開的重頁面 ---
+_WARM_GROUPS = ("左尾風險監控", "每日天啟", "McElligott波動率微結構")
+_WARM_QUIET_SECONDS = 300  # pkl 連續這麼久沒變動，才視為批次更新結束
+_WARM_POLL_SECONDS = 30
+_WARM_MIN_AVAILABLE_MB = 800  # 可用記憶體低於此值就暫停預熱，下一輪再試
+_warm_low_memory_warned = False
 
 
 @app.after_request
@@ -59,8 +72,8 @@ def _gzip_response(resp):
     return resp
 
 
-def _compute_data_version():
-    """掃描 data/ 下所有 pkl 的最後修改時間，產生版本 hash。"""
+def _latest_pkl_mtime():
+    """data/ 下所有 pkl 中最新的修改時間（epoch 秒）。"""
     max_mtime = 0.0
     try:
         for fname in os.listdir(DATA_DIR):
@@ -71,22 +84,40 @@ def _compute_data_version():
                     max_mtime = mt
     except OSError:
         pass
-    return hashlib.md5(str(max_mtime).encode()).hexdigest()[:12]
+    return max_mtime
 
 
-def _refresh_data_version_if_needed():
+def _compute_data_version():
+    """掃描 data/ 下所有 pkl 的最後修改時間，產生版本 hash。"""
+    return hashlib.md5(str(_latest_pkl_mtime()).encode()).hexdigest()[:12]
+
+
+def _current_etag():
+    return f"{_data_version}-{_code_token}"
+
+
+def _clear_caches():
+    """清除所有快取。呼叫端須持有 _version_lock。"""
+    global _cache_generation
+    _cache_generation += 1
+    _api_cache.clear()
+    _gzip_cache.clear()
+    clear_series_cache()
+
+
+def _refresh_data_version_if_needed(force=False):
     """定期掃描 pkl 檔案 mtime，若 data version 改變則清除所有快取。"""
     global _data_version, _last_check_time
-    now = time.monotonic()
-    if now - _last_check_time < _CHECK_INTERVAL:
-        return
-    _last_check_time = now
-    new_version = _compute_data_version()
-    if new_version != _data_version:
-        logger.info("Data version changed: {} -> {}, clearing caches", _data_version, new_version)
-        _data_version = new_version
-        _api_cache.clear()
-        clear_series_cache()
+    with _version_lock:
+        now = time.monotonic()
+        if not force and now - _last_check_time < _CHECK_INTERVAL:
+            return
+        _last_check_time = now
+        new_version = _compute_data_version()
+        if new_version != _data_version:
+            logger.info("Data version changed: {} -> {}, clearing caches", _data_version, new_version)
+            _data_version = new_version
+            _clear_caches()
 
 
 def _init_data_version():
@@ -179,6 +210,88 @@ def _build_group_charts(group_name):
     return charts
 
 
+def _get_group_json(group_name):
+    """回傳 (json 字串, ETag)。同一群組同時間只算一次，其他請求等結果。"""
+    with _group_locks.setdefault(group_name, threading.Lock()):
+        etag = _current_etag()
+        cached = _api_cache.get(group_name)
+        if cached is not None:
+            logger.info("Cache hit for '{}'", group_name)
+            return cached, etag
+
+        generation = _cache_generation
+        charts = _build_group_charts(group_name)
+        json_str = jsonify({"charts": charts}).get_data(as_text=True)
+        with _version_lock:
+            if generation == _cache_generation:
+                _api_cache[group_name] = json_str
+                logger.info("Computed and cached chart data for '{}'", group_name)
+            else:
+                # 計算途中資料已更新：不存這份舊結果，並清掉這次計算可能寫回的舊序列
+                clear_series_cache()
+                logger.info("Discarded stale chart data for '{}'", group_name)
+        return json_str, etag
+
+
+def _available_memory_mb():
+    """系統可用實體記憶體（MB）。"""
+
+    class _MemoryStatus(ctypes.Structure):
+        _fields_ = [("length", ctypes.c_ulong), ("load", ctypes.c_ulong)] + [
+            (name, ctypes.c_ulonglong)
+            for name in ("total_phys", "avail_phys", "total_page", "avail_page",
+                         "total_virtual", "avail_virtual", "avail_extended")
+        ]
+
+    status = _MemoryStatus()
+    status.length = ctypes.sizeof(status)
+    if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):
+        raise ctypes.WinError()
+    return status.avail_phys / (1024 * 1024)
+
+
+def _warm_groups():
+    """走完整 API 路徑預熱，讓 JSON 與 gzip 快取都就緒。記憶體不足時回傳 False，稍後再試。"""
+    global _warm_low_memory_warned
+    client = app.test_client()
+    for group_name in _WARM_GROUPS:
+        if group_name not in chart_id_list:
+            continue
+        available_mb = _available_memory_mb()
+        if available_mb < _WARM_MIN_AVAILABLE_MB:
+            if not _warm_low_memory_warned:
+                logger.warning("Pause chart warm-up: available memory {:.0f} MB", available_mb)
+                _warm_low_memory_warned = True
+            return False
+        started = time.monotonic()
+        resp = client.get(f"/api/chart/{group_name}", headers={"Accept-Encoding": "gzip"})
+        logger.info("Warmed '{}': HTTP {} in {:.1f}s", group_name, resp.status_code,
+                    time.monotonic() - started)
+    _warm_low_memory_warned = False
+    return True
+
+
+def _warm_tick(warmed_generation):
+    """資料穩定且快取世代未預熱過時預熱一次，回傳最後預熱完成的世代。"""
+    if time.time() - _latest_pkl_mtime() < _WARM_QUIET_SECONDS:
+        return warmed_generation
+    _refresh_data_version_if_needed(force=True)
+    generation = _cache_generation
+    if generation == warmed_generation:
+        return warmed_generation
+    return generation if _warm_groups() else warmed_generation
+
+
+def _warm_loop():
+    warmed_generation = None
+    while True:
+        try:
+            warmed_generation = _warm_tick(warmed_generation)
+        except Exception as e:
+            logger.exception("Chart warm-up failed: {}", e)
+        time.sleep(_WARM_POLL_SECONDS)
+
+
 @app.route('/favicon.ico')
 def favicon():
     logger.info(f"Accessed favicon {app.root_path}")
@@ -201,25 +314,14 @@ def get_chart_data(group_name):
     _refresh_data_version_if_needed()
 
     client_etag = request.headers.get("If-None-Match", "").strip('" ')
-    if client_etag == _data_version:
+    if client_etag == _current_etag():
         return "", 304
 
-    if group_name in _api_cache:
-        logger.info("Cache hit for '{}'", group_name)
-        resp = make_response(_api_cache[group_name])
-        resp.headers["Content-Type"] = "application/json"
-        resp.headers["ETag"] = f'"{_data_version}"'
-        return resp
-
     try:
-        charts = _build_group_charts(group_name)
-        json_str = jsonify({"charts": charts}).get_data(as_text=True)
-        _api_cache[group_name] = json_str
-
-        logger.info("Computed and cached chart data for '{}'", group_name)
+        json_str, etag = _get_group_json(group_name)
         resp = make_response(json_str)
         resp.headers["Content-Type"] = "application/json"
-        resp.headers["ETag"] = f'"{_data_version}"'
+        resp.headers["ETag"] = f'"{etag}"'
         return resp
     except Exception as e:
         logger.exception("Error in get_chart_data for '{}': {}", group_name, e)
@@ -239,9 +341,11 @@ def show_charts(group_name):
 @app.route("/api/update_groups", methods=["GET"])
 def update_groups():
     """重新載入所有 group 模組（熱更新），同時清除快取。"""
+    global _code_token
     try:
-        _api_cache.clear()
-        clear_series_cache()
+        with _version_lock:
+            _clear_caches()
+            _code_token = format(time.time_ns(), "x")
         _load_all_modules()
         _init_data_version()
         logger.info("Updated chart_id_list: {}", list(chart_id_list.keys()))
@@ -256,4 +360,6 @@ if __name__ == "__main__":
     port = 6002 if is_dev else 5002
 
     logger.info(f"Starting Flask app chart dev: {is_dev} port {port} ")
+    if not is_dev:
+        threading.Thread(target=_warm_loop, name="chart-warmer", daemon=True).start()
     app.run(debug=False, host="0.0.0.0", port=port)

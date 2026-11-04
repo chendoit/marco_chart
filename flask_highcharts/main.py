@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, send_from_directory, request, make_response
+import gzip
 import json
 import math
 import os
@@ -25,6 +26,37 @@ _data_version = ""
 _last_check_time = 0.0
 _CHECK_INTERVAL = 60  # 每 60 秒最多重掃一次 pkl mtime
 _api_cache = {}
+_gzip_cache = {}  # (path, etag) -> gzip bytes
+
+
+@app.after_request
+def _gzip_response(resp):
+    """對 JSON/HTML 做 gzip（7.8MB 的圖表 JSON 可壓到 1MB 內）；API 壓縮結果依 ETag 快取。"""
+    if (
+        resp.status_code != 200
+        or resp.direct_passthrough
+        or "Content-Encoding" in resp.headers
+        or "gzip" not in request.headers.get("Accept-Encoding", "")
+        or resp.mimetype not in ("application/json", "text/html")
+    ):
+        return resp
+    data = resp.get_data()
+    if len(data) < 1024:
+        return resp
+    etag = resp.headers.get("ETag")
+    key = (request.path, etag) if etag else None
+    gz = _gzip_cache.get(key) if key else None
+    if gz is None:
+        gz = gzip.compress(data, compresslevel=6)
+        if key:
+            if len(_gzip_cache) > 64:
+                _gzip_cache.clear()
+            _gzip_cache[key] = gz
+    resp.set_data(gz)
+    resp.headers["Content-Encoding"] = "gzip"
+    resp.headers["Content-Length"] = str(len(gz))
+    resp.headers.add("Vary", "Accept-Encoding")
+    return resp
 
 
 def _compute_data_version():

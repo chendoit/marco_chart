@@ -142,7 +142,9 @@ def _fetch_crack321() -> list:
 # 沿用 etf_* close/volume 寫法而非 TICKERS 的 sid 寫法:這些都是 ETF 價量,命名與 VIXM 等一致,不必自編 sid;
 # 且 ETF 配息/拆股會回溯調整歷史,整檔覆寫 + 防呆比逐日 merge 合適。
 ETF_TICKERS = ["VIXM", "UVXY", "SVXY", "TQQQ", "SQQQ", "SOXL", "SOXS",
-               "QQQ", "SMH", "XLK", "XLE", "IGV", "TLT", "HYG", "LQD"]
+               "QQQ", "SMH", "XLK", "XLE", "IGV", "TLT", "HYG", "LQD",
+               "GLD",  # [2026-11-11] GLD:美元水管流動性頁 ⑨ 黃金日報酬
+               "RSP"]  # [2026-11-11] RSP 等權 S&P:警示系統 H_Sector 板塊集中度(SMH/QQQ 跌幅 − RSP 跌幅)
 
 
 def _yf_chart_ohlcv(symbol: str) -> list:

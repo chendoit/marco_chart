@@ -36,6 +36,7 @@ from get_fiscal_data import fetch_fiscal_data
 from get_eia_series import fetch_eia_series
 from get_jp_yield import fetch_jp_yield_and_spread
 from get_cftc_crude_mm import fetch_cftc_crude_mm
+from get_cftc_treasury import fetch_cftc_treasury
 from get_conference_board import fetch_conference_board
 from get_tradingview_series import fetch_tradingview_series
 from get_cme_fedwatch import fetch_cme_fedwatch_main
@@ -60,12 +61,12 @@ tasks = [
     ("FRED csv (261/4/7249 + WN-A WP-A1/A1b 12條)", fetch_fred_csv),
     ("FRED STLFSI4", lambda: fetch_and_save_fred_data('STLFSI4')),
     ("FRED THREEFYTP10 (Kim-Wright Term Premium)", lambda: fetch_and_save_fred_data('THREEFYTP10')),
-    ("FRED Treasury Yields (DGS1MO/1/2/10/20/30)", fetch_fed_treasury_yields),
+    ("FRED Treasury Yields (DGS1MO/1/2/10/20/30 + DTB3)", fetch_fed_treasury_yields),
     ("FRED T10Y2Y (10Y-2Y Spread)", lambda: fetch_and_save_fred_data('T10Y2Y')),
     ("FRED DFII10 (10Y Real Yield)", lambda: fetch_and_save_fred_data('DFII10')),
     ("FRED MMMFFAQ027S (MMF AUM)", lambda: fetch_and_save_fred_data('MMMFFAQ027S')),
     ("NY Fed SOFR (rate/percentiles)", fetch_sofr_data),
-    ("FRED IORB + ON RRP + DFF", fetch_fed_liquidity_reference_rates),
+    ("FRED IORB + ON RRP + DFF + OBFR", fetch_fed_liquidity_reference_rates),
     ("MacroMicro charts (curl_cffi API, 16 series)", fetch_m_square_chart_api),
     # [2026-09-28] get_m_square_series.url_list 已清空(全數改由其他來源或停抓),不再登入 M² 抓 series
     # ("MacroMicro series", fetch_m_square_series),
@@ -92,6 +93,7 @@ tasks = [
     ("EIA oil inventory + SPR (sid 854/19080)", fetch_eia_series),
     ("日本10Y + 美日利差 (sid 2018/4456, 需排在 FRED Treasury Yields 之後)", fetch_jp_yield_and_spread),
     ("CFTC 原油 Managed Money long/short/net (sid 8297/8298/8296)", fetch_cftc_crude_mm),
+    ("CFTC 美債期貨 2Y/5Y/10Y 槓桿基金淨部位 (美元水管流動性頁)", fetch_cftc_treasury),
     ("Conference Board LEI/CEI (sid 374/376)", fetch_conference_board),
     ("TradingView 德10Y/美德利差/SP500均線breadth (sid 1916/4448/18331/22718, WN-2026-09-22-C批)", fetch_tradingview_series),
     ("CME FedWatch 官方結算 hike/cut (chart 77 備援, ex-M², 不接儀表板)", fetch_cme_fedwatch_main),

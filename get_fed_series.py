@@ -3,6 +3,7 @@
 import os
 import pickle
 import datetime
+from zoneinfo import ZoneInfo
 import requests
 import pandas as pd
 from pystlouisfed import FRED
@@ -44,12 +45,14 @@ def fetch_and_save_fred_data(series_id):
     從 FRED API 獲取數據並保存為與 STLFSI4 相同的數據結構。
     """
     try:
-        # 獲取系列標題
-        series_info = fred.series_search(search_text=series_id)
-        title = series_info.iloc[0]['title']
+        # [2026-11-11] FRED 的「今天」是美國中部時間；pystlouisfed 預設用本機日期當 realtime，
+        # 台北上午（美國仍是前一天）會回 400，所有 fed_* 靜默失敗。明確傳美中日期。
+        rt = datetime.datetime.now(ZoneInfo("America/Chicago")).date()
+        # 標題直接查 series（舊寫法用全文搜尋第一筆，可能拿到別的序列標題）
+        title = fred.series(series_id, realtime_start=rt, realtime_end=rt).title
 
         # 獲取系列數據
-        data = fred.series_observations(series_id=series_id)
+        data = fred.series_observations(series_id=series_id, realtime_start=rt, realtime_end=rt)
 
         # 格式化數據（按日期升序）
         formatted_data = []
@@ -195,14 +198,16 @@ def fetch_sofr_data():
 
 
 def fetch_fed_liquidity_reference_rates():
-    """IORB、ON RRP、Fed Funds 等 FRED 系列，供 SOFR 流動性圖表使用。"""
-    for series_id in ("IORB", "RRPONTSYAWARD", "RRPONTSYD", "DFF"):
+    """IORB、ON RRP、Fed Funds 等 FRED 系列，供 SOFR 流動性圖表使用。
+    [2026-11-11] 加 OBFR（隔夜銀行融資利率），供美元水管流動性警示系統的 OBFR−EFFR 境外美元壓力指標。"""
+    for series_id in ("IORB", "RRPONTSYAWARD", "RRPONTSYD", "DFF", "OBFR"):
         fetch_and_save_fred_data(series_id)
 
 
 def fetch_fed_treasury_yields():
-    """美國公債殖利率曲線（FRED DGS 系列）。"""
-    for series_id in ("DGS1MO", "DGS1", "DGS2", "DGS10", "DGS20", "DGS30"):
+    """美國公債殖利率曲線（FRED DGS 系列）。
+    [2026-11-11] 加 DTB3（3M T-bill 次級市場，貼現率口徑），供警示系統 R6 Type II 搶現金判斷。"""
+    for series_id in ("DGS1MO", "DGS1", "DGS2", "DGS10", "DGS20", "DGS30", "DTB3"):
         fetch_and_save_fred_data(series_id)
 
 

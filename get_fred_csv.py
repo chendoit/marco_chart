@@ -59,6 +59,10 @@ TITLE_MAP = {
     95003: "us-5y-breakeven-inflation-rate",
     95004: "us-10y-breakeven-inflation-rate",
     95005: "us-5y5y-forward-inflation-expectation-rate",
+    # [2026-11-11] 美元水管流動性頁(flask_highcharts 美元水管流動性.py)原本讀一次性 CSV,改成每日 ETL
+    96001: "us-fed-treasury-bills-held-outright-weekly",
+    96002: "us-fed-standing-repo-accepted-daily",
+    96003: "us-fed-funds-target-upper",
 }
 
 
@@ -303,6 +307,12 @@ JOBS = [
     ("FRED T5YIE (sid 95003, 5Y 損益兩平通膨率)", 95003, lambda: _fetch_fred_direct("T5YIE")),
     ("FRED T10YIE (sid 95004, 10Y 損益兩平通膨率)", 95004, lambda: _fetch_fred_direct("T10YIE")),
     ("FRED T5YIFR (sid 95005, 5y5y 遠期通膨預期)", 95005, lambda: _fetch_fred_direct("T5YIFR")),
+    # [2026-11-11] 美元水管流動性頁:自編 96001 起。
+    # WSHOBL = Fed 持有 T-bill(週三,百萬美元);RPTTLD = Fed 臨時 OMO 回購總承作(十億美元,2021-07 起即 SRF 用量);
+    # DFEDTARU = Fed 目標利率上限(%,即 SRF 利率)
+    ("FRED WSHOBL (sid 96001, Fed 持有 T-bill 週三)", 96001, lambda: _fetch_fred_direct("WSHOBL")),
+    ("FRED RPTTLD (sid 96002, Fed 臨時回購承作/SRF 用量)", 96002, lambda: _fetch_fred_direct("RPTTLD")),
+    ("FRED DFEDTARU (sid 96003, 聯邦資金利率目標上限)", 96003, lambda: _fetch_fred_direct("DFEDTARU")),
 ]
 
 

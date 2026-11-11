@@ -1,0 +1,165 @@
+# 美元水管流動性：日層 Shock 規則（第 1 階段回測用）
+# 規格：WN-2026-11-11-美元水管流動性-警示系統規劃.md 第一部分第 2–4 節、第八節「對規則的影響」
+#
+# 所有門檻都還沒校準（calibrated: false）。
+# 防過度擬合：分位數只能選 0.90／0.95／0.99；floor／cap 只用整數 bp 或整數十億，
+# 而且要在看回測結果之前寫好理由（見每條規則的 why）。
+#
+# 單位：利差 bp；SRF、RRP 為十億美元（bn）。
+# avail_lag：資料在第幾個交易日後才能用。SOFR、TGCR 是 T+1 公布，所以 R1、R3 為 1；
+#            SRF 是 T+0（當天早盤、午盤就公布）；R6 用當日收盤。
+#            燈號在 date 當天收盤後可得；R1、R3 用的是前一個交易日的利差。
+
+quantile:
+  window: 250          # 前 250 個交易日，不含當日
+  min_periods: 120
+
+calendar:
+  # 日曆日 = 月底、季底、年底、稅日（4/15、6/15、9/15、12/15、1/15，遇假日順延）
+  # 再加上日曆日的下一個交易日（1/2 這類月初也常有結算壓力）
+  after_days: 1
+  widen:
+    R1_bp: 3           # 日曆日 R1 門檻 +3bp
+    R4a_bn: 10         # 日曆日 R4a 門檻 +100 億
+  t2_check: true       # 日曆日後第 2 個交易日，利差沒回落一半就強制 R1 2 級
+  # 標售淨結算 > 500 億的日子也該算日曆日，但本地只有毛額（auction_settlements.csv）。
+  # 替代：季中 refunding 結算日（2、5、8、11 月 15 日），v2 版本才開啟。
+  refunding_months: []
+
+rules:
+  R1:                  # SOFR − IORB
+    enabled: true
+    avail_lag: 1
+    quantile_exclude_calendar: true
+    # why：2019-09-16 漏掉，是因為 P99 被 2018 年底墊到 33bp；2026 年 R1 幾乎只能亮 1 級，
+    #      是因為 2025Q4 的月底和年底把 P95／P99 墊到 +11／+22bp。日曆日本來就另外加寬門檻，
+    #      不該再拿來墊高平常日的分位數。
+    levels:
+      1: {q: 0.90, floor: 3, cap: null, consecutive: 2}
+      2: {q: 0.95, floor: 5, cap: 10, mean_days: 5}
+      3: {q: 0.99, floor: 8, cap: 15}
+    # cap why：+10bp（5 日均）和 +15bp（單日）在 2018 年以後的資料中，只出現在已確認的
+    #          準備金吃緊期（2019-09、2025Q4、2025 年底），分位數再高也不該要求更多。
+
+  R3:                  # SOFR − TGCR（交易商中介壓力）
+    enabled: true
+    avail_lag: 1
+    quantile_exclude_calendar: false
+    # why：2022 年利差長期貼在 0～+3bp，P95 被拉到 0bp，觸發 115 天。
+    levels:
+      1: {q: 0.95, floor: 4, cap: null}
+      2: {q: 0.99, floor: 6, cap: null}
+
+  R4a:                 # SRF 用量（十億美元），2021-07-28 起才有這個工具
+    enabled: true
+    avail_lag: 0
+    levels:
+      1: {gt: 2}       # > 20 億
+      2: {gt: 10}      # > 100 億
+    # why：2025-06-30 RRP 還有 4,600 億，SRF 111 億是季底窗飾，不是壓力
+    rrp_guard: {quarter_end_only: true, rrp_bn_gt: 100}
+
+  R6:                  # 跨資產同跌
+    enabled: true
+    avail_lag: 0
+    pre: {z_equity: -1.5, z_gold: -1.5}    # min(z_SPY, z_QQQ) < -1.5 且 z_GLD < -1.5
+    type2:
+      mode: dtb3       # dtb3：長端失控且短券被搶；funding：長端失控且融資面已經 ≥ 1 級；loose：初版
+      d10_bp_ge: 5
+      d3m_bp_le: -5    # mode = dtb3 用
+    # why：初版 DGS1MO ≤ 0bp 幾乎天天成立，2021–2026 有十幾個鷹派日被判成 Type II
+
+light:
+  # 0 綠、1 黃、2 橘、3 紅
+  # 黃：融資面（R1、R3、R4a）任一 ≥ 1
+  # 橘：融資面 ≥ 2，或融資面 ≥ 1 且 R6 ≥ 1
+  # 紅：融資面 ≥ 2 且 R6 = 2（Type II），或任一項 3 級
+  # 還沒做：Regime 為 Normal 時門檻 ×1.5（G1–G5 尚未實作）；R2、R5（SOFR P99 只有 2021-08 起）
+  funding_rules: [R1, R3, R4a]
+  r6_type2_alone: 0    # R6 Type II 單獨出現時的燈號；0 = 不單獨升燈（v3 起為 1 = 黃）
+
+events:
+  detect_buffer_days: 2   # 窗口結束後再多看 2 個交易日（T+1 公布的落後）
+  positive:               # H_Liq 正樣本（第三部分事件表，2026-11-11 改版）
+    - {name: 2018 年底, start: 2018-12-31, end: 2019-01-03}
+    - {name: 2019-09 repo 危機, start: 2019-09-16, end: 2019-09-20}
+    - {name: 2020-03 COVID 搶現金, start: 2020-03-12, end: 2020-03-17}
+    - {name: 2025-09 稅日, start: 2025-09-15, end: 2025-09-16}
+    - {name: 2025-10～11 準備金吃緊, start: 2025-10-15, end: 2025-11-04}
+    - {name: 2025 年底, start: 2025-11-25, end: 2026-01-02}
+  negative:               # 不得亮橘燈以上
+    - {name: 2022 英國 LDI, start: 2022-09-26, end: 2022-10-14}
+    - {name: 2023 SVB, start: 2023-03-09, end: 2023-03-22}
+    - {name: 2024-08 日圓平倉, start: 2024-08-02, end: 2024-08-06}
+  precursor:              # 前奏型（2026-11-11 看完回測結果才補入）
+    # 只報告有沒有亮燈；不算進召回，也不從誤報扣除，不能拿來證明規則更準。
+    # 依據：準備金 1.47 兆、SOFR−IOER 月中位數 +6～+8.5bp，是 2019-09 repo 危機的前奏。
+    - {name: 2019-04～07 準備金稀缺（事後補入）, start: 2019-04-01, end: 2019-07-31}
+  sanity:                 # 只作合理性檢查，不是通過條件（WN 第五節第 1 點）
+    - {name: 2026-10-23～11-05 本次, start: 2026-10-20, end: 2026-11-09}
+
+acceptance:
+  recall_orange_min: 5          # 6 個正樣本至少 5 個亮橘燈以上
+  negative_max_light: 1         # 負樣本最多黃燈
+  false_alarm_episodes_per_year_max: 2   # 正樣本窗口以外的橘燈以上事件（連續日併成一次）
+  # 誤報分類：期間內 SOFR−IORB 5 日均曾 ≥ 5bp 算「真實偏緊」（不在事件表、但融資面確實緊），
+  # 其餘算「假訊號」。驗收只看假訊號。
+  # why：2019-04～07 準備金 1.47 兆、SOFR−IOER 月中位數 +6～+8.5bp，是 2019-09 危機的前奏，
+  #      把它當誤報會逼規則變鈍。5bp = R1 2 級的 floor。
+  real_pressure_5d_bp: 5
+
+periods:
+  # 2021–2024 幾乎沒有正樣本，原本「2018–2022 定參數、2023–2026 盲測」不能用。
+  # 改成：2018–2020（3 個正樣本、準備金充裕到吃緊）定參數，2021–2026（3 個正樣本、3 個負樣本、
+  # 4 年平靜期考誤報）驗證。注意：2025 年的事件在寫這份設定前已經逐日看過，驗證期不是真正的盲測。
+  calibrate: [2018-01-01, 2020-12-31]
+  validate: [2021-01-01, 2026-12-31]
+
+# 要比較的版本：對上面設定的覆寫（深度合併）
+variants:
+  v0_初版:
+    calendar: {widen: {R1_bp: 0, R4a_bn: 0}, t2_check: false, after_days: 0}
+    rules:
+      R1:
+        quantile_exclude_calendar: false
+        levels:
+          2: {floor: 4.5, cap: null}
+          3: {cap: null}
+      R3: {levels: {1: {floor: null}, 2: {floor: null}}}
+      R4a: {rrp_guard: null, quarter_end_l1_off: true}
+      R6: {type2: {mode: loose}}
+  v1_修正:
+    {}
+  v1_R6用融資面:
+    rules: {R6: {type2: {mode: funding}}}
+  v1_R1不排除日曆:
+    rules: {R1: {quantile_exclude_calendar: false}}
+  v1_R1不設上限:
+    rules: {R1: {levels: {2: {cap: null}, 3: {cap: null}}}}
+  # v2：v1 消融結果，拿掉 R3 召回不變、誤報 23 → 16、負樣本 LDI／SVB 從黃降綠。
+  #     依「拿掉後精確率沒下降就刪」原則，R3 不再進燈號，只留給計分板當傳導證據（H_Liq +2）和 X2 反證。
+  v2_R3不進燈號:
+    light: {funding_rules: [R1, R4a]}
+  v2+季中結算日:
+    light: {funding_rules: [R1, R4a]}
+    calendar: {refunding_months: [2, 5, 8, 11]}
+  v2+R1日曆RRP防護:
+    # 和 R4a 的 rrp_guard 同一個理由：RRP 還有 > 1,000 億緩衝時，日曆日利差跳升是窗飾
+    light: {funding_rules: [R1, R4a]}
+    rules: {R1: {rrp_guard: {rrp_bn_gt: 100}}}
+  v2+R1一級上限5:
+    # 1 級也會被墊高：2020-03 前 250 日含 2019 年，P90 被拉高，3/11–3/12（+5、+10bp）連 2 日沒亮 1 級。
+    # 上限取 5 = 2 級的 floor，不另外找數字。
+    light: {funding_rules: [R1, R4a]}
+    rules: {R1: {levels: {1: {cap: 5}}}}
+  v2_全部:
+    light: {funding_rules: [R1, R4a]}
+    calendar: {refunding_months: [2, 5, 8, 11]}
+    rules: {R1: {rrp_guard: {rrp_bn_gt: 100}}}
+
+  # v3：使用者 2026-11-11 決定 R6 Type II 單獨亮黃燈（只提醒注意，不升橘）。
+  #     理由：R6 是 T+0 訊號，原本必須等 T+1 的融資面先亮，2020-03-12 因此沒有反應。
+  v3_R6單獨亮黃:
+    light: {funding_rules: [R1, R4a], r6_type2_alone: 1}
+
+main_variant: v3_R6單獨亮黃

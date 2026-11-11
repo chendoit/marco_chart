@@ -1,0 +1,13 @@
+﻿指標名,來源,頻率,量的是什麼,與haircut的理論關係,主要偏差
+sofr_tgcr_bp（SOFR−TGCR，bp）,NY Fed SOFR、TGCR,日,SOFR 多含 DVP/GCF 等集中清算雙邊回購，相對純三方 GC 的溢價,經銷商把對沖基金等槓桿客戶的資金成本轉嫁時，可在利率或 haircut 二選一；溢價擴大代表經銷商資產負債表變緊，同一時期 haircut 也可能收緊（價格面替代）,只量利率不量擔保品；受季末窗飾、TGA/準備金體制與 SOFR 樣本組成變動影響；分段後符號不穩
+bgcr_tgcr_bp（BGCR−TGCR，bp）,NY Fed BGCR、TGCR,日,BGCR 比 TGCR 多納入 GCF 的溢價,GCF 是經銷商之間的一般擔保融資；溢價出現代表經銷商間中介受限，理論上與 haircut 收緊同向,多數日子為 0，季末常整季無變異（季末值相關無法計算）；資訊量極低
+dvp_tri_bp（OFR DVP 利率−三方利率，bp）,OFR DVP_AR_OO-F、TRIV1_AR_OO-F,日,集中清算 DVP 相對三方回購的利差，即經銷商從三方借入再於 DVP 貸出的中介價差,中介價差大代表經銷商轉手成本高；經銷商在 DVP 端也可能同時提高 haircut,2018–2022 多為負值（DVP 含特券），特券稀缺會壓低 DVP 利率，與 haircut 無關
+gcf_sofr_bp（GCF 利率−SOFR，bp）,OFR GCF_AR_OO-F、NY Fed SOFR,日（稀疏）,GCF 隔夜利率相對 SOFR 的溢價,同 bgcr_tgcr，經銷商間融資溢價,OFR GCF 利率只有約 270 天資料，季平均多不足 20 天；可下結論的季數 < 20，不採用
+sofr_p99_p1_bp（SOFR 第 99 減第 1 百分位，bp）,NY Fed SOFR 百分位（既有 raw JSON）,日,SOFR 成交利率分布的全距,haircut 收緊時，擔保品較差或資產負債表受限的借方只能用更高利率借，分布右尾拉長,受季末、月末、稅日等日曆效應主導；第 1 百分位受特券影響
+sofr_p75_p25_bp（SOFR 四分位距，bp）,NY Fed SOFR 百分位,日,SOFR 成交利率分布的中段離散度,比全距穩健的分散度量；借方之間的融資條件差異擴大，可能伴隨差別 haircut,利率體制（準備金充裕/稀缺）主導其水準；與 haircut 的關係間接
+sofr_p99_med_bp（SOFR 第 99 百分位−SOFR，bp）,NY Fed SOFR 百分位,日,右尾借方相對中位數的溢價,只看最弱借方的溢價，最接近『被收緊者』的成本,同 p99_p1，日曆效應強
+dvp_vol_rel60_pct（DVP 成交量相對前 60 日均值，%）,OFR DVP_TV_TOT-F,日,DVP 成交量的短期偏離,haircut 收緊會在同樣擔保品下減少可融資額，成交量應相對下降,成交量也隨國債發行、基差交易、季末結算變動；方向不專屬 haircut
+tri_vol_rel60_pct（三方成交量相對前 60 日均值，%）,OFR TRIV1_TV_TOT-F,日,三方回購（現金端，MMF 等）成交量短期偏離,三方是經銷商的資金來源；量縮表示經銷商可轉貸給槓桿客戶的資金減少,受 ON RRP 與 MMF 資金流主導，與 haircut 無直接連結
+dvp_ov_chg60_pct（DVP 未平倉量 60 日對數變化，%）,OFR DVP_OV_TOT-F,日,集中清算 DVP 餘額的增長,haircut 收緊會壓縮槓桿部位，未平倉量應下降,餘額增長主要反映基差交易與贊助回購規模；增長期間平均 haircut 反而因零 haircut 部位占比上升而下降（組成效應）
+nontri_share_pct（1−TGCR量/SOFR量，%）,NY Fed SOFR-VOL、TGCR-VOL,日,SOFR 成交中非三方（DVP/GCF）所占比例,槓桿客戶在清算雙邊回購的融資需求比重,結構趨勢為主；與 haircut 水準是組成而非收緊關係
+dvp_ov_to_tri_vol（DVP 未平倉量/三方成交量）,OFR DVP_OV_TOT-F、TRIV1_TV_TOT-F,日,經銷商中介的雙邊槓桿部位相對其三方資金來源的倍數,比值越高，經銷商資產負債表越被雙邊部位占用，理論上收緊 haircut 的動機越大,強烈結構趨勢（2022 後上升）；季頻相關主要來自趨勢而非同步波動

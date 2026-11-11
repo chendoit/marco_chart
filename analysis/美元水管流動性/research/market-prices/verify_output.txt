@@ -1,0 +1,86 @@
+ok   欄位前段為 ['date', 'ticker', 'open', 'high', 'low', 'close', 'adj_close', 'volume']（實際 ['date', 'ticker', 'open', 'high', 'low', 'close', 'adj_close', 'volume']）
+ok   主鍵 ['ticker', 'date'] 不重複
+ok   依 ['ticker', 'date'] 升冪
+ok   ^GSPC 有資料
+ok   ^GSPC 起始 <= 2018-01-02（1970-01-02）
+ok   ^GSPC 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   ^GSPC 沒有週末日期
+ok   ^GSPC high/low 合理（異常 0 筆）
+ok   ^GSPC 近期 close 無缺值
+ok   ^DJI 有資料
+ok   ^DJI 起始 <= 2018-01-02（1992-01-02）
+ok   ^DJI 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   ^DJI 沒有週末日期
+ok   ^DJI high/low 合理（異常 0 筆）
+ok   ^DJI 近期 close 無缺值
+ok   ^SOX 有資料
+ok   ^SOX 起始 <= 2018-01-02（1994-05-04）
+ok   ^SOX 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   ^SOX 沒有週末日期
+ok   ^SOX high/low 合理（異常 0 筆）
+ok   ^SOX 近期 close 無缺值
+ok   ^NDX 有資料
+ok   ^NDX 起始 <= 2018-01-02（1985-10-01）
+ok   ^NDX 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   ^NDX 沒有週末日期
+ok   ^NDX high/low 合理（異常 0 筆）
+ok   ^NDX 近期 close 無缺值
+ok   QQQ 有資料
+ok   QQQ 起始 <= 2018-01-02（1999-03-10）
+ok   QQQ 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   QQQ 沒有週末日期
+ok   QQQ high/low 合理（異常 0 筆）
+ok   QQQ 近期 close 無缺值
+ok   SPY 有資料
+ok   SPY 起始 <= 2018-01-02（1993-01-29）
+ok   SPY 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   SPY 沒有週末日期
+ok   SPY high/low 合理（異常 0 筆）
+ok   SPY 近期 close 無缺值
+ok   RSP 有資料
+ok   RSP 起始 <= 2018-01-02（2003-05-01）
+ok   RSP 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   RSP 沒有週末日期
+ok   RSP high/low 合理（異常 0 筆）
+ok   RSP 近期 close 無缺值
+ok   INTC 有資料
+ok   INTC 起始 <= 2018-01-02（1980-03-17）
+ok   INTC 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   INTC 沒有週末日期
+ok   INTC high/low 合理（異常 0 筆）
+ok   INTC 近期 close 無缺值
+ok   GLD 有資料
+ok   GLD 起始 <= 2018-01-02（2004-11-18）
+ok   GLD 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   GLD 沒有週末日期
+ok   GLD high/low 合理（異常 0 筆）
+ok   GLD 近期 close 無缺值
+ok   GC=F 有資料
+ok   GC=F 起始 <= 2018-01-02（2000-08-30）
+ok   GC=F 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   GC=F 沒有週末日期
+FAIL GC=F high/low 合理（異常 441 筆）
+ok   GC=F 近期 close 無缺值
+ok   SI=F 有資料
+ok   SI=F 起始 <= 2018-01-02（2000-08-30）
+ok   SI=F 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   SI=F 沒有週末日期
+FAIL SI=F high/low 合理（異常 243 筆）
+ok   SI=F 近期 close 無缺值
+ok   DX-Y.NYB 有資料
+ok   DX-Y.NYB 起始 <= 2018-01-02（1971-01-04）
+ok   DX-Y.NYB 最新為已收盤交易日 2026-11-06（2026-11-06）
+ok   DX-Y.NYB 沒有週末日期
+ok   DX-Y.NYB high/low 合理（異常 0 筆）
+ok   DX-Y.NYB 近期 close 無缺值
+ok   BTC-USD 有資料
+ok   BTC-USD 起始 <= 2018-01-02（2014-09-17）
+ok   BTC-USD 最新為已收盤交易日 2026-11-06（2026-11-08）
+ok   BTC-USD high/low 合理（異常 0 筆）
+ok   BTC-USD 近期 close 無缺值
+ok   ^GSPC 與本地 series_2 近 60 筆差異中位數 0.00000
+ok   QQQ 與本地 series_etf_QQQ_close 近 60 筆差異中位數 0.00000
+ok   GC=F 與本地 series_485 近 60 筆差異中位數 0.00000
+ok   DX-Y.NYB 與本地 series_483 近 60 筆差異中位數 0.00000
+ok   BTC-USD 與本地 series_4249 近 60 筆差異中位數 0.00000
+FAIL market-prices: 2 項

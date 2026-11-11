@@ -1,0 +1,3 @@
+取得了 E1 srf_usage.csv（SRF 日用量，2021-07-28～2026-11-06，1318 列）與 E2 srf_rate.csv（DFEDTARU 目標區間上限與 SRF 最低投標利率，2018-01-02～2026-11-06，3231 列），verify.py nyfed-srf 為 PASS。
+起訖日：usage 2021-07-28～2026-11-06；rate 2018-01-02～2026-11-06。API 窗口僅涵蓋 2024-04-23 起（最近 999 筆操作），之前改用 FRED RPTTLD 補 accepted 系列。
+缺口：2021-07-28～2024-04-22 的 ops_count、submitted_bn、min_bid_rate 留空；2024-04-22 以前的 srf_min_bid_rate 留空；FRED 段擔保品拆解僅含 Overnight；詳見 report.md「缺口與異常」。

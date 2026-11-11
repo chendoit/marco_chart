@@ -1,0 +1,9 @@
+reference,agg,kind,n,pearson,spearman
+fpf_oc_all,qmean,level,33,-0.476,-0.503
+fpf_oc_all,qmean,diff,32,-0.236,-0.104
+fpf_oc_cashsec,qmean,level,33,-0.219,-0.216
+fpf_oc_cashsec,qmean,diff,32,-0.181,0.002
+fpf_oc_all,qend,level,33,-0.592,-0.622
+fpf_oc_all,qend,diff,32,-0.389,-0.285
+fpf_oc_cashsec,qend,level,33,-0.395,-0.376
+fpf_oc_cashsec,qend,diff,32,-0.32,-0.158

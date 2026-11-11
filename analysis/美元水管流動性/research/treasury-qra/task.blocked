@@ -1,0 +1,5 @@
+原因：verify.py treasury-qra 未通過，唯一失敗項為「tga_assumption_bn 在 100~2000」。
+來源值 2019-04-29 公告（sm672）的 end-of-September 2019 cash balance 為 $85 billion（已於 raw/sm672.html 確認原文），低於 verify.py 的下限 100；這是來源真實數值，不是解析錯誤。依規定不竄改、不刪除、不插補，verify.py 亦不在本任務可修改範圍內，故無法寫 task.done。
+已試過：從 home.treasury.gov 索引頁取得 2019–2026 共 32 次 Marketable Borrowing Estimates 新聞稿，逐一解析，每次 2 列，共 64 列；最新公告 2026-11-02（sb0675）已取得；全部其他檢查項目皆 ok。
+已抓到的資料照常保留：qra_tga_targets.csv、fetch.py、raw/、report.md、verify_output.txt。
+需要決定：verify.py 的 tga_assumption_bn 範圍下限是否放寬（例如改為 0），或接受 2019-09-30 的 85 這一列。

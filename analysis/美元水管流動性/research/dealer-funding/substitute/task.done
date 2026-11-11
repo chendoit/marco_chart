@@ -1,0 +1,3 @@
+最有希望組合：等權 z(SOFR−TGCR, DVP−三方利差, SOFR 四分位距)，季末對齊；與 Form PF 過度擔保率水準 r=−0.59（n=33）、季變動 r=−0.39（n=32）。
+方向與 haircut 相反（組成效應：低 haircut 槓桿擴張），只能當 repo 中介壓力指標，不可替代 haircut；最強單一 dvp_ov_to_tri_vol 季末水準 r=−0.64（n=33）但多為趨勢。
+季末對齊優於季平均；GCF−SOFR 樣本<20 季不下結論；verify PASS dealer-funding，既有檔案未改動。

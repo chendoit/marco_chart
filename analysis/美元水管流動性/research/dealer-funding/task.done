@@ -1,0 +1,3 @@
+取得：NY Fed 一級交易商週頻融資與美債部位（22 系列）、OFR/Form PF 過度擔保率與 SCOOS（9 系列，haircut 近似）、Form PF 對沖基金槓桿/借款/Treasury 曝險（28 系列）。
+起訖：pd 2018-01-03~2026-10-28；haircut 2018-03-31~2026-09-30；hedge fund 2018-03-31~2026-09-30；verify.py PASS dealer-funding。
+缺口：沒有真正的 repo haircut 序列（僅過度擔保率近似）；PD 部分系列在部分週別無值；Form PF 最新為 2026-06-30。

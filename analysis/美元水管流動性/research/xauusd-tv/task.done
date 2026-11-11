@@ -1,0 +1,3 @@
+取得 OANDA:XAUUSD（推薦，現貨，1831 列）、TVC:GOLD（CFD 對照，1832 列）、FX_IDC:XAUUSD（1520 列，不完整）5 分鐘線；FXCM:XAUUSD 0 根失敗。推薦 OANDA:XAUUSD：現貨報價、覆蓋完整範圍，與 TVC:GOLD close 中位差 0.15。
+起訖（美東）：OANDA 與 TVC 為 2026-10-29 02:25 / 02:20 起至 2026-11-06 16:55；FX_IDC 僅自 10-30 05:20 起。缺口：10-29 00:00–02:20 無資料、FX_IDC 缺 10-29、FXCM 無資料，詳見 compare.md。
+check.py 結果：RESULT SOME FAIL（exit 1）。OANDA、TVC 全部 PASS；FX_IDC 僅「涵蓋 10-29～11-06」FAIL（起點 10-30），其餘 PASS。圖表已還原為 BLACKBULL:SPX500 / 5。

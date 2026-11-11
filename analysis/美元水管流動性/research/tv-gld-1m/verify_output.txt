@@ -1,0 +1,10 @@
+ok   欄位前段為 ['date', 'time_et', 'open', 'high', 'low', 'close', 'volume']（實際 ['date', 'time_et', 'open', 'high', 'low', 'close', 'volume']）
+ok   主鍵 ['date', 'time_et'] 不重複
+ok   依 ['date', 'time_et'] 升冪
+ok   起始 <= 2026-10-29（2026-10-29）
+ok   最新 >= 2026-11-06（2026-11-06）
+ok   2026-10-30 正常時段（09:30–15:59）至少 75 根 5 分鐘線（78）
+ok   10/30 開盤價約 368（361.5）
+ok   high/low 合理
+ok   各日最後一根 close 與 Yahoo 日線收盤差異（日數 7，最大 0.00021308157908550562）
+PASS tv-gld-1m

@@ -1,0 +1,3 @@
+daily_repo.csv 寫出：13 個日頻 repo 代理系列（OFR DVP/GCF/三方 + NY Fed SOFR/BGCR/TGCR），2018-01-02～2026-11-06，相鄰日期間隔中位數 1 天。
+日頻 haircut 無公開來源；F1（週頻）、F4（季頻）也沒有日頻來源，都只寫在 README 裡，沒另外寫檔案。
+verify.py dealer-funding 通過（PASS），既有檔案沒動。

@@ -1,0 +1,3 @@
+market-prices 未完成：verify.py market-prices 2 項 FAIL（GC=F、SI=F 的 high/low 與 open/close 不一致，441 列與 243 列，集中在 2001–2011 低量列；門檻 1%）。
+已試做法：Yahoo chart API（同 get_yfinance_series.py 的 _yf_chart 口徑，含 OHLCV），拆股還原（QQQ、RSP、INTC）；Stooq 替代來源（JavaScript 驗證頁，無法取得資料）。來源數值未竄改、未刪除、未插補。
+其餘 11 檔的起訖日、主鍵、欄位、週末、近期 close、本地比對檢查皆通過；已抓到的資料（market_prices.csv）照常保留，詳見 report.md。

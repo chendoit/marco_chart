@@ -1,0 +1,954 @@
+date,series_key,description,value,unit
+2018-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),34.0,Percent of total
+2018-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),15.142,Equal-weighted average ratio
+2018-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),7.464,Equal-weighted average ratio
+2018-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.608,Equal-weighted average ratio
+2018-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6107000000000.0,U.S. dollars
+2018-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),21803000000000.0,U.S. dollars
+2018-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3105000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7058000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),723000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),715000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),765000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),474000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1262000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),774000000000.0,U.S. dollars
+2018-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),488000000000.0,U.S. dollars
+2018-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),394000000000.0,U.S. dollars
+2018-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1420000000000.0,U.S. dollars
+2018-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),50.4,Percent of total
+2018-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),25.5,Percent of total
+2018-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),24.1,Percent of total
+2018-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),780000000000.0,U.S. dollars
+2018-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),10.512,Gross asset-weighted average ratio
+2018-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),3.336,Net asset-weighted average ratio
+2018-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),5.262,Gross asset-weighted average ratio
+2018-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.479,Net asset-weighted average ratio
+2018-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),17.725,Gross asset-weighted average ratio
+2018-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.137,Net asset-weighted average ratio
+2018-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2018-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),34.6,Percent of total
+2018-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),17.077,Equal-weighted average ratio
+2018-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),7.944,Equal-weighted average ratio
+2018-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.6,Equal-weighted average ratio
+2018-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6310000000000.0,U.S. dollars
+2018-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),20349000000000.0,U.S. dollars
+2018-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3153000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6058000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),843000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),825000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),732000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),501000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1418000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),902000000000.0,U.S. dollars
+2018-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),516000000000.0,U.S. dollars
+2018-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),392000000000.0,U.S. dollars
+2018-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1530000000000.0,U.S. dollars
+2018-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),49.7,Percent of total
+2018-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),25.5,Percent of total
+2018-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),24.8,Percent of total
+2018-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),894000000000.0,U.S. dollars
+2018-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),9.537,Gross asset-weighted average ratio
+2018-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),2.923,Net asset-weighted average ratio
+2018-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.259,Gross asset-weighted average ratio
+2018-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.733,Net asset-weighted average ratio
+2018-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),21.171,Gross asset-weighted average ratio
+2018-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.204,Net asset-weighted average ratio
+2018-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2018-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.0,Percent of total
+2018-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),17.996,Equal-weighted average ratio
+2018-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),10.121,Equal-weighted average ratio
+2018-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.552,Equal-weighted average ratio
+2018-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6434000000000.0,U.S. dollars
+2018-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),18775000000000.0,U.S. dollars
+2018-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3185000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),5498000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),934000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),850000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),754000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),548000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1568000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),998000000000.0,U.S. dollars
+2018-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),570000000000.0,U.S. dollars
+2018-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),377000000000.0,U.S. dollars
+2018-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1594000000000.0,U.S. dollars
+2018-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),48.3,Percent of total
+2018-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),30.7,Percent of total
+2018-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),21.0,Percent of total
+2018-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),862000000000.0,U.S. dollars
+2018-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.041,Gross asset-weighted average ratio
+2018-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),3.329,Net asset-weighted average ratio
+2018-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),7.687,Gross asset-weighted average ratio
+2018-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.831,Net asset-weighted average ratio
+2018-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),19.267,Gross asset-weighted average ratio
+2018-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.044,Net asset-weighted average ratio
+2018-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),4.3478260869565215,Net percent of respondents reporting a change
+2018-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),38.5,Percent of total
+2018-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),22.383,Equal-weighted average ratio
+2018-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),10.48,Equal-weighted average ratio
+2018-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.597,Equal-weighted average ratio
+2018-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6180000000000.0,U.S. dollars
+2018-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),18085000000000.0,U.S. dollars
+2018-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),2956000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),5346000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1152000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1045000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),766000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),645000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1886000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1219000000000.0,U.S. dollars
+2018-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),667000000000.0,U.S. dollars
+2018-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),387000000000.0,U.S. dollars
+2018-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1291000000000.0,U.S. dollars
+2018-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),55.2,Percent of total
+2018-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),26.2,Percent of total
+2018-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),18.5,Percent of total
+2018-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1081000000000.0,U.S. dollars
+2018-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),14.049,Gross asset-weighted average ratio
+2018-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),3.832,Net asset-weighted average ratio
+2018-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.345,Gross asset-weighted average ratio
+2018-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.628,Net asset-weighted average ratio
+2018-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),23.502,Gross asset-weighted average ratio
+2018-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.894,Net asset-weighted average ratio
+2018-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2019-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),37.9,Percent of total
+2019-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),23.339,Equal-weighted average ratio
+2019-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),10.219,Equal-weighted average ratio
+2019-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.619,Equal-weighted average ratio
+2019-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6510000000000.0,U.S. dollars
+2019-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),20149000000000.0,U.S. dollars
+2019-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3117000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6601000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1229000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1223000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),810000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),715000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),2013000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1286000000000.0,U.S. dollars
+2019-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),727000000000.0,U.S. dollars
+2019-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),401000000000.0,U.S. dollars
+2019-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1411000000000.0,U.S. dollars
+2019-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),57.2,Percent of total
+2019-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),25.3,Percent of total
+2019-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),17.5,Percent of total
+2019-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1221000000000.0,U.S. dollars
+2019-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),13.138,Gross asset-weighted average ratio
+2019-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.071,Net asset-weighted average ratio
+2019-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.019,Gross asset-weighted average ratio
+2019-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.613,Net asset-weighted average ratio
+2019-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),24.92,Gross asset-weighted average ratio
+2019-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.961,Net asset-weighted average ratio
+2019-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-8.695652173913043,Net percent of respondents reporting a change
+2019-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.6,Percent of total
+2019-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),24.641,Equal-weighted average ratio
+2019-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),12.136,Equal-weighted average ratio
+2019-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.679,Equal-weighted average ratio
+2019-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6718000000000.0,U.S. dollars
+2019-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),20624000000000.0,U.S. dollars
+2019-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3157000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6753000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1312000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1218000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),721000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),876000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),2252000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1368000000000.0,U.S. dollars
+2019-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),884000000000.0,U.S. dollars
+2019-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),429000000000.0,U.S. dollars
+2019-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1436000000000.0,U.S. dollars
+2019-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),55.3,Percent of total
+2019-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),28.1,Percent of total
+2019-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),16.6,Percent of total
+2019-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1290000000000.0,U.S. dollars
+2019-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),13.554,Gross asset-weighted average ratio
+2019-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.066,Net asset-weighted average ratio
+2019-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.263,Gross asset-weighted average ratio
+2019-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.588,Net asset-weighted average ratio
+2019-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),29.641,Gross asset-weighted average ratio
+2019-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),7.524,Net asset-weighted average ratio
+2019-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),4.3478260869565215,Net percent of respondents reporting a change
+2019-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),37.9,Percent of total
+2019-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),20.643,Equal-weighted average ratio
+2019-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),9.688,Equal-weighted average ratio
+2019-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.764,Equal-weighted average ratio
+2019-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6639000000000.0,U.S. dollars
+2019-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),20397000000000.0,U.S. dollars
+2019-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3173000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6085000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1295000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1226000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),666000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),824000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),2184000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1350000000000.0,U.S. dollars
+2019-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),834000000000.0,U.S. dollars
+2019-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),401000000000.0,U.S. dollars
+2019-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1356000000000.0,U.S. dollars
+2019-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),54.7,Percent of total
+2019-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),28.3,Percent of total
+2019-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),17.0,Percent of total
+2019-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1331000000000.0,U.S. dollars
+2019-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),12.022,Gross asset-weighted average ratio
+2019-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),3.974,Net asset-weighted average ratio
+2019-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),5.748,Gross asset-weighted average ratio
+2019-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.621,Net asset-weighted average ratio
+2019-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),24.252,Gross asset-weighted average ratio
+2019-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),6.04,Net asset-weighted average ratio
+2019-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-4.545454545454546,Net percent of respondents reporting a change
+2019-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),38.4,Percent of total
+2019-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),21.216,Equal-weighted average ratio
+2019-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),9.188,Equal-weighted average ratio
+2019-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.734,Equal-weighted average ratio
+2019-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6702000000000.0,U.S. dollars
+2019-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),20585000000000.0,U.S. dollars
+2019-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3221000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),5734000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1325000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1229000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),693000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),864000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),2252000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1378000000000.0,U.S. dollars
+2019-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),874000000000.0,U.S. dollars
+2019-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),450000000000.0,U.S. dollars
+2019-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1413000000000.0,U.S. dollars
+2019-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),56.3,Percent of total
+2019-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),25.3,Percent of total
+2019-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),18.4,Percent of total
+2019-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1302000000000.0,U.S. dollars
+2019-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),12.765,Gross asset-weighted average ratio
+2019-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.429,Net asset-weighted average ratio
+2019-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),5.92,Gross asset-weighted average ratio
+2019-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.732,Net asset-weighted average ratio
+2019-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),21.857,Gross asset-weighted average ratio
+2019-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.709,Net asset-weighted average ratio
+2019-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),4.545454545454546,Net percent of respondents reporting a change
+2020-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),40.5,Percent of total
+2020-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),19.552,Equal-weighted average ratio
+2020-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.127,Equal-weighted average ratio
+2020-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.708,Equal-weighted average ratio
+2020-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6239000000000.0,U.S. dollars
+2020-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),18160000000000.0,U.S. dollars
+2020-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),2862000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),5583000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1164000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1249000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),735000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),748000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1968000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1215000000000.0,U.S. dollars
+2020-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),753000000000.0,U.S. dollars
+2020-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),441000000000.0,U.S. dollars
+2020-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1067000000000.0,U.S. dollars
+2020-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),53.0,Percent of total
+2020-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),29.9,Percent of total
+2020-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),17.0,Percent of total
+2020-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1358000000000.0,U.S. dollars
+2020-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.592,Gross asset-weighted average ratio
+2020-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.471,Net asset-weighted average ratio
+2020-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.454,Gross asset-weighted average ratio
+2020-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.904,Net asset-weighted average ratio
+2020-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),23.316,Gross asset-weighted average ratio
+2020-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),7.466,Net asset-weighted average ratio
+2020-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2020-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.7,Percent of total
+2020-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),15.945,Equal-weighted average ratio
+2020-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),6.961,Equal-weighted average ratio
+2020-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.657,Equal-weighted average ratio
+2020-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6403000000000.0,U.S. dollars
+2020-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),18265000000000.0,U.S. dollars
+2020-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3211000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),5287000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1085000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1111000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),691000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),682000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1822000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1135000000000.0,U.S. dollars
+2020-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),687000000000.0,U.S. dollars
+2020-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),416000000000.0,U.S. dollars
+2020-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1301000000000.0,U.S. dollars
+2020-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),51.4,Percent of total
+2020-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),29.6,Percent of total
+2020-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),19.1,Percent of total
+2020-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1169000000000.0,U.S. dollars
+2020-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.532,Gross asset-weighted average ratio
+2020-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),3.747,Net asset-weighted average ratio
+2020-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),5.725,Gross asset-weighted average ratio
+2020-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.714,Net asset-weighted average ratio
+2020-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),18.092,Gross asset-weighted average ratio
+2020-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.706,Net asset-weighted average ratio
+2020-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-65.21739130434783,Net percent of respondents reporting a change
+2020-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.5,Percent of total
+2020-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),14.701,Equal-weighted average ratio
+2020-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.129,Equal-weighted average ratio
+2020-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.587,Equal-weighted average ratio
+2020-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),6825000000000.0,U.S. dollars
+2020-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),20355000000000.0,U.S. dollars
+2020-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3398000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6390000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1082000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1282000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),788000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),657000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1798000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1134000000000.0,U.S. dollars
+2020-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),664000000000.0,U.S. dollars
+2020-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),449000000000.0,U.S. dollars
+2020-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1417000000000.0,U.S. dollars
+2020-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),51.4,Percent of total
+2020-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),31.7,Percent of total
+2020-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),17.0,Percent of total
+2020-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1331000000000.0,U.S. dollars
+2020-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.971,Gross asset-weighted average ratio
+2020-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.471,Net asset-weighted average ratio
+2020-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.887,Gross asset-weighted average ratio
+2020-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),2.931,Net asset-weighted average ratio
+2020-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),18.48,Gross asset-weighted average ratio
+2020-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),4.591,Net asset-weighted average ratio
+2020-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-4.3478260869565215,Net percent of respondents reporting a change
+2020-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),33.8,Percent of total
+2020-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),15.45,Equal-weighted average ratio
+2020-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.035,Equal-weighted average ratio
+2020-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.65,Equal-weighted average ratio
+2020-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),7105000000000.0,U.S. dollars
+2020-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),20880000000000.0,U.S. dollars
+2020-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3575000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6281000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),971000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1176000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),734000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),624000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1655000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1022000000000.0,U.S. dollars
+2020-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),633000000000.0,U.S. dollars
+2020-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),406000000000.0,U.S. dollars
+2020-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1621000000000.0,U.S. dollars
+2020-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),49.0,Percent of total
+2020-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),31.5,Percent of total
+2020-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),19.4,Percent of total
+2020-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1202000000000.0,U.S. dollars
+2020-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.474,Gross asset-weighted average ratio
+2020-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.152,Net asset-weighted average ratio
+2020-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.775,Gross asset-weighted average ratio
+2020-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.07,Net asset-weighted average ratio
+2020-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),20.242,Gross asset-weighted average ratio
+2020-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.127,Net asset-weighted average ratio
+2020-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-17.391304347826086,Net percent of respondents reporting a change
+2021-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),32.3,Percent of total
+2021-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),14.895,Equal-weighted average ratio
+2021-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),7.574,Equal-weighted average ratio
+2021-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.613,Equal-weighted average ratio
+2021-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),7235000000000.0,U.S. dollars
+2021-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),22770000000000.0,U.S. dollars
+2021-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3738000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6780000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),925000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1044000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),852000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),747000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1729000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),971000000000.0,U.S. dollars
+2021-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),758000000000.0,U.S. dollars
+2021-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),482000000000.0,U.S. dollars
+2021-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1715000000000.0,U.S. dollars
+2021-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),46.4,Percent of total
+2021-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),33.2,Percent of total
+2021-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),20.5,Percent of total
+2021-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1066000000000.0,U.S. dollars
+2021-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.918,Gross asset-weighted average ratio
+2021-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.083,Net asset-weighted average ratio
+2021-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.446,Gross asset-weighted average ratio
+2021-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.193,Net asset-weighted average ratio
+2021-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),20.989,Gross asset-weighted average ratio
+2021-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),4.655,Net asset-weighted average ratio
+2021-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-4.3478260869565215,Net percent of respondents reporting a change
+2021-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),31.0,Percent of total
+2021-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),15.219,Equal-weighted average ratio
+2021-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.784,Equal-weighted average ratio
+2021-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.597,Equal-weighted average ratio
+2021-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),7895000000000.0,U.S. dollars
+2021-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),24554000000000.0,U.S. dollars
+2021-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4051000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7481000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),978000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1110000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),963000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),748000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1787000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1021000000000.0,U.S. dollars
+2021-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),766000000000.0,U.S. dollars
+2021-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),544000000000.0,U.S. dollars
+2021-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1939000000000.0,U.S. dollars
+2021-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),47.6,Percent of total
+2021-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),31.4,Percent of total
+2021-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),21.0,Percent of total
+2021-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1113000000000.0,U.S. dollars
+2021-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.687,Gross asset-weighted average ratio
+2021-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.482,Net asset-weighted average ratio
+2021-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.966,Gross asset-weighted average ratio
+2021-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.285,Net asset-weighted average ratio
+2021-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),24.071,Gross asset-weighted average ratio
+2021-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),4.636,Net asset-weighted average ratio
+2021-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-8.695652173913043,Net percent of respondents reporting a change
+2021-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),33.9,Percent of total
+2021-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),23.699,Equal-weighted average ratio
+2021-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.482,Equal-weighted average ratio
+2021-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.621,Equal-weighted average ratio
+2021-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),8316000000000.0,U.S. dollars
+2021-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),24891000000000.0,U.S. dollars
+2021-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4166000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7616000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),992000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1208000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1063000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),742000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1806000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1046000000000.0,U.S. dollars
+2021-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),760000000000.0,U.S. dollars
+2021-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),548000000000.0,U.S. dollars
+2021-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1931000000000.0,U.S. dollars
+2021-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),52.1,Percent of total
+2021-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),28.9,Percent of total
+2021-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),19.0,Percent of total
+2021-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1205000000000.0,U.S. dollars
+2021-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.87,Gross asset-weighted average ratio
+2021-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.668,Net asset-weighted average ratio
+2021-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),7.588,Gross asset-weighted average ratio
+2021-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.301,Net asset-weighted average ratio
+2021-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),36.957,Gross asset-weighted average ratio
+2021-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),6.055,Net asset-weighted average ratio
+2021-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-21.73913043478261,Net percent of respondents reporting a change
+2021-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),34.8,Percent of total
+2021-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),22.919,Equal-weighted average ratio
+2021-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),10.208,Equal-weighted average ratio
+2021-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.625,Equal-weighted average ratio
+2021-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),8323000000000.0,U.S. dollars
+2021-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),24595000000000.0,U.S. dollars
+2021-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4182000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7451000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1001000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1143000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1078000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),759000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1828000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1051000000000.0,U.S. dollars
+2021-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),777000000000.0,U.S. dollars
+2021-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),634000000000.0,U.S. dollars
+2021-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1975000000000.0,U.S. dollars
+2021-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),51.9,Percent of total
+2021-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),27.2,Percent of total
+2021-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),20.9,Percent of total
+2021-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1151000000000.0,U.S. dollars
+2021-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.042,Gross asset-weighted average ratio
+2021-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.178,Net asset-weighted average ratio
+2021-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),7.838,Gross asset-weighted average ratio
+2021-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.325,Net asset-weighted average ratio
+2021-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),35.074,Gross asset-weighted average ratio
+2021-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.62,Net asset-weighted average ratio
+2021-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-13.043478260869565,Net percent of respondents reporting a change
+2022-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),34.8,Percent of total
+2022-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),21.148,Equal-weighted average ratio
+2022-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),9.243,Equal-weighted average ratio
+2022-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.597,Equal-weighted average ratio
+2022-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),8258000000000.0,U.S. dollars
+2022-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),24808000000000.0,U.S. dollars
+2022-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4136000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7740000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1000000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1121000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1078000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),689000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1759000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1047000000000.0,U.S. dollars
+2022-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),712000000000.0,U.S. dollars
+2022-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),599000000000.0,U.S. dollars
+2022-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1851000000000.0,U.S. dollars
+2022-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),51.4,Percent of total
+2022-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),27.5,Percent of total
+2022-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),21.1,Percent of total
+2022-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1090000000000.0,U.S. dollars
+2022-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),9.941,Gross asset-weighted average ratio
+2022-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.742,Net asset-weighted average ratio
+2022-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.73,Gross asset-weighted average ratio
+2022-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.166,Net asset-weighted average ratio
+2022-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),30.375,Gross asset-weighted average ratio
+2022-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.231,Net asset-weighted average ratio
+2022-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-8.695652173913043,Net percent of respondents reporting a change
+2022-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),34.8,Percent of total
+2022-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),21.454,Equal-weighted average ratio
+2022-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.732,Equal-weighted average ratio
+2022-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.609,Equal-weighted average ratio
+2022-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),7920000000000.0,U.S. dollars
+2022-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),22676000000000.0,U.S. dollars
+2022-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3873000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7165000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),957000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1122000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1050000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),566000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1601000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1007000000000.0,U.S. dollars
+2022-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),594000000000.0,U.S. dollars
+2022-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),589000000000.0,U.S. dollars
+2022-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1667000000000.0,U.S. dollars
+2022-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),52.8,Percent of total
+2022-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),30.4,Percent of total
+2022-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),16.8,Percent of total
+2022-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1150000000000.0,U.S. dollars
+2022-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.933,Gross asset-weighted average ratio
+2022-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.541,Net asset-weighted average ratio
+2022-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.697,Gross asset-weighted average ratio
+2022-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.176,Net asset-weighted average ratio
+2022-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),33.932,Gross asset-weighted average ratio
+2022-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.697,Net asset-weighted average ratio
+2022-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-26.08695652173913,Net percent of respondents reporting a change
+2022-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),35.1,Percent of total
+2022-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),19.247,Equal-weighted average ratio
+2022-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.089,Equal-weighted average ratio
+2022-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.578,Equal-weighted average ratio
+2022-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),7701000000000.0,U.S. dollars
+2022-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),21869000000000.0,U.S. dollars
+2022-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3769000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6761000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),896000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1102000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),986000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),598000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1557000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),942000000000.0,U.S. dollars
+2022-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),615000000000.0,U.S. dollars
+2022-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),567000000000.0,U.S. dollars
+2022-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1601000000000.0,U.S. dollars
+2022-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),51.2,Percent of total
+2022-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),30.4,Percent of total
+2022-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),18.4,Percent of total
+2022-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1149000000000.0,U.S. dollars
+2022-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.383,Gross asset-weighted average ratio
+2022-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.673,Net asset-weighted average ratio
+2022-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),6.139,Gross asset-weighted average ratio
+2022-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.084,Net asset-weighted average ratio
+2022-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),29.828,Gross asset-weighted average ratio
+2022-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.466,Net asset-weighted average ratio
+2022-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-18.181818181818183,Net percent of respondents reporting a change
+2022-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.7,Percent of total
+2022-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),19.881,Equal-weighted average ratio
+2022-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.426,Equal-weighted average ratio
+2022-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.567,Equal-weighted average ratio
+2022-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),7825000000000.0,U.S. dollars
+2022-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),21951000000000.0,U.S. dollars
+2022-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3778000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6743000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1000000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1138000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),986000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),694000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1771000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1052000000000.0,U.S. dollars
+2022-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),719000000000.0,U.S. dollars
+2022-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),583000000000.0,U.S. dollars
+2022-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1646000000000.0,U.S. dollars
+2022-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),52.9,Percent of total
+2022-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),30.6,Percent of total
+2022-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),16.5,Percent of total
+2022-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1227000000000.0,U.S. dollars
+2022-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),7.975,Gross asset-weighted average ratio
+2022-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),4.994,Net asset-weighted average ratio
+2022-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),7.112,Gross asset-weighted average ratio
+2022-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.316,Net asset-weighted average ratio
+2022-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),28.157,Gross asset-weighted average ratio
+2022-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),5.029,Net asset-weighted average ratio
+2022-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-25.0,Net percent of respondents reporting a change
+2023-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.1,Percent of total
+2023-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),18.728,Equal-weighted average ratio
+2023-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.053,Equal-weighted average ratio
+2023-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.574,Equal-weighted average ratio
+2023-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),8025000000000.0,U.S. dollars
+2023-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),22948000000000.0,U.S. dollars
+2023-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3880000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),6955000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1146000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1344000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1014000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),732000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),1935000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1191000000000.0,U.S. dollars
+2023-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),744000000000.0,U.S. dollars
+2023-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),569000000000.0,U.S. dollars
+2023-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1753000000000.0,U.S. dollars
+2023-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),52.4,Percent of total
+2023-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),32.1,Percent of total
+2023-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),15.5,Percent of total
+2023-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1442000000000.0,U.S. dollars
+2023-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),8.187,Gross asset-weighted average ratio
+2023-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),5.003,Net asset-weighted average ratio
+2023-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),7.205,Gross asset-weighted average ratio
+2023-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.347,Net asset-weighted average ratio
+2023-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),26.038,Gross asset-weighted average ratio
+2023-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),4.95,Net asset-weighted average ratio
+2023-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),5.0,Net percent of respondents reporting a change
+2023-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),35.6,Percent of total
+2023-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),13.297,Equal-weighted average ratio
+2023-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.753,Equal-weighted average ratio
+2023-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.575,Equal-weighted average ratio
+2023-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),8447000000000.0,U.S. dollars
+2023-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),24428000000000.0,U.S. dollars
+2023-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3940000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7053000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1263000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1508000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1005000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),988000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),2339000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1323000000000.0,U.S. dollars
+2023-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1016000000000.0,U.S. dollars
+2023-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),547000000000.0,U.S. dollars
+2023-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1878000000000.0,U.S. dollars
+2023-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),52.5,Percent of total
+2023-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),31.9,Percent of total
+2023-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),15.6,Percent of total
+2023-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1637000000000.0,U.S. dollars
+2023-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),9.521,Gross asset-weighted average ratio
+2023-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),5.111,Net asset-weighted average ratio
+2023-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),8.358,Gross asset-weighted average ratio
+2023-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.792,Net asset-weighted average ratio
+2023-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),23.812,Gross asset-weighted average ratio
+2023-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),4.737,Net asset-weighted average ratio
+2023-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-14.285714285714285,Net percent of respondents reporting a change
+2023-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.4,Percent of total
+2023-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),15.393,Equal-weighted average ratio
+2023-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),9.434,Equal-weighted average ratio
+2023-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.559,Equal-weighted average ratio
+2023-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),8766000000000.0,U.S. dollars
+2023-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),25786000000000.0,U.S. dollars
+2023-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3964000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),7692000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1436000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1634000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1060000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1207000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),2743000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1506000000000.0,U.S. dollars
+2023-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1237000000000.0,U.S. dollars
+2023-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),564000000000.0,U.S. dollars
+2023-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),1811000000000.0,U.S. dollars
+2023-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),53.9,Percent of total
+2023-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),34.5,Percent of total
+2023-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),11.6,Percent of total
+2023-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),1822000000000.0,U.S. dollars
+2023-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),9.293,Gross asset-weighted average ratio
+2023-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),5.895,Net asset-weighted average ratio
+2023-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),9.513,Gross asset-weighted average ratio
+2023-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.876,Net asset-weighted average ratio
+2023-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),25.512,Gross asset-weighted average ratio
+2023-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),4.644,Net asset-weighted average ratio
+2023-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2023-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),39.9,Percent of total
+2023-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),19.239,Equal-weighted average ratio
+2023-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),8.754,Equal-weighted average ratio
+2023-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.563,Equal-weighted average ratio
+2023-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),9209000000000.0,U.S. dollars
+2023-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),26732000000000.0,U.S. dollars
+2023-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),3962000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),8127000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1609000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1804000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1040000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1259000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),2965000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1679000000000.0,U.S. dollars
+2023-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1286000000000.0,U.S. dollars
+2023-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),548000000000.0,U.S. dollars
+2023-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),2088000000000.0,U.S. dollars
+2023-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),60.7,Percent of total
+2023-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),27.9,Percent of total
+2023-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),11.4,Percent of total
+2023-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),2009000000000.0,U.S. dollars
+2023-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.063,Gross asset-weighted average ratio
+2023-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),6.13,Net asset-weighted average ratio
+2023-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),9.631,Gross asset-weighted average ratio
+2023-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.954,Net asset-weighted average ratio
+2023-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),22.996,Gross asset-weighted average ratio
+2023-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),6.415,Net asset-weighted average ratio
+2023-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),4.761904761904762,Net percent of respondents reporting a change
+2024-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),37.9,Percent of total
+2024-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),16.247,Equal-weighted average ratio
+2024-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),9.949,Equal-weighted average ratio
+2024-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.573,Equal-weighted average ratio
+2024-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),9490000000000.0,U.S. dollars
+2024-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),28965000000000.0,U.S. dollars
+2024-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4129000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),8701000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1642000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),1837000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1129000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1361000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),3100000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1708000000000.0,U.S. dollars
+2024-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1392000000000.0,U.S. dollars
+2024-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),557000000000.0,U.S. dollars
+2024-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),2312000000000.0,U.S. dollars
+2024-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),57.2,Percent of total
+2024-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),29.9,Percent of total
+2024-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),12.9,Percent of total
+2024-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),2071000000000.0,U.S. dollars
+2024-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.804,Gross asset-weighted average ratio
+2024-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),6.52,Net asset-weighted average ratio
+2024-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),9.159,Gross asset-weighted average ratio
+2024-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),3.987,Net asset-weighted average ratio
+2024-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),21.157,Gross asset-weighted average ratio
+2024-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),6.206,Net asset-weighted average ratio
+2024-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2024-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.7,Percent of total
+2024-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),20.005,Equal-weighted average ratio
+2024-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),10.425,Equal-weighted average ratio
+2024-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.618,Equal-weighted average ratio
+2024-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),9626000000000.0,U.S. dollars
+2024-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),29800000000000.0,U.S. dollars
+2024-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4126000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),8650000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1729000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),2014000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1085000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1380000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),3201000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1799000000000.0,U.S. dollars
+2024-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1402000000000.0,U.S. dollars
+2024-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),553000000000.0,U.S. dollars
+2024-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),2338000000000.0,U.S. dollars
+2024-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),58.3,Percent of total
+2024-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),29.3,Percent of total
+2024-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),12.4,Percent of total
+2024-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),2215000000000.0,U.S. dollars
+2024-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),13.983,Gross asset-weighted average ratio
+2024-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),6.687,Net asset-weighted average ratio
+2024-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),10.748,Gross asset-weighted average ratio
+2024-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.163,Net asset-weighted average ratio
+2024-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),22.617,Gross asset-weighted average ratio
+2024-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),6.411,Net asset-weighted average ratio
+2024-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),8.695652173913043,Net percent of respondents reporting a change
+2024-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),38.8,Percent of total
+2024-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),17.985,Equal-weighted average ratio
+2024-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),11.175,Equal-weighted average ratio
+2024-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.683,Equal-weighted average ratio
+2024-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),10425000000000.0,U.S. dollars
+2024-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),31667000000000.0,U.S. dollars
+2024-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4292000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),9489000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1976000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),2549000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1175000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1548000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),3647000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),2067000000000.0,U.S. dollars
+2024-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1580000000000.0,U.S. dollars
+2024-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),582000000000.0,U.S. dollars
+2024-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),2426000000000.0,U.S. dollars
+2024-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),55.6,Percent of total
+2024-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),32.4,Percent of total
+2024-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),12.0,Percent of total
+2024-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),2803000000000.0,U.S. dollars
+2024-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.362,Gross asset-weighted average ratio
+2024-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),7.114,Net asset-weighted average ratio
+2024-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),11.785,Gross asset-weighted average ratio
+2024-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.384,Net asset-weighted average ratio
+2024-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),22.769,Gross asset-weighted average ratio
+2024-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),6.679,Net asset-weighted average ratio
+2024-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2024-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),38.8,Percent of total
+2024-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),16.75,Equal-weighted average ratio
+2024-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),9.817,Equal-weighted average ratio
+2024-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.707,Equal-weighted average ratio
+2024-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),10258000000000.0,U.S. dollars
+2024-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),30106000000000.0,U.S. dollars
+2024-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4213000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),8916000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),1920000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),2356000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1105000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1447000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),3480000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),1996000000000.0,U.S. dollars
+2024-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1484000000000.0,U.S. dollars
+2024-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),599000000000.0,U.S. dollars
+2024-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),2500000000000.0,U.S. dollars
+2024-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),54.7,Percent of total
+2024-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),31.5,Percent of total
+2024-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),13.9,Percent of total
+2024-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),2497000000000.0,U.S. dollars
+2024-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),10.738,Gross asset-weighted average ratio
+2024-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),6.794,Net asset-weighted average ratio
+2024-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),12.446,Gross asset-weighted average ratio
+2024-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.407,Net asset-weighted average ratio
+2024-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),19.27,Gross asset-weighted average ratio
+2024-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),6.231,Net asset-weighted average ratio
+2024-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2025-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.3,Percent of total
+2025-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),18.297,Equal-weighted average ratio
+2025-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),11.633,Equal-weighted average ratio
+2025-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.721,Equal-weighted average ratio
+2025-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),10939000000000.0,U.S. dollars
+2025-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),32926000000000.0,U.S. dollars
+2025-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4319000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),9822000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),2186000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),2689000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1147000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1417000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),3736000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),2276000000000.0,U.S. dollars
+2025-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1460000000000.0,U.S. dollars
+2025-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),650000000000.0,U.S. dollars
+2025-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),2610000000000.0,U.S. dollars
+2025-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),52.7,Percent of total
+2025-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),33.4,Percent of total
+2025-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),13.9,Percent of total
+2025-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),2855000000000.0,U.S. dollars
+2025-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),12.449,Gross asset-weighted average ratio
+2025-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),7.681,Net asset-weighted average ratio
+2025-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),12.072,Gross asset-weighted average ratio
+2025-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.434,Net asset-weighted average ratio
+2025-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),24.9,Gross asset-weighted average ratio
+2025-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),7.347,Net asset-weighted average ratio
+2025-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),4.545454545454546,Net percent of respondents reporting a change
+2025-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),37.4,Percent of total
+2025-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),17.951,Equal-weighted average ratio
+2025-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),12.612,Equal-weighted average ratio
+2025-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.83,Equal-weighted average ratio
+2025-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),11811000000000.0,U.S. dollars
+2025-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),35795000000000.0,U.S. dollars
+2025-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4546000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),10999000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),2296000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),2921000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1263000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1622000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),4064000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),2400000000000.0,U.S. dollars
+2025-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1664000000000.0,U.S. dollars
+2025-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),719000000000.0,U.S. dollars
+2025-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),2992000000000.0,U.S. dollars
+2025-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),53.1,Percent of total
+2025-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),31.8,Percent of total
+2025-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),15.2,Percent of total
+2025-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),3122000000000.0,U.S. dollars
+2025-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.961,Gross asset-weighted average ratio
+2025-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),7.175,Net asset-weighted average ratio
+2025-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),13.29,Gross asset-weighted average ratio
+2025-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.78,Net asset-weighted average ratio
+2025-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),25.178,Gross asset-weighted average ratio
+2025-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),7.401,Net asset-weighted average ratio
+2025-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),-22.727272727272727,Net percent of respondents reporting a change
+2025-09-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),36.0,Percent of total
+2025-09-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),18.159,Equal-weighted average ratio
+2025-09-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),12.523,Equal-weighted average ratio
+2025-09-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.824,Equal-weighted average ratio
+2025-09-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),12205000000000.0,U.S. dollars
+2025-09-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),37898000000000.0,U.S. dollars
+2025-09-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4743000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),11533000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),2375000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),3012000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1322000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1613000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),4147000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),2486000000000.0,U.S. dollars
+2025-09-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1661000000000.0,U.S. dollars
+2025-09-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),700000000000.0,U.S. dollars
+2025-09-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),3240000000000.0,U.S. dollars
+2025-09-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),52.8,Percent of total
+2025-09-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),31.6,Percent of total
+2025-09-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),15.6,Percent of total
+2025-09-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),3165000000000.0,U.S. dollars
+2025-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),12.789,Gross asset-weighted average ratio
+2025-09-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),7.21,Net asset-weighted average ratio
+2025-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),11.431,Gross asset-weighted average ratio
+2025-09-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.595,Net asset-weighted average ratio
+2025-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),25.779,Gross asset-weighted average ratio
+2025-09-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),8.439,Net asset-weighted average ratio
+2025-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2025-12-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),37.4,Percent of total
+2025-12-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),23.909,Equal-weighted average ratio
+2025-12-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),12.052,Equal-weighted average ratio
+2025-12-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.847,Equal-weighted average ratio
+2025-12-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),12589000000000.0,U.S. dollars
+2025-12-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),39148000000000.0,U.S. dollars
+2025-12-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4849000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),12321000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),2465000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),3225000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1335000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1645000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),4256000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),2574000000000.0,U.S. dollars
+2025-12-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1682000000000.0,U.S. dollars
+2025-12-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),784000000000.0,U.S. dollars
+2025-12-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),3239000000000.0,U.S. dollars
+2025-12-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),53.2,Percent of total
+2025-12-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),32.6,Percent of total
+2025-12-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),14.3,Percent of total
+2025-12-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),3380000000000.0,U.S. dollars
+2025-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),11.767,Gross asset-weighted average ratio
+2025-12-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),7.23,Net asset-weighted average ratio
+2025-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),13.335,Gross asset-weighted average ratio
+2025-12-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.657,Net asset-weighted average ratio
+2025-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),26.853,Gross asset-weighted average ratio
+2025-12-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),8.337,Net asset-weighted average ratio
+2025-12-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),5.263157894736842,Net percent of respondents reporting a change
+2026-03-31,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),32.5,Percent of total
+2026-03-31,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),23.722,Equal-weighted average ratio
+2026-03-31,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),10.412,Equal-weighted average ratio
+2026-03-31,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.79,Equal-weighted average ratio
+2026-03-31,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),12779000000000.0,U.S. dollars
+2026-03-31,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),42291000000000.0,U.S. dollars
+2026-03-31,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),4994000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),14087000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),2359000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),3173000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1405000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1568000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),4044000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),2439000000000.0,U.S. dollars
+2026-03-31,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1605000000000.0,U.S. dollars
+2026-03-31,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),782000000000.0,U.S. dollars
+2026-03-31,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),3241000000000.0,U.S. dollars
+2026-03-31,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),47.4,Percent of total
+2026-03-31,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),35.9,Percent of total
+2026-03-31,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),16.7,Percent of total
+2026-03-31,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),3249000000000.0,U.S. dollars
+2026-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),13.182,Gross asset-weighted average ratio
+2026-03-31,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),7.409,Net asset-weighted average ratio
+2026-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),13.207,Gross asset-weighted average ratio
+2026-03-31,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.472,Net asset-weighted average ratio
+2026-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),24.512,Gross asset-weighted average ratio
+2026-03-31,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),7.936,Net asset-weighted average ratio
+2026-03-31,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),10.0,Net percent of respondents reporting a change
+2026-06-30,FPF-ALLQHF_GAVN10_BORROWING_PERCENT,Top 10 largest funds: share of borrowing (percent of total),32.1,Percent of total
+2026-06-30,FPF-ALLQHF_GAVN10_LEVERAGERATIO_AVERAGE,Top 10 largest funds: leverage (equal-weighted average ratio),19.249,Equal-weighted average ratio
+2026-06-30,FPF-ALLQHF_GAVN11TO50_LEVERAGERATIO_AVERAGE,Top 11-50 largest funds: leverage (equal-weighted average ratio),11.76,Equal-weighted average ratio
+2026-06-30,FPF-ALLQHF_GAVN51_LEVERAGERATIO_AVERAGE,Top 51+ largest funds: leverage (equal-weighted average ratio),1.792,Equal-weighted average ratio
+2026-06-30,FPF-ALLQHF_GAV_SUM,Qualifying Hedge Funds: gross assets (U.S. dollars),13863000000000.0,U.S. dollars
+2026-06-30,FPF-ALLQHF_GNE_SUM,Qualifying Hedge Funds: gross notional exposure (U.S. dollars),45193000000000.0,U.S. dollars
+2026-06-30,FPF-ALLQHF_NAV_SUM,Qualifying Hedge Funds: net assets (U.S. dollars),5511000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_IRD_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to interest rate derivatives (U.S. dollars),13902000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_LTREASURY_SUM,Qualifying Hedge Funds: long U.S. Treasury exposure (U.S. dollars),2362000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_REPO_REPO_SUM,Qualifying Hedge Funds: repo exposure (U.S. dollars),3283000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_REPO_REVERSEREPO_SUM,Qualifying Hedge Funds: reverse repo exposure (U.S. dollars),1320000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_STREASURY_SUM,Qualifying Hedge Funds: short U.S. Treasury exposure (U.S. dollars),1498000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_USGOV_GNE_SUM,Qualifying Hedge Funds: gross notional exposure to U.S. government debt (U.S. dollars),3964000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_USGOV_LGNE_SUM,Qualifying Hedge Funds: long notional exposure to U.S. government debt (U.S. dollars),2435000000000.0,U.S. dollars
+2026-06-30,FPF-ASSETCLASS_USGOV_SGNE_SUM,Qualifying Hedge Funds: short notional exposure to U.S. government debt (U.S. dollars),1529000000000.0,U.S. dollars
+2026-06-30,FPF-BORROW_OTHERSECURED_SUM,Qualifying Hedge Funds: other secured borrowing (U.S. dollars),882000000000.0,U.S. dollars
+2026-06-30,FPF-BORROW_PRIMEBROKER_SUM,Qualifying Hedge Funds: prime brokerage borrowing (U.S. dollars),3688000000000.0,U.S. dollars
+2026-06-30,FPF-BORROW_REPO_GAVN10_PERCENT,Top 10 largest funds: share of repo borrowing (percent of total),48.4,Percent of total
+2026-06-30,FPF-BORROW_REPO_GAVN11TO50_PERCENT,Top 11-50 largest funds: share of repo borrowing (percent of total),35.9,Percent of total
+2026-06-30,FPF-BORROW_REPO_GAVN51_PERCENT,Top 51+ largest funds: share of repo borrowing (percent of total),15.8,Percent of total
+2026-06-30,FPF-BORROW_REPO_SUM,Qualifying Hedge Funds: repo borrowing (U.S. dollars),3382000000000.0,U.S. dollars
+2026-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_GAVWMEAN,Macro strategy funds: leverage (gross asset-weighted average ratio),12.719,Gross asset-weighted average ratio
+2026-06-30,FPF-STRATEGY_MACRO_LEVERAGERATIO_NAVWMEAN,Macro strategy funds: leverage (net asset-weighted average ratio),6.816,Net asset-weighted average ratio
+2026-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_GAVWMEAN,Multi strategy funds: leverage (gross asset-weighted average ratio),12.291,Gross asset-weighted average ratio
+2026-06-30,FPF-STRATEGY_MULTI_LEVERAGERATIO_NAVWMEAN,Multi strategy funds: leverage (net asset-weighted average ratio),4.462,Net asset-weighted average ratio
+2026-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_GAVWMEAN,Relative value strategy funds: leverage (gross asset-weighted average ratio),23.305,Gross asset-weighted average ratio
+2026-06-30,FPF-STRATEGY_RV_LEVERAGERATIO_NAVWMEAN,Relative value strategy funds: leverage (net asset-weighted average ratio),8.102,Net asset-weighted average ratio
+2026-06-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change
+2026-09-30,SCOOS-NET_HF_LEVERAGEUSE,Survey: use of leverage offered to hedge funds (net percent of respondents reporting a change),0.0,Net percent of respondents reporting a change

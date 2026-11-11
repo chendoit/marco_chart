@@ -1,0 +1,4 @@
+task: treasury-ops（E5：美債 buyback 操作結果與標售發行規模）
+取得了什麼：treasury_buybacks.csv（170 列，來源 Fiscal Data Treasury Securities Buybacks 公開 API，無需金鑰）；auction_settlements.csv（1683 列，來源 TreasuryDirect securities/search）。
+起訖日：buybacks 2024-05-29 至 2026-11-05（date）；auctions 發行日 2023-01-03 至 2026-11-05。verify.py treasury-ops 通過（PASS）。
+缺口：2024-08-21 同日同年期第二筆未舉行紀錄已排除（保留有成交那筆）；2024-07-17 3Y to 5Y 無成交結果，par_accepted_bn 留空；auctions 的 TIPS/FRN 未拆出（以 Note/Bond 保留於 securityType），2026-11 的 2 年期與 5 年期標售尚無來源資料。詳見 report.md。

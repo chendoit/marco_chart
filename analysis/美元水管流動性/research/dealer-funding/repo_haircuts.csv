@@ -1,0 +1,308 @@
+date,series_key,description,value,unit
+2018-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-1.9,Percent
+2018-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-1.9,Percent
+2018-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),12.1,Percent
+2018-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),10.7,Percent
+2018-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),30.4,Percent
+2018-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),24.0,Percent
+2018-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),14.7,Percent
+2018-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),11.8,Percent
+2018-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),-1.0,Net count of respondents
+2018-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),0.0,Percent
+2018-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),0.0,Percent
+2018-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),9.3,Percent
+2018-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),6.6,Percent
+2018-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),30.4,Percent
+2018-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),23.1,Percent
+2018-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),14.3,Percent
+2018-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),10.8,Percent
+2018-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2018-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),24.4,Percent
+2018-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),24.4,Percent
+2018-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),12.1,Percent
+2018-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),9.0,Percent
+2018-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),28.1,Percent
+2018-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),21.1,Percent
+2018-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),22.4,Percent
+2018-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),19.0,Percent
+2018-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2018-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),1.4,Percent
+2018-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),1.4,Percent
+2018-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),13.4,Percent
+2018-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),11.2,Percent
+2018-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),30.6,Percent
+2018-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),22.5,Percent
+2018-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),14.6,Percent
+2018-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),11.3,Percent
+2018-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2019-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),1.5,Percent
+2019-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),1.5,Percent
+2019-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),9.4,Percent
+2019-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),6.7,Percent
+2019-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),28.3,Percent
+2019-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),20.4,Percent
+2019-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),12.9,Percent
+2019-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),9.5,Percent
+2019-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2019-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),1.1,Percent
+2019-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),1.1,Percent
+2019-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),13.5,Percent
+2019-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),10.8,Percent
+2019-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),32.2,Percent
+2019-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),24.1,Percent
+2019-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),15.6,Percent
+2019-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),12.0,Percent
+2019-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2019-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-0.2,Percent
+2019-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-0.2,Percent
+2019-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),14.9,Percent
+2019-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),12.1,Percent
+2019-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),32.3,Percent
+2019-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),23.5,Percent
+2019-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),15.3,Percent
+2019-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),11.5,Percent
+2019-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2019-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-1.1,Percent
+2019-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-1.1,Percent
+2019-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),11.9,Percent
+2019-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),8.5,Percent
+2019-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),29.3,Percent
+2019-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),21.4,Percent
+2019-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),13.2,Percent
+2019-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),9.4,Percent
+2019-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2020-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),3.4,Percent
+2020-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),3.4,Percent
+2020-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),18.9,Percent
+2020-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),16.1,Percent
+2020-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),34.2,Percent
+2020-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),22.9,Percent
+2020-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),17.8,Percent
+2020-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),13.3,Percent
+2020-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2020-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-0.8,Percent
+2020-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-0.8,Percent
+2020-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),16.4,Percent
+2020-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),13.3,Percent
+2020-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),37.9,Percent
+2020-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),27.9,Percent
+2020-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),18.0,Percent
+2020-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),13.5,Percent
+2020-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2020-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-0.2,Percent
+2020-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-1.5,Percent
+2020-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),13.1,Percent
+2020-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),8.8,Percent
+2020-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),36.6,Percent
+2020-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),28.5,Percent
+2020-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),17.0,Percent
+2020-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),12.3,Percent
+2020-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2020-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),4.0,Percent
+2020-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),4.0,Percent
+2020-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),15.1,Percent
+2020-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),10.7,Percent
+2020-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),40.7,Percent
+2020-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),30.2,Percent
+2020-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),21.0,Percent
+2020-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),15.8,Percent
+2020-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),1.0,Net count of respondents
+2021-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),0.2,Percent
+2021-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),0.2,Percent
+2021-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),16.1,Percent
+2021-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),11.0,Percent
+2021-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),38.6,Percent
+2021-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),28.6,Percent
+2021-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),20.0,Percent
+2021-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),14.6,Percent
+2021-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),1.0,Net count of respondents
+2021-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),0.7,Percent
+2021-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),0.7,Percent
+2021-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),14.5,Percent
+2021-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),9.7,Percent
+2021-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),37.3,Percent
+2021-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),26.3,Percent
+2021-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),19.3,Percent
+2021-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),13.5,Percent
+2021-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2021-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-0.8,Percent
+2021-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-0.8,Percent
+2021-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),14.5,Percent
+2021-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),8.6,Percent
+2021-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),42.7,Percent
+2021-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),29.8,Percent
+2021-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),20.2,Percent
+2021-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),13.7,Percent
+2021-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2021-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-2.3,Percent
+2021-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-2.3,Percent
+2021-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),14.0,Percent
+2021-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),8.4,Percent
+2021-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),35.5,Percent
+2021-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),21.9,Percent
+2021-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),16.6,Percent
+2021-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),9.8,Percent
+2021-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),1.0,Net count of respondents
+2022-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-2.0,Percent
+2022-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-2.0,Percent
+2022-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),14.8,Percent
+2022-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),8.5,Percent
+2022-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),32.9,Percent
+2022-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),19.3,Percent
+2022-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),16.1,Percent
+2022-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),9.1,Percent
+2022-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2022-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-0.5,Percent
+2022-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-0.5,Percent
+2022-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),9.8,Percent
+2022-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),4.6,Percent
+2022-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),33.3,Percent
+2022-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),18.4,Percent
+2022-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),14.9,Percent
+2022-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),7.9,Percent
+2022-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2022-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-1.5,Percent
+2022-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-1.5,Percent
+2022-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),14.1,Percent
+2022-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),9.0,Percent
+2022-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),34.3,Percent
+2022-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),17.8,Percent
+2022-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),16.1,Percent
+2022-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),8.5,Percent
+2022-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2022-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),1.0,Percent
+2022-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),1.0,Percent
+2022-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),12.8,Percent
+2022-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),7.9,Percent
+2022-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),34.1,Percent
+2022-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),19.2,Percent
+2022-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),16.1,Percent
+2022-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),9.4,Percent
+2022-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),1.0,Net count of respondents
+2023-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),0.7,Percent
+2023-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),0.7,Percent
+2023-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),11.5,Percent
+2023-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),7.1,Percent
+2023-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),35.4,Percent
+2023-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),21.3,Percent
+2023-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),16.2,Percent
+2023-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),9.9,Percent
+2023-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2023-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-0.6,Percent
+2023-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-0.6,Percent
+2023-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),12.6,Percent
+2023-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),8.4,Percent
+2023-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),34.5,Percent
+2023-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),20.2,Percent
+2023-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),15.3,Percent
+2023-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),9.2,Percent
+2023-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),1.0,Net count of respondents
+2023-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-4.1,Percent
+2023-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-4.1,Percent
+2023-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),5.9,Percent
+2023-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),1.9,Percent
+2023-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),37.3,Percent
+2023-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),22.4,Percent
+2023-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),12.3,Percent
+2023-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),6.3,Percent
+2023-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2023-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-2.4,Percent
+2023-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-2.4,Percent
+2023-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),5.4,Percent
+2023-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),3.2,Percent
+2023-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),34.5,Percent
+2023-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),19.3,Percent
+2023-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),10.9,Percent
+2023-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),5.7,Percent
+2023-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2024-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-3.6,Percent
+2024-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-3.6,Percent
+2024-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),1.4,Percent
+2024-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),-0.7,Percent
+2024-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),37.7,Percent
+2024-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),22.7,Percent
+2024-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),10.2,Percent
+2024-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),5.1,Percent
+2024-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2024-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-1.1,Percent
+2024-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-1.1,Percent
+2024-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),-0.8,Percent
+2024-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),-2.6,Percent
+2024-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),39.8,Percent
+2024-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),22.8,Percent
+2024-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),11.1,Percent
+2024-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),5.5,Percent
+2024-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2024-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-1.4,Percent
+2024-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-1.4,Percent
+2024-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),4.1,Percent
+2024-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),2.4,Percent
+2024-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),36.5,Percent
+2024-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),20.9,Percent
+2024-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),11.5,Percent
+2024-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),6.4,Percent
+2024-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2024-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),0.6,Percent
+2024-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),0.6,Percent
+2024-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),2.1,Percent
+2024-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),0.2,Percent
+2024-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),33.2,Percent
+2024-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),17.9,Percent
+2024-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),11.3,Percent
+2024-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),5.9,Percent
+2024-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2025-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),3.7,Percent
+2025-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),3.7,Percent
+2025-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),3.3,Percent
+2025-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),1.4,Percent
+2025-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),31.9,Percent
+2025-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),16.8,Percent
+2025-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),12.4,Percent
+2025-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),7.1,Percent
+2025-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2025-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),1.4,Percent
+2025-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),0.8,Percent
+2025-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),5.2,Percent
+2025-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),3.6,Percent
+2025-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),29.6,Percent
+2025-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),17.1,Percent
+2025-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),11.3,Percent
+2025-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),6.7,Percent
+2025-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2025-09-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),3.3,Percent
+2025-09-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),3.3,Percent
+2025-09-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),2.7,Percent
+2025-09-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),2.1,Percent
+2025-09-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),30.2,Percent
+2025-09-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),16.7,Percent
+2025-09-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),11.7,Percent
+2025-09-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),7.2,Percent
+2025-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2025-12-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),3.7,Percent
+2025-12-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),3.7,Percent
+2025-12-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),2.2,Percent
+2025-12-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),0.4,Percent
+2025-12-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),36.1,Percent
+2025-12-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),23.7,Percent
+2025-12-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),13.3,Percent
+2025-12-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),8.9,Percent
+2025-12-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2026-03-31,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),-1.2,Percent
+2026-03-31,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),-1.2,Percent
+2026-03-31,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),5.6,Percent
+2026-03-31,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),4.3,Percent
+2026-03-31,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),36.8,Percent
+2026-03-31,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),22.8,Percent
+2026-03-31,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),13.7,Percent
+2026-03-31,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),8.6,Percent
+2026-03-31,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2026-06-30,FPF-GAVN10_OCRATEALL_PERCENT,Top 10 largest funds: over-collateralization rate (percent),0.0,Percent
+2026-06-30,FPF-GAVN10_OCRATEEXOTHER_PERCENT,Top 10 largest funds: over-collateralization rate excluding other collateral (percent),0.0,Percent
+2026-06-30,FPF-GAVN11TO50_OCRATEALL_PERCENT,Top 11-50 largest funds: over-collateralization rate (percent),7.6,Percent
+2026-06-30,FPF-GAVN11TO50_OCRATEEXOTHER_PERCENT,Top 11-50 largest funds: over-collateralization rate excluding other collateral (percent),7.1,Percent
+2026-06-30,FPF-GAVN51_OCRATEALL_PERCENT,Top 51+ largest funds: over-collateralization rate (percent),37.3,Percent
+2026-06-30,FPF-GAVN51_OCRATEEXOTHER_PERCENT,Top 51+ largest funds: over-collateralization rate excluding other collateral (percent),22.9,Percent
+2026-06-30,FPF-OCRATEALL_PERCENT,Qualifying Hedge Funds: over-collateralization rate for all collateral types (percent),15.3,Percent
+2026-06-30,FPF-OCRATECASHSEC_PERCENT,Qualifying Hedge Funds: over-collateralization rate for cash and securities collateral (percent),10.2,Percent
+2026-06-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents
+2026-09-30,SCOOS-NET_COLLATTERMS,Survey: collateral terms as most important reason for a change in credit terms (net count of respondents),0.0,Net count of respondents

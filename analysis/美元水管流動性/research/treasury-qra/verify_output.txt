@@ -1,0 +1,19 @@
+ok   欄位前段為 ['date', 'quarter_end', 'tga_assumption_bn', 'source_url']（實際 ['date', 'quarter_end', 'tga_assumption_bn', 'source_url']）
+ok   主鍵 ['date', 'quarter_end'] 不重複
+ok   依 ['date', 'quarter_end'] 升冪
+ok   起始 <= 2019-01-31（2019-01-28）
+ok   最新公告 >= 2026-10-26（2026-11-02）
+ok   含 2026-12-31 年底目標
+FAIL tga_assumption_bn 在 100~2000（十億美元）
+ok   每列都有 source_url
+info 近期：
+      date quarter_end  tga_assumption_bn                                           source_url
+2026-02-02  2026-03-31                850 https://home.treasury.gov/news/press-releases/sb0377
+2026-02-02  2026-06-30                900 https://home.treasury.gov/news/press-releases/sb0377
+2026-05-04  2026-06-30                900 https://home.treasury.gov/news/press-releases/sb0485
+2026-05-04  2026-09-30                950 https://home.treasury.gov/news/press-releases/sb0485
+2026-08-03  2026-09-30                950 https://home.treasury.gov/news/press-releases/sb0584
+2026-08-03  2026-12-31                850 https://home.treasury.gov/news/press-releases/sb0584
+2026-11-02  2026-12-31                850 https://home.treasury.gov/news/press-releases/sb0675
+2026-11-02  2027-03-31               1000 https://home.treasury.gov/news/press-releases/sb0675
+FAIL treasury-qra: 1 項

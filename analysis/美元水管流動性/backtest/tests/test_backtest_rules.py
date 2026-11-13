@@ -106,3 +106,29 @@ def test_main_variant_passes(cfg, panel):
     c = b.variant_config(cfg, cfg["main_variant"])
     sc = b.score(b.evaluate(panel, c), c)
     assert b.passed(sc), sc["ok"]
+
+
+# ---------- --utility ----------
+
+def test_forward_table_values_and_mae():
+    idx = pd.bdate_range("2026-01-05", periods=6)
+    px = pd.DataFrame({"SPY": [100.0, 110.0, 99.0, 100.0, 105.0, 90.0]}, index=idx)
+    fw = b.forward_table(px, [1, 2], 3)
+    assert fw["SPY_T+1"].iloc[0] == pytest.approx(0.10)
+    assert fw["SPY_T+2"].iloc[0] == pytest.approx(-0.01)
+    assert fw["SPY_MAE3"].iloc[0] == pytest.approx(-0.01)       # 之後 3 日最低 99
+    assert fw["SPY_MAE3"].iloc[1] == pytest.approx(99 / 110 - 1)
+    assert fw["SPY_MAE3"].iloc[-3:].isna().all()                  # 尾端不足 3 日不給值
+    assert fw["SPY_T+1"].iloc[-1] != fw["SPY_T+1"].iloc[-1]       # NaN：不能用未來資料補
+
+
+def test_utility_section_runs_and_matches_group_counts(cfg, panel):
+    res = b.evaluate(panel, b.variant_config(cfg, cfg["main_variant"]))
+    prod = b.load_rules()
+    lines, stats = b.utility_section(res, panel, prod["investment_utility"], prod)
+    assert stats["baseline"]["assets"]["SPY"]["n"] == len(res)
+    light2 = res.light >= 2
+    assert stats["orange_start"]["assets"]["SPY"]["n"] == int((light2 & ~light2.shift(1, fill_value=False)).sum())
+    assert (stats["orange_start_ge2d"]["assets"]["SPY"]["n"] + stats["orange_start_1d"]["assets"]["SPY"]["n"]
+            == stats["orange_start"]["assets"]["SPY"]["n"])
+    assert any("投資效用" in l for l in lines)

@@ -9,9 +9,11 @@
 - z 值的波動率在 build_panel 已用 shift(1)
 tests/test_backtest_rules.py 用「截斷資料後結果不變」檢查。
 
-用法：venv\\Scripts\\python.exe backtest_rules.py [--variant v1_修正] [-q]
+用法：venv\\Scripts\\python.exe backtest_rules.py [--variant v1_修正] [-q] [--utility]
+  --utility：報告附加「投資效用」章節（燈號後 T+1/T+5/T+20 前瞻報酬與 MAE），並寫 utility_stats.json
+            （liq_notify 解除通知引用）。價格來自 research/market-prices/market_prices.csv，用收盤價算。
 """
-import copy
+import json
 import os
 import sys
 
@@ -20,20 +22,16 @@ import pandas as pd
 import yaml
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-LIGHT = {0: "綠", 1: "黃", 2: "橘", 3: "紅"}
+ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+sys.path.insert(0, os.path.join(ROOT, "alerts", "liq_pipe"))
+# 規則邏輯和線上判定共用 alerts/liq_pipe/rules.py
+from rules import (LIGHT, calendar_span, day15, deep_merge, evaluate, load_rules,  # noqa: E402,F401
+                   replay_episodes, roll_q, rule_r1, rule_r3, rule_r4a, rule_r6, threshold)
+
+PRICES = os.path.join(HERE, "..", "research", "market-prices", "market_prices.csv")
 
 
 # ---------- 設定 ----------
-
-def deep_merge(base, over):
-    out = copy.deepcopy(base)
-    for k, v in (over or {}).items():
-        if isinstance(v, dict) and isinstance(out.get(k), dict):
-            out[k] = deep_merge(out[k], v)
-        else:
-            out[k] = copy.deepcopy(v)
-    return out
-
 
 def load_config(path=os.path.join(HERE, "rules.yaml")):
     with open(path, encoding="utf-8") as f:
@@ -48,148 +46,6 @@ def variant_config(cfg, name):
 def load_panel(path=os.path.join(HERE, "panel.csv")):
     p = pd.read_csv(path, parse_dates=["date"], index_col="date")
     return p.drop(columns=[c for c in p.columns if c[:1] == "R" and c[1:2].isdigit()])
-
-
-# ---------- 規則 ----------
-
-def day15(idx, months):
-    """指定月份的 15 日（遇假日順延到下一個交易日）。"""
-    f = pd.Series(False, index=idx)
-    for y in range(idx.year.min(), idx.year.max() + 1):
-        for m in months:
-            d = pd.Timestamp(y, m, 15)
-            nxt = idx[idx >= d]
-            if len(nxt) and (nxt[0] - d).days <= 4:
-                f[nxt[0]] = True
-    return f
-
-
-def calendar_span(p, after_days, refunding_months=()):
-    """日曆日本身，加上之後 after_days 個交易日。回傳（日曆日, 季底）。"""
-    base = p.month_end.astype(bool) | p.tax_day.astype(bool)
-    if refunding_months:
-        base |= day15(p.index, refunding_months)
-    q0 = p.quarter_end.astype(bool)
-    cal, qe = base.copy(), q0.copy()
-    for k in range(1, after_days + 1):
-        cal |= base.shift(k, fill_value=False)
-        qe |= q0.shift(k, fill_value=False)
-    return cal, qe
-
-
-def roll_q(s, q, qc, exclude=None):
-    x = s.where(~exclude) if exclude is not None else s
-    return x.rolling(qc["window"], min_periods=qc["min_periods"]).quantile(q).shift(1)
-
-
-def threshold(s, lv, qc, exclude):
-    t = roll_q(s, lv["q"], qc, exclude)
-    if lv.get("floor") is not None:
-        t = np.maximum(t, lv["floor"])
-    if lv.get("cap") is not None:
-        t = np.minimum(t, lv["cap"])
-    return t
-
-
-def rule_r1(p, c, qc, cal, cal_cfg):
-    s = p.s_iorb
-    lv = c["levels"]
-    excl = cal if c.get("quantile_exclude_calendar") else None
-    w = cal_cfg["widen"]["R1_bp"]
-    cal5 = cal.astype(int).rolling(lv[2]["mean_days"], min_periods=1).max().astype(bool)
-    th1 = threshold(s, lv[1], qc, excl) + w * cal
-    th2 = threshold(s, lv[2], qc, excl) + w * cal5
-    th3 = threshold(s, lv[3], qc, excl) + w * cal
-    l1 = s >= th1
-    for k in range(1, lv[1].get("consecutive", 1)):
-        l1 &= s.shift(k) >= th1.shift(k)
-    l2 = s.rolling(lv[2]["mean_days"]).mean() >= th2
-    l3 = s >= th3
-    r = pd.Series(np.select([l3, l2, l1], [3, 2, 1], 0), index=s.index)
-    if cal_cfg.get("t2_check"):
-        # 日曆日當天利差達 1 級門檻；2 個交易日後還在 1 級下限以上且沒回落一半 → 強制 2 級
-        hot = cal & (s >= th1)
-        stuck = hot.shift(2, fill_value=False) & (s > 0.5 * s.shift(2)) & (s >= lv[1]["floor"])
-        r = r.where(~stuck, np.maximum(r, 2))
-    g = c.get("rrp_guard")
-    if g:
-        # 日曆日且 RRP 還有緩衝：屬於窗飾，不算壓力
-        r = r.where(~(cal & (p.rrp_bn > g["rrp_bn_gt"])), 0)
-    return r
-
-
-def rule_r3(p, c, qc, cal):
-    s = p.s_tgcr
-    excl = cal if c.get("quantile_exclude_calendar") else None
-    lv = c["levels"]
-    l1 = s >= threshold(s, lv[1], qc, excl)
-    l2 = s >= threshold(s, lv[2], qc, excl)
-    return pd.Series(np.select([l2, l1], [2, 1], 0), index=s.index)
-
-
-def rule_r4a(p, c, cal, qe, cal_cfg):
-    srf = p.srf_bn.fillna(0)
-    w = cal_cfg["widen"]["R4a_bn"] * cal
-    l1 = srf > c["levels"][1]["gt"] + w
-    l2 = srf > c["levels"][2]["gt"] + w
-    if c.get("quarter_end_l1_off"):          # 初版：季底不算 1 級
-        l1 &= ~p.quarter_end.astype(bool)
-    r = pd.Series(np.select([l2, l1], [2, 1], 0), index=srf.index)
-    g = c.get("rrp_guard")
-    if g:
-        mask = (qe if g.get("quarter_end_only") else cal) & (p.rrp_bn > g["rrp_bn_gt"])
-        r = r.where(~mask, 0)
-    return r
-
-
-def rule_r6(p, c, funding_prev):
-    pre = (np.minimum(p.z_spy, p.z_qqq) < c["pre"]["z_equity"]) & (p.z_gld < c["pre"]["z_gold"])
-    t = c["type2"]
-    up = p.d10 >= t["d10_bp_ge"]
-    if t["mode"] == "loose":
-        t2 = up & ((p.d1m <= 0) | (p.d3m <= 0))
-    elif t["mode"] == "dtb3":
-        t2 = up & (p.d3m <= t["d3m_bp_le"])
-    elif t["mode"] == "funding":
-        t2 = up & (funding_prev >= 1)
-    else:
-        raise ValueError(t["mode"])
-    return pd.Series(np.select([pre & t2, pre], [2, 1], 0), index=p.index)
-
-
-def evaluate(p, cfg):
-    """回傳逐日規則等級與燈號。所有欄位都已依 avail_lag 對齊到「可得日」。"""
-    qc, cal_cfg, rc = cfg["quantile"], cfg["calendar"], cfg["rules"]
-    cal, qe = calendar_span(p, cal_cfg.get("after_days", 0), cal_cfg.get("refunding_months") or ())
-    out = pd.DataFrame(index=p.index)
-    raw = {
-        "R1": rule_r1(p, rc["R1"], qc, cal, cal_cfg),
-        "R3": rule_r3(p, rc["R3"], qc, cal),
-        "R4a": rule_r4a(p, rc["R4a"], cal, qe, cal_cfg),
-    }
-    for k, r in raw.items():
-        r = r.shift(rc[k]["avail_lag"], fill_value=0) if rc[k]["avail_lag"] else r
-        out[k] = (r if rc[k].get("enabled", True) else r * 0).astype(int)
-    fr = [k for k in cfg["light"]["funding_rules"] if rc[k].get("enabled", True)]
-    funding = out[fr].max(axis=1) if fr else pd.Series(0, index=p.index)
-    r6 = rule_r6(p, rc["R6"], funding)
-    out["R6"] = (r6 if rc["R6"].get("enabled", True) else r6 * 0).astype(int)
-    r6 = out.R6
-    anymax = out[fr + ["R6"]].max(axis=1)
-    out["funding"] = funding
-    out["light"] = np.select(
-        [((funding >= 2) & (r6 == 2)) | (anymax >= 3),
-         (funding >= 2) | ((funding >= 1) & (r6 >= 1)),
-         funding >= 1],
-        [3, 2, 1], 0)
-    # R6 Type II 單獨出現時的燈號（0 = 不單獨升燈）。T+0 的跨資產訊號不必等 T+1 的融資面
-    alone = cfg["light"].get("r6_type2_alone", 0)
-    if alone:
-        out["light"] = np.where(r6 == 2, np.maximum(out["light"], alone), out["light"])
-    out["calendar"] = cal
-    # 只給事後分類誤報用，不進規則
-    out["s_iorb_5d"] = p.s_iorb.rolling(5, min_periods=3).mean()
-    return out
 
 
 # ---------- 評估 ----------
@@ -320,6 +176,120 @@ def run(cfg, p, name):
     return c, res, score(res, c)
 
 
+# ---------- 投資效用（--utility）----------
+
+def load_prices(assets, idx, path=PRICES):
+    """收盤價對齊到回測交易日；沒有價格的日子留 NaN（不 ffill，避免把缺資料當成沒漲跌）。"""
+    m = pd.read_csv(path, parse_dates=["date"], usecols=["date", "ticker", "close"])
+    return m[m.ticker.isin(assets)].pivot(index="date", columns="ticker", values="close").reindex(idx)
+
+
+def forward_table(px, horizons, mae_h):
+    """逐日、逐資產的前瞻報酬 {A}_T+k 與 {A}_MAE{h}（未來 h 日內相對 t 日收盤的最低報酬，不足 h 日給 NaN）。
+    基準價是訊號當天收盤：R6 用當天報酬，R1／R3 已移到可得日，所以當天收盤才是可執行的最早價。"""
+    out = {}
+    for a in px.columns:
+        s = px[a]
+        for k in horizons:
+            out[f"{a}_T+{k}"] = s.shift(-k) / s - 1
+        path = pd.concat([s.shift(-k) / s - 1 for k in range(1, mae_h + 1)], axis=1)
+        out[f"{a}_MAE{mae_h}"] = path.min(axis=1, skipna=False)
+    return pd.DataFrame(out, index=px.index)
+
+
+def group_stats(fw, mask, assets, horizons, mae_h, dd):
+    """一組日期的前瞻統計：每個資產各一列 dict（數值為小數報酬）。"""
+    out = {}
+    for a in assets:
+        x = fw.loc[mask]
+        mae = x[f"{a}_MAE{mae_h}"].dropna()
+        row = {"n": int(mask.sum()), f"n_T+{horizons[-1]}": int(x[f"{a}_T+{horizons[-1]}"].notna().sum())}
+        for k in horizons:
+            row[f"T+{k}"] = float(x[f"{a}_T+{k}"].mean())
+        row[f"MAE{mae_h}_mean"] = float(mae.mean())
+        row[f"MAE{mae_h}_median"] = float(mae.median())
+        row[f"P(MAE{mae_h}<={dd:.0%})"] = float((mae <= dd).mean()) if len(mae) else float("nan")
+        out[a] = row
+    return out
+
+
+def utility_section(res, p, ucfg, notif_cfg):
+    """回傳 (報告行, stats dict)。ucfg = rules.yaml 的 investment_utility。"""
+    hz, assets, bench = ucfg["horizons"], ucfg["assets"], ucfg["benchmark"]
+    dd, mae_h = ucfg.get("drawdown_threshold", -0.05), max(hz)
+    px = load_prices(assets, res.index)
+    fw = forward_table(px, hz, mae_h)
+    ev, _ = replay_episodes(res, notif_cfg)
+    on = lambda d: pd.Series(res.index.isin(pd.to_datetime(d)), index=res.index)  # noqa: E731
+    light2 = res.light >= 2
+    start = light2 & ~light2.shift(1, fill_value=False)
+    run_id = (light2 != light2.shift(1)).cumsum()
+    run_len = light2.groupby(run_id).transform("sum").where(light2, 0)
+    starts_ge2 = start & (run_len >= notif_cfg["notification"]["action_level"]["consecutive_days"])
+    action = on([e["date"] for e in ev if e["kind"] == "action"])
+    recov_all = on([e["date"] for e in ev if e["kind"] == "recovery"])
+    recov_act = on([e["date"] for e in ev if e["kind"] == "recovery" and e["tier"] == "action"])
+    groups = {
+        "baseline": ("全期基準（所有交易日）", pd.Series(True, index=res.index)),
+        "orange_start": ("首次亮橘燈以上（episode 第一天）", start),
+        "orange_start_ge2d": ("　其中橘燈連續 ≥ 2 日（通過連續過濾）", starts_ge2),
+        "orange_start_1d": ("　其中橘燈只亮 1 日（被連續過濾擋掉）", start & ~starts_ge2),
+        "action_alert": ("行動級警報日（橘燈以上連 2 日 + 傳導）", action),
+        "recovery": ("解除確認日（全部 episode）", recov_all),
+        "recovery_action": ("解除確認日（僅發過行動級者）", recov_act),
+        "green_crash": ("綠燈但 SPY 單日 z < −2", (res.light == 0) & (p.z_spy < -2)),
+    }
+    stats = {k: {"label": lab, "assets": group_stats(fw, m, assets, hz, mae_h, dd)} for k, (lab, m) in groups.items()}
+
+    pc = lambda v: "" if v != v else f"{v:+.2%}"  # noqa: E731
+    L = ["## 6. 投資效用（--utility）\n",
+         f"價格：{', '.join(assets)} 收盤價（research/market-prices/market_prices.csv，"
+         f"{px.dropna(how='all').index[0].date()}～{px.dropna(how='all').index[-1].date()}）。"
+         f"報酬 = 訊號日收盤到 T+k 個交易日後收盤；MAE{mae_h} = 之後 {mae_h} 日內相對訊號日收盤的最低報酬"
+         f"（越負代表逆向走勢越大）；P(MAE) = MAE 跌到 {dd:.0%} 以下的比例。"
+         "價格尾端不足 20 日的日期不計入該欄平均（見「T+20 有效 n」）。\n"
+         "訊號日收盤進場是樂觀假設（實務上要看到燈號才動作，最快下一個交易日）。\n"]
+    for a in assets:
+        rows = []
+        for k, (lab, _) in groups.items():
+            s = stats[k]["assets"][a]
+            rows.append({"情境": lab, "樣本天數": s["n"], f"T+{hz[-1]} 有效 n": s[f"n_T+{hz[-1]}"],
+                         **{f"T+{h} 平均": pc(s[f"T+{h}"]) for h in hz},
+                         f"MAE{mae_h} 平均": pc(s[f"MAE{mae_h}_mean"]),
+                         f"MAE{mae_h} 中位數": pc(s[f"MAE{mae_h}_median"]),
+                         f"P(MAE≤{dd:.0%})": "" if s[f"P(MAE{mae_h}<={dd:.0%})"] != s[f"P(MAE{mae_h}<={dd:.0%})"]
+                         else f"{s[f'P(MAE{mae_h}<={dd:.0%})']:.0%}"})
+        L.append(f"### {a} 前瞻報酬與最大不利走勢\n")
+        L.append(md(pd.DataFrame(rows)) + "\n")
+
+    # 假警報與連續過濾
+    n_start, n_ge2, n_act = int(start.sum()), int(starts_ge2.sum()), int(action.sum())
+    L.append("### 假警報與連續 2 日過濾成效\n")
+    rows = []
+    for lab, m in [("橘燈 episode 起點（過濾前）", start), ("通過連續 2 日", starts_ge2),
+                   ("行動級警報（再加傳導條件）", action)]:
+        r = {"層級": lab, "次數": int(m.sum()), "占起點比例": f"{m.sum() / max(n_start, 1):.0%}"}
+        for a in assets:
+            x = fw.loc[m]
+            r[f"{a} T+{hz[-1]}"] = pc(x[f"{a}_T+{hz[-1]}"].mean())
+            r[f"{a} MAE{mae_h}"] = pc(x[f"{a}_MAE{mae_h}"].mean())
+        rows.append(r)
+    L.append(md(pd.DataFrame(rows)) + "\n")
+    L.append(f"橘燈起點 {n_start} 次，只亮 1 日 {n_start - n_ge2} 次被連續過濾擋下，行動級警報 {n_act} 次。\n")
+    L.append("### 行動級警報與解除明細\n")
+    det = []
+    for e in ev:
+        if e["kind"] in ("action", "escalation", "recovery"):
+            d = pd.Timestamp(e["date"])
+            r = {"日期": e["date"], "類型": e["kind"], "層級": e["tier"], "燈號": e["light"],
+                 "episode 起": e["episode_start"]}
+            for a in assets:
+                r[f"{a} T+{hz[-1]}"] = pc(fw.loc[d, f"{a}_T+{hz[-1]}"]) if d in fw.index else ""
+            det.append(r)
+    L.append((md(pd.DataFrame(det)) if det else "（無）") + "\n")
+    return L, stats
+
+
 def main():
     cfg = load_config()
     p = load_panel()
@@ -409,6 +379,14 @@ def main():
         P(f"### {e['name']}\n")
         P(md(w.rename_axis("date").reset_index()) + "\n")
     P("s_iorb、s_tgcr 是當日利差；R1、R3 欄位是前一日利差的判定（T+1 才能用）。\n")
+
+    if "--utility" in sys.argv:
+        prod = load_rules()
+        ul, ustats = utility_section(res, p, prod["investment_utility"], prod)
+        L += ul
+        with open(os.path.join(HERE, "utility_stats.json"), "w", encoding="utf-8") as f:
+            json.dump({"variant": main_v, "period": f"{p.index[0].date()}～{p.index[-1].date()}",
+                       "groups": ustats}, f, ensure_ascii=False, indent=2)
 
     out = os.path.join(HERE, "backtest_report.md")
     with open(out, "w", encoding="utf-8") as f:

@@ -293,15 +293,17 @@ def replay_episodes(res, cfg):
         chk = check_recovery({"max_light_in_episode": ep["max_light"], "green_days": ep["green_days"]},
                              light, rc["cooldown_days"], rc["from_min_light"])
         ep["green_days"] = chk["green_days"]
-        if rc["enabled"] and chk["recovered"]:
-            first_green = res.index[res.index.get_loc(d) - rc["cooldown_days"] + 1].strftime("%Y-%m-%d")
-            tier = "action" if (ep["notified_action"] or not rc.get("require_action_notified")) else "info"
-            events.append({"key": f"recovery|{ep['start_date']}", "kind": "recovery", "date": ds,
-                           "tier": tier, "light": 0, "episode_start": ep["start_date"],
-                           "recovery_date": first_green, "prior_max_light": ep["max_light"],
-                           "episode_days": ep["days"], "action_notified": ep["notified_action"]})
-            recent = {"recovery_date": first_green, "confirmed_date": ds,
-                      "prior_max_light": ep["max_light"], "episode_start": ep["start_date"]}
+        if chk["recovered"]:
+            # 即使 recovery_alert 關閉，episode 也要結束，否則會卡住、之後的新 episode 被併進去
+            if rc["enabled"]:
+                first_green = res.index[res.index.get_loc(d) - rc["cooldown_days"] + 1].strftime("%Y-%m-%d")
+                tier = "action" if (ep["notified_action"] or not rc.get("require_action_notified")) else "info"
+                events.append({"key": f"recovery|{ep['start_date']}", "kind": "recovery", "date": ds,
+                               "tier": tier, "light": 0, "episode_start": ep["start_date"],
+                               "recovery_date": first_green, "prior_max_light": ep["max_light"],
+                               "episode_days": ep["days"], "action_notified": ep["notified_action"]})
+                recent = {"recovery_date": first_green, "confirmed_date": ds,
+                          "prior_max_light": ep["max_light"], "episode_start": ep["start_date"]}
             ep = None
     last = res.iloc[-1]
     state = {"current_light": int(last["light"]), "consecutive_light_days": int(consec),

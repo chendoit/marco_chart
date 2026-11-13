@@ -84,6 +84,9 @@ def load_json(path, default):
             return json.load(f)
     except FileNotFoundError:
         return default
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        print(f"[warn] {path} 損毀（{type(e).__name__}），改用預設值", file=sys.stderr)
+        return default
 
 
 def save_json(path, data):
@@ -157,7 +160,7 @@ def build_panel(today):
     if s["sofr"].empty:
         raise RuntimeError("cache 沒有 SOFR，先跑 liq_fetch.py")
     idx = s["sofr"].index
-    tail = pd.date_range(idx[-1] + R.BDAY, today, freq=R.BDAY)
+    tail = pd.date_range(idx[-1] + HBDAY, today, freq=HBDAY)   # HBDAY 含耶穌受難日（市場休市）
     idx = idx.append(tail)
     df = pd.DataFrame(index=idx)
     for n, v in s.items():
@@ -330,6 +333,10 @@ def main():
     today = t.normalize().tz_localize(None)
     panel, data_last = build_panel(today)
     res = R.evaluate(panel, cfg)
+    # 尾端「今天」若收盤價還沒進來（盤前、盤中），綠燈是缺值造成的，不能算解除所需的綠燈天數
+    incomplete = panel.z_spy.isna() & (res.light == 0)
+    while len(res) > 1 and incomplete.iloc[len(res) - 1]:
+        res, panel, incomplete = res.iloc[:-1], panel.iloc[:-1], incomplete.iloc[:-1]
     st = load_json(os.path.join(STATE, "state.json"), {"lights": {}, "health": {}})
     ts = datetime.now().astimezone().isoformat(timespec="seconds")
 

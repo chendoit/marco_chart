@@ -225,15 +225,20 @@ def utility_section(res, p, ucfg, notif_cfg):
     start = light2 & ~light2.shift(1, fill_value=False)
     run_id = (light2 != light2.shift(1)).cumsum()
     run_len = light2.groupby(run_id).transform("sum").where(light2, 0)
-    starts_ge2 = start & (run_len >= notif_cfg["notification"]["action_level"]["consecutive_days"])
+    run_pos = light2.astype(int).groupby(run_id).cumsum().where(light2, 0)
+    n_conf = notif_cfg["notification"]["action_level"]["consecutive_days"]
+    # 通過連續過濾的 episode：訊號日取「確認日」（橘燈連續第 n 日）收盤，避免用未來資訊挑選起點日
+    starts_ge2 = run_pos == n_conf
+    # 事後標籤（只用來看被擋掉的單日尖刺長怎樣，不是可交易訊號）
+    starts_1d = start & (run_len < n_conf)
     action = on([e["date"] for e in ev if e["kind"] == "action"])
     recov_all = on([e["date"] for e in ev if e["kind"] == "recovery"])
     recov_act = on([e["date"] for e in ev if e["kind"] == "recovery" and e["tier"] == "action"])
     groups = {
         "baseline": ("全期基準（所有交易日）", pd.Series(True, index=res.index)),
         "orange_start": ("首次亮橘燈以上（episode 第一天）", start),
-        "orange_start_ge2d": ("　其中橘燈連續 ≥ 2 日（通過連續過濾）", starts_ge2),
-        "orange_start_1d": ("　其中橘燈只亮 1 日（被連續過濾擋掉）", start & ~starts_ge2),
+        "orange_start_ge2d": ("橘燈連續第 2 日（通過連續過濾，確認日收盤）", starts_ge2),
+        "orange_start_1d": ("　事後標籤：橘燈只亮 1 日（被擋掉，起點日收盤）", starts_1d),
         "action_alert": ("行動級警報日（橘燈以上連 2 日 + 傳導）", action),
         "recovery": ("解除確認日（全部 episode）", recov_all),
         "recovery_action": ("解除確認日（僅發過行動級者）", recov_act),

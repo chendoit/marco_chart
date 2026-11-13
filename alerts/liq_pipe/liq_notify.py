@@ -39,7 +39,9 @@ def _fmt(v, unit="", sign=False, nd=1):
 
 def _time_line(ts):
     t = pd.Timestamp(ts) if ts is not None else pd.Timestamp.now(tz="America/New_York")
-    return f"時間：{t.tz_convert('America/New_York'):%Y-%m-%d %H:%M} EST"
+    if t.tzinfo is None:
+        t = t.tz_localize("America/New_York")
+    return f"時間：{t.tz_convert('America/New_York'):%Y-%m-%d %H:%M %Z}"
 
 
 def load_utility_stats(path=STATS_PATH):
